@@ -8,7 +8,7 @@ import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
 const logoWidths = [50, 100];
 
 const navItems: Array<NavItem> = [
-  { title: "About", url: "#about"},
+  { title: "About", url: "#about" },
   { title: "Services", url: "#services" },
   { title: "Solutions", url: "#compatibility" },
   // { title: "Portfolios", url: "#showcase" },
@@ -72,7 +72,13 @@ const navItems: Array<NavItem> = [
             </button>
           </header>
           <div class="flex justify-center">
-            <Icon name="logomark" class="size-16" />
+            <Image
+              class="h-16 w-16 object-cover"
+              src={codePassionLogo}
+              alt="CodePassion Logo"
+              widths={logoWidths}
+              sizes="16px, 16px"
+            />
           </div>
           <nav>
             <ul class="flex flex-col">
