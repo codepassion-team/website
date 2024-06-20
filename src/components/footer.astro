@@ -1,36 +1,34 @@
 ---
 import { Icon } from "astro-icon/components";
-import HeroImage from "~/components/hero-image.astro";
 import type { FooterLink } from "~/types";
 
 const links: Array<FooterLink> = [
   {
-    url: "https://astro.build/",
-    description: "Astro's official website",
-    icon: "mdi:home",
+    url: "tell:+66886384566",
+    description: "Quick Call",
+    icon: "mdi:call",
   },
   {
-    url: "https://github.com/mhyfritz/astro-landing-page",
-    description: "View source on GitHub",
-    icon: "fa-brands:github-alt",
+    url: "https://facebook.com/codepassion.co",
+    description: "Facebook Page",
+    icon: "fa-brands:facebook",
+  },
+  {
+    url: "https://github.com/codepassion-team",
+    description: "GitHub",
+    icon: "fa-brands:github",
   },
   {
     url: "https://astro.build/chat",
-    description: "Astro on Discord",
-    icon: "fa-brands:discord",
-  },
-  {
-    url: "https://twitter.com/astrodotbuild",
-    description: "Astro on Twitter",
-    icon: "fa-brands:twitter",
+    description: "YouTube Channel",
+    icon: "fa-brands:youtube",
   },
 ];
 ---
-
-<footer class="relative flex h-64 items-center justify-center">
-  <div class="absolute inset-0 overflow-hidden opacity-40">
-    <HeroImage />
-  </div>
+<h2 class="gradient-text text-center font-extrabold tracking-tight text-6xl bg-slate-950">
+  Contact us
+</h2>
+<footer class="relative flex h-48 items-center justify-center" id="contact">
   <ul class="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
     {
       links.map((link) => (

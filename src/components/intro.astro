@@ -1,30 +1,36 @@
 ---
+import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import ContentSection from "~/components/content-section.astro";
+import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
 ---
 
-<ContentSection title="Just ship less" id="intro">
-  <Icon slot="eyebrow" name="logomark" class="size-32" />
+<ContentSection title="We Code Your Passion" id="objective">
+  <Image
+    slot="eyebrow"
+    class="h-36 w-36 object-cover"
+    src={codePassionLogo}
+    alt="CodePassion Logo"
+    widths={[50, 100]}
+    sizes="10px, 20px"
+  />
   <Fragment slot="lead">
-    Astro is a new kind of site builder for the
-    <span class="text-primary">modern</span> web.
-    <span class="text-primary">Lightning-fast</span>
-    performance meets <span class="text-primary">powerful</span> developer experience.
+    Our mission is to create <span class="gradient-text">vibrant</span>, <span class="gradient-text">innovative</span>, and <span class="gradient-text">practical</span> modular applications that benefit both businesses and the community. <br/><br/>We envision a future where <span class="gradient-text">technology</span> brings color and connectivity to <span class="gradient-text">society</span>.
   </Fragment>
-  <div class="grid grid-cols-1 gap-2 sm:grid-cols-2">
-    <a
+  <div class="grid grid-cols-1 gap-2 sm:grid-cols-1">
+    <!-- <a
       href="https://docs.astro.build/"
       class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
     >
       <Icon name="mdi:telescope" class="size-8" />
       <span>Read the docs</span>
-    </a>
+    </a> -->
     <a
-      href="https://astro.new/"
-      class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4"
+      href="tel:+66886384566"
+      class="flex items-center justify-center gap-3 border-2 border-current px-6 py-4 text-white hover:text-white hover:font-bold bg-gradient-to-r from-[#F04D2D] via-[#EF3544] to-[#ED1B5D]"
     >
-      <Icon name="mdi:rocket" class="size-8" />
-      <span>Try it out</span>
+      <Icon name="mdi:call" class="size-8" />
+      <span>Call Now!</span>
     </a>
   </div>
 </ContentSection>
