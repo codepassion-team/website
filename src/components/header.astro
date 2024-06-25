@@ -16,14 +16,16 @@ const navItems: Array<NavItem> = [
   { title: "Partners", url: "#partners" },
   { title: "Contact", url: "#contact" },
 ];
+
+const companyName = "Code Passion";
 ---
 
 <header
   id="page-header"
   class="absolute bottom-0 z-20 flex w-full items-center justify-between border-b border-transparent px-8 py-4 text-white"
 >
-  <a class="flex items-center gap-3 hover:!text-default" href="/">
-    <h1 class="sr-only">Code Passion</h1>
+  <a class="flex items-center gap-1 hover:!text-default" href="/">
+    <h1 class="sr-only">{companyName}</h1>
     <Image
       class="h-12 w-12 object-cover"
       src={codePassionLogo}
@@ -31,7 +33,7 @@ const navItems: Array<NavItem> = [
       widths={logoWidths}
       sizes="10px, 20px"
     />
-    <strong>Code Passion</strong>
+    <strong>{companyName}</strong>
   </a>
   <div>
     <div class="flex items-center gap-6">
