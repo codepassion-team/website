@@ -12,67 +12,67 @@ const orderedSites = featuredSites.sort(
 const partners = [
   {
     title: "Teeraporn",
-    logo: "https://img.wongnai.com/p/256x256/2021/03/31/311daf757ebe4ee898a80a95fa04f650.jpg",
+    logo: "/logos/teeraporn.webp",
   },
   {
     title: "สสส.",
-    logo: "https://www.thaihealth.or.th/wp-content/uploads/2022/10/Logo_RGB_HEX_ThaiHealth_2022_Logo_2Colors.jpg"
+    logo: "/logos/ThaiHealth.jpg"
   },
   {
     title: "IPAC",
-    logo: "https://scontent.fbkk22-7.fna.fbcdn.net/v/t39.30808-6/272883223_345367920931522_26536883699164380_n.jpg?_nc_cat=107&ccb=1-7&_nc_sid=5f2048&_nc_ohc=Q1W_N5k6WnQQ7kNvgG5Ut0G&_nc_ht=scontent.fbkk22-7.fna&oh=00_AYCVMfijGOy5BvFJ0btMhRHkoGonBePlS1mwVAAUQ6G1hg&oe=667A0A03"
+    logo: "/logos/IPAC.png"
   },
   {
     title: "aommoney",
-    logo: "https://aommoney.com/wp-content/uploads/2023/03/cropped-aomMONEY_3000.png",
+    logo: "/logos/aommoney.jpg",
   },
   {
     title: "Koph",
-    logo: "https://koph.co/img/logo-koph.png"
+    logo: "/logos/koph.png"
   },
   {
     title: "Totop",
-    logo: "https://totop.group/wp-content/uploads/2022/08/TOTOP-Logo.jpg"
+    logo: "/logos/TOTOP.jpg"
   },
   {
     title: "Mummily",
-    logo: "https://www.mummily.com/wp-content/uploads/2021/04/mummily-logo-blue.png"
+    logo: "/logos/mummily.png"
   },
   {
     title: "Dental Land",
-    logo: "https://dentalland-chiangrai.com/wp-content/uploads/2024/01/Logo-DTL.png"
+    logo: "/logos/DTL.png"
   },
   {
     title: "BAR-BQ Resort",
-    logo: "https://ugc.production.linktr.ee/i2gey5chR2mMqiH10ARg_IMG_6980.PNG?io=true&size=avatar-v3_0"
+    logo: "/logos/BarBQ-Resort.webp"
   },
   {
     title: "The Local",
-    logo: "https://thelocalroadrestaurant.com/wp-content/uploads/2023/08/Logo.png"
+    logo: "/logos/TheLocal.png"
   },
   {
     title: "UOE4289",
-    logo: "https://www.uoe4289.com/wp-content/uploads/2019/11/logo.jpg"
+    logo: "/logos/UOE4289.jpg"
   },
   {
     title: "Plogpaiguard",
-    logo: "https://www.plodpaiguard.co.th/wp-content/uploads/2020/10/plodpaiguard.png"
+    logo: "/logos/plodpaiguard.png"
   },
   {
     title: "Pi-R-Square",
-    logo: "https://pirsquare.net/images/logo-main.svg"
+    logo: "/logos/Pi-R.svg"
   },
   {
     title: "Thai Programmer Association",
-    logo: "https://thaiprogrammer.org/wp-content/uploads/2024/05/logo-with-title-1024x311.webp",
+    logo: "/logos/thaiprogrammer.webp",
   },
   {
     title: "Digital Technology Entrepreneur Trade Association",
-    logo: "https://dte.or.th/wp-content/uploads/2022/03/logo4.png",
+    logo: "/logos/DTE.png",
   },
   {
     title: "Design Alternative",
-    logo: "https://media.jobthai.com/v1/images/logo-pic-map/162453_logo_20210309142335.jpeg?type=webp"
+    logo: "/logos/DesignAlternative.webp"
   }
 ];
 ---
@@ -82,10 +82,10 @@ const partners = [
     <span class="gradient-text">30+</span> Clients & Partners
   </Fragment>
   <div class="max-w-6xl flex flex-wrap -m-4 justify-center items-center bg-white">
-    {partners.map(({logo}) => (
+    {partners.map(({title, logo}) => (
       <div class="lg:w-1/4 sm:w-1/3 w-1/2 p-8">
         <div class="flex">
-          <img alt="gallery" class="inset-0 w-full h-full object-cover object-center" src={logo} />
+          <img alt="gallery" class="inset-0 w-full h-full object-cover object-center" src={logo} alt={title} />
         </div>
       </div>
     ))}
