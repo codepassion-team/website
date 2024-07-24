@@ -1,0 +1,52 @@
+---
+import { Image, Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
+
+import sekwebArt from "~/assets/sekweb_artwork.png";
+---
+
+<section class="relative h-full bg-white">
+  <div class="relative grid h-full place-items-center sm:grid-cols-1">
+    <div
+      class="flex flex-col items-center gap-2 self-center sm:gap-4 sm:self-auto sm:justify-self-center"
+    >
+      <div class="mx-4 my-8 text-center tracking-tighter text-black">
+        <Image
+          slot="eyebrow"
+          class="mx-auto w-36 object-cover"
+          src="https://sekweb.site/logo.svg"
+          alt="CodePassion Logo"
+          inferSize={true}
+          sizes="10px, 10px"
+        />
+        <h1 class="mt-8 font-bold text-5xl sm:text-6xl md:text-7xl">
+          เสกเว็บได้ภายใน 10 วิ
+        </h1>
+        <p class="text-md sm:text-md mt-1 font-light text-gray-700 md:text-lg">
+          SekWeb is an AI-powered website builder with instant content.
+        </p>
+        <Picture
+          src={sekwebArt}
+          class="mx-auto max-h-[640px] w-full max-w-[640px]"
+          widths={[640, 640]}
+          alt="Sekweb's Art"
+          formats={["avif", "webp"]}
+        />
+        <!-- <Image
+          src="/sekweb_artwork.png"
+          alt="SekWeb's Artwork"
+          class="mx-auto max-h-[640px] w-full max-w-[640px]"
+          inferSize={true}
+          sizes="10px, 10px"
+        /> -->
+        <a
+          href="https://app.sekweb.site?from=codepassion.co"
+          class="mx-auto mt-12 flex w-64 animate-bounce items-center justify-center gap-3 rounded-full border-2 border-current px-6 py-4 text-[#774CFE] hover:bg-[#774CFE] hover:font-bold hover:text-white"
+        >
+          <Icon name="mdi:wand" class="size-8" />
+          <span>เริ่มเสกเว็บไซต์ฟรี</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

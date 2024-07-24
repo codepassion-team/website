@@ -25,23 +25,163 @@ const links: Array<FooterLink> = [
   },
 ];
 ---
-<h2 class="gradient-text text-center font-extrabold tracking-tight text-6xl bg-slate-950">
-  Contact us
-</h2>
-<footer class="relative flex h-48 items-center justify-center" id="contact">
-  <ul class="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
-    {
-      links.map((link) => (
-        <li>
-          <a
-            class="flex size-16 items-center justify-center rounded-full border-2 border-current p-4"
-            href={link.url}
-          >
-            <span class="sr-only">{link.description}</span>
-            <Icon class="size-full" name={link.icon} />
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+
+<div class="py-36 text-center">
+  <h2
+    id="contact"
+    class="gradient-text bg-slate-950 text-center font-extrabold tracking-tight text-6xl"
+  >
+    Contact us
+  </h2>
+
+  <div class="relative flex h-48 items-center justify-center">
+    <ul class="relative grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {
+        links.map((link) => (
+          <li>
+            <a
+              class="flex size-16 items-center justify-center rounded-full border-2 border-current p-4"
+              href={link.url}
+            >
+              <span class="sr-only">{link.description}</span>
+              <Icon class="size-full" name={link.icon} />
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  <script
+    async
+    defer
+    crossorigin="anonymous"
+    src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v20.0&appId=1048058969988849"
+    nonce="820AieRx"></script>
+  <div id="fb-root"></div>
+  <div
+    class="fb-page"
+    data-href="https://www.facebook.com/codepassion.co"
+    data-hide-cover="false"
+    data-small-header="false"
+    data-show-facepile="true"
+  >
+  </div>
+</div>
+
+<footer class="bg-offset">
+  <div
+    class="container mx-auto flex max-w-6xl flex-col flex-wrap px-5 py-24 md:flex-row md:flex-nowrap md:items-center lg:items-start"
+  >
+    <!-- <div
+      class="mx-auto mt-10 w-64 flex-shrink-0 text-center md:mx-0 md:mt-0 md:text-left"
+    >
+      <a
+        class="title-font flex items-center justify-center font-medium md:justify-start"
+      >
+        <img
+          src="https://asset.codepassion.co/logo/codepassion_logo_tagline_blackfont.png"
+        />
+      </a>
+    </div> -->
+    <div
+      class="order-first -mb-10 flex flex-grow flex-wrap text-center text-sm md:pr-0 md:text-left"
+    >
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">
+          Products
+        </h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a
+              href="https://sekweb.site"
+              target="_blank"
+              class="hover:text-primary">Sekweb.site</a
+            >
+          </li>
+          <li>
+            <span class="text-gray-600 hover:text-gray-600">IR Page (Soon)</span
+            >
+          </li>
+          <li>
+            <span class="text-gray-600 hover:text-gray-600">LMS (Soon)</span>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">
+          Services
+        </h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="#services" class="">Consulting</a>
+          </li>
+          <li>
+            <a href="#services" class="">UX/UI Design</a>
+          </li>
+          <li>
+            <a href="#services" class="">Development</a>
+          </li>
+          <li>
+            <a href="#services" class="">Server Mainenance</a>
+          </li>
+          <li>
+            <a href="#services" class="">Digital Marketing</a>
+          </li>
+          <li>
+            <a href="#services" class="">Supporting</a>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">About</h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="#about" class="">Our Company</a>
+          </li>
+          <li>
+            <a href="https://card.codepassion.co" class="">Our Team</a>
+          </li>
+          <li>
+            <a href="#partners" class="">Clients & Partners</a>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">Tools</h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="https://stats.codepassion.co" target="_blank" class=""
+              >🟢 System Status</a
+            >
+          </li>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div
+      class="container mx-auto flex flex-col flex-wrap px-5 py-6 sm:flex-row"
+    >
+      <p class="text-center text-gray-500 text-sm sm:text-left">
+        © 2024 Code Passion Co., Ltd.
+      </p>
+      <div class="h-4"></div>
+      <span
+        class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.url}
+              aria-label={link.description}
+              class="ml-3 text-gray-500"
+            >
+              <Icon class="size-full" name={link.icon} />
+            </a>
+          ))
+        }
+      </span>
+    </div>
+  </div>
 </footer>
