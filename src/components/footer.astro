@@ -100,10 +100,11 @@ const links: Array<FooterLink> = [
             >
           </li>
           <li>
-            <a class="text-gray-600 hover:text-gray-600">IR Page (Soon)</a>
+            <span class="text-gray-600 hover:text-gray-600">IR Page (Soon)</span
+            >
           </li>
           <li>
-            <a class="text-gray-600 hover:text-gray-600">LMS (Soon)</a>
+            <span class="text-gray-600 hover:text-gray-600">LMS (Soon)</span>
           </li>
         </nav>
       </div>
@@ -171,7 +172,11 @@ const links: Array<FooterLink> = [
       >
         {
           links.map((link) => (
-            <a href={link.url} class="ml-3 text-gray-500">
+            <a
+              href={link.url}
+              aria-label={link.description}
+              class="ml-3 text-gray-500"
+            >
               <Icon class="size-full" name={link.icon} />
             </a>
           ))

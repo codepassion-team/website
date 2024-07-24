@@ -1,6 +1,8 @@
 ---
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import { Icon } from "astro-icon/components";
+
+import sekwebArt from "~/assets/sekweb_artwork.png";
 ---
 
 <section class="relative h-full bg-white">
@@ -23,10 +25,20 @@ import { Icon } from "astro-icon/components";
         <p class="text-md sm:text-md mt-1 font-light text-gray-700 md:text-lg">
           SekWeb is an AI-powered website builder with instant content.
         </p>
-        <img
-          src="/sekweb_artwork.png"
+        <Picture
+          src={sekwebArt}
           class="mx-auto max-h-[640px] w-full max-w-[640px]"
+          widths={[640, 640]}
+          alt="Sekweb's Art"
+          formats={["avif", "webp"]}
         />
+        <!-- <Image
+          src="/sekweb_artwork.png"
+          alt="SekWeb's Artwork"
+          class="mx-auto max-h-[640px] w-full max-w-[640px]"
+          inferSize={true}
+          sizes="10px, 10px"
+        /> -->
         <a
           href="https://app.sekweb.site?from=codepassion.co"
           class="mx-auto mt-12 flex w-64 animate-bounce items-center justify-center gap-3 rounded-full border-2 border-current px-6 py-4 text-[#774CFE] hover:bg-[#774CFE] hover:font-bold hover:text-white"

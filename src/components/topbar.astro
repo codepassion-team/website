@@ -1,6 +1,6 @@
 ---
 import { Icon } from "astro-icon/components";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 import ThemeSwitcher from "~/components/theme-switcher.astro";
 import type { NavItem } from "~/types";
 import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
@@ -27,11 +27,10 @@ const companyName = "Code Passion";
   <a class="flex items-center gap-1 hover:!text-default" href="/">
     <h1 class="sr-only">{companyName}</h1>
     <Image
-      class="h-12 w-12 object-cover"
       src={codePassionLogo}
-      alt="CodePassion Logo"
-      widths={logoWidths}
-      sizes="10px, 20px"
+      alt="CodePassion's Logo"
+      width="48"
+      height="48"
     />
     <strong>{companyName}</strong>
   </a>
