@@ -4,10 +4,10 @@ import ContentSection from "~/components/content-section.astro";
 
 const featuredSites = await getCollection(
   "showcase",
-  ({ data }) => "featured" in data,
+  ({ data }) => "featured" in data
 );
 const orderedSites = featuredSites.sort(
-  (a, b) => a.data.featured! - b.data.featured!,
+  (a, b) => a.data.featured! - b.data.featured!
 );
 const partners = [
   {
@@ -16,11 +16,11 @@ const partners = [
   },
   {
     title: "สสส.",
-    logo: "/logos/ThaiHealth.jpg"
+    logo: "/logos/ThaiHealth.jpg",
   },
   {
     title: "IPAC",
-    logo: "/logos/IPAC.png"
+    logo: "/logos/IPAC.png",
   },
   {
     title: "aommoney",
@@ -28,39 +28,39 @@ const partners = [
   },
   {
     title: "Koph",
-    logo: "/logos/koph.png"
+    logo: "/logos/koph.png",
   },
   {
     title: "Totop",
-    logo: "/logos/TOTOP.jpg"
+    logo: "/logos/TOTOP.jpg",
   },
   {
     title: "Mummily",
-    logo: "/logos/mummily.png"
+    logo: "/logos/mummily.png",
   },
   {
     title: "Dental Land",
-    logo: "/logos/DTL.png"
+    logo: "/logos/DTL.png",
   },
   {
     title: "BAR-BQ Resort",
-    logo: "/logos/BarBQ-Resort.webp"
+    logo: "/logos/BarBQ-Resort.webp",
   },
   {
     title: "The Local",
-    logo: "/logos/TheLocal.png"
+    logo: "/logos/TheLocal.png",
   },
   {
     title: "UOE4289",
-    logo: "/logos/UOE4289.jpg"
+    logo: "/logos/UOE4289.jpg",
   },
   {
     title: "Plogpaiguard",
-    logo: "/logos/plodpaiguard.png"
+    logo: "/logos/plodpaiguard.png",
   },
   {
     title: "Pi-R-Square",
-    logo: "/logos/Pi-R.svg"
+    logo: "/logos/Pi-R.svg",
   },
   {
     title: "Thai Programmer Association",
@@ -72,8 +72,8 @@ const partners = [
   },
   {
     title: "Design Alternative",
-    logo: "/logos/DesignAlternative.webp"
-  }
+    logo: "/logos/DesignAlternative.webp",
+  },
 ];
 ---
 
@@ -81,13 +81,22 @@ const partners = [
   <Fragment slot="lead">
     <span class="gradient-text">30+</span> Clients & Partners
   </Fragment>
-  <div class="max-w-6xl flex flex-wrap -m-4 justify-center items-center bg-white">
-    {partners.map(({title, logo}) => (
-      <div class="lg:w-1/4 sm:w-1/3 w-1/2 p-8">
-        <div class="flex">
-          <img alt="gallery" class="inset-0 w-full h-full object-cover object-center" src={logo} alt={title} />
+  <div
+    class="-m-4 flex max-w-6xl flex-wrap items-center justify-center rounded-xl border border-default bg-white"
+  >
+    {
+      partners.map(({ title, logo }) => (
+        <div class="w-1/2  p-8 sm:w-1/3 lg:w-1/4">
+          <div class="flex">
+            <img
+              alt="gallery"
+              class="inset-0 h-full w-full object-cover object-center"
+              src={logo}
+              alt={title}
+            />
+          </div>
         </div>
-      </div>
-    ))}
+      ))
+    }
   </div>
 </ContentSection>
