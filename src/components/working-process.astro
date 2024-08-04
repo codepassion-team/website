@@ -5,41 +5,54 @@ import type { FeatureItem } from "~/types";
 
 const features: Array<FeatureItem> = [
   {
-    title: "Website",
+    title: "Exclusive Consulting",
     description:
       "เริ่มต้นด้วย Passion เพียงสิ่งนี้ ก็สามารถจองปรึกษากับเราได้ฟรี ไม่ค่าใช้จ่ายใดๆ ทั้งสิ้น ไม่มีกั๊ก เป็นกันเอง เพื่อจุดประสงค์เดียวกันคือต้องการเห็นธุรกิจได้เติบโตด้วย Passion ไม่ว่าธุรกิจของคุณจะเล็กหรือใหญ่ Code Passion ยินดีให้คำปรึกษาเป็นอย่างยิ่ง",
-    icon: "mdi:monitor-dashboard",
+    icon: "mdi:handshake",
   },
   {
-    title: "Data",
+    title: "UX/UI Design",
     description:
       "เมื่อได้รับเป้าหมายและความต้องการ ทาง Code Passion จะออกแบบและนำเสนอ Solution ที่ตรงเป้า ตอบโจทย์ รวมทั้งโครงร่าง Design ของ web และ mobile application ตามหลักการ User-centered design ทุก design จะต้องผ่านการตรวจสอบด้านความสวยงามและการใช้งานก่อนนำไปพัฒนาจริง",
-    icon: "mdi:finance",
+    icon: "mdi:feather",
   },
   {
-    title: "E-Commerce",
+    title: "Development",
     description:
       "ขั้นตอนเป็นขั้นการพัฒนาและสร้าง Solution ตามข้อตกลง มีกรอบเวลาและสิ่งที่ส่งมอบได้อย่างชัดเจน สามารถติดตามและขอรายงานได้ตลอดทั้งช่วงการพัฒนา ด้วยเทคโนโลยีที่ได้รับการยอมรับล่าสุด เช่น React, Vue, Angular, Strapi, NextJS",
-    icon: "mdi:cart-outline",
+    icon: "mdi:directions-fork",
+  },
+  {
+    title: "Maintenance",
+    description:
+      "วางแผน ตรวจสอบ และวิเคราะห์กระบวนการทำงานด้าน IT ในปัจจุบัน เพื่อค้นหา เสนอแผน และลงมือปรับปรุงให้ดียิ่งขึ้น เพื่อลดช่องโหว่ เสริมความปลอดภัย สร้างผลลัพธ์ที่ดีขึ้น ในเกณฑ์มาตรฐานที่ได้รับการยอมรับ",
+    icon: "mdi:graph",
+  },
+  {
+    title: "Digital Marketing",
+    description:
+      "ยึดหลักการทำงานแบบ Cost Effectiveness โดยทุกแผนการตลาดจะต้องคุ้มค่าและได้ผลลัพธ์ที่พึงพอใจ เข้าถึงกลุ่มเป้าหมายที่ตรงจุด ผลัพธ์ที่ตรงใจ ทีมงานจะแนะนำทำแผน และปรับปรุงให้เข้ากับสถานการณ์ โดยไม่ศูนย์ตัวตนของแบรนด์",
+    icon: "mdi:search-web",
+  },
+  {
+    title: "Friendly Support",
+    description:
+      "ความไว้วางใจคือสิ่งสำคัญสำหรับเรา เราถึงถือว่าการที่ได้ดูแลช่วยเหลือคุณ และให้คำแนะนำแบบเพื่อนคู่คิด จะเป็นแนวทางที่ดีที่ทำให้เราได้รับความไว้วางใจจากคุณ",
+    icon: "mdi:account-group",
   },
 ];
 ---
 
-<ContentSection title="Our Services" id="services">
-  <Fragment slot="lead">
-    We provide services to make your technologies <span class="gradient-text">
-      driven</span
-    > your business.
-  </Fragment>
+<ContentSection title="Our Working Process" id="working-process">
   <ul class="grid max-w-6xl grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
     {
       features.map(({ title, description, icon }) => (
-        <li class="flex flex-col items-center gap-4 p-6">
+        <li class="flex flex-col items-center gap-4 border border-default bg-offset p-6">
           <div class="size-16 rounded-full border-2 border-current p-3">
             <Icon name={icon} class="size-full" />
           </div>
           <p class="text-center font-extrabold text-xl">{title}</p>
-          {/* <p class="text-center text-offset text-sm">{description}</p> */}
+          <p class="text-center text-offset text-sm">{description}</p>
         </li>
       ))
     }
