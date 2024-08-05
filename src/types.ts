@@ -10,6 +10,16 @@ export interface FeatureItem {
   title: string;
 }
 
+export interface OurServiceItem {
+  description: {
+    short: string;
+    long: string;
+    thai: string;
+  };
+  icon: string;
+  title: string;
+}
+
 export interface FooterLink {
   description: string;
   icon: string;
