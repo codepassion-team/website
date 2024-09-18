@@ -1,0 +1,76 @@
+---
+import "~/styles/index.css";
+import "@fontsource-variable/inter";
+import "@fontsource-variable/noto-sans-thai";
+
+import Topbar from "~/components/topbar.astro";
+import Footer from "~/components/footer.astro";
+import packageJson from "../../package.json";
+import ContentSection from "~/components/content-section.astro";
+
+const { generator, site } = Astro;
+const image = new URL("cover.jpg", site);
+const description = `Code Passion co., ltd. "Tech makes it real", our mission is to create vibrant, innovative, and practical modular applications that benefit both businesses and the community. We envision a future where technology brings color and connectivity to society.`;
+---
+
+<!doctype html>
+<html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
+  <head>
+    <meta name="version" content={packageJson.version} />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="generator" content={generator} />
+
+    <title>Code Passion</title>
+    <meta name="description" content={description} />
+
+    <!-- social media -->
+    <meta property="og:title" content="Code Passion" />
+    <meta property="og:type" content="website" />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={site} />
+    <meta property="fb:app_id" content="1048058969988849" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- initialize theme -->
+    <script is:inline>
+      const themeSaved = localStorage.getItem("theme");
+
+      if (themeSaved) {
+        document.documentElement.dataset.theme = themeSaved;
+      } else {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)"
+        ).matches;
+        document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+      }
+
+      window
+        .matchMedia("(prefers-color-scheme: light)")
+        .addEventListener("change", (event) => {
+          if (!localStorage.getItem("theme")) {
+            document.documentElement.dataset.theme = event.matches
+              ? "dark"
+              : "light";
+          }
+        });
+    </script>
+  </head>
+  <body
+    class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
+  >
+    <Topbar />
+
+    <section class="space-y-64 px-8 py-32">
+      <div
+        class="-m-4 mx-auto flex max-w-5xl flex-wrap items-center justify-center"
+      >
+        <slot />
+      </div>
+    </section>
+
+    <Footer />
+  </body>
+</html>
