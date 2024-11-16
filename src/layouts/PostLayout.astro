@@ -1,0 +1,9 @@
+---
+import BlogLayout from "./BlogLayout.astro";
+
+const { pages, pageData, postUrl } = Astro.props;
+---
+
+<BlogLayout>
+  <slot />
+</BlogLayout>

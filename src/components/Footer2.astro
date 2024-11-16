@@ -1,0 +1,133 @@
+---
+import { Icon } from "astro-icon/components";
+import type { FooterLink } from "~/types";
+
+const links: Array<FooterLink> = [
+  {
+    url: "tell:+66886384566",
+    description: "Quick Call",
+    icon: "mdi:call",
+  },
+  {
+    url: "https://facebook.com/codepassion.co",
+    description: "Facebook Page",
+    icon: "fa-brands:facebook",
+  },
+  {
+    url: "https://github.com/codepassion-team",
+    description: "GitHub",
+    icon: "fa-brands:github",
+  },
+  {
+    url: "https://www.youtube.com/@code-passion",
+    description: "YouTube Channel",
+    icon: "fa-brands:youtube",
+  },
+];
+---
+
+<footer class="bg-offset">
+  <div
+    class="container mx-auto flex max-w-6xl flex-col flex-wrap px-5 py-24 md:flex-row md:flex-nowrap md:items-center lg:items-start"
+  >
+    <div
+      class="order-first -mb-10 flex flex-grow flex-wrap text-center text-sm md:pr-0 md:text-left"
+    >
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">
+          Products
+        </h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a
+              href="https://sekweb.site"
+              target="_blank"
+              class="hover:text-primary">Sekweb.site</a
+            >
+          </li>
+          <li>
+            <span class="text-gray-600 hover:text-gray-600">IR Page (Soon)</span
+            >
+          </li>
+          <li>
+            <span class="text-gray-600 hover:text-gray-600">LMS (Soon)</span>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">
+          Services
+        </h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="#services" class="">Consulting</a>
+          </li>
+          <li>
+            <a href="#services" class="">UX/UI Design</a>
+          </li>
+          <li>
+            <a href="#services" class="">Development</a>
+          </li>
+          <li>
+            <a href="#services" class="">Server Mainenance</a>
+          </li>
+          <li>
+            <a href="#services" class="">Digital Marketing</a>
+          </li>
+          <li>
+            <a href="#services" class="">Supporting</a>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">About</h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="#about" class="">Our Company</a>
+          </li>
+          <li>
+            <a href="https://card.codepassion.co" class="">Our Team</a>
+          </li>
+          <li>
+            <a href="#partners" class="">Clients & Partners</a>
+          </li>
+        </nav>
+      </div>
+      <div class="w-full px-4 md:w-1/2 lg:w-1/4">
+        <h2 class="title-font mb-3 font-bold tracking-widest text-sm">Tools</h2>
+        <nav class="mb-10 list-none leading-8">
+          <li>
+            <a href="https://stats.codepassion.co" target="_blank" class=""
+              >🟢 System Status</a
+            >
+          </li>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <div class="">
+    <div
+      class="container mx-auto flex flex-col flex-wrap px-5 py-6 sm:flex-row"
+    >
+      <p class="text-center text-gray-500 text-sm sm:text-left">
+        © 2024 Code Passion Co., Ltd.
+      </p>
+      <div class="h-4"></div>
+      <span
+        class="mt-2 inline-flex justify-center sm:ml-auto sm:mt-0 sm:justify-start"
+      >
+        {
+          links.map((link) => (
+            <a
+              href={link.url}
+              aria-label={link.description}
+              class="ml-3 text-gray-500"
+            >
+              <Icon class="size-full" name={link.icon} />
+            </a>
+          ))
+        }
+      </span>
+    </div>
+  </div>
+</footer>
