@@ -1,0 +1,100 @@
+---
+import { Image } from "astro:assets";
+import type { ClientLogo } from "~/types";
+
+import thaiprogrammer from "~/assets/logos/thaiprogrammer.webp";
+import teeraporn from "~/assets/logos/teeraporn.webp";
+import bbq from "~/assets/logos/BarBQ-Resort.webp";
+import DesignAlternative from "~/assets/logos/DesignAlternative.webp";
+import PiR from "~/assets/logos/Pi-R.svg";
+import aommoney from "~/assets/logos/aommoney.jpg";
+import thaiHealth from "~/assets/logos/ThaiHealth.jpg";
+import TOTOP from "~/assets/logos/TOTOP.jpg";
+import UOE4289 from "~/assets/logos/UOE4289.jpg";
+import IPAC from "~/assets/logos/IPAC.png";
+import koph from "~/assets/logos/koph.png";
+import mummily from "~/assets/logos/mummily.png";
+import DTL from "~/assets/logos/DTL.png";
+import DTE from "~/assets/logos/DTE.png";
+import TheLocal from "~/assets/logos/TheLocal.png";
+import plodpaiguard from "~/assets/logos/plodpaiguard.png";
+import AIVOS from "~/assets/logos/aivos.png";
+
+const clients: Array<ClientLogo> = [
+  { title: "Teeraporn", logo: teeraporn },
+  { title: "ThaiHealth", logo: thaiHealth },
+  { title: "IPAC", logo: IPAC },
+  { title: "aommoney", logo: aommoney },
+  { title: "Koph", logo: koph },
+  { title: "Totop", logo: TOTOP },
+  { title: "Mummily", logo: mummily },
+  { title: "Dental Land", logo: DTL },
+  { title: "BAR-BQ Resort", logo: bbq },
+  { title: "The Local", logo: TheLocal },
+  { title: "UOE4289", logo: UOE4289 },
+  { title: "Plogpaiguard", logo: plodpaiguard },
+  { title: "Pi-R-Square", logo: PiR },
+  { title: "Thai Programmer Association", logo: thaiprogrammer },
+  { title: "Digital Tech Entrepreneur Association", logo: DTE },
+  { title: "Design Alternative", logo: DesignAlternative },
+  { title: "AIVOS", logo: AIVOS },
+];
+---
+
+<section id="clients" class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Our Clients</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">Trusted by 30+ Businesses</h2>
+
+    <!-- Stats row -->
+    <div class="mt-8 flex flex-wrap justify-center gap-8 md:gap-16">
+      <div class="text-center">
+        <p class="text-3xl font-bold gradient-text">30+</p>
+        <p class="text-xs font-light text-offset">Projects Delivered</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl font-bold gradient-text">5+</p>
+        <p class="text-xs font-light text-offset">Years in Business</p>
+      </div>
+      <div class="text-center">
+        <p class="text-3xl font-bold gradient-text">100%</p>
+        <p class="text-xs font-light text-offset">Enterprise-Grade Quality</p>
+      </div>
+    </div>
+
+    <!-- Logo grid -->
+    <div class="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5" role="list" aria-label="Our clients">
+      {
+        clients.map(({ title, logo }) => (
+          <div
+            class="client-logo-card flex items-center justify-center p-5 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg"
+            role="listitem"
+          >
+            <Image
+              src={logo}
+              alt={title}
+              width={160}
+              height={80}
+              class="max-h-16 w-auto object-contain"
+              loading="lazy"
+            />
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .client-logo-card {
+    border-radius: 0.75rem;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  }
+
+  .client-logo-card:hover {
+    background: #FFFFFF;
+    border-color: #D0D0D0;
+  }
+</style>

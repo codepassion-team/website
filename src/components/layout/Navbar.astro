@@ -1,0 +1,241 @@
+---
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import type { NavItem } from "~/types";
+import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
+
+const navItems: Array<NavItem> = [
+  { title: "About", url: "#about" },
+  { title: "Services", url: "#services" },
+  { title: "Products", url: "#products" },
+  { title: "Clients", url: "#clients" },
+  { title: "Team", url: "#team" },
+  { title: "Contact", url: "#contact" },
+];
+
+const companyName = "CodePassion";
+---
+
+<header
+  id="navbar"
+  class="navbar-base fixed top-0 z-50 w-full transition-all duration-300"
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+    <a
+      class="flex items-center gap-2"
+      href="/"
+      aria-label="Code Passion - Home"
+    >
+      <Image
+        class="h-10 w-10 object-contain"
+        src={codePassionLogo}
+        alt="Code Passion Logo"
+        width={40}
+        height={40}
+      />
+      <strong class="font-bold text-default text-lg">{companyName}</strong>
+    </a>
+
+    <nav class="hidden items-center gap-6 lg:flex" aria-label="Main navigation">
+      {
+        navItems.map(({ title, url }) => (
+          <a class="nav-link transition-colors text-sm" href={url}>
+            {title}
+          </a>
+        ))
+      }
+      <a
+        href="#contact"
+        class="brand-gradient rounded-lg px-5 py-2.5 font-medium text-white shadow-sm transition-all text-sm hover:opacity-90 hover:shadow-md"
+        aria-label="Get Started"
+      >
+        Get Started
+      </a>
+    </nav>
+
+    <div class="flex items-center gap-2 lg:hidden">
+      <button
+        id="theme-toggle-mobile"
+        type="button"
+        class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors"
+        aria-label="Toggle theme"
+      >
+        <Icon
+          id="icon-light-mobile"
+          name="mdi:white-balance-sunny"
+          class="size-5"
+        />
+        <Icon
+          id="icon-dark-mobile"
+          name="mdi:weather-night"
+          class="hidden size-5"
+        />
+      </button>
+      <button
+        id="mobile-menu-open"
+        type="button"
+        class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors"
+        aria-label="Open menu"
+      >
+        <Icon name="mdi:menu" class="size-6" />
+      </button>
+    </div>
+  </div>
+
+  <div
+    id="mobile-drawer"
+    class="fixed inset-y-0 right-0 z-50 w-full max-w-sm translate-x-full bg-background shadow-2xl transition-transform duration-300 ease-in-out lg:hidden"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Mobile navigation"
+  >
+    <div
+      class="flex items-center justify-between border-b border-border px-6 py-4"
+    >
+      <strong class="font-semibold text-default text-lg">{companyName}</strong>
+      <button
+        id="mobile-menu-close"
+        type="button"
+        class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors"
+        aria-label="Close menu"
+      >
+        <Icon name="mdi:close" class="size-6" />
+      </button>
+    </div>
+    <nav class="flex flex-col p-6" aria-label="Mobile navigation">
+      {
+        navItems.map(({ title, url }) => (
+          <a
+            class="border-b border-border py-4 text-default transition-colors text-lg hover:text-brand-red"
+            href={url}
+          >
+            {title}
+          </a>
+        ))
+      }
+      <a
+        href="#contact"
+        class="brand-gradient mt-6 rounded-lg px-4 py-3 text-center font-medium text-white transition-opacity text-sm hover:opacity-90"
+        aria-label="Get Started"
+      >
+        Get Started
+      </a>
+    </nav>
+  </div>
+
+  <div
+    id="mobile-overlay"
+    class="fixed inset-0 z-40 hidden bg-black/50 lg:hidden"
+    aria-hidden="true"
+  >
+  </div>
+</header>
+
+<style is:global>
+  /* Dark mode nav links */
+  [data-theme="dark"] .nav-link {
+    color: #aaaaaa;
+  }
+  [data-theme="dark"] .nav-link:hover {
+    color: #ffffff;
+  }
+
+  /* Light mode nav links */
+  [data-theme="light"] .nav-link {
+    color: #666666;
+  }
+  [data-theme="light"] .nav-link:hover {
+    color: #252525;
+  }
+</style>
+
+<script>
+  const navbar = document.getElementById("navbar");
+  const drawer = document.getElementById("mobile-drawer");
+  const overlay = document.getElementById("mobile-overlay");
+  const openBtn = document.getElementById("mobile-menu-open");
+  const closeBtn = document.getElementById("mobile-menu-close");
+
+  function openMenu() {
+    drawer?.classList.remove("translate-x-full");
+    overlay?.classList.remove("hidden");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    drawer?.classList.add("translate-x-full");
+    overlay?.classList.add("hidden");
+    document.body.style.overflow = "";
+  }
+
+  openBtn?.addEventListener("click", openMenu);
+  closeBtn?.addEventListener("click", closeMenu);
+  overlay?.addEventListener("click", closeMenu);
+
+  drawer?.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  function updateNavbarStyle() {
+    if (!navbar) return;
+    const scrolled = window.scrollY > 50;
+    const isDark = document.documentElement.dataset.theme === "dark";
+
+    if (scrolled) {
+      if (isDark) {
+        navbar.style.backgroundColor = "rgba(10, 10, 10, 0.85)";
+      } else {
+        navbar.style.backgroundColor = "rgba(255, 255, 255, 0.92)";
+      }
+      navbar.style.backdropFilter = "blur(16px)";
+      navbar.style.borderBottom = "1px solid var(--color-border)";
+      navbar.style.boxShadow = isDark ? "none" : "0 1px 8px rgba(0,0,0,0.06)";
+    } else {
+      if (isDark) {
+        navbar.style.backgroundColor = "rgba(10, 10, 10, 0.5)";
+      } else {
+        navbar.style.backgroundColor = "rgba(255, 255, 255, 0.6)";
+      }
+      navbar.style.backdropFilter = "blur(16px)";
+      navbar.style.borderBottom = "1px solid transparent";
+      navbar.style.boxShadow = "none";
+    }
+  }
+
+  window.addEventListener("scroll", () => {
+    requestAnimationFrame(updateNavbarStyle);
+  });
+
+  // Theme toggle
+  function getTheme(): string {
+    return document.documentElement.dataset.theme || "dark";
+  }
+
+  function updateThemeIcons() {
+    const isDark = getTheme() === "dark";
+    document
+      .querySelectorAll("#icon-light-mobile, #icon-light-desktop")
+      .forEach((el) => {
+        (el as HTMLElement).classList.toggle("hidden", !isDark);
+      });
+    document
+      .querySelectorAll("#icon-dark-mobile, #icon-dark-desktop")
+      .forEach((el) => {
+        (el as HTMLElement).classList.toggle("hidden", isDark);
+      });
+  }
+
+  function toggleTheme() {
+    const next = getTheme() === "dark" ? "light" : "dark";
+    document.documentElement.dataset.theme = next;
+    localStorage.setItem("theme", next);
+    updateThemeIcons();
+    updateNavbarStyle();
+  }
+
+  document
+    .getElementById("theme-toggle-mobile")
+    ?.addEventListener("click", toggleTheme);
+  updateThemeIcons();
+  updateNavbarStyle();
+</script>

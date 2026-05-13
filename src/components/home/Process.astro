@@ -1,0 +1,62 @@
+---
+import { Icon } from "astro-icon/components";
+import type { ProcessStep } from "~/types";
+
+const steps: Array<ProcessStep> = [
+  {
+    number: "01",
+    title: "Discover",
+    description: "Free consultation to understand your goals, requirements, and business context.",
+    icon: "mdi:magnify",
+  },
+  {
+    number: "02",
+    title: "Design",
+    description: "UX/UI prototyping with a user-centered approach before a single line of code.",
+    icon: "mdi:pencil-ruler",
+  },
+  {
+    number: "03",
+    title: "Build",
+    description: "Agile development with regular updates, transparent progress, and rapid iteration.",
+    icon: "mdi:code-braces",
+  },
+  {
+    number: "04",
+    title: "Support",
+    description: "Maintenance, monitoring, and continuous optimization to keep you growing.",
+    icon: "mdi:rocket-launch",
+  },
+];
+---
+
+<section id="process" class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">How We Work</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">From Idea to Reality</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      A proven process that turns your vision into production-grade software.
+    </p>
+
+    <div class="relative mt-12">
+      <!-- Connecting line (desktop) -->
+      <div class="absolute top-1/2 left-0 hidden h-0.5 w-full -translate-y-1/2 bg-border-default lg:block" aria-hidden="true">
+        <div class="brand-gradient h-full w-full origin-left scale-x-0" id="process-line"></div>
+      </div>
+
+      <ul class="relative grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+        {
+          steps.map(({ number, title, description, icon }) => (
+            <li class="flex flex-col items-center text-center">
+              <div class="relative z-10 mb-4 flex size-16 items-center justify-center rounded-full border-2 border-border-default bg-background-card">
+                <span class="font-mono text-sm font-bold gradient-text">{number}</span>
+              </div>
+              <h3 class="text-lg font-medium text-default">{title}</h3>
+              <p class="mt-2 text-sm font-light leading-relaxed text-offset">{description}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</section>

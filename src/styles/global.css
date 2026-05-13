@@ -1,12 +1,109 @@
-/* TODO: consider creating <Button> and <GradientText> components */
-a,
-.btn {
-  @apply transition-colors duration-200;
-  @apply hover:text-secondary;
-  @apply focus:outline-none focus:ring-2 focus:ring-secondary focus:ring-offset-2 focus:ring-offset-transparent;
+/* Brand gradient text utility */
+.gradient-text {
+  background: linear-gradient(135deg, var(--color-brand-red) 0%, var(--color-brand-orange-red) 50%, var(--color-brand-pink-red) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
 
-.gradient-text {
-  @apply bg-clip-text text-transparent;
-  @apply bg-gradient-to-br from-[#F04D2D] via-[#EF3544] to-[#ED1B5D];
+/* Brand gradient background */
+.brand-gradient {
+  background: linear-gradient(135deg, var(--color-brand-red) 0%, var(--color-brand-orange-red) 50%, var(--color-brand-pink-red) 100%);
+}
+
+/* Glass card utility */
+.glass-card {
+  background: var(--color-background-card);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+}
+
+/* Scroll-triggered animation */
+.animate-on-scroll {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.animate-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-on-scroll {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Link styles */
+a {
+  transition: color 0.2s;
+}
+a:focus-visible,
+button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--color-background), 0 0 0 4px var(--color-brand-red);
+}
+
+/* Blinking cursor */
+@keyframes blink {
+  0%, 50% { opacity: 1; }
+  51%, 100% { opacity: 0; }
+}
+.cursor-blink {
+  animation: blink 1s step-end infinite;
+}
+
+/* Noise texture overlay */
+.noise-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  opacity: 0.03;
+  background: repeating-conic-gradient(var(--color-text) 0% 25%, transparent 0% 50%) 0 0 / 2px 2px;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Hero word list */
+.hero-word-list li {
+  display: block;
+}
+
+/* Hero grid background */
+.hero-grid-bg {
+  background-image:
+    linear-gradient(rgba(128,128,128,0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(128,128,128,0.06) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+/* Hero shadow utilities */
+.hero-glow-btn {
+  box-shadow: 0 4px 40px rgba(240,77,45,0.3);
+}
+.hero-glow-btn:hover {
+  box-shadow: 0 8px 60px rgba(240,77,45,0.4);
+}
+.hero-terminal-shadow {
+  box-shadow: 0 8px 60px rgba(0,0,0,0.3);
+}
+
+/* Skip to content */
+.skip-to-content {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  z-index: 9999;
+  padding: 0.5rem 1rem;
+  background: var(--color-brand-red);
+  color: white;
+  font-weight: 600;
+  transition: top 0.2s;
+}
+.skip-to-content:focus {
+  top: 0;
 }
