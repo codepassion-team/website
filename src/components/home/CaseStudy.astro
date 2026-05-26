@@ -1,0 +1,84 @@
+---
+---
+
+<section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Featured Project</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">Real Systems. Real Results.</h2>
+
+    <div class="mt-12 glass-card overflow-hidden border-[rgba(245,158,11,0.2)]">
+      <div class="grid grid-cols-1 lg:grid-cols-2">
+        <!-- Content -->
+        <div class="p-8 lg:p-10">
+          <div class="mb-4 flex items-center gap-3">
+            <span class="rounded-full bg-[rgba(245,158,11,0.1)] px-3 py-1 text-xs font-medium text-amber-400">DDG Jewelry</span>
+            <span class="rounded-full border border-border-default px-3 py-1 text-xs font-light text-offset">Case Study</span>
+          </div>
+          <h3 class="text-xl font-medium text-default">Jewelry Savings Management Platform</h3>
+          <p class="mt-3 text-sm font-light leading-relaxed text-offset">
+            Comprehensive jewelry savings management — customers track contracts, payments, and balances directly through LINE, without a separate app.
+          </p>
+
+          <ul class="mt-6 space-y-2">
+            {[
+              "Passwordless LINE Login (JWT Auth)",
+              "Automated contract status: ACTIVE / OVERDUE / CLOSED",
+              "AI slip verification via Thunder API (OCR &rarr; ChillPay &rarr; Instant Approval)",
+              "Real-time sync of 20,000+ global diamonds via Supabase Edge Functions",
+              "Instant LINE Group notifications for every transaction",
+              "Self-managing webhooks &mdash; auto-closes contracts, auto-updates due dates",
+            ].map((feature) => (
+              <li class="flex items-start gap-2 text-sm text-offset">
+                <span class="mt-0.5 text-brand-red">&#x2713;</span>
+                <span class="font-light">{feature}</span>
+              </li>
+            ))}
+          </ul>
+
+          <div class="mt-6 flex flex-wrap gap-2">
+            {["Next.js 16", "Bun + ElysiaJS", "PostgreSQL", "Drizzle ORM", "Supabase", "ChillPay", "LINE API", "Thunder API"].map((tech) => (
+              <span class="rounded-full border border-border-default px-2 py-0.5 text-[11px] font-light text-offset">{tech}</span>
+            ))}
+          </div>
+
+          <div class="mt-6 flex items-center gap-4">
+            <span class="rounded-full border border-[rgba(240,77,45,0.3)] px-3 py-1 text-xs font-medium gradient-text">v2.0.12</span>
+            <span class="text-xs font-light text-offset">Deployed in 14s</span>
+            <span class="text-xs font-light text-offset">97 PRs merged</span>
+          </div>
+        </div>
+
+        <!-- Phone mockup -->
+        <div class="flex items-center justify-center bg-offset p-8">
+          <div class="w-64 rounded-[2rem] border-4 border-[#333] bg-[#1a1a1a] p-2">
+            <div class="rounded-[1.5rem] bg-[#0d0d0d] p-4">
+              <!-- Fake LINE chat -->
+              <div class="mb-3 flex items-center gap-2 border-b border-[#222] pb-3">
+                <div class="size-8 rounded-full bg-green-500"></div>
+                <div>
+                  <p class="text-xs font-medium text-white">DDG Jewelry</p>
+                  <p class="text-[10px] text-[#888]">Online</p>
+                </div>
+              </div>
+              <div class="space-y-2">
+                <div class="rounded-lg bg-[#1a1a1a] p-2">
+                  <p class="text-[10px] text-[#888]">Payment Received</p>
+                  <p class="text-xs text-white">THB 5,000.00</p>
+                  <p class="text-[10px] text-green-400">Verified &rarr; ChillPay</p>
+                </div>
+                <div class="rounded-lg bg-[#1a1a1a] p-2">
+                  <p class="text-[10px] text-[#888]">Contract Status</p>
+                  <p class="text-xs text-amber-400">ACTIVE</p>
+                  <p class="text-[10px] text-[#888]">Balance: THB 45,000</p>
+                </div>
+                <div class="rounded-lg bg-[rgba(240,77,45,0.1)] p-2">
+                  <p class="text-[10px] text-brand-red">Next payment due in 3 days</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

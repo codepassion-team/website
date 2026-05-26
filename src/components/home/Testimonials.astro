@@ -1,0 +1,64 @@
+---
+import type { Testimonial } from "~/types";
+
+// TODO: Replace with real client quotes
+const testimonials: Array<Testimonial> = [
+  {
+    quote: "Code Passion transformed our manual processes into a fully automated system. The LINE integration they built saves us hours every day and our customers love the instant notifications.",
+    author: "Operations Director",
+    role: "Head of Operations",
+    company: "Retail & E-Commerce Client",
+  },
+  {
+    quote: "Their team delivered our platform ahead of schedule with exceptional quality. The architecture they built has scaled seamlessly as we grew from 100 to 10,000+ users.",
+    author: "Chief Technology Officer",
+    role: "CTO",
+    company: "Financial Technology Client",
+  },
+  {
+    quote: "Working with Code Passion felt like having an in-house team. They understood our business goals from day one and built exactly what we needed — nothing more, nothing less.",
+    author: "Business Owner",
+    role: "Managing Director",
+    company: "Healthcare Solutions Client",
+  },
+];
+---
+
+<section class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Testimonials</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">What Our Clients Say</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      30+ businesses. Real systems. Real results.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        testimonials.map(({ quote, author, role, company }) => (
+          <div class="glass-card overflow-hidden">
+            <div class="h-1 brand-gradient"></div>
+            <div class="p-6">
+              <span class="gradient-text text-4xl leading-none">&ldquo;</span>
+              <p class="mt-2 text-sm font-light italic leading-relaxed text-default">{quote}</p>
+              <div class="mt-4 border-t border-border-default pt-4">
+                <p class="text-sm font-medium text-default">{author}</p>
+                <p class="text-xs font-light text-offset">{role}, {company}</p>
+              </div>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        href="https://facebook.com/codepassion.co"
+        class="text-sm font-medium text-brand-red hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Want to share your experience? &rarr;
+      </a>
+    </div>
+  </div>
+</section>

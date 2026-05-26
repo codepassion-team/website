@@ -1,0 +1,74 @@
+---
+const certifications = [
+  {
+    title: "ISO 29110",
+    image: "/certifications/iso-29110.svg",
+  },
+  {
+    title: "W3C WCAG 2.2",
+    image: "/certifications/wcag-2.2.svg",
+  },
+  {
+    title: "Microsoft Azure Fundamentals",
+    image: "/certifications/azure-fundamentals.svg",
+  },
+  {
+    title: "SAFe 5 SA Agilist",
+    image: "/certifications/safe-5-agilist.svg",
+  },
+];
+---
+
+<section id="certifications" class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Certifications</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">Recognized. Certified. Trusted.</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      Industry partnerships and international certifications that validate our standards.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {certifications.map(({ title, image }) => (
+        <div class="cert-card group flex flex-col items-center justify-center p-8 text-center transition-all duration-300 hover:-translate-y-1">
+          <img
+            src={image}
+            alt={`${title} certification badge`}
+            class="mb-4 h-20 w-auto"
+            loading="lazy"
+          />
+          <h3 class="font-semibold text-default" style="font-family: 'Mitr', sans-serif; font-size: 1rem;">
+            {title}
+          </h3>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .cert-card {
+    border-radius: 1rem;
+  }
+
+  [data-theme="dark"] .cert-card {
+    background: #0F1623;
+    border: 1px solid rgba(30, 100, 200, 0.2);
+    box-shadow: 0 0 20px rgba(30, 100, 200, 0.15);
+  }
+
+  [data-theme="dark"] .cert-card:hover {
+    border-color: rgba(30, 100, 200, 0.45);
+    box-shadow: 0 0 35px rgba(30, 100, 200, 0.25);
+  }
+
+  [data-theme="light"] .cert-card {
+    background: #FFFFFF;
+    border: 1px solid rgba(30, 100, 200, 0.15);
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+
+  [data-theme="light"] .cert-card:hover {
+    border-color: rgba(30, 100, 200, 0.35);
+    box-shadow: 0 4px 20px rgba(30, 100, 200, 0.12);
+  }
+</style>

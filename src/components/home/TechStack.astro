@@ -1,0 +1,208 @@
+---
+const layers = [
+  {
+    number: "01",
+    name: "Infrastructure",
+    description: "Cloud, deployment & hosting",
+    items: [
+      { name: "AWS", logoUrl: "https://img.icons8.com/color/96/amazon-web-services.png" },
+      { name: "Google Cloud", logoUrl: "https://cdn.simpleicons.org/googlecloud/4285F4" },
+      { name: "DigitalOcean", logoUrl: "https://cdn.simpleicons.org/digitalocean/0080FF" },
+      { name: "Coolify", logoUrl: "https://cdn.simpleicons.org/coolify/6D28D9" },
+      { name: "Supabase", logoUrl: "https://cdn.simpleicons.org/supabase/3FCF8E" },
+      { name: "Cloudflare", logoUrl: "https://cdn.simpleicons.org/cloudflare/F38020" },
+    ],
+  },
+  {
+    number: "02",
+    name: "Presentation",
+    description: "Frontend frameworks & API gateway",
+    items: [
+      { name: "NestJS", logoUrl: "https://cdn.simpleicons.org/nestjs/E0234E" },
+      { name: "Next.js", logoUrl: "https://cdn.simpleicons.org/nextdotjs/171717" },
+      { name: "Supabase", logoUrl: "https://cdn.simpleicons.org/supabase/3FCF8E" },
+      { name: "n8n", logoUrl: "https://cdn.simpleicons.org/n8n/FF6D5A" },
+    ],
+  },
+  {
+    number: "03",
+    name: "Application",
+    description: "Runtime & application logic",
+    items: [
+      { name: "Nginx", logoUrl: "https://cdn.simpleicons.org/nginx/009639" },
+      { name: "Flutter", logoUrl: "https://cdn.simpleicons.org/flutter/02569B" },
+      { name: "WordPress", logoUrl: "https://cdn.simpleicons.org/wordpress/21759B" },
+      { name: "Astro", logoUrl: "https://cdn.simpleicons.org/astro/FF5D01" },
+    ],
+  },
+  {
+    number: "04",
+    name: "Domain",
+    description: "Data persistence & query layer",
+    items: [
+      { name: "Typeorm", logoUrl: "https://cdn.simpleicons.org/typeorm/3FCF8E" },
+      { name: "Drizzle ORM", logoUrl: "https://cdn.simpleicons.org/drizzle/C5F74F" },
+    ],
+  },
+];
+---
+
+<section
+  class="animate-on-scroll relative overflow-hidden py-24 lg:py-32"
+>
+  <div
+    class="absolute -left-40 top-1/4 size-[500px] rounded-full bg-[rgba(240,77,45,0.08)] blur-[120px]"
+    aria-hidden="true"
+  />
+  <div
+    class="absolute -right-40 bottom-1/4 size-[400px] rounded-full bg-[rgba(237,27,93,0.06)] blur-[100px]"
+    aria-hidden="true"
+  />
+
+  <div class="relative z-10 mx-auto max-w-7xl">
+    <div class="text-center px-6 md:px-12">
+      <p class="font-light uppercase tracking-widest text-offset text-sm">
+        Technology
+      </p>
+      <h2 class="gradient-text mt-2 font-bold text-3xl md:text-4xl lg:text-5xl">
+        Our Tech Stack
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl font-light text-offset text-lg">
+        Every layer of your system, covered — from infrastructure to data.
+      </p>
+    </div>
+
+    <div
+      class="mt-16 flex snap-x snap-mandatory gap-6 overflow-x-auto scroll-smooth pb-6 pl-6 pr-6 md:pl-12 md:pr-12"
+      style="-webkit-overflow-scrolling: touch; scrollbar-width: thin;"
+      role="list"
+      aria-label="Technology stack layers"
+    >
+      {
+        layers.map(({ number, name, description, items }) => (
+          <div class="tech-layer-card relative flex w-[320px] flex-shrink-0 snap-start flex-col overflow-hidden rounded-3xl transition-all duration-500 sm:w-[380px] md:w-[440px]" role="listitem">
+            <div class="brand-gradient h-[2px] w-full" aria-hidden="true" />
+            <div
+              class="absolute right-0 top-0 size-40 rounded-full bg-[rgba(240,77,45,0.08)] blur-[60px]"
+              aria-hidden="true"
+            />
+            <div class="p-6 pb-3 md:p-8 md:pb-4">
+              <div class="flex items-center gap-4">
+                <span class="gradient-text flex size-12 items-center justify-center rounded-2xl bg-[rgba(240,77,45,0.1)] font-mono font-bold text-lg">
+                  {number}
+                </span>
+                <div>
+                  <h3 class="font-medium text-default text-lg">{name}</h3>
+                  <p class="font-light text-offset text-sm">{description}</p>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-1 flex-wrap content-start gap-4 px-6 pb-6 md:px-8 md:pb-8">
+              {items.map(({ name: itemName, logoUrl }) => (
+                <div
+                  class="tech-item group flex flex-col items-center gap-3 rounded-2xl p-5 transition-all duration-300 hover:-translate-y-1"
+                  style="width: calc(50% - 0.5rem);"
+                >
+                  <div class="transition-transform duration-300 group-hover:scale-110">
+                    <img
+                      src={logoUrl}
+                      alt={itemName}
+                      width={48}
+                      height={48}
+                      loading="lazy"
+                      class="size-12 object-contain"
+                    />
+                  </div>
+                  <span class="text-center font-light leading-tight text-offset text-sm">
+                    {itemName}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div
+      class="mt-4 flex items-center justify-center gap-2 font-light text-offset text-xs px-6 md:hidden md:px-12"
+    >
+      <svg class="size-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M7 16l-4-4m0 0l4-4m-4 4h18"></path>
+      </svg>
+      Swipe to explore all layers
+    </div>
+
+    <div class="tech-footer mx-6 mt-12 rounded-2xl px-6 py-4 md:mx-12">
+      <p class="text-center font-light text-offset text-xs">
+        <span class="gradient-text font-medium">All projects ship with:</span>
+        {" "}Conventional Commits &middot; Prettier &middot; Type-safe
+        end-to-end &middot; CI/CD in under 20s
+      </p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .tech-layer-card {
+    border: 1px solid var(--color-border);
+    backdrop-filter: blur(12px);
+  }
+
+  .tech-item {
+    background: var(--color-background-offset);
+  }
+
+  .tech-footer {
+    background: var(--color-background-card);
+    border: 1px solid var(--color-border);
+  }
+
+  /* Dark mode */
+  [data-theme="dark"] .tech-layer-card {
+    background: rgba(255, 255, 255, 0.03);
+  }
+
+  [data-theme="dark"] .tech-layer-card:hover {
+    background: rgba(255, 255, 255, 0.06);
+    box-shadow: 0 8px 60px rgba(240, 77, 45, 0.12);
+  }
+
+  [data-theme="dark"] .tech-item {
+    background: rgba(255, 255, 255, 0.04);
+  }
+
+  [data-theme="dark"] .tech-item:hover {
+    background: rgba(255, 255, 255, 0.08);
+    box-shadow: 0 4px 30px rgba(240, 77, 45, 0.15);
+  }
+
+  [data-theme="dark"] .tech-footer {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.06);
+  }
+
+  /* Light mode */
+  [data-theme="light"] .tech-layer-card {
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.06);
+  }
+
+  [data-theme="light"] .tech-layer-card:hover {
+    box-shadow: 0 8px 40px rgba(240, 77, 45, 0.1);
+  }
+
+  [data-theme="light"] .tech-item {
+    background: #F0F0F0;
+  }
+
+  [data-theme="light"] .tech-item:hover {
+    background: #E8E8E8;
+    box-shadow: 0 4px 20px rgba(240, 77, 45, 0.1);
+  }
+
+  [data-theme="light"] .tech-footer {
+    background: #F0F0F0;
+    border-color: #E5E5E5;
+  }
+</style>

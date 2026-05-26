@@ -1,0 +1,129 @@
+---
+import { Image } from "astro:assets";
+import type { TeamMember } from "~/types";
+import savePhoto from "~/assets/team/save.png";
+import maggiePhoto from "~/assets/team/maggie.jpg";
+
+const executives: Array<TeamMember & { photo: any }> = [
+  {
+    name: "Thanathorn Boonnak",
+    nickname: "Maggie",
+    title: "Chief Executive Officer (CEO)",
+    credentials: ["Board Member, Digital Tech Entrepreneur Association (DTE)"],
+    photo: maggiePhoto,
+  },
+  {
+    name: "Pongsiri Pisutakarathada",
+    nickname: "Save",
+    title: "Chief Technology Officer (CTO)",
+    credentials: [
+      "Sub-committee, DEPA — Strategy & Digital Economy Promotion",
+      "Working Group, Area Development — Phra Nakhon District, Bangkok",
+      "(Acting) Working Group, Thai Website Standards — Digital Council of Thailand",
+    ],
+    photo: savePhoto,
+  },
+];
+---
+
+<section id="team" class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <div class="text-center">
+      <p class="font-light uppercase tracking-widest text-offset text-sm">
+        Leadership
+      </p>
+      <h2 class="gradient-text mt-2 font-bold text-3xl md:text-4xl lg:text-5xl">
+        Led by Passionate Builders
+      </h2>
+      <p class="mx-auto mt-4 max-w-2xl font-light text-offset text-lg">
+        Code Passion is driven by leaders who are deeply invested in the Thai
+        digital economy — not just building software, but shaping the industry.
+      </p>
+    </div>
+
+    <div class="mt-12 grid grid-cols-1 gap-8 md:grid-cols-2">
+      {
+        executives.map(({ name, nickname, title, credentials, photo }) => (
+          <div class="team-card group relative overflow-hidden rounded-2xl transition-all duration-300 hover:-translate-y-1">
+            {/* Top accent line */}
+            <div class="brand-gradient h-1 w-full" aria-hidden="true" />
+
+            <div class="flex flex-col items-center p-8 text-center">
+              {/* Photo */}
+              <div class="team-photo-ring relative mb-6 size-28 overflow-hidden rounded-full">
+                <Image
+                  src={photo}
+                  alt={name}
+                  width={112}
+                  height={112}
+                  class="size-full object-cover"
+                />
+              </div>
+
+              {/* Name & title */}
+              <h3 class="font-semibold text-default text-xl">
+                {name}
+              </h3>
+              <span class="gradient-text font-bold text-sm">({nickname})</span>
+              <p class="mt-2 font-medium text-offset text-sm">{title}</p>
+
+              {/* Credentials */}
+              <ul class="mt-5 space-y-2.5">
+                {credentials.map((cred) => (
+                  <li class="flex items-start gap-2 text-left font-light text-offset text-sm">
+                    <span class="mt-0.5 text-brand-red">&#x2022;</span>
+                    <span>{cred}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="mt-8 text-center">
+      <a
+        href="https://card.codepassion.co"
+        class="font-medium text-brand-red text-sm hover:underline"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Meet the full team &rarr;
+      </a>
+      <p class="mt-4 font-light text-offset text-xs">
+        We run Refactor — our internal tech conference — every month to stay
+        ahead.
+      </p>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  .team-photo-ring {
+    box-shadow: 0 0 0 3px rgba(240, 77, 45, 0.15), 0 8px 30px rgba(0, 0, 0, 0.1);
+  }
+
+  .team-card:hover .team-photo-ring {
+    box-shadow: 0 0 0 3px rgba(240, 77, 45, 0.3), 0 8px 40px rgba(0, 0, 0, 0.15);
+  }
+
+  [data-theme="dark"] .team-card {
+    background: #141414;
+    border: 1px solid #222222;
+  }
+
+  [data-theme="dark"] .team-card:hover {
+    box-shadow: 0 8px 40px rgba(240, 77, 45, 0.08);
+  }
+
+  [data-theme="light"] .team-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  }
+
+  [data-theme="light"] .team-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+  }
+</style>
