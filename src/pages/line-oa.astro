@@ -9,7 +9,7 @@ import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
 
 const LINE_URL = "https://line.me/ti/p/@codepassion";
 const LINE_HANDLE = "@codepassion";
-const QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&bgcolor=141414&color=FFFFFF&data=${encodeURIComponent(
+const QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&bgcolor=FFFFFF&color=000000&data=${encodeURIComponent(
   LINE_URL,
 )}`;
 
@@ -134,6 +134,28 @@ const differences = [
     />
     <meta property="og:image" content={new URL("cover.jpg", Astro.site)} />
     <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Initialize theme (respect saved preference / system) -->
+    <script is:inline>
+      const themeSaved = localStorage.getItem("theme");
+      if (themeSaved) {
+        document.documentElement.dataset.theme = themeSaved;
+      } else {
+        const prefersDark = window.matchMedia(
+          "(prefers-color-scheme: dark)",
+        ).matches;
+        document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
+      }
+      window
+        .matchMedia("(prefers-color-scheme: dark)")
+        .addEventListener("change", (event) => {
+          if (!localStorage.getItem("theme")) {
+            document.documentElement.dataset.theme = event.matches
+              ? "dark"
+              : "light";
+          }
+        });
+    </script>
   </head>
 
   <body
@@ -162,16 +184,27 @@ const differences = [
             >CodePassion</strong
           >
         </a>
-        <a
-          href={LINE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="เพิ่มเพื่อน LINE OA @codepassion"
-          class="loa-btn-line inline-flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium transition-all sm:px-5 sm:py-2.5"
-        >
-          <Icon name="fa-brands:line" class="size-5 sm:size-4" />
-          <span class="hidden sm:inline">เพิ่มเพื่อน LINE OA</span>
-        </a>
+        <div class="flex items-center gap-1 sm:gap-2">
+          <button
+            id="loa-theme-toggle"
+            type="button"
+            class="rounded-lg p-2 text-default transition-colors hover:bg-background-offset"
+            aria-label="Toggle theme"
+          >
+            <Icon id="loa-icon-light" name="mdi:white-balance-sunny" class="size-5" />
+            <Icon id="loa-icon-dark" name="mdi:weather-night" class="hidden size-5" />
+          </button>
+          <a
+            href={LINE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="เพิ่มเพื่อน LINE OA @codepassion"
+            class="loa-btn-line inline-flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium transition-all sm:px-5 sm:py-2.5"
+          >
+            <Icon name="fa-brands:line" class="size-5 sm:size-4" />
+            <span class="hidden sm:inline">เพิ่มเพื่อน LINE OA</span>
+          </a>
+        </div>
       </div>
     </header>
 
@@ -221,7 +254,7 @@ const differences = [
 
         <div class="relative z-10 mx-auto w-full max-w-4xl text-center">
           <div
-            class="animate-on-scroll mb-6 inline-flex items-center gap-2 rounded-full bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-md"
+            class="loa-glass animate-on-scroll mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2"
           >
             <span class="relative flex size-2">
               <span
@@ -279,7 +312,7 @@ const differences = [
                 "ทำงานตาม Workflow จริง",
                 "เริ่มต้นจากจุดที่เจ็บที่สุด",
               ].map((t) => (
-                <div class="flex items-center gap-2.5 rounded-full bg-[rgba(255,255,255,0.04)] px-4 py-2 backdrop-blur-md">
+                <div class="loa-glass flex items-center gap-2.5 rounded-full px-4 py-2">
                   <span class="brand-gradient size-1.5 rounded-full" />
                   <span class="text-xs font-light text-offset">{t}</span>
                 </div>
@@ -672,7 +705,7 @@ const differences = [
               </span>
             </div>
 
-            <div class="relative mx-auto mt-6 inline-block rounded-xl bg-background p-4">
+            <div class="relative mx-auto mt-6 inline-block rounded-xl border border-border bg-background p-4">
               <img
                 class="block rounded"
                 src={QR_URL}
@@ -754,11 +787,28 @@ const differences = [
         box-shadow: 0 12px 44px rgba(6, 199, 85, 0.45);
       }
 
+      /* Theme-aware frosted glass (pills / badges) */
+      .loa-glass {
+        backdrop-filter: blur(12px);
+      }
+      [data-theme="dark"] .loa-glass {
+        background: rgba(255, 255, 255, 0.05);
+      }
+      [data-theme="light"] .loa-glass {
+        background: rgba(255, 255, 255, 0.65);
+        border: 1px solid var(--color-border);
+      }
+
       /* Navbar scroll treatment (mirrors main site) */
       #sale-navbar.scrolled {
-        background-color: rgba(10, 10, 10, 0.85);
         backdrop-filter: blur(16px);
         border-bottom: 1px solid var(--color-border);
+      }
+      [data-theme="dark"] #sale-navbar.scrolled {
+        background-color: rgba(10, 10, 10, 0.85);
+      }
+      [data-theme="light"] #sale-navbar.scrolled {
+        background-color: rgba(255, 255, 255, 0.9);
       }
 
       /* Strike-through emphasis on "ไม่สำเร็จรูป" */
@@ -984,6 +1034,30 @@ const differences = [
       };
       window.addEventListener("scroll", () => requestAnimationFrame(onScroll));
       onScroll();
+
+      // Theme toggle
+      function getTheme() {
+        return document.documentElement.dataset.theme || "dark";
+      }
+      function updateThemeIcons() {
+        const isDark = getTheme() === "dark";
+        document
+          .querySelectorAll("#loa-icon-light")
+          .forEach((el) => el.classList.toggle("hidden", !isDark));
+        document
+          .querySelectorAll("#loa-icon-dark")
+          .forEach((el) => el.classList.toggle("hidden", isDark));
+      }
+      function toggleTheme() {
+        const next = getTheme() === "dark" ? "light" : "dark";
+        document.documentElement.dataset.theme = next;
+        localStorage.setItem("theme", next);
+        updateThemeIcons();
+      }
+      document
+        .getElementById("loa-theme-toggle")
+        ?.addEventListener("click", toggleTheme);
+      updateThemeIcons();
 
       // Scroll reveals (reuse global animate-on-scroll)
       const io = new IntersectionObserver(
