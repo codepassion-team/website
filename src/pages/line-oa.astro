@@ -1,0 +1,1071 @@
+---
+import "~/styles/index.css";
+import "@fontsource-variable/noto-sans-thai";
+import "@fontsource/mitr";
+import "@fontsource/jetbrains-mono";
+import { Image } from "astro:assets";
+import { Icon } from "astro-icon/components";
+import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
+
+const LINE_URL = "https://line.me/ti/p/@codepassion";
+const LINE_HANDLE = "@codepassion";
+const QR_URL = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&margin=8&bgcolor=141414&color=FFFFFF&data=${encodeURIComponent(
+  LINE_URL,
+)}`;
+
+const symptoms = [
+  { id: "excel", q: "มี LINE OA แต่ข้อมูลลูกค้ายังอยู่ใน Excel" },
+  { id: "rekey", q: "มีระบบจอง แต่พนักงานยังต้องคีย์ข้อมูลซ้ำ" },
+  { id: "richmenu", q: "มี Rich Menu แต่ลูกค้ายังต้องทักถามทุกเรื่อง" },
+  {
+    id: "autoreply",
+    q: "มี Auto Reply แต่คำตอบไม่ตรงกับลูกค้าแต่ละกลุ่ม",
+  },
+  {
+    id: "segments",
+    q: "มีผู้ติดตามจำนวนมาก แต่ไม่รู้ว่าใครใหม่ ใครเก่า ใครกำลังจะหายไป",
+  },
+  {
+    id: "leads",
+    q: "มีทีมขาย แต่ยังตาม Lead ผ่านแชทส่วนตัวและความจำ",
+  },
+];
+
+const systems = [
+  {
+    icon: "mdi:account-group-outline",
+    title: "Custom CRM",
+    items: [
+      "เก็บข้อมูลลูกค้า",
+      "แยก Lead",
+      "ติดตาม Sales Pipeline",
+      "แจ้งเตือน Follow-up",
+      "มอบหมายลูกค้าให้ทีมขาย",
+    ],
+  },
+  {
+    icon: "mdi:view-dashboard-outline",
+    title: "Customer Portal",
+    items: [
+      "ลูกค้าดูข้อมูลสมาชิก",
+      "สถานะออเดอร์ / งาน",
+      "เอกสาร",
+      "แต้มและสิทธิประโยชน์ผ่าน LINE",
+    ],
+  },
+  {
+    icon: "mdi:calendar-check-outline",
+    title: "Booking & Service",
+    items: ["จองคิว / เลือกสาขา", "เลือกบริการ", "ชำระเงิน", "แจ้งเตือนก่อนวันนัด"],
+  },
+  {
+    icon: "mdi:star-circle-outline",
+    title: "Loyalty & Membership",
+    items: ["สะสมแต้ม / คูปอง", "ระดับสมาชิก", "Birthday Campaign", "Referral Program"],
+  },
+  {
+    icon: "mdi:headset",
+    title: "After-Sales Tracking",
+    items: ["แจ้งซ่อม / เปิดเคส", "ติดตามสถานะ", "ดูประวัติบริการ", "ประเมินความพึงพอใจ"],
+  },
+  {
+    icon: "mdi:robot-outline",
+    title: "AI Assistant",
+    items: [
+      "ตอบคำถามจากข้อมูลบริษัท",
+      "แนะนำสินค้า / คัดกรอง Lead",
+      "สรุปบทสนทนา",
+      "ส่งต่อเจ้าหน้าที่เมื่อจำเป็น",
+    ],
+  },
+];
+
+const startPoints = [
+  "ลูกค้าหลุดหลังสอบถามราคา",
+  "ทีมงานลืม Follow-up",
+  "แอดมินตอบคำถามซ้ำ",
+  "การจองคิวตกหล่น",
+  "ลูกค้าตามสถานะงานบ่อย",
+  "มีฐานลูกค้า แต่ยังทำการตลาดแบบหว่าน",
+];
+
+const fitCheckItems = [
+  "ระบบเดิมติดข้อจำกัดตรงไหน",
+  "ขั้นตอนใดที่ยังต้องทำด้วยมือ",
+  "ลูกค้าหลุดตรงจุดใด",
+  "ฟังก์ชันใดควรเก็บไว้",
+  "ส่วนใดควรปรับหรือพัฒนาเพิ่ม",
+  "Custom Solution แบบใดเหมาะกับธุรกิจคุณ",
+];
+
+const differences = [
+  "Customer Journey ไม่เหมือนกัน",
+  "วิธีขายไม่เหมือนกัน",
+  "บริการไม่เหมือนกัน",
+  "ทีมงานไม่เหมือนกัน",
+  "เป้าหมายการเติบโตไม่เหมือนกัน",
+];
+---
+
+<!doctype html>
+<html lang="th" class="h-full motion-safe:scroll-smooth" data-theme="dark">
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="utf-8" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://codepassion.co/line-oa" />
+
+    <title>โตเกินกว่าระบบสำเร็จรูป — Custom LINE OA Solutions | Code Passion</title>
+    <meta
+      name="description"
+      content="ธุรกิจคุณไม่สำเร็จรูป LINE OA ก็ไม่ควรสำเร็จรูป Code Passion ออกแบบและพัฒนา Custom LINE OA Solution ให้ทำงานตาม Workflow จริงของธุรกิจคุณ รับ LINE OA Fit Check วันนี้"
+    />
+    <meta name="robots" content="index, follow" />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="th_TH" />
+    <meta property="og:url" content="https://codepassion.co/line-oa" />
+    <meta
+      property="og:title"
+      content="โตเกินกว่าระบบสำเร็จรูป — Custom LINE OA Solutions"
+    />
+    <meta
+      property="og:description"
+      content="ธุรกิจคุณไม่สำเร็จรูป LINE OA ก็ไม่ควรสำเร็จรูป สร้างระบบให้เข้ากับวิธีขายของคุณ รับ LINE OA Fit Check ฟรี"
+    />
+    <meta property="og:image" content={new URL("cover.jpg", Astro.site)} />
+    <meta name="twitter:card" content="summary_large_image" />
+  </head>
+
+  <body
+    class="loa-body h-full overflow-x-hidden bg-background text-foreground selection:bg-brand-red selection:text-white"
+  >
+    <a href="#hero" class="skip-to-content">Skip to main content</a>
+
+    {/* ===== Header (matches main Navbar style) ===== */}
+    <header
+      id="sale-navbar"
+      class="fixed top-0 z-50 w-full border-b border-transparent transition-all duration-300"
+    >
+      <div
+        class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 sm:py-4"
+      >
+        <a class="flex items-center gap-2" href="/" aria-label="Code Passion - Home">
+          <Image
+            class="h-9 w-9 object-contain sm:h-10 sm:w-10"
+            src={codePassionLogo}
+            alt="Code Passion Logo"
+            width={40}
+            height={40}
+          />
+          <strong
+            class="whitespace-nowrap text-base font-bold text-default sm:text-lg"
+            >CodePassion</strong
+          >
+        </a>
+        <a
+          href={LINE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="เพิ่มเพื่อน LINE OA @codepassion"
+          class="loa-btn-line inline-flex items-center gap-2 rounded-lg px-2.5 py-2 text-sm font-medium transition-all sm:px-5 sm:py-2.5"
+        >
+          <Icon name="fa-brands:line" class="size-5 sm:size-4" />
+          <span class="hidden sm:inline">เพิ่มเพื่อน LINE OA</span>
+        </a>
+      </div>
+    </header>
+
+    {/* ===== Sticky LINE rail (desktop) ===== */}
+    <aside class="loa-rail" aria-label="Add Code Passion on LINE">
+      <a class="loa-rail-btn" href={LINE_URL} target="_blank" rel="noopener noreferrer">
+        <span class="loa-rail-vlabel">เพิ่มเพื่อน&nbsp;LINE&nbsp;OA</span>
+        <span class="loa-rail-line" aria-hidden="true"></span>
+        <Icon name="mdi:chevron-right" class="size-4" />
+      </a>
+    </aside>
+
+    {/* ===== Mobile sticky CTA ===== */}
+    <a
+      class="loa-mobile-cta"
+      href={LINE_URL}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      <Icon name="fa-brands:line" class="size-5" />
+      รับ Fit Check ใน LINE →
+    </a>
+
+    <main id="hero">
+      {/* ============================================================ */}
+      {/* HERO                                                          */}
+      {/* ============================================================ */}
+      <section
+        class="relative flex min-h-screen items-center overflow-hidden px-6 pt-28 pb-20 md:px-12"
+      >
+        <div
+          class="absolute -left-32 top-1/4 size-[600px] rounded-full bg-[rgba(240,77,45,0.12)] blur-[150px]"
+          aria-hidden="true"
+        >
+        </div>
+        <div
+          class="absolute -right-32 bottom-1/4 size-[500px] rounded-full bg-[rgba(237,27,93,0.08)] blur-[130px]"
+          aria-hidden="true"
+        >
+        </div>
+        <div class="hero-grid-bg absolute inset-0" aria-hidden="true"></div>
+        <div
+          class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"
+          aria-hidden="true"
+        >
+        </div>
+
+        <div class="relative z-10 mx-auto w-full max-w-4xl text-center">
+          <div
+            class="animate-on-scroll mb-6 inline-flex items-center gap-2 rounded-full bg-[rgba(255,255,255,0.05)] px-4 py-2 backdrop-blur-md"
+          >
+            <span class="relative flex size-2">
+              <span
+                class="absolute inline-flex size-full animate-ping rounded-full bg-brand-red opacity-75"
+              ></span>
+              <span class="brand-gradient relative inline-flex size-2 rounded-full"></span>
+            </span>
+            <span class="text-xs font-light text-offset"
+              >Campaign · โตเกินกว่าระบบสำเร็จรูป</span
+            >
+          </div>
+
+          <h1
+            class="animate-on-scroll text-4xl font-bold text-default md:text-5xl lg:text-6xl"
+          >
+            ธุรกิจคุณ
+            <span class="loa-strike">ไม่สำเร็จรูป</span><br />
+            <span class="gradient-text">LINE OA ก็ไม่ควรสำเร็จรูป</span>
+          </h1>
+
+          <p
+            class="animate-on-scroll mx-auto mt-8 max-w-2xl text-lg font-light leading-relaxed text-offset"
+          >
+            เมื่อธุรกิจโตขึ้น ลูกค้าเพิ่มขึ้น ทีมงานเพิ่มขึ้น
+            ขั้นตอนการขายและบริการซับซ้อนขึ้น —
+            ระบบเดิมอาจเริ่มตามธุรกิจไม่ทัน
+          </p>
+
+          <div class="animate-on-scroll mt-12 flex flex-wrap justify-center gap-4">
+            <a
+              href="#fit-check"
+              class="brand-gradient hero-glow-btn group inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-105"
+            >
+              เริ่ม LINE OA Fit Check
+              <Icon
+                name="mdi:arrow-down"
+                class="size-4 transition-transform duration-300 group-hover:translate-y-1"
+              />
+            </a>
+            <a
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="loa-btn-line inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-105"
+            >
+              <Icon name="fa-brands:line" class="size-4" />
+              เพิ่มเพื่อน LINE OA
+            </a>
+          </div>
+
+          <div class="animate-on-scroll mt-14 flex flex-wrap justify-center gap-3">
+            {
+              [
+                "Custom LINE OA Solutions",
+                "ทำงานตาม Workflow จริง",
+                "เริ่มต้นจากจุดที่เจ็บที่สุด",
+              ].map((t) => (
+                <div class="flex items-center gap-2.5 rounded-full bg-[rgba(255,255,255,0.04)] px-4 py-2 backdrop-blur-md">
+                  <span class="brand-gradient size-1.5 rounded-full" />
+                  <span class="text-xs font-light text-offset">{t}</span>
+                </div>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 02 — THE OUTGROWING ARC                                       */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+        <div class="mx-auto max-w-7xl">
+          <p class="text-sm font-light uppercase tracking-widest text-offset">
+            วันที่มันเคยเพียงพอ
+          </p>
+          <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            จากที่เคยพอ — สู่ที่ตามไม่ทัน
+          </h2>
+
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+            <div class="glass-card animate-on-scroll p-8">
+              <span
+                class="inline-block rounded-full border border-border bg-background-offset px-3 py-1 text-xs font-light text-offset"
+                >THEN</span
+              >
+              <p class="mt-4 text-lg font-light leading-relaxed text-default">
+                คุณอาจเริ่มต้น LINE OA ด้วย Rich Menu ข้อความตอบกลับอัตโนมัติ
+                ระบบจอง หรือแพ็กเกจสำเร็จรูป
+              </p>
+              <p class="mt-3 font-light italic text-offset">และมันอาจเคยเพียงพอในวันนั้น</p>
+            </div>
+
+            <div class="hidden items-center justify-center md:flex">
+              <Icon name="mdi:arrow-right" class="size-7 text-brand-red" />
+            </div>
+            <div class="flex items-center justify-center md:hidden">
+              <Icon name="mdi:arrow-down" class="size-7 text-brand-red" />
+            </div>
+
+            <div
+              class="loa-card-accent glass-card animate-on-scroll p-8 transition-all duration-300 hover:-translate-y-1"
+            >
+              <span
+                class="brand-gradient inline-block rounded-full px-3 py-1 text-xs font-medium text-white"
+                >NOW</span
+              >
+              <p class="mt-4 text-lg font-light leading-relaxed text-default">
+                แต่เมื่อธุรกิจโตขึ้น ลูกค้าเพิ่มขึ้น ทีมงานเพิ่มขึ้น
+                ขั้นตอนการขายและบริการซับซ้อนขึ้น
+              </p>
+              <p class="mt-3 text-lg font-medium text-default">
+                ระบบเดิมอาจเริ่ม<span class="text-brand-red">ตามธุรกิจไม่ทัน</span>
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 03 — LIVE FIT CHECK                                          */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32" id="fit-check">
+        <div class="mx-auto max-w-4xl">
+          <p class="text-sm font-light uppercase tracking-widest text-offset">
+            LINE OA Fit Check · Live
+          </p>
+          <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            คุณกำลังเจอสิ่งเหล่านี้หรือไม่?
+          </h2>
+          <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+            ตอบคำถามเพื่อวัดระยะห่างระหว่างระบบปัจจุบันกับสิ่งที่ธุรกิจต้องการ
+          </p>
+
+          <div class="glass-card animate-on-scroll mt-10 overflow-hidden p-6 md:p-8">
+            <div class="mb-5 flex items-center justify-between">
+              <span class="flex items-center gap-2 text-sm font-light text-offset">
+                <span class="relative flex size-2">
+                  <span
+                    class="absolute inline-flex size-full animate-ping rounded-full bg-brand-red opacity-75"
+                  ></span>
+                  <span class="brand-gradient relative inline-flex size-2 rounded-full"></span>
+                </span>
+                กำลังวิเคราะห์
+              </span>
+              <span class="font-mono text-sm text-brand-red" id="loa-progress-count"
+                >0 / 6</span
+              >
+            </div>
+
+            <ol class="grid gap-3" id="loa-checklist">
+              {
+                symptoms.map((s, i) => (
+                  <li
+                    class="loa-check flex flex-col gap-3 rounded-xl border border-border bg-background-offset p-4 transition-all sm:flex-row sm:items-center sm:justify-between"
+                    data-id={s.id}
+                  >
+                    <div class="flex items-start gap-3">
+                      <span class="mt-0.5 font-mono text-sm text-offset">
+                        {String(i + 1).padStart(2, "0")}
+                      </span>
+                      <span class="text-default">{s.q}</span>
+                    </div>
+                    <div class="flex shrink-0 gap-2" role="group" aria-label={s.q}>
+                      <button
+                        class="loa-btn loa-btn-yes rounded-lg border border-border px-4 py-1.5 text-sm transition-all"
+                        type="button"
+                        data-vote="yes"
+                        aria-pressed="false"
+                      >
+                        ใช่
+                      </button>
+                      <button
+                        class="loa-btn loa-btn-no rounded-lg border border-border px-4 py-1.5 text-sm text-offset transition-all"
+                        type="button"
+                        data-vote="no"
+                        aria-pressed="false"
+                      >
+                        ไม่ใช่
+                      </button>
+                    </div>
+                  </li>
+                ))
+              }
+            </ol>
+
+            {/* Score meter */}
+            <div class="mt-6">
+              <div class="flex items-baseline justify-between">
+                <span class="text-xs font-light uppercase tracking-widest text-offset"
+                  >Readiness Gap</span
+                >
+                <span class="font-mono text-sm text-brand-red" id="loa-meter-value">—</span>
+              </div>
+              <div
+                class="mt-2 h-2 overflow-hidden rounded-full border border-border bg-background"
+                aria-hidden="true"
+              >
+                <div class="loa-meter-fill h-full w-0 rounded-full" id="loa-meter-fill"></div>
+              </div>
+              <p class="mt-3 text-sm font-light text-offset" id="loa-meter-hint">
+                เลือกคำตอบเพื่อดูค่าประเมินแบบเรียลไทม์
+              </p>
+            </div>
+
+            {/* Verdict */}
+            <div class="loa-verdict hidden" id="loa-verdict">
+              <div class="my-6 border-t border-dashed border-border"></div>
+              <p class="text-xs font-light uppercase tracking-widest text-brand-red">
+                Diagnosis Complete
+              </p>
+              <p class="mt-3 text-xl font-medium text-default" id="loa-verdict-text"></p>
+              <p class="mt-2 font-light leading-relaxed text-offset">
+                ปัญหาอาจไม่ใช่ว่าคุณใช้ LINE OA ไม่ดีพอ แต่ธุรกิจของคุณอาจ
+                <span class="gradient-text font-medium">โตเกินกว่าระบบสำเร็จรูป</span>
+                แล้ว
+              </p>
+              <a
+                class="brand-gradient hero-glow-btn mt-6 inline-flex items-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-105"
+                href={LINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                รับ Fit Check เต็มใน LINE
+                <Icon name="mdi:arrow-right" class="size-4" />
+              </a>
+              <p class="mt-3 text-xs font-light text-offset">
+                แอด LINE {LINE_HANDLE} · ทักแชทรับการวิเคราะห์แบบเต็ม
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 04 — VERDICT                                                 */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-20 md:px-12">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-2xl font-medium leading-relaxed text-default md:text-3xl">
+            หากคำตอบคือ <span class="gradient-text">“ใช่”</span>
+            ปัญหาอาจไม่ใช่ว่าคุณใช้ LINE OA ไม่ดีพอ
+            แต่ธุรกิจของคุณอาจ<span class="loa-strike-dim">โตเกินกว่าระบบสำเร็จรูป</span>แล้ว
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 05 — THE SHIFT                                               */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+        <div class="mx-auto max-w-7xl">
+          <p class="text-sm font-light uppercase tracking-widest text-offset">The Shift</p>
+          <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            ถึงเวลาเปลี่ยน LINE OA ให้เป็นระบบของธุรกิจคุณ
+          </h2>
+
+          <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-[1fr_auto_1fr] md:items-stretch">
+            <div class="glass-card p-8">
+              <span
+                class="inline-block rounded-full border border-border bg-background-offset px-3 py-1 text-xs font-light text-offset"
+                >วิธีเดิม</span
+              >
+              <p class="mt-4 text-lg font-light leading-relaxed text-offset">
+                บังคับให้ธุรกิจเปลี่ยนวิธีทำงาน เพื่อให้เข้ากับระบบ
+              </p>
+            </div>
+            <div class="hidden items-center justify-center md:flex">
+              <Icon name="mdi:arrow-right" class="size-7 text-brand-red" />
+            </div>
+            <div class="flex items-center justify-center md:hidden">
+              <Icon name="mdi:arrow-down" class="size-7 text-brand-red" />
+            </div>
+            <div
+              class="loa-card-accent glass-card p-8 transition-all duration-300 hover:-translate-y-1"
+            >
+              <span
+                class="brand-gradient inline-block rounded-full px-3 py-1 text-xs font-medium text-white"
+                >Code Passion</span
+              >
+              <p class="mt-4 text-lg font-light leading-relaxed text-default">
+                สร้างระบบให้เข้ากับวิธีขาย วิธีบริการ และวิธีดูแลลูกค้าของคุณ
+              </p>
+            </div>
+          </div>
+
+          <p class="mt-8 text-center font-light italic text-offset md:text-lg">
+            ไม่ใช่บังคับให้ธุรกิจเข้าระบบ — แต่สร้างระบบให้เข้าธุรกิจ
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 06 — YOUR STACK                                              */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+        <div class="mx-auto max-w-7xl">
+          <p class="text-sm font-light uppercase tracking-widest text-offset">Your Stack</p>
+          <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            ระบบของคุณอาจเป็นแบบนี้
+          </h2>
+          <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+            โมดูลที่ออกแบบให้ทำงานตาม Workflow จริง — เสียบต่อกันได้ ขยายได้ ทุกอย่างเชื่อมผ่าน LINE OA
+          </p>
+
+          <ul class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+            {
+              systems.map(({ title, items, icon }) => (
+                <li class="loa-node glass-card group p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(240,77,45,0.3)] hover:shadow-lg">
+                  <div class="mb-4 flex size-12 items-center justify-center rounded-lg brand-gradient">
+                    <Icon name={icon} class="size-6 text-white" />
+                  </div>
+                  <h3 class="text-lg font-medium text-default">{title}</h3>
+                  <ul class="mt-3 grid gap-1.5">
+                    {items.map((it) => (
+                      <li class="flex items-start gap-2 text-sm font-light text-offset">
+                        <span class="mt-1 size-1 shrink-0 rounded-full bg-brand-red" />
+                        {it}
+                      </li>
+                    ))}
+                  </ul>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 07 — NO REWIRE NEEDED                                        */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+        <div class="mx-auto max-w-7xl">
+          <p class="text-sm font-light uppercase tracking-widest text-offset">
+            No Rewire Needed
+          </p>
+          <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">
+            ไม่จำเป็นต้องรื้อระบบทั้งหมด
+          </h2>
+          <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+            การทำ Custom ไม่ได้แปลว่าต้องเริ่มใหม่ทุกอย่าง — เริ่มจากจุดที่สร้างปัญหามากที่สุดก่อน
+          </p>
+
+          <ul class="mt-12 grid grid-cols-1 gap-4 md:grid-cols-2">
+            {
+              startPoints.map((sp, i) => (
+                <li class="loa-startpoint flex items-center gap-4 rounded-xl border border-border border-l-2 border-l-brand-red bg-background-card p-5 transition-all duration-300 hover:translate-x-1 hover:border-[rgba(240,77,45,0.3)]">
+                  <span class="font-mono text-sm text-offset">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <span class="flex-1 text-default">{sp}</span>
+                  <span class="rounded border border-border px-2 py-0.5 text-xs font-light text-brand-red">
+                    Start here
+                  </span>
+                </li>
+              ))
+            }
+          </ul>
+
+          <p class="mt-8 text-center font-light text-offset md:text-lg">
+            จากนั้นจึงค่อย<span class="gradient-text font-medium">ต่อยอดระบบ</span>ตามการเติบโตของธุรกิจ
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 08 — PHILOSOPHY                                              */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12">
+        <div class="mx-auto max-w-3xl text-center">
+          <p class="text-2xl font-light text-offset md:text-3xl">
+            จากระบบที่ <span class="text-offset">“มีให้ใช้”</span>
+          </p>
+          <p class="mt-2 text-3xl font-bold text-default md:text-4xl">
+            สู่ระบบที่ <span class="gradient-text">“สร้างมาเพื่อคุณ”</span>
+          </p>
+
+          <ul class="mx-auto mt-10 max-w-xl text-left">
+            {
+              differences.map((d, i) => (
+                <li class="flex items-center gap-3 border-b border-border py-3">
+                  <span class="text-offset">×</span>
+                  <span class="flex-1 font-light text-offset">{d}</span>
+                  {i === differences.length - 1 && (
+                    <span class="text-brand-red">✓</span>
+                  )}
+                </li>
+              ))
+            }
+          </ul>
+
+          <p class="mx-auto mt-10 max-w-2xl text-lg font-light leading-relaxed text-default">
+            ระบบที่ดีจึงไม่ควรแค่มีฟังก์ชันครบ —
+            แต่ต้องช่วยให้ธุรกิจของคุณ<em class="gradient-text not-italic font-medium"
+              >ทำงานได้ดีขึ้นจริง</em
+            >
+          </p>
+        </div>
+      </section>
+
+      {/* ============================================================ */}
+      {/* 09 — FINALE CTA + QR                                         */}
+      {/* ============================================================ */}
+      <section class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32" id="contact">
+        <div class="mx-auto grid max-w-7xl grid-cols-1 items-start gap-12 lg:grid-cols-[1.3fr_0.9fr]">
+          <div>
+            <p class="text-sm font-light uppercase tracking-widest text-offset">
+              รับ LINE OA Fit Check
+            </p>
+            <h2 class="mt-2 text-3xl font-bold text-default md:text-4xl lg:text-5xl">
+              LINE OA ของคุณยังตอบโจทย์<br class="hidden md:block" />ธุรกิจวันนี้
+              <span class="gradient-text">อยู่หรือไม่?</span>
+            </h2>
+
+            <p class="mt-6 text-lg font-light text-offset">
+              เราช่วยวิเคราะห์ให้ชัดเจน:
+            </p>
+            <ul class="mt-4 grid gap-2">
+              {
+                fitCheckItems.map((f) => (
+                  <li class="flex items-start gap-3 text-default">
+                    <Icon name="mdi:check-circle" class="mt-0.5 size-5 shrink-0 text-brand-red" />
+                    <span class="font-light">{f}</span>
+                  </li>
+                ))
+              }
+            </ul>
+
+            <div
+              class="mt-8 flex flex-wrap gap-x-3 gap-y-2 border-t border-border pt-6 text-sm font-light text-offset"
+            >
+              <span>ไม่จำเป็นต้องรื้อทั้งหมด</span><span>·</span>
+              <span>ไม่จำเป็นต้องทำระบบใหญ่ทันที</span><span>·</span>
+              <span>เริ่มจากสิ่งที่สร้างผลลัพธ์มากที่สุดก่อน</span>
+            </div>
+          </div>
+
+          <div class="glass-card loa-qr-card sticky top-28 p-6 text-center">
+            <div class="flex items-center justify-between text-xs font-light text-offset">
+              <span>connect · line_oa</span>
+              <span class="flex items-center gap-1.5 text-brand-red">
+                <span class="relative flex size-1.5">
+                  <span
+                    class="absolute inline-flex size-full animate-ping rounded-full bg-brand-red opacity-75"
+                  ></span>
+                  <span class="brand-gradient relative inline-flex size-1.5 rounded-full"></span>
+                </span>
+                LIVE
+              </span>
+            </div>
+
+            <div class="relative mx-auto mt-6 inline-block rounded-xl bg-background p-4">
+              <img
+                class="block rounded"
+                src={QR_URL}
+                width="200"
+                height="200"
+                alt={`QR Code สำหรับเพิ่ม LINE OA ${LINE_HANDLE}`}
+                loading="lazy"
+              />
+              <span class="loa-qr-corner left-1 top-1" aria-hidden="true"></span>
+              <span class="loa-qr-corner right-1 top-1" aria-hidden="true"></span>
+              <span class="loa-qr-corner bottom-1 left-1" aria-hidden="true"></span>
+              <span class="loa-qr-corner bottom-1 right-1" aria-hidden="true"></span>
+            </div>
+
+            <p class="mt-4 font-mono text-lg text-brand-red">{LINE_HANDLE}</p>
+            <a
+              class="loa-btn-line mt-4 flex w-full items-center justify-center gap-2 rounded-xl px-6 py-3 text-sm font-medium text-white transition-all duration-300 hover:scale-[1.02]"
+              href={LINE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Icon name="fa-brands:line" class="size-4" />
+              เพิ่มเพื่อน LINE OA
+            </a>
+            <p class="mt-4 text-xs font-light text-offset">
+              ถึงเวลาให้ LINE OA ทำงานตามธุรกิจของคุณ
+            </p>
+          </div>
+        </div>
+      </section>
+
+      {/* ===== Brand-gradient signoff strip (matches main CTA) ===== */}
+      <section class="relative overflow-hidden">
+        <div class="absolute inset-0 brand-gradient opacity-90"></div>
+        <div class="absolute inset-0 noise-overlay"></div>
+        <div class="relative z-10 mx-auto max-w-4xl px-6 py-16 text-center">
+          <p class="text-2xl font-bold text-white md:text-3xl">Code Passion</p>
+          <p class="mt-1 font-mono text-sm text-[rgba(255,255,255,0.85)]">
+            // Custom LINE OA Solutions
+          </p>
+        </div>
+      </section>
+
+      {/* ===== Footer ===== */}
+      <footer class="border-t border-border px-6 py-8">
+        <div
+          class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs font-light text-offset"
+        >
+          <a class="transition-colors hover:text-brand-red" href="https://codepassion.co"
+            >← codepassion.co</a
+          >
+          <span class="hidden md:inline">Campaign · โตเกินกว่าระบบสำเร็จรูป</span>
+          <a
+            class="transition-colors hover:text-brand-red"
+            href={LINE_URL}
+            target="_blank"
+            rel="noopener noreferrer">LINE {LINE_HANDLE} →</a
+          >
+        </div>
+      </footer>
+    </main>
+
+    <style is:global>
+      /* Thai-safe heading leading — restores upper marks (ี ้ ่ ๊ ็) that tight line-height clips */
+      .loa-body h1 { line-height: 1.35; }
+      .loa-body h2 { line-height: 1.4; }
+      .loa-body h3 { line-height: 1.45; }
+      /* .gradient-text uses background-clip:text which trims to the line box — pad so the paint box covers the marks */
+      .loa-body .gradient-text { padding-top: 0.15em; }
+
+      /* LINE CI button (#06C755) */
+      .loa-btn-line {
+        background: #06c755;
+        color: #fff;
+        box-shadow: 0 8px 30px rgba(6, 199, 85, 0.3);
+      }
+      .loa-btn-line:hover {
+        background: #05b14b;
+        box-shadow: 0 12px 44px rgba(6, 199, 85, 0.45);
+      }
+
+      /* Navbar scroll treatment (mirrors main site) */
+      #sale-navbar.scrolled {
+        background-color: rgba(10, 10, 10, 0.85);
+        backdrop-filter: blur(16px);
+        border-bottom: 1px solid var(--color-border);
+      }
+
+      /* Strike-through emphasis on "ไม่สำเร็จรูป" */
+      .loa-strike {
+        position: relative;
+        color: var(--color-text-muted);
+      }
+      .loa-strike::after {
+        content: "";
+        position: absolute;
+        left: -2%;
+        right: -2%;
+        top: 54%;
+        height: 0.1em;
+        background: var(--color-brand-red);
+        transform: scaleX(0);
+        transform-origin: left;
+        animation: loa-strike 0.9s 0.6s cubic-bezier(0.7, 0, 0.2, 1) forwards;
+      }
+      @keyframes loa-strike {
+        to {
+          transform: scaleX(1);
+        }
+      }
+      .loa-strike-dim {
+        position: relative;
+        color: var(--color-text-muted);
+      }
+      .loa-strike-dim::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 55%;
+        height: 0.08em;
+        background: var(--color-text-muted);
+        opacity: 0.6;
+      }
+
+      /* Accent card */
+      .loa-card-accent {
+        border-color: rgba(240, 77, 45, 0.3) !important;
+        box-shadow: 0 0 40px rgba(240, 77, 45, 0.06);
+      }
+
+      /* Fit Check buttons */
+      .loa-btn-yes[aria-pressed="true"] {
+        background: var(--color-brand-red);
+        color: #fff;
+        border-color: var(--color-brand-red);
+      }
+      .loa-btn-no[aria-pressed="true"] {
+        background: var(--color-background-offset);
+        color: var(--color-text-muted);
+      }
+      .loa-check.is-yes {
+        border-color: rgba(240, 77, 45, 0.3);
+        background: rgba(240, 77, 45, 0.05);
+      }
+
+      /* Meter fill = brand gradient */
+      .loa-meter-fill {
+        background: linear-gradient(
+          90deg,
+          var(--color-brand-red),
+          var(--color-brand-pink-red)
+        );
+        box-shadow: 0 0 12px rgba(240, 77, 45, 0.5);
+        transition: width 0.5s cubic-bezier(0.2, 0.7, 0.2, 1);
+      }
+
+      /* Node top accent on hover */
+      .loa-node {
+        position: relative;
+        overflow: hidden;
+      }
+      .loa-node::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 2px;
+        background: linear-gradient(
+          90deg,
+          var(--color-brand-red),
+          var(--color-brand-pink-red)
+        );
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.4s;
+      }
+      .loa-node:hover::before {
+        transform: scaleX(1);
+      }
+
+      /* Sticky desktop rail */
+      .loa-rail {
+        position: fixed;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 45;
+        display: none;
+      }
+      @media (min-width: 1024px) {
+        .loa-rail {
+          display: block;
+        }
+      }
+      .loa-rail-btn {
+        display: flex;
+        align-items: center;
+        gap: 0.75rem;
+        padding: 0.9rem 0.6rem;
+        background: var(--color-background-card);
+        border: 1px solid var(--color-border);
+        border-right: none;
+        border-radius: 12px 0 0 12px;
+        color: var(--color-text);
+        transition: all 0.25s;
+      }
+      .loa-rail-btn:hover {
+        border-color: rgba(6, 199, 85, 0.4);
+        transform: translateX(-2px);
+      }
+      .loa-rail-vlabel {
+        writing-mode: vertical-rl;
+        transform: rotate(180deg);
+        font-size: 0.7rem;
+        line-height: 1.4;
+        letter-spacing: 0.12em;
+        color: #06c755;
+      }
+      .loa-rail-line {
+        width: 1px;
+        height: 28px;
+        background: var(--color-border);
+      }
+
+      /* Mobile CTA */
+      .loa-mobile-cta {
+        position: fixed;
+        left: 1rem;
+        right: 1rem;
+        bottom: 1rem;
+        z-index: 50;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.5rem;
+        padding: 0.95rem 1rem;
+        background: linear-gradient(
+          135deg,
+          var(--color-brand-red),
+          var(--color-brand-pink-red)
+        );
+        color: #fff;
+        font-weight: 600;
+        font-size: 0.95rem;
+        border-radius: 14px;
+        box-shadow: 0 10px 40px rgba(240, 77, 45, 0.4);
+      }
+      @media (min-width: 768px) {
+        .loa-mobile-cta {
+          display: none;
+        }
+      }
+
+      /* QR corners */
+      .loa-qr-corner {
+        position: absolute;
+        width: 14px;
+        height: 14px;
+        border: 2px solid var(--color-brand-red);
+      }
+      .loa-qr-corner.top {
+        border-bottom: none;
+      }
+      .loa-qr-corner.left {
+        border-right: none;
+      }
+      .loa-qr-corner.top.left {
+        border-top: 2px solid var(--color-brand-red);
+        border-left: 2px solid var(--color-brand-red);
+        border-right: none;
+        border-bottom: none;
+      }
+      .loa-qr-corner.top.right {
+        border-top: 2px solid var(--color-brand-red);
+        border-right: 2px solid var(--color-brand-red);
+        border-left: none;
+        border-bottom: none;
+      }
+      .loa-qr-corner.bottom.left {
+        border-bottom: 2px solid var(--color-brand-red);
+        border-left: 2px solid var(--color-brand-red);
+        border-top: none;
+        border-right: none;
+      }
+      .loa-qr-corner.bottom.right {
+        border-bottom: 2px solid var(--color-brand-red);
+        border-right: 2px solid var(--color-brand-red);
+        border-top: none;
+        border-left: none;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .loa-strike::after {
+          transform: scaleX(1);
+          animation: none;
+        }
+      }
+    </style>
+
+    <script>
+      // Navbar scroll style
+      const nav = document.getElementById("sale-navbar");
+      const onScroll = () => {
+        if (!nav) return;
+        if (window.scrollY > 50) nav.classList.add("scrolled");
+        else nav.classList.remove("scrolled");
+      };
+      window.addEventListener("scroll", () => requestAnimationFrame(onScroll));
+      onScroll();
+
+      // Scroll reveals (reuse global animate-on-scroll)
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((e) => {
+            if (e.isIntersecting) {
+              e.target.classList.add("is-visible");
+              io.unobserve(e.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      );
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => io.observe(el));
+
+      // === Live Fit Check ===
+      (function () {
+        const items = Array.from(document.querySelectorAll(".loa-check"));
+        const countEl = document.getElementById("loa-progress-count");
+        const fillEl = document.getElementById("loa-meter-fill");
+        const valueEl = document.getElementById("loa-meter-value");
+        const hintEl = document.getElementById("loa-meter-hint");
+        const verdictEl = document.getElementById("loa-verdict");
+        const verdictTextEl = document.getElementById("loa-verdict-text");
+        const total = items.length;
+        const state = {};
+
+        const verdicts = {
+          low: "ระบบเดิมยังพอตอบโจทย์ — แต่น่าจะเริ่มมีจุดคับข้องใจแล้ว",
+          mid: "คุณกำลังอยู่ในช่วงเปลี่ยนผ่าน เริ่มวางแผนระบบก่อนจะตามไม่ทัน",
+          high: "ธุรกิจของคุณเตรียมพร้อมสำหรับระบบที่ออกแบบมาเพื่อคุณแล้ว",
+        };
+
+        function render() {
+          const answered = items.filter((li) => state[li.dataset.id]);
+          const yesCount = answered.filter(
+            (li) => state[li.dataset.id] === "yes",
+          ).length;
+          const gap = total ? (yesCount / total) * 100 : 0;
+
+          countEl.textContent = `${answered.length} / ${total}`;
+          fillEl.style.width = `${gap}%`;
+          valueEl.textContent = answered.length ? `${Math.round(gap)}%` : "—";
+
+          if (!answered.length) {
+            hintEl.textContent = "เลือกคำตอบเพื่อดูค่าประเมินแบบเรียลไทม์";
+          } else if (answered.length < total) {
+            hintEl.textContent = `ตอบแล้ว ${answered.length} จาก ${total} · เริ่มเห็นแนวโน้มแล้ว`;
+          }
+
+          if (answered.length === total) {
+            const tier = yesCount <= 2 ? "low" : yesCount <= 4 ? "mid" : "high";
+            hintEl.textContent = `ตรวจสอบครบทุกข้อ · พบ ${yesCount} จุดที่ระบบเดิมตามไม่ทัน`;
+            verdictTextEl.textContent = verdicts[tier];
+            verdictEl.classList.remove("hidden");
+            verdictEl.scrollIntoView({ behavior: "smooth", block: "center" });
+          } else {
+            verdictEl.classList.add("hidden");
+          }
+        }
+
+        items.forEach((li) => {
+          const yes = li.querySelector('[data-vote="yes"]');
+          const no = li.querySelector('[data-vote="no"]');
+          const vote = (v) => {
+            const id = li.dataset.id;
+            state[id] = state[id] === v ? undefined : v;
+            li.classList.toggle("is-yes", state[id] === "yes");
+            yes.setAttribute(
+              "aria-pressed",
+              state[id] === "yes" ? "true" : "false",
+            );
+            no.setAttribute(
+              "aria-pressed",
+              state[id] === "no" ? "true" : "false",
+            );
+            render();
+          };
+          yes?.addEventListener("click", () => vote("yes"));
+          no?.addEventListener("click", () => vote("no"));
+        });
+      })();
+    </script>
+  </body>
+</html>
