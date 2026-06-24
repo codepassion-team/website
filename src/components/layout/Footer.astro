@@ -1,0 +1,157 @@
+---
+import { Icon } from "astro-icon/components";
+import { Image } from "astro:assets";
+import type { FooterLink } from "~/types";
+import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
+
+const links: Array<FooterLink> = [
+  {
+    url: "tel:+66886384566",
+    description: "Quick Call",
+    icon: "mdi:call",
+  },
+  {
+    url: "https://facebook.com/codepassion.co",
+    description: "Facebook Page",
+    icon: "fa-brands:facebook",
+  },
+  {
+    url: "https://github.com/codepassion-team",
+    description: "GitHub",
+    icon: "fa-brands:github",
+  },
+  {
+    url: "https://www.youtube.com/@code-passion",
+    description: "YouTube Channel",
+    icon: "fa-brands:youtube",
+  },
+];
+
+const currentYear = new Date().getFullYear();
+---
+
+<footer class="border-t border-border-default bg-offset">
+  <div class="mx-auto max-w-7xl px-6 py-16">
+    <div class="grid grid-cols-1 gap-12 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Logo & tagline -->
+      <div class="space-y-4">
+        <a class="flex items-center gap-2" href="/" aria-label="Code Passion - Home">
+          <Image
+            class="h-8 w-8 object-contain"
+            src={codePassionLogo}
+            alt="Code Passion Logo"
+            width={32}
+            height={32}
+          />
+          <strong class="font-semibold text-default">Code Passion</strong>
+        </a>
+        <p class="text-sm text-muted-foreground">
+          Code with Passion. Build with Purpose.
+        </p>
+        <div class="flex gap-3">
+          {
+            links.map((link) => (
+              <a
+                href={link.url}
+                aria-label={link.description}
+                class="text-offset hover:text-brand-red transition-colors"
+              >
+                <Icon class="size-5" name={link.icon} />
+              </a>
+            ))
+          }
+        </div>
+        <address class="text-sm text-muted-foreground not-italic">
+          Bangkok, Thailand<br />
+          <a href="tel:+66886384566" class="hover:text-brand-red transition-colors">+66 88 638 4566</a>
+        </address>
+      </div>
+
+      <!-- Products -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-default">Products</h3>
+        <ul class="space-y-2 text-sm text-muted-foreground">
+          <li><a href="https://sekweb.site" class="hover:text-brand-red transition-colors">Sekweb.site</a></li>
+          <li><a href="#products" class="hover:text-brand-red transition-colors">Workengine 0.1</a></li>
+          <li class="text-muted-foreground/50">IR Page <span class="text-xs">(Coming Soon)</span></li>
+          <li class="text-muted-foreground/50">LMS <span class="text-xs">(Coming Soon)</span></li>
+        </ul>
+      </div>
+
+      <!-- Services -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-default">Services</h3>
+        <ul class="space-y-2 text-sm text-muted-foreground">
+          <li><a href="#services" class="hover:text-brand-red transition-colors">Web & App Development</a></li>
+          <li><a href="#services" class="hover:text-brand-red transition-colors">System & Backend</a></li>
+          <li><a href="#services" class="hover:text-brand-red transition-colors">UX/UI Design</a></li>
+          <li><a href="#services" class="hover:text-brand-red transition-colors">Data & Analytics</a></li>
+          <li><a href="#services" class="hover:text-brand-red transition-colors">E-Commerce Solutions</a></li>
+          <li><a href="#services" class="hover:text-brand-red transition-colors">Maintenance & Support</a></li>
+        </ul>
+      </div>
+
+      <!-- Company -->
+      <div>
+        <h3 class="mb-4 text-sm font-semibold uppercase tracking-wider text-default">Company</h3>
+        <ul class="space-y-2 text-sm text-muted-foreground">
+          <li><a href="#about" class="hover:text-brand-red transition-colors">About Us</a></li>
+          <li><a href="https://card.codepassion.co" class="hover:text-brand-red transition-colors">Our Team</a></li>
+          <li><a href="#clients" class="hover:text-brand-red transition-colors">Clients & Partners</a></li>
+          <li><a href="/careers" class="hover:text-brand-red transition-colors">Careers</a></li>
+          <li><a href="#contact" class="hover:text-brand-red transition-colors">Contact</a></li>
+          <li><a href="https://stats.codepassion.co" class="hover:text-brand-red transition-colors">System Status</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="border-t border-border-default">
+    <div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-6 sm:flex-row">
+      <p class="text-sm text-muted-foreground">
+        &copy; {currentYear} Code Passion Co., Ltd.
+      </p>
+      <p class="text-xs text-muted-foreground">
+        Code with Passion. Build with Purpose.
+      </p>
+    </div>
+  </div>
+</footer>
+
+<style is:global>
+  /* Dark mode */
+  [data-theme="dark"] footer {
+    background: #0A0A0A;
+    border-color: #222222;
+  }
+
+  [data-theme="dark"] footer .text-muted-foreground {
+    color: #888888;
+  }
+
+  [data-theme="dark"] footer a.text-offset {
+    color: #AAAAAA;
+  }
+
+  [data-theme="dark"] footer a.text-offset:hover {
+    color: #FFFFFF;
+  }
+
+  /* Light mode */
+  [data-theme="light"] footer {
+    background: #F5F5F5;
+    border-color: #E5E5E5;
+  }
+
+  [data-theme="light"] footer .text-muted-foreground {
+    color: #666666;
+  }
+
+  [data-theme="light"] footer a.text-offset {
+    color: #666666;
+  }
+
+  [data-theme="light"] footer a.text-offset:hover {
+    color: #252525;
+  }
+</style>

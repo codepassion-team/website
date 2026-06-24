@@ -1,58 +1,110 @@
 ---
 import "~/styles/index.css";
-import "@fontsource-variable/inter";
 import "@fontsource-variable/noto-sans-thai";
+import "@fontsource/mitr";
+import "@fontsource/jetbrains-mono";
 
-import Compatibility from "~/components/compatibility.astro";
-import Features from "~/components/features.astro";
-import WorkingProcess from "~/components/working-process.astro";
-import Footer from "~/components/footer.astro";
-import Header from "~/components/header.astro";
-import Intro from "~/components/intro.astro";
-import Partners from "~/components/partners.astro";
-import Splash from "~/components/splash.astro";
-import Sekweb from "~/components/sekweb.astro";
-import packageJson from "../../package.json";
+import Navbar from "~/components/layout/Navbar.astro";
+import Hero from "~/components/home/Hero.astro";
+import Certifications from "~/components/home/Certifications.astro";
+import Services from "~/components/home/Services.astro";
+import Process from "~/components/home/Process.astro";
+import TechStack from "~/components/home/TechStack.astro";
+import Clients from "~/components/home/Clients.astro";
+import Team from "~/components/home/Team.astro";
+import Testimonials from "~/components/home/Testimonials.astro";
+import Products from "~/components/home/Products.astro";
+import CTA from "~/components/home/CTA.astro";
+import Footer from "~/components/layout/Footer.astro";
 
 const { generator, site } = Astro;
 const image = new URL("cover.jpg", site);
-const description = `Code Passion co., ltd. "Tech makes it real", our mission is to create vibrant, innovative, and practical modular applications that benefit both businesses and the community. We envision a future where technology brings color and connectivity to society.`;
+const description =
+  "Code Passion builds innovative and feasible solutions for companies and communities. Custom web applications, enterprise systems, and digital platforms built with passion.";
 ---
 
 <!doctype html>
 <html lang="en" class="h-full motion-safe:scroll-smooth" data-theme="dark">
   <head>
-    <meta name="version" content={packageJson.version} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width" />
-    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <meta name="generator" content={generator} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="canonical" href="https://codepassion.co/" />
 
-    <title>Code Passion</title>
+    <!-- Primary Meta -->
+    <title>
+      Code Passion Co., Ltd. | Software Development & Workengine Platform
+      Thailand
+    </title>
     <meta name="description" content={description} />
+    <meta
+      name="keywords"
+      content="software development Thailand, web development company Bangkok, custom system development, Workengine, LINE integration Thailand, Supabase development, Next.js developer Thailand, ElysiaJS, Bun API"
+    />
 
-    <!-- social media -->
-    <meta property="og:title" content="Code Passion" />
+    <!-- Open Graph -->
+    <meta
+      property="og:title"
+      content="Code Passion Co., Ltd. | Software Development"
+    />
     <meta property="og:type" content="website" />
-    <meta property="og:description" content={description} />
+    <meta
+      property="og:description"
+      content="We build custom systems, web apps, and digital platforms that drive real business growth."
+    />
     <meta property="og:image" content={image} />
     <meta property="og:url" content={site} />
+    <meta property="og:locale" content="en_US" />
     <meta property="fb:app_id" content="1048058969988849" />
-    <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- initialize theme -->
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Code Passion | Software Development Thailand"
+    />
+    <meta
+      name="twitter:description"
+      content="Custom systems, web apps & digital platforms built with passion."
+    />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" is:inline>
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Code Passion Co., Ltd.",
+        "url": "https://codepassion.co",
+        "description": "Software development company. Creators of Workengine.",
+        "areaServed": "TH",
+        "foundingDate": "2020",
+        "contactPoint": {
+          "@type": "ContactPoint",
+          "telephone": "+66886384566",
+          "contactType": "customer service",
+          "availableLanguage": ["Thai", "English"]
+        },
+        "sameAs": [
+          "https://facebook.com/codepassion.co",
+          "https://github.com/codepassion-team",
+          "https://www.youtube.com/@code-passion"
+        ]
+      }
+    </script>
+
+    <!-- Initialize theme -->
     <script is:inline>
       const themeSaved = localStorage.getItem("theme");
-
       if (themeSaved) {
         document.documentElement.dataset.theme = themeSaved;
       } else {
         const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
+          "(prefers-color-scheme: dark)",
         ).matches;
         document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
       }
-
       window
         .matchMedia("(prefers-color-scheme: light)")
         .addEventListener("change", (event) => {
@@ -65,35 +117,42 @@ const description = `Code Passion co., ltd. "Tech makes it real", our mission is
     </script>
   </head>
   <body
-    class="h-full overflow-x-hidden bg-default text-default text-base selection:bg-secondary selection:text-white"
+    class="h-full overflow-x-hidden bg-background text-foreground selection:bg-brand-red selection:text-white"
   >
-    <Header />
-    <Splash />
+    <a href="#about" class="skip-to-content">Skip to main content</a>
 
-    <section class="space-y-64 px-8 py-32">
-      <Intro />
-    </section>
+    <Navbar />
 
-    <section class="space-y-64 bg-white px-8 py-32">
-      <Features />
-    </section>
-
-    <section class="space-y-64 px-8 py-32">
-      <WorkingProcess />
-    </section>
-
-    <section class="relative h-full bg-white">
-      <Sekweb />
-    </section>
-
-    <section class="px-8 py-32">
-      <Compatibility />
-    </section>
-
-    <section class="bg-white px-8 py-32">
-      <Partners />
-    </section>
+    <main id="main-content">
+      <Hero />
+      <Certifications />
+      <Clients />
+      <Services />
+      <Process />
+      <TechStack />
+      <Team />
+      <Testimonials />
+      <Products />
+      <CTA />
+    </main>
 
     <Footer />
+
+    <script>
+      const observer = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("is-visible");
+              observer.unobserve(entry.target);
+            }
+          });
+        },
+        { threshold: 0.1, rootMargin: "0px 0px -50px 0px" },
+      );
+      document.querySelectorAll(".animate-on-scroll").forEach((el) => {
+        observer.observe(el);
+      });
+    </script>
   </body>
 </html>

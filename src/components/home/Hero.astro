@@ -1,0 +1,165 @@
+---
+import { Icon } from "astro-icon/components";
+---
+
+<section
+  id="about"
+  class="animate-on-scroll relative flex min-h-screen items-center overflow-hidden"
+>
+  {/* Gradient orbs */}
+  <div
+    class="absolute -left-32 top-1/4 size-[600px] rounded-full bg-[rgba(240,77,45,0.12)] blur-[150px]"
+    aria-hidden="true"
+  >
+  </div>
+  <div
+    class="absolute -right-32 bottom-1/4 size-[500px] rounded-full bg-[rgba(237,27,93,0.08)] blur-[130px]"
+    aria-hidden="true"
+  >
+  </div>
+
+  {/* Grid background */}
+  <div class="hero-grid-bg absolute inset-0" aria-hidden="true"></div>
+
+  {/* Bottom fade into next section */}
+  <div
+    class="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"
+    aria-hidden="true"
+  >
+  </div>
+
+  <div
+    class="relative z-10 mx-auto max-w-4xl px-6 py-28 text-center md:px-12 lg:py-36"
+  >
+    {/* Eyebrow pill */}
+    <div
+      class="hero-pill mb-6 inline-flex items-center gap-2 rounded-full px-4 py-2"
+    >
+      <span class="relative flex size-2">
+        <span
+          class="absolute inline-flex size-full animate-ping rounded-full bg-green-400 opacity-75"
+        ></span>
+        <span class="relative inline-flex size-2 rounded-full bg-green-500"
+        ></span>
+      </span>
+      <span class="font-light text-offset text-xs"
+        >Available for new projects</span
+      >
+    </div>
+
+    {/* Heading */}
+    <h1
+      class="font-bold leading-tight text-default text-4xl md:text-5xl lg:text-6xl"
+    >
+      We Build<br />
+      <span class="gradient-text">What Matters.</span>
+    </h1>
+
+    {/* Cycling words */}
+    <div class="mt-4 h-8 overflow-hidden md:h-10 lg:h-12">
+      <ul
+        class="hero-word-list block animate-text-slide font-bold leading-none text-default text-2xl md:text-3xl lg:text-4xl"
+      >
+        <li class="gradient-text">Systems.</li>
+        <li class="gradient-text">Platforms.</li>
+        <li class="gradient-text">Experiences.</li>
+        <li class="gradient-text">Products.</li>
+        <li class="gradient-text">Solutions.</li>
+        <li aria-hidden="true" class="gradient-text">Systems.</li>
+      </ul>
+    </div>
+
+    {/* Description */}
+    <p
+      class="mx-auto mt-8 max-w-2xl font-light leading-relaxed text-offset text-lg"
+    >
+      Code Passion builds production-ready systems for custom web apps,
+      enterprise platforms, and digital solutions built with precision and
+      passion.
+    </p>
+
+    {/* CTA buttons */}
+    <div class="mt-12 flex flex-wrap justify-center gap-4">
+      <a
+        href="#contact"
+        class="brand-gradient hero-glow-btn group inline-flex items-center gap-2 rounded-xl px-6 py-3 font-medium text-white transition-all duration-300 text-sm hover:scale-105"
+      >
+        Start Your Project
+        <Icon
+          name="mdi:arrow-right"
+          class="size-4 transition-transform duration-300 group-hover:translate-x-1"
+        />
+      </a>
+      <!-- <a
+        href="https://github.com/codepassion-team"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hero-btn-ghost inline-flex items-center gap-2 rounded-xl px-6 py-3 font-medium text-default transition-all duration-300 text-sm"
+      >
+        <Icon name="fa-brands:github" class="size-4" />
+        GitHub
+      </a> -->
+    </div>
+
+    {/* Trust badges */}
+    <div class="mt-14 flex flex-wrap justify-center gap-3">
+      <div class="hero-badge flex items-center gap-2.5 rounded-full px-4 py-2">
+        <span class="brand-gradient size-1.5 rounded-full"></span>
+        <span class="font-light text-offset text-xs"
+          >50+ Projects Delivered</span
+        >
+      </div>
+      <div class="hero-badge flex items-center gap-2.5 rounded-full px-4 py-2">
+        <span class="brand-gradient size-1.5 rounded-full"></span>
+        <span class="font-light text-offset text-xs">DEPA Committee Member</span
+        >
+      </div>
+      <div class="hero-badge flex items-center gap-2.5 rounded-full px-4 py-2">
+        <span class="brand-gradient size-1.5 rounded-full"></span>
+        <span class="font-light text-offset text-xs"
+          >Open Source Contributors</span
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<style is:global>
+  /* Dark mode */
+  [data-theme="dark"] .hero-pill {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+  }
+
+  [data-theme="dark"] .hero-btn-ghost {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(12px);
+  }
+
+  [data-theme="dark"] .hero-btn-ghost:hover {
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  [data-theme="dark"] .hero-badge {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(12px);
+  }
+
+  /* Light mode */
+  [data-theme="light"] .hero-pill {
+    background: #f0f0f0;
+  }
+
+  [data-theme="light"] .hero-btn-ghost {
+    background: #f0f0f0;
+    border: 1px solid #e5e5e5;
+  }
+
+  [data-theme="light"] .hero-btn-ghost:hover {
+    background: #e5e5e5;
+  }
+
+  [data-theme="light"] .hero-badge {
+    background: #f0f0f0;
+  }
+</style>

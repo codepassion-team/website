@@ -1,0 +1,82 @@
+---
+import Navbar from "~/components/layout/Navbar.astro";
+---
+
+<Navbar />
+
+<!-- Hero Section -->
+<section class="py-32 px-4 text-center mb-32">
+  <h1 class="text-5xl md:text-2xl font-medium tracking-tight">Careers</h1>
+  <p class="text-lg md:text-xl mb-14 max-w-2xl mx-auto font-light">Help us build the future of technology. We're looking for passionate people to make a difference.</p>
+  <a href="#positions" class="inline-block font-normal px-12 py-5 rounded-xl shadow hover:bg-gray-100 transition text-lg">See Open Positions</a>
+</section>
+
+<!-- About Section -->
+<section class="px-4 max-w-4xl mx-auto text-center mb-32">
+  <h2 class="text-2xl md:text-5xl font-bold tracking-tight mb-6">Why Work With Us?</h2>
+  <p class="text-lg md:text-xl font-light">At CodePassion, we're dedicated to solving challenging problems and making a positive impact. Our team values curiosity, creativity, and collaboration. Join us to work on projects that matter, with people who care.</p>
+</section>
+
+<!-- Benefits Section -->
+<section class="container px-4 mx-auto mb-32">
+  <h2 class="text-2xl md:text-5xl font-bold text-center mb-16 tracking-tight">Benefits</h2>
+  <div class="max-w-5xl mx-auto">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 text-left">
+        <h3 class="font-medium mb-6 text-lg">Flexible Work</h3>
+        <p class="text-gray-700 text-lg font-light">Remote-friendly culture and flexible hours to fit your lifestyle.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 text-left">
+        <h3 class="font-medium mb-6 text-lg">Health & Wellness</h3>
+        <p class="text-gray-700 text-lg font-light">Comprehensive health, dental, and vision coverage for you and your family.</p>
+      </div>
+      <div class="bg-gray-50 p-6 rounded-lg border border-gray-200 text-left">
+        <h3 class="font-medium mb-6 text-lg">Growth & Learning</h3>
+        <p class="text-gray-700 text-lg font-light">Annual learning stipend and opportunities for professional development.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Open Positions Section -->
+<section id="positions" class="py-20 px-4 max-w-5xl mx-auto mb-32">
+  <h2 class="text-3xl md:text-4xl font-light text-center mb-16 tracking-tight">Open Positions</h2>
+  <div class="space-y-12">
+    <div class="bg-white p-10 rounded-2xl border border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <h3 class="font-normal text-2xl mb-2">Frontend Engineer</h3>
+        <p class="text-gray-500 text-lg font-light">Remote · Full-time</p>
+      </div>
+      <a href="#" class="pt-8 mp:mt-0 inline-block bg-black text-white px-10 py-4 rounded-xl font-normal hover:bg-gray-900 transition text-lg">Apply</a>
+    </div>
+    <div class="bg-white p-10 rounded-2xl border border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <h3 class="font-normal text-2xl mb-2">Backend Developer</h3>
+        <p class="text-gray-500 text-lg font-light">Remote · Full-time</p>
+      </div>
+      <a href="#" class="pt-8 mp:mt-0 inline-block bg-black text-white px-10 py-4 rounded-xl font-normal hover:bg-gray-900 transition text-lg">Apply</a>
+    </div>
+    <div class="bg-white p-10 rounded-2xl border border-gray-200 flex flex-col md:flex-row md:items-center md:justify-between">
+      <div>
+        <h3 class="font-normal text-2xl mb-2">Product Designer</h3>
+        <p class="text-gray-500 text-lg font-light">Remote · Full-time</p>
+      </div>
+      <a href="#" class="pt-8 mp:mt-0 inline-block bg-black text-white px-10 py-4 rounded-xl font-normal hover:bg-gray-900 transition text-lg">Apply</a>
+    </div>
+  </div>
+</section>
+
+<!-- Diversity & Inclusion Section -->
+<section class="py-20 px-4 bg-white border-t border-b border-gray-200 mb-32">
+  <div class="max-w-3xl mx-auto text-center">
+    <h2 class="text-3xl md:text-4xl font-light mb-6 tracking-tight">Diversity & Inclusion</h2>
+    <p class="text-xl md:text-2xl font-light">We're committed to building a diverse and inclusive team. We welcome applicants from all backgrounds and experiences. Your unique perspective helps us grow and innovate.</p>
+  </div>
+</section>
+
+<!-- Contact / Footer Section -->
+<section class="py-20 px-4 text-center bg-black text-white">
+  <h2 class="text-2xl md:text-3xl font-light mb-6">Ready to make an impact?</h2>
+  <p class="mb-8 text-lg font-light">Send your resume or questions to <a href="mailto:careers@codepassion.dev" class="underline hover:text-gray-300">careers@codepassion.dev</a></p>
+  <p class="text-gray-400 text-base font-light">© {new Date().getFullYear()} CodePassion. All rights reserved.</p>
+</section>

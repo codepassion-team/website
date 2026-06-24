@@ -1,0 +1,70 @@
+---
+import type { ProductItem } from "~/types";
+
+const products: Array<ProductItem> = [
+  {
+    title: "Sekweb.site",
+    description: "AI-powered website builder that gets your business online in minutes.",
+    url: "https://sekweb.site",
+    status: "live",
+  },
+  {
+    title: "Workengine 0.1",
+    description: "Production-ready architecture powering modern business applications.",
+    url: "#workengine",
+    status: "beta",
+  },
+  {
+    title: "IR Page",
+    description: "Investor relations platform for public companies.",
+    url: "#",
+    status: "coming-soon",
+  },
+  {
+    title: "LMS",
+    description: "Learning management system for educational institutions.",
+    url: "#",
+    status: "coming-soon",
+  },
+];
+---
+
+<section id="products" class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Products</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">What We've Built</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      Our own products, born from real client challenges and production experience.
+    </p>
+
+    <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      {
+        products.map(({ title, description, url, status }) => (
+          <div class="group glass-card overflow-hidden p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg">
+            <div class="mb-3 flex items-center justify-between">
+              <span class={`rounded-full px-2 py-0.5 text-[10px] font-medium ${
+                status === "live" ? "bg-[rgba(34,197,94,0.1)] text-green-400" :
+                status === "beta" ? "bg-[rgba(245,158,11,0.1)] text-amber-400" :
+                "bg-muted text-muted-foreground"
+              }`}>
+                {status === "live" ? "Live" : status === "beta" ? "Beta" : "Coming Soon"}
+              </span>
+            </div>
+            <h3 class="text-lg font-medium text-default">{title}</h3>
+            <p class="mt-2 text-sm font-light leading-relaxed text-offset">{description}</p>
+            {status !== "coming-soon" ? (
+              <a
+                href={url}
+                class="mt-4 inline-flex items-center gap-1 text-sm font-medium text-brand-red hover:underline"
+              >
+                {status === "beta" ? "Learn More" : "Visit"} &rarr;
+              </a>
+            ) : (
+              <p class="mt-4 text-xs font-light text-muted-foreground">Coming soon</p>
+            )}
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>

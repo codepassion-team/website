@@ -1,0 +1,65 @@
+---
+import { Icon } from "astro-icon/components";
+import type { ServiceItem } from "~/types";
+
+const services: Array<ServiceItem> = [
+  {
+    icon: "mdi:monitor-dashboard",
+    title: "Web & App Development",
+    description: "Custom web applications, portals, and dashboards built with modern frameworks for performance and scale.",
+  },
+  {
+    icon: "mdi:server",
+    title: "System & Backend Architecture",
+    description: "Scalable APIs, cloud infrastructure, and seamless integrations that power your business operations.",
+  },
+  {
+    icon: "mdi:palette",
+    title: "UX/UI Design",
+    description: "User-centered design, prototyping, and design systems that create intuitive digital experiences.",
+  },
+  {
+    icon: "mdi:chart-line",
+    title: "Data & Analytics",
+    description: "Data pipelines, dashboards, and actionable insights that turn complexity into clarity.",
+  },
+  {
+    icon: "mdi:cart-outline",
+    title: "E-Commerce Solutions",
+    description: "End-to-end commerce platforms that enhance customer experience and drive global sales.",
+  },
+  {
+    icon: "mdi:wrench",
+    title: "Maintenance & Support",
+    description: "Ongoing support, monitoring, and optimization to keep your systems running at peak performance.",
+  },
+];
+---
+
+<section id="services" class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
+  <div class="mx-auto max-w-7xl">
+    <p class="text-sm font-light uppercase tracking-widest text-offset">What We Do</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">What We Build</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      End-to-end software development services tailored to your business needs, from concept to deployment.
+    </p>
+
+    <ul class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      {
+        services.map(({ title, description, icon }) => (
+          <li class="group glass-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-[rgba(240,77,45,0.3)] hover:shadow-lg">
+            <div class="mb-4 flex size-12 items-center justify-center rounded-lg brand-gradient">
+              <Icon name={icon} class="size-6 text-white" />
+            </div>
+            <h3 class="text-lg font-medium text-default">{title}</h3>
+            <p class="mt-2 text-sm font-light leading-relaxed text-offset">{description}</p>
+            <div class="mt-4 flex items-center gap-1 text-sm text-brand-red opacity-0 transition-opacity group-hover:opacity-100">
+              <span>Learn more</span>
+              <Icon name="mdi:arrow-right" class="size-4" />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
