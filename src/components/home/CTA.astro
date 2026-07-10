@@ -17,6 +17,7 @@ import { Icon } from "astro-icon/components";
     <div class="mt-8 flex flex-wrap justify-center gap-4">
       <a
         href="tel:+66886384566"
+        id="cta-book-call"
         class="rounded-md bg-white px-6 py-3 text-sm font-medium text-[#252525] hover:bg-[rgba(255,255,255,0.9)] transition-colors"
       >
         Book a Free Call
@@ -25,6 +26,7 @@ import { Icon } from "astro-icon/components";
         href="https://facebook.com/codepassion.co"
         target="_blank"
         rel="noopener noreferrer"
+        id="cta-facebook-message"
         class="rounded-md border border-[rgba(255,255,255,0.3)] px-6 py-3 text-sm font-medium text-white hover:bg-[rgba(255,255,255,0.1)] transition-colors"
       >
         Message Us on Facebook
@@ -50,4 +52,13 @@ import { Icon } from "astro-icon/components";
       </a>
     </div>
   </div>
+
+  <script is:inline>
+    document.getElementById('cta-book-call')?.addEventListener('click', function () {
+      if (typeof fbq !== 'undefined') fbq('track', 'Lead');
+    });
+    document.getElementById('cta-facebook-message')?.addEventListener('click', function () {
+      if (typeof fbq !== 'undefined') fbq('track', 'Contact');
+    });
+  </script>
 </section>
