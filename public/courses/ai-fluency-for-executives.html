@@ -302,6 +302,7 @@ h1 .thin{font-weight:400; color:var(--ink-2); font-size:.58em; letter-spacing:-.
   background:var(--copper); color:#FFF9F3; font-size:11px; font-weight:600; padding:4px 10px; letter-spacing:.02em}
 .tier.now:first-child::before{left:0}
 .tier.now .tp .n{color:var(--copper)}
+.tiers.pre .tier.now::before{content:"ราคาเริ่มต้น · 17 ส.ค."}
 .tier-note{margin-top:22px; font-size:14px; color:var(--ink-3)}
 .deals{display:grid; grid-template-columns:1fr 1fr; gap:var(--gut); margin-top:clamp(44px,4.4vw,68px)}
 .deal{border-top:1px solid var(--line); padding-top:26px}
@@ -834,25 +835,25 @@ a.c-val:hover{color:var(--copper-lt)}
         <div class="tier" data-tier="0">
           <div class="tw">สัปดาห์ที่ 1</div>
           <div class="tp"><span class="n">6,900</span><span class="cur">บาท</span></div>
-          <div class="td">12 – 18 ส.ค. 2569</div>
+          <div class="td">17 – 23 ส.ค. 2569</div>
         </div>
         <div class="tier" data-tier="1">
           <div class="tw">สัปดาห์ที่ 2</div>
           <div class="tp"><span class="n">7,900</span><span class="cur">บาท</span></div>
-          <div class="td">19 – 25 ส.ค. 2569</div>
+          <div class="td">24 – 30 ส.ค. 2569</div>
         </div>
         <div class="tier" data-tier="2">
           <div class="tw">สัปดาห์ที่ 3</div>
           <div class="tp"><span class="n">8,900</span><span class="cur">บาท</span></div>
-          <div class="td">26 ส.ค. – 1 ก.ย. 2569</div>
+          <div class="td">31 ส.ค. – 6 ก.ย. 2569</div>
         </div>
         <div class="tier" data-tier="3">
           <div class="tw">สัปดาห์ที่ 4</div>
           <div class="tp"><span class="n">9,900</span><span class="cur">บาท</span></div>
-          <div class="td">2 – 8 ก.ย. 2569</div>
+          <div class="td">7 – 11 ก.ย. 2569</div>
         </div>
       </div>
-      <p class="tier-note">ราคาต่อท่าน · ปิดรับสมัคร 8 กันยายน 2569 หรือเมื่อครบ 20 ที่นั่ง</p>
+      <p class="tier-note">ราคาต่อท่าน · ปิดรับสมัคร 11 กันยายน 2569 หรือเมื่อครบ 20 ที่นั่ง</p>
 
       <div class="deals">
         <div class="deal">
@@ -1017,26 +1018,36 @@ a.c-val:hover{color:var(--copper-lt)}
 
 <script>
 /* ── ปรับวันหมดเขตของแต่ละสัปดาห์ได้ที่นี่ (เวลาไทย) ── */
+const OPEN='2026-08-17T00:00:00+07:00';   // เริ่มนับถอยหลังราคาแรก (จันทร์ 17 ส.ค.)
 const TIERS=[
-  {label:'สัปดาห์ที่ 1', price:'6,900', end:'2026-08-19T00:00:00+07:00'},
-  {label:'สัปดาห์ที่ 2', price:'7,900', end:'2026-08-26T00:00:00+07:00'},
-  {label:'สัปดาห์ที่ 3', price:'8,900', end:'2026-09-02T00:00:00+07:00'},
-  {label:'สัปดาห์ที่ 4', price:'9,900', end:'2026-09-09T00:00:00+07:00'}
+  {label:'สัปดาห์ที่ 1', price:'6,900', end:'2026-08-24T00:00:00+07:00'},
+  {label:'สัปดาห์ที่ 2', price:'7,900', end:'2026-08-31T00:00:00+07:00'},
+  {label:'สัปดาห์ที่ 3', price:'8,900', end:'2026-09-07T00:00:00+07:00'},
+  {label:'สัปดาห์ที่ 4', price:'9,900', end:'2026-09-12T00:00:00+07:00'}
 ];
 const abar=document.getElementById('abar'), abLb=document.getElementById('abar-lb');
 function setBarH(){document.documentElement.style.setProperty('--barh',(abar.hidden?0:abar.offsetHeight)+'px');}
 function activeTier(now){for(let i=0;i<TIERS.length;i++){if(now < new Date(TIERS[i].end).getTime()) return i;} return -1;}
 function pad(n){return String(n).padStart(2,'0');}
+function fmtLeft(ms){
+  const d=Math.floor(ms/864e5), h=Math.floor(ms/36e5)%24, m=Math.floor(ms/6e4)%60, sec=Math.floor(ms/1e3)%60;
+  return (d>0? d+' วัน ':'')+'<i>'+pad(h)+':'+pad(m)+':'+pad(sec)+'</i>';
+}
 function tickBar(){
-  const now=Date.now(), i=activeTier(now);
+  const now=Date.now(), open=new Date(OPEN).getTime(), pre=now<open, i=activeTier(now);
+  const tiersEl=document.getElementById('tiers');
+  if(tiersEl) tiersEl.classList.toggle('pre', pre);
   document.querySelectorAll('.tier').forEach((el,k)=>{
-    el.classList.toggle('now', k===i);
-    el.classList.toggle('past', i>-1 ? k<i : true);
+    el.classList.toggle('now', pre ? k===0 : k===i);
+    el.classList.toggle('past', pre ? false : (i>-1 ? k<i : true));
   });
   if(i<0){abar.hidden=true; setBarH(); return;}
-  const t=TIERS[i], left=new Date(t.end).getTime()-now;
-  const d=Math.floor(left/864e5), h=Math.floor(left/36e5)%24, m=Math.floor(left/6e4)%60, sec=Math.floor(left/1e3)%60;
-  abLb.innerHTML='ราคา Early Bird <b>'+t.price+' บาท</b> เหลืออีก '+(d>0? d+' วัน ':'')+'<i>'+pad(h)+':'+pad(m)+':'+pad(sec)+'</i>';
+  if(pre){
+    abLb.innerHTML='เปิดรับสมัคร Early Bird <b>'+TIERS[0].price+' บาท</b> อีก '+fmtLeft(open-now);
+  }else{
+    const t=TIERS[i];
+    abLb.innerHTML='ราคา Early Bird <b>'+t.price+' บาท</b> เหลืออีก '+fmtLeft(new Date(t.end).getTime()-now);
+  }
   if(abar.hidden){abar.hidden=false;}
   setBarH();
 }
