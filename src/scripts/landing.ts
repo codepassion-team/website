@@ -399,6 +399,7 @@ function setupStory(signal: AbortSignal) {
   const chapters = Array.from(
     document.querySelectorAll<HTMLElement>(".story-chapter"),
   );
+  const siteHeader = document.querySelector<HTMLElement>("#site-header");
   const navigation = document.querySelector<HTMLElement>(".story-navigation");
   const previous = document.querySelector<HTMLButtonElement>("#story-previous");
   const next = document.querySelector<HTMLButtonElement>("#story-next");
@@ -409,6 +410,14 @@ function setupStory(signal: AbortSignal) {
   );
   const mobileViewport = matchMedia("(max-width: 800px)");
   if (!story || !canvas) return () => {};
+  const storyBrand = story.querySelector<HTMLElement>(".story-brand");
+  function updateStoryBrand() {
+    if (!storyBrand || !siteHeader) return;
+    const headerBounds = siteHeader.getBoundingClientRect();
+    const headerVisible =
+      headerBounds.bottom > 0 && headerBounds.top < window.innerHeight;
+    storyBrand.classList.toggle("is-visible", !headerVisible);
+  }
   const renderer = createArchitectureRenderer(canvas);
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   const shortViewport = matchMedia(
@@ -573,6 +582,11 @@ function setupStory(signal: AbortSignal) {
     signal,
   });
   window.addEventListener("scroll", schedule, { passive: true, signal });
+  window.addEventListener("scroll", updateStoryBrand, {
+    passive: true,
+    signal,
+  });
+  updateStoryBrand();
   preference.addEventListener("change", configure, { signal });
   shortViewport.addEventListener("change", configure, { signal });
   motionToggles.forEach((motionToggle) =>
