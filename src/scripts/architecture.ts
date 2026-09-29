@@ -100,6 +100,26 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     reflection.addColorStop(1, "#00000000");
     ctx.fillStyle = reflection;
     ctx.fillRect(cx - 340 * scale, cy - 220 * scale, 680 * scale, 640 * scale);
+    // A centered orbital ring frames the stack without competing with its layers.
+    ctx.save();
+    const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, 360 * scale);
+    halo.addColorStop(0, "#ff8d6a08");
+    halo.addColorStop(0.72, "#ff8d6a05");
+    halo.addColorStop(1, "#ff8d6a00");
+    ctx.fillStyle = halo;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 360 * scale, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.strokeStyle = "#ffac8d1c";
+    ctx.lineWidth = 1;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 332 * scale, 0, Math.PI * 2);
+    ctx.stroke();
+    ctx.strokeStyle = "#ffac8d2c";
+    ctx.beginPath();
+    ctx.arc(cx, cy, 356 * scale, -Math.PI * 0.73, -Math.PI * 0.28);
+    ctx.stroke();
+    ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
     for (let layer = STORY_LAYER_COUNT - 1; layer >= 0; layer--) {
@@ -358,9 +378,9 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     if (callout && arrowTarget && callout.opacity > 0.01) {
       ctx.save();
       ctx.globalAlpha = callout.opacity;
-      ctx.strokeStyle = "#ffac8d99";
+      ctx.strokeStyle = "#ffac8dcc";
       ctx.fillStyle = "#ffac8d";
-      ctx.lineWidth = 1;
+      ctx.lineWidth = 1.2;
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
       ctx.beginPath();
@@ -421,10 +441,10 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     const alignment = desktopStoryAlignment(progress);
     const centerX = width * (mobile ? 0.5 : alignment.x);
     let centerY = height * (mobile ? 0.43 : alignment.y);
-    const openingSize = Math.min(1.25, width / 1320);
-    const centeredSize = Math.min(1.15, width / 1500);
+    const openingSize = Math.min(width / 980, height / 520, 2.65);
+    const centeredSize = Math.min(width / 1450, height / 620, 2.2);
     let size = mobile
-      ? Math.min(width / 610, height / (height < 650 ? 1380 : 1250), 0.9)
+      ? Math.min(width / 550, height / (height < 650 ? 1380 : 1100), 0.9)
       : openingSize + (centeredSize - openingSize) * alignment.centered;
     if (mobile) {
       // Fit the whole assembly above the shortest chapter, including the bottom layer.
@@ -435,8 +455,16 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
       const bottom = Math.max(
         ...geometry.map((layer) => -layer.height + 105 * layer.scale + 18),
       );
-      const frameTop = height < 650 ? 90 : 110;
-      const frameBottom = height < 650 ? height - 318 : height * 0.56;
+      const headerHeight =
+        document.getElementById("site-header")?.getBoundingClientRect().height ??
+        68;
+      const frameTop = height < 650 ? Math.max(86, headerHeight + 16) : 110;
+      const frameBottom =
+        height < 520
+          ? height * 0.38
+          : height < 650
+            ? height - 318
+            : height * 0.56;
       size = Math.min(size, (frameBottom - frameTop) / (bottom - top));
       centerY = (frameTop + frameBottom) / 2 - ((top + bottom) * size) / 2;
     }

@@ -324,15 +324,22 @@ function setupLogoMarquee(signal: AbortSignal) {
   if (!marquee || !toggle) return () => {};
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   let paused = false;
-  let visible = false;
+  let dragging = false;
+  let lastX = 0;
+  let resumeTimer = 0;
   function update() {
-    marquee.classList.toggle(
-      "is-paused",
-      paused || !visible || preference.matches,
-    );
     toggle.hidden = preference.matches;
     toggle.setAttribute("aria-pressed", String(paused));
     toggle.textContent = paused ? t("Play logos") : t("Pause logos");
+    marquee.classList.toggle("is-paused", paused);
+  }
+  function noteInteraction() {
+    if (paused) return;
+    marquee.classList.add("is-paused");
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      marquee.classList.remove("is-paused");
+    }, 900);
   }
   toggle.addEventListener(
     "click",
@@ -342,14 +349,46 @@ function setupLogoMarquee(signal: AbortSignal) {
     },
     { signal },
   );
-  preference.addEventListener("change", update, { signal });
-  const observer = new IntersectionObserver((entries) => {
-    visible = entries.some((entry) => entry.isIntersecting);
-    update();
+  marquee.addEventListener(
+    "pointerdown",
+    (event) => {
+      noteInteraction();
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      dragging = true;
+      lastX = event.clientX;
+      marquee.setPointerCapture(event.pointerId);
+      marquee.classList.add("is-dragging");
+    },
+    { signal },
+  );
+  marquee.addEventListener(
+    "pointermove",
+    (event) => {
+      if (!dragging) return;
+      noteInteraction();
+      marquee.scrollLeft += lastX - event.clientX;
+      lastX = event.clientX;
+    },
+    { signal },
+  );
+  const stopDrag = () => {
+    dragging = false;
+    marquee.classList.remove("is-dragging");
+    noteInteraction();
+  };
+  marquee.addEventListener("pointerup", stopDrag, { signal });
+  marquee.addEventListener("pointercancel", stopDrag, { signal });
+  marquee.addEventListener("lostpointercapture", stopDrag, { signal });
+  marquee.addEventListener("wheel", noteInteraction, {
+    passive: true,
+    signal,
   });
-  observer.observe(marquee);
+  marquee.addEventListener("keydown", noteInteraction, { signal });
+  preference.addEventListener("change", update, { signal });
   update();
-  return () => observer.disconnect();
+  return () => {
+    window.clearTimeout(resumeTimer);
+  };
 }
 
 function setupStory(signal: AbortSignal) {

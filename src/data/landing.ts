@@ -188,33 +188,33 @@ export const projects = [
     number: "02",
   },
   {
+    name: "Teeraporn Hospital",
+    domain: "trphospital.com",
+    category: "Hospital",
+    number: "03",
+  },
+  {
     name: "Natural Home",
     domain: "naturalhome.co.th",
     category: "Property",
-    number: "03",
+    number: "04",
   },
   {
     name: "Smart SME Expo",
     domain: "smartsmeexpo.com",
     category: "Exhibition",
-    number: "04",
-  },
-  {
-    name: "Teeraporn",
-    domain: "teerapornclinic.com",
-    category: "Clinic",
     number: "05",
   },
   {
     name: "Franchise Expo Thailand",
-    domain: "franchiseexpothailand.com",
+    domain: "www.franchiseexpothailand.com",
     category: "Exhibition",
     number: "06",
   },
 ];
 
 // Embedded pages unavailable in browser validation; keep a direct-first option.
-export const unavailablePreviews = ["smartsmeexpo.com", "teerapornclinic.com"];
+export const unavailablePreviews = ["smartsmeexpo.com"];
 
 export const courses = [
   {

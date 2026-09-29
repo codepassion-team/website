@@ -132,7 +132,7 @@ const thai = {
         Jewelry: "เครื่องประดับ",
         Property: "อสังหาริมทรัพย์",
         Exhibition: "งานแสดงสินค้า",
-        Clinic: "คลินิก",
+        Hospital: "โรงพยาบาล",
       } as Record<string, string>
     )[project.category],
   })),
