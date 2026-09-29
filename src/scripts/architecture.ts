@@ -421,10 +421,11 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     const alignment = desktopStoryAlignment(progress);
     const centerX = width * (mobile ? 0.5 : alignment.x);
     let centerY = height * (mobile ? 0.43 : alignment.y);
-    const openingSize = Math.min(1.25, width / 1320);
-    const centeredSize = Math.min(1.15, width / 1500);
+    const openingSize = Math.min(width / 980, height / 520, 2.65);
+    const centeredWidth = 1500 - Math.min(350, Math.max(0, width - 1000) * 0.8);
+    const centeredSize = Math.min(width / centeredWidth, height / 620, 2.2);
     let size = mobile
-      ? Math.min(width / 610, height / (height < 650 ? 1380 : 1250), 0.9)
+      ? Math.min(width / 550, height / (height < 650 ? 1380 : 1100), 0.9)
       : openingSize + (centeredSize - openingSize) * alignment.centered;
     if (mobile) {
       // Fit the whole assembly above the shortest chapter, including the bottom layer.

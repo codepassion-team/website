@@ -34,3 +34,7 @@ No Higgsfield generation or job tools were callable, so no generated stills, por
 The production build and both content checks pass. Browser inspection covered desktop and phone opening layouts, chapter navigation, reverse scrolling, reduced-motion path, fixed mobile menu, the logo row, Kantana loading cover, and 820px/900px connector routing. Asset checks verify local paths, 35 logo marks, six portfolio projects, four products and courses, and the unchanged vector logo. The 35 WebP logo derivatives total 224,482 bytes. Embedded third-party websites control their own load behavior; direct links remain available. Browser compilation and local checks do not measure real-device loading speed or guarantee external iframe readiness.
 
 This PR provides the code for deployment review. No public deployment is performed by the local build.
+
+## Responsive refinement
+
+The stack scales with available viewport width and height, and story copy now uses the full viewport at ultrawide sizes. The portfolio has a Safari-style centered address field; Teeraporn Hospital is third and embeds `https://trphospital.com`, while Franchise Expo uses `https://www.franchiseexpothailand.com`. Customer logos use native horizontal scrolling with mouse dragging and automatic movement that pauses on interaction. Logo padding is reduced while preserving image aspect ratios.

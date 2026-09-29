@@ -69,7 +69,18 @@ const { projects } = getLandingContent(locale);
       <div class="browser-chrome">
         <span class="browser-dots" aria-hidden="true"
           ><i></i><i></i><i></i></span
-        ><span id="preview-domain">{projects[0].domain}</span><button
+        ><div class="browser-address">
+          <svg
+            width="12"
+            height="12"
+            viewBox="0 0 16 16"
+            fill="none"
+            stroke="currentColor"
+            aria-hidden="true"
+            ><rect x="4" y="7" width="8" height="7" rx="2"></rect><path
+              d="M5.5 7V4a2.5 2.5 0 0 1 5 0v3"></path></svg
+          ><span id="preview-domain">{projects[0].domain}</span>
+        </div><button
           type="button"
           id="close-preview"
           aria-label={t("Close live preview")}

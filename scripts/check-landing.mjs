@@ -38,7 +38,7 @@ for (const [locale, path] of [
   for (const asset of localAssets) await access(`dist${asset}`);
   assert.equal(
     [...html.matchAll(/data-preview-unavailable="true"/g)].length,
-    2,
+    1,
   );
   assert.equal([...html.matchAll(/class="customer-logo"/g)].length, 35);
   assert.equal(
@@ -92,6 +92,9 @@ for (const [locale, path] of [
   );
 }
 assert.equal(projects.length, 6);
+assert.equal(projects[2].domain, "trphospital.com");
+assert.equal(projects[2].category, "Hospital");
+assert.equal(projects[5].domain, "www.franchiseexpothailand.com");
 assert.equal(courses.length, 4);
 assert.equal(products.length, 4);
 assert.equal(certificates.length, 2);

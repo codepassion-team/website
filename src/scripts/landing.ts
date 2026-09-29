@@ -325,14 +325,19 @@ function setupLogoMarquee(signal: AbortSignal) {
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   let paused = false;
   let visible = false;
+  let hovering = false;
+  let dragging = false;
+  let lastX = 0;
+  let previousTime = 0;
+  let animation = 0;
   function update() {
-    marquee.classList.toggle(
-      "is-paused",
-      paused || !visible || preference.matches,
-    );
     toggle.hidden = preference.matches;
     toggle.setAttribute("aria-pressed", String(paused));
     toggle.textContent = paused ? t("Play logos") : t("Pause logos");
+  }
+  function pause() {
+    paused = true;
+    update();
   }
   toggle.addEventListener(
     "click",
@@ -342,14 +347,80 @@ function setupLogoMarquee(signal: AbortSignal) {
     },
     { signal },
   );
+  marquee.addEventListener(
+    "pointerenter",
+    (event) => {
+      hovering = event.pointerType === "mouse";
+    },
+    { signal },
+  );
+  marquee.addEventListener(
+    "pointerleave",
+    () => {
+      hovering = false;
+    },
+    { signal },
+  );
+  marquee.addEventListener(
+    "pointerdown",
+    (event) => {
+      pause();
+      if (event.pointerType !== "mouse" || event.button !== 0) return;
+      dragging = true;
+      lastX = event.clientX;
+      marquee.setPointerCapture(event.pointerId);
+      marquee.classList.add("is-dragging");
+    },
+    { signal },
+  );
+  marquee.addEventListener(
+    "pointermove",
+    (event) => {
+      if (!dragging) return;
+      marquee.scrollLeft += lastX - event.clientX;
+      lastX = event.clientX;
+    },
+    { signal },
+  );
+  const stopDrag = () => {
+    dragging = false;
+    marquee.classList.remove("is-dragging");
+  };
+  marquee.addEventListener("pointerup", stopDrag, { signal });
+  marquee.addEventListener("pointercancel", stopDrag, { signal });
+  marquee.addEventListener("lostpointercapture", stopDrag, { signal });
+  marquee.addEventListener("wheel", pause, { passive: true, signal });
+  marquee.addEventListener("keydown", pause, { signal });
   preference.addEventListener("change", update, { signal });
   const observer = new IntersectionObserver((entries) => {
     visible = entries.some((entry) => entry.isIntersecting);
-    update();
   });
   observer.observe(marquee);
+  function tick(time: number) {
+    const elapsed = Math.min(time - previousTime, 50);
+    previousTime = time;
+    if (
+      visible &&
+      !paused &&
+      !hovering &&
+      !preference.matches &&
+      !document.hidden &&
+      document.activeElement !== marquee
+    ) {
+      const loopWidth =
+        marquee.querySelector<HTMLElement>(".logo-set")?.offsetWidth ?? 0;
+      marquee.scrollLeft += elapsed * 0.035;
+      if (loopWidth && marquee.scrollLeft >= loopWidth)
+        marquee.scrollLeft -= loopWidth;
+    }
+    animation = requestAnimationFrame(tick);
+  }
+  animation = requestAnimationFrame(tick);
   update();
-  return () => observer.disconnect();
+  return () => {
+    observer.disconnect();
+    cancelAnimationFrame(animation);
+  };
 }
 
 function setupStory(signal: AbortSignal) {
