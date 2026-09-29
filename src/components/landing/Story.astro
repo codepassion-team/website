@@ -1,0 +1,139 @@
+---
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const { chapters } = getLandingContent(locale);
+---
+
+<section class="story" id="home" aria-label={t("The CodePassion story")}>
+  <div class="story-stage">
+    <div class="stage-grid" aria-hidden="true"></div>
+    <div class="stage-halo" aria-hidden="true"></div>
+    <canvas id="architecture-canvas" aria-hidden="true"></canvas>
+    <div class="static-sculpture" aria-hidden="true">
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
+    <div class="stage-copy">
+      {
+        chapters.map((chapter, index) => (
+          <article
+            class:list={[
+              "story-chapter",
+              `story-chapter--${chapter.key}`,
+              { "is-current": index === 0 },
+            ]}
+            data-chapter={index}
+            data-layer-key={chapter.key}
+            data-copy-side={index > 0 && index % 2 === 0 ? "right" : "left"}
+            data-layer-label={chapter.layer}
+          >
+            {index > 0 && (
+              <div class="layer-kicker">
+                <span>{String(index).padStart(2, "0")}</span>
+                {chapter.layer}
+              </div>
+            )}
+            <p class="eyebrow">
+              <span class="signal-dot" />
+              {chapter.eyebrow}
+            </p>
+            {index === 0 ? (
+              <h1>
+                {chapter.lines.map((line, i) => (
+                  <span
+                    class:list={["desktop-line", { "muted-heading": i === 1 }]}
+                  >
+                    {line}
+                  </span>
+                ))}
+                {chapter.mobileLines.map((line, i) => (
+                  <span
+                    class:list={["mobile-line", { "muted-heading": i === 1 }]}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </h1>
+            ) : (
+              <h2>
+                {chapter.lines.map((line, i) => (
+                  <span
+                    class:list={["desktop-line", { "muted-heading": i === 1 }]}
+                  >
+                    {line}
+                  </span>
+                ))}
+                {chapter.mobileLines.map((line, i) => (
+                  <span
+                    class:list={["mobile-line", { "muted-heading": i === 1 }]}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </h2>
+            )}
+            <p class="hero-description">{chapter.description}</p>
+            {index > 0 && (
+              <ul class="layer-details">
+                {chapter.details.map((detail) => (
+                  <li>{detail}</li>
+                ))}
+              </ul>
+            )}
+            <a class="button button-light" href={chapter.href}>
+              {chapter.action}
+              <span aria-hidden="true">↗</span>
+            </a>
+          </article>
+        ))
+      }
+    </div>
+    <div class="sculpture-caption" aria-hidden="true">
+      <span class="crosshair">+</span><span id="sculpture-label"
+        >FULL STACK</span
+      ><span class="caption-line"></span>
+    </div>
+    <div class="story-bottom">
+      <span class="scroll-prompt"
+        ><span aria-hidden="true">↓</span>{
+          t("Scroll to explore each layer")
+        }</span
+      ><nav class="story-navigation" aria-label={t("Story navigation")} hidden>
+        <button
+          id="story-previous"
+          type="button"
+          aria-label={t("Previous chapter")}
+          disabled
+          ><span aria-hidden="true">←</span><span>{t("Previous")}</span></button
+        >
+        <span class="story-count" aria-live="polite" aria-atomic="true"
+          ><span id="story-current">01</span><span aria-hidden="true">
+            / {String(chapters.length).padStart(2, "0")}</span
+          ></span
+        >
+        <button id="story-next" type="button" aria-label={t("Next chapter")}
+          ><span>{t("Next")}</span><span aria-hidden="true">→</span></button
+        >
+      </nav><div class="story-controls">
+        <button id="motion-toggle" type="button" aria-pressed="true" hidden
+          >{t("Motion on")}</button
+        ><a href="#expertise" class="skip-story">{t("Skip the story ↗")}</a>
+      </div>
+    </div>
+  </div>
+  <div class="story-layer-summary">
+    {
+      chapters.slice(1).map((chapter) => (
+        <article>
+          <p class="layer-kicker">{chapter.layer}</p>
+          <h2>{chapter.lines.join(" ")}</h2>
+          <p>{chapter.description}</p>
+        </article>
+      ))
+    }
+  </div>
+</section>

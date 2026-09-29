@@ -1,0 +1,580 @@
+---
+import "~/styles/landing.css";
+import Header from "~/components/landing/Header.astro";
+import Story from "~/components/landing/Story.astro";
+import Portfolio from "~/components/landing/Portfolio.astro";
+import { Icon } from "astro-icon/components";
+import Analytics from "~/components/landing/Analytics.astro";
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const {
+  company,
+  services,
+  products,
+  courses,
+  certificates,
+  customerLogos,
+  channels,
+  technologyLayers,
+  technologyLogos,
+} = getLandingContent(locale);
+const title = `CodePassion — ${t("Software development & system architecture.")}`;
+const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
+---
+
+<!doctype html>
+<html lang={locale} data-theme="dark">
+  <head>
+    <meta charset="utf-8" /><meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>{title}</title><meta
+      name="description"
+      content={company.description}
+    />
+    <meta name="theme-color" content="#090a0c" /><meta
+      name="generator"
+      content={Astro.generator}
+    />
+    <link rel="canonical" href={canonical} /><link
+      rel="icon"
+      type="image/svg+xml"
+      href="/favicon.svg"
+    />
+    <link rel="stylesheet" href="/design/tokens.css" />
+    <link rel="alternate" hreflang="th" href="https://codepassion.co/" />
+    <link rel="alternate" hreflang="en" href="https://codepassion.co/en/" />
+    <link rel="alternate" hreflang="x-default" href="https://codepassion.co/" />
+    <meta property="og:locale" content={locale === "th" ? "th_TH" : "en_US"} />
+    <link
+      rel="preload"
+      href={`/design/assets/noto-sans-thai-${locale === "th" ? "thai" : "latin"}.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta property="og:title" content={title} /><meta
+      property="og:type"
+      content="website"
+    /><meta property="og:url" content={canonical} />
+    <meta property="og:description" content={company.description} /><meta
+      property="og:image"
+      content="https://codepassion.co/cover.jpg"
+    />
+    <meta name="twitter:card" content="summary_large_image" /><meta
+      name="twitter:title"
+      content={title}
+    /><meta name="twitter:description" content={company.description} /><meta
+      name="twitter:image"
+      content="https://codepassion.co/cover.jpg"
+    />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        name: company.legalName,
+        url: "https://codepassion.co",
+        logo: "https://codepassion.co/brand/codepassion.svg",
+        description: company.description,
+        contactPoint: {
+          "@type": "ContactPoint",
+          telephone: "+66886384566",
+          contactType: "customer service",
+          availableLanguage: ["Thai", "English"],
+        },
+        sameAs: channels
+          .filter((channel) => channel.name !== "TikTok")
+          .map((channel) => channel.href),
+      })}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#expertise">{t("Skip to main content")}</a>
+    <Header locale={locale} />
+    <main>
+      <Story locale={locale} />
+      <section class="intro-strip section" aria-label={t("Our focus")}>
+        <p>
+          {t("Software for")}<br /><strong>{t("your business.")}</strong>
+        </p><div class="intro-disciplines">
+          <span>{t("Solution architecture")}</span><span
+            >{t("Software development")}</span
+          ><span>{t("Systems integration")}</span>
+        </div><span class="intro-symbol" aria-hidden="true">↗</span>
+      </section>
+      <section
+        class="section expertise-section"
+        id="expertise"
+        aria-labelledby="expertise-heading"
+      >
+        <div class="section-top">
+          <p class="eyebrow">{t("01 / OUR EXPERTISE")}</p><span class="micro"
+            >{t("ARCHITECTURE / DEVELOPMENT / INTEGRATION")}</span
+          >
+        </div>
+        <div class="section-heading">
+          <h2 id="expertise-heading">
+            {t("From system design")}<br /><span
+              >{t("to working software.")}</span
+            >
+          </h2><p>
+            {t("We design the architecture,")}<br />{
+              t("develop the application,")
+            }<br />{t("and connect it to your existing systems.")}
+          </p>
+        </div>
+        <div class="service-grid">
+          {
+            services.map((service) => (
+              <article class="service-card">
+                <div class="service-card-top">
+                  <>
+                    <span class="micro">
+                      {service.number} / {service.category}
+                    </span>
+                    <span aria-hidden="true">↗</span>
+                  </>
+                </div>
+                <div
+                  class={`service-diagram ${service.symbol}`}
+                  aria-hidden="true"
+                >
+                  <>
+                    <i />
+                    <i />
+                    <i />
+                    <b />
+                  </>
+                </div>
+                <>
+                  <h3>{service.title}</h3>
+                  <p>{service.description}</p>
+                  <ul>
+                    {service.details.map((detail) => (
+                      <li>{detail}</li>
+                    ))}
+                  </ul>
+                </>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+      <Portfolio locale={locale} />
+      <section
+        class="section trust-section"
+        id="trust"
+        aria-labelledby="trust-heading"
+      >
+        <div class="trust-intro">
+          <p class="eyebrow">{t("CUSTOMERS & PARTNERS")}</p><h2
+            id="trust-heading"
+          >
+            {t("Our customers")}<br /><span>{t("and partners.")}</span>
+          </h2><p>
+            {t("We work with businesses across industries.")}<br />{
+              t("Thank you for trusting our team.")
+            }
+          </p>
+        </div>
+        <div
+          class="logo-marquee"
+          aria-label={t("Customers & partners")}
+          tabindex="0"
+        >
+          <div class="logo-track">
+            {
+              [0, 1].map((copy) => (
+                <div
+                  class="logo-set"
+                  aria-hidden={copy === 1 ? "true" : undefined}
+                >
+                  {customerLogos.map((logo) => (
+                    <div
+                      class:list={[
+                        "customer-logo",
+                        { "logo-duplicate": copy === 1 },
+                      ]}
+                    >
+                      <img
+                        src={`/media/logos/${logo.file.replace(".png", ".webp")}`}
+                        alt={copy === 0 ? logo.name : ""}
+                        loading="lazy"
+                        decoding="async"
+                        width="160"
+                        height="80"
+                      />
+                    </div>
+                  ))}
+                </div>
+              ))
+            }
+          </div>
+        </div>
+        <div class="logo-controls">
+          <button type="button" id="logo-motion-toggle" aria-pressed="false"
+            >{t("Pause logos")}</button
+          >
+        </div>
+      </section>
+      <section
+        class="section products-section"
+        id="products"
+        aria-labelledby="products-heading"
+      >
+        <div class="section-top">
+          <p class="eyebrow">{t("03 / OUR PRODUCTS")}</p><span class="micro"
+            >{t("BY CODEPASSION")}</span
+          >
+        </div>
+        <div class="section-heading">
+          <h2 id="products-heading">
+            {t("Products by")}<br /><span>{t("CodePassion.")}</span>
+          </h2><p>
+            {t("Our products cover website creation,")}<br />{
+              t("membership management,")
+            }<br />{t("and software architecture.")}
+          </p>
+        </div>
+        <div class="product-grid">
+          {
+            products.map((product, index) => (
+              <article class={`product-card product-${index}`} id={product.id}>
+                <div class="product-art" aria-hidden="true">
+                  <>
+                    <div class="product-monogram">{product.glyph}</div>
+                    <div class="product-orbit" />
+                    <span class="micro">
+                      CODEPASSION / {String(index + 1).padStart(2, "0")}
+                    </span>
+                  </>
+                </div>
+                <div class="product-info">
+                  <>
+                    <p class="eyebrow">{product.category}</p>
+                    <h3>{product.name}</h3>
+                    <p>{product.description}</p>
+                    <a
+                      href={product.href}
+                      class="text-link"
+                      target={
+                        product.href.startsWith("https") ? "_blank" : undefined
+                      }
+                      rel={
+                        product.href.startsWith("https")
+                          ? "noopener noreferrer"
+                          : undefined
+                      }
+                    >
+                      {product.action}
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  </>
+                </div>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+      <section
+        class="section technology-section"
+        id="technologies"
+        aria-labelledby="technology-heading"
+      >
+        <div class="section-top">
+          <p class="eyebrow">{t("04 / OUR TECHNOLOGY")}</p><span class="micro"
+            >{t("CLOUD / APPLICATIONS / DATA")}</span
+          >
+        </div>
+        <div class="section-heading">
+          <h2 id="technology-heading">
+            {t("The technology")}<br /><span>{t("we work with.")}</span>
+          </h2><p>
+            {
+              t(
+                "We choose the tools for each project, from cloud hosting and application frameworks to data storage.",
+              )
+            }
+          </p>
+        </div>
+        <div class="technology-layers">
+          {
+            technologyLayers.map((layer, index) => (
+              <article class="technology-layer">
+                <>
+                  <div class="technology-label">
+                    <>
+                      <span class="micro">0{index + 1}</span>
+                      <h3>{layer.name}</h3>
+                      <p>{layer.description}</p>
+                    </>
+                  </div>
+                  <ul>
+                    {layer.items.map((item) => (
+                      <li>
+                        <span class="technology-icon">
+                          <img
+                            src={technologyLogos[item]}
+                            alt=""
+                            width="30"
+                            height="30"
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </span>
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              </article>
+            ))
+          }
+        </div>
+      </section>
+      <section
+        class="section approach-section"
+        id="approach"
+        aria-labelledby="approach-heading"
+      >
+        <div class="section-top">
+          <p class="eyebrow">{t("05 / HOW WE WORK")}</p><span class="micro"
+            >{t("FROM REQUIREMENTS TO DELIVERY")}</span
+          >
+        </div>
+        <div class="approach-layout">
+          <h2 id="approach-heading">
+            {t("Understand the problem.")}<br />{t("Plan the system.")}<br
+            /><span>{t("Build and test.")}</span>
+          </h2><div class="approach-steps">
+            <article>
+              <span class="micro">01</span><div>
+                <h3>{t("Understand before we build.")}</h3><p>
+                  {
+                    t(
+                      "We discuss your business, users, and requirements, then agree on what the software needs to do.",
+                    )
+                  }
+                </p>
+              </div>
+            </article>
+            <article>
+              <span class="micro">02</span><div>
+                <h3>{t("Design the whole system.")}</h3><p>
+                  {
+                    t(
+                      "We map the architecture and user experience, then discuss the trade-offs before development.",
+                    )
+                  }
+                </p>
+              </div>
+            </article>
+            <article>
+              <span class="micro">03</span><div>
+                <h3>{t("Test and improve.")}</h3><p>
+                  {
+                    t(
+                      "We develop in stages, test the software, and improve it as your requirements change.",
+                    )
+                  }
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+        <div class="certification-strip" id="certifications">
+          <div>
+            <p class="eyebrow">{t("CERTIFICATES & STANDARDS")}</p><h3>
+              {t("Software quality and accessibility.")}
+            </h3><p>
+              {t("Software engineering processes")}<br />{
+                t("and web accessibility standards.")
+              }
+            </p>
+          </div><div class="certificates">
+            {
+              certificates.map((certificate) => (
+                <figure>
+                  <>
+                    <div class="certificate-image">
+                      <img
+                        src={certificate.image}
+                        alt={certificate.name}
+                        width="180"
+                        height="151"
+                        loading="lazy"
+                      />
+                    </div>
+                    <figcaption>
+                      <>
+                        <strong>{certificate.name}</strong>
+                        <span>{certificate.detail}</span>
+                      </>
+                    </figcaption>
+                  </>
+                </figure>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+      <section
+        class="academy-section"
+        id="academy"
+        aria-labelledby="academy-heading"
+      >
+        <div class="academy-inner section">
+          <div class="section-top">
+            <p class="eyebrow">{t("06 / CODEPASSION ACADEMY")}</p><a
+              href={company.academyUrl}
+              class="text-link"
+              target="_blank"
+              rel="noopener noreferrer"
+              >{t("Visit the academy")}<span aria-hidden="true">↗</span></a
+            >
+          </div>
+          <div class="academy-heading">
+            <div>
+              <h2 id="academy-heading">
+                {t("Learn to use AI")}<br /><span>{t("in your work.")}</span>
+              </h2><p>
+                {t("Learn AI from the people putting it to work.")}<br />{
+                  t("Practical courses for business leaders, developers,")
+                }<br class="desktop-break" />{
+                  t("and teams learning to use AI in their work.")
+                }
+              </p>
+            </div><div class="academy-emblem" aria-hidden="true">
+              <img
+                src="/brand/codepassion.svg"
+                alt=""
+                width="120"
+                height="120"
+              /><small>ACADEMY</small><i></i>
+            </div>
+          </div>
+          <div class="courses">
+            {
+              courses.map((course) => (
+                <a
+                  class="course-row"
+                  href={`${company.academyUrl}courses/${course.slug}/`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <>
+                    <span class="course-number micro">{course.number}</span>
+                    <div>
+                      <>
+                        <p class="eyebrow">{course.audience}</p>
+                        <h3>{course.name}</h3>
+                        <p class="course-summary">{course.summary}</p>
+                      </>
+                    </div>
+                    <span class="course-action">
+                      {t("Explore course")}
+                      <span aria-hidden="true">↗</span>
+                    </span>
+                  </>
+                </a>
+              ))
+            }
+          </div>
+        </div>
+      </section>
+      <section
+        class="section contact-section"
+        id="contact"
+        aria-labelledby="contact-heading"
+      >
+        <p class="eyebrow">
+          <span class="signal-dot"></span>{t("TELL US ABOUT YOUR PROJECT")}
+        </p><h2 id="contact-heading">
+          {t("What do you")}<br /><span>{t("want to build?")}</span><span
+            class="contact-star"
+            aria-hidden="true">✳</span
+          >
+        </h2><div class="contact-bottom">
+          <p>
+            {t("Tell us what you’re planning or where you’re stuck.")}<br />{
+              t("We can help with the design and development.")
+            }
+          </p><div class="contact-actions">
+            <a
+              href={company.contactUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="button button-light"
+              ><Icon
+                name="fa-brands:line"
+                class="line-icon"
+                aria-hidden="true"
+              />{t("Let’s talk on LINE")}<span aria-hidden="true">↗</span></a
+            ><a href={company.phoneUrl} class="phone-link">{company.phone}</a>
+          </div>
+        </div>
+      </section>
+    </main>
+    <footer class="site-footer section">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="#home"
+            ><img
+              src="/brand/codepassion.svg"
+              alt=""
+              width="42"
+              height="42"
+            /><span>CodePassion</span></a
+          ><p>{t("Software development & system architecture.")}</p>
+        </div><div>
+          <h2>{t("Explore")}</h2><a href="#technologies"
+            >{t("Core technologies")}</a
+          ><a href="#expertise">{t("Expertise")}</a><a href="#work"
+            >{t("Our work")}</a
+          ><a href="#trust">{t("Customers & partners")}</a><a
+            href="#certifications">{t("Certificates & standards")}</a
+          >
+        </div><div>
+          <h2>{t("Our products")}</h2>{
+            products.map((product) => (
+              <a href={`#${product.id}`}>{product.name}</a>
+            ))
+          }<a
+            href={company.academyUrl}
+            target="_blank"
+            rel="noopener noreferrer">CodePassion Academy ↗</a
+          >
+        </div><div>
+          <h2>{t("Stay connected")}</h2>{
+            channels.map((channel) => (
+              <a
+                href={channel.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`${channel.name}: ${channel.label}`}
+              >
+                {channel.name}
+                <span aria-hidden="true">↗</span>
+              </a>
+            ))
+          }
+        </div>
+      </div><div class="footer-bottom">
+        <span>© {new Date().getFullYear()} {company.legalName}</span><span
+          >{t("Software development & systems integration.")}</span
+        ><a href="#home">{t("Back to top ↑")}</a>
+      </div>
+    </footer>
+    <Analytics />
+    <script>
+      import "~/scripts/landing";
+    </script>
+  </body>
+</html>
