@@ -1,45 +1,50 @@
-# CodePassion Landing Page <picture><source media="(prefers-color-scheme: dark)" srcset="https://astro.build/assets/press/astro-icon-light.png"><source media="(prefers-color-scheme: light)" srcset="https://astro.build/assets/press/astro-icon-dark.png"><img align="right" valign="center" height="79" width="63" src="https://astro.build/assets/press/astro-icon-dark.png" alt="Astro logo" /></picture>
+# CodePassion website
 
-> An Astro + Tailwind CSS example/template for landing pages.
+The CodePassion company website is an Astro landing page for software development, solution architecture, system design, and integration. Thai is the default at `/`; English is available at `/en/`.
 
-<div align="center">
+## What the site includes
 
-[![Built with Astro](https://astro.badg.es/v2/built-with-astro/small.svg)](https://astro.build)
+- A scroll-driven architecture story. The opening keeps the message on the left and the stack on the right; scrolling centers the stack, then expands and highlights AI Agent, Application, Workflow Automation, Data Transformation, and Infrastructure in order. Previous/Next controls, a skip link, and a motion toggle support different ways to explore it.
+- A mobile layout with a fixed brand navigation bar, an accessible menu, a portrait composition of the architecture graphic, and shorter story timing.
+- Services, four products (Sekweb, MemberConnex, Workery, and WorkEngine 0.3), CodePassion Academy courses, technology stacks, certifications, customer and partner logos, and contact channels.
+- Six portfolio sites, with Kantana Holdings first. The selected site's iframe starts loading when its preview enters view; a branded cover masks the initial blank frame. Direct links remain available if a third-party site blocks embedding.
+- Thai and English copy with Noto Sans Thai, the original CodePassion vector logo, and an editable [style tile](public/design/style-tile.html).
 
-</div>
+The animation is currently an original responsive canvas illustration. There are **no generated video clips or image sequences**: Higgsfield image/video tools were unavailable during production. The story and future footage requirements are documented in [the production note](docs/design/cinematic-production.md).
 
-![Screenshots of Astro Landing Page](screenshots.jpg)
+## Run locally
 
-## Features
+```sh
+corepack pnpm install --frozen-lockfile
+corepack pnpm run dev
+```
 
-- 💨 Tailwind CSS for styling
-- 🎨 Themeable
-  - CSS variables are defined in `src/styles/theme.css` and mapped to Tailwind classes (`tailwind.config.cjs`)
-- 🌙 Dark mode
-- 📱 Responsive (layout, images, typography)
-- ♿ Accessible (as measured by https://web.dev/measure/)
-- 🔎 SEO-enabled (as measured by https://web.dev/measure/)
-- 🔗 Open Graph tags for social media sharing
-- 💅 [Prettier](https://prettier.io/) setup for both [Astro](https://github.com/withastro/prettier-plugin-astro) and [Tailwind](https://github.com/tailwindlabs/prettier-plugin-tailwindcss)
+Astro serves the site at `http://localhost:4321/` by default. Visit `/en/` for English and `/design/style-tile.html` for the design board.
 
-## Commands
+## Validate
 
-| Command                | Action                                            |
-| :--------------------- | :------------------------------------------------ |
-| `npm install`          | Install dependencies                              |
-| `npm run dev`          | Start local dev server at `localhost:4321`        |
-| `npm run build`        | Build your production site to `./dist/`           |
-| `npm run preview`      | Preview your build locally, before deploying      |
-| `npm run astro ...`    | Run CLI commands like `astro add`, `astro check`  |
-| `npm run astro --help` | Get help using the Astro CLI                      |
-| `npm run format`       | Format code with [Prettier](https://prettier.io/) |
-| `npm run clean`        | Remove `node_modules` and build output            |
+```sh
+corepack pnpm run build
+node scripts/check-landing.mjs
+node scripts/check-story.mjs
+```
 
-## Credits
+Cloudflare Pages uses the v2 build image for this project. The repo pins Node 22 in `.node-version` and pnpm 8.7.1 in `package.json`; its pnpm lockfile uses the format that pnpm 8 reads. Use `npm run build` or `pnpm run build` as the Pages build command and `dist` as the output directory. If Cloudflare still reports Node 18, check for a Pages `NODE_VERSION` environment variable overriding the repo pin.
 
-- astronaut image
-  - source: https://github.com/withastro/astro-og-image; note: this repo is not available anymore
-- moon image
-  - source: https://unsplash.com/@nasa
-- other than that, a lot of material (showcase data, copy) was taken from official Astro sources, in particular https://astro.build/blog/introducing-astro/ and https://github.com/withastro/astro.build
-- Sliding Text Animation with Tailwind CSS: https://codepen.io/cruip/pen/dywRwNV
+The content check examines the built Thai and English pages, local asset references, navigation targets, products, courses, portfolio entries, and logo assets. The story check verifies chapter holds, smooth forward and reverse progress, layer order, and connector geometry. Browser review is still needed for visual composition, accessibility interactions, and third-party iframe behavior. A local build does not publish the site.
+
+## Edit the site
+
+| What to change | Location |
+| --- | --- |
+| Business details, services, products, courses, projects, customers, technologies, and links | `src/data/landing.ts` |
+| Thai business copy | `src/data/landing-locales.ts` |
+| Thai interface labels | `src/data/landing-ui.ts` |
+| Page sections and navigation | `src/components/landing/` |
+| Responsive layout and typography | `src/styles/landing.css` |
+| Story scroll timing | `src/scripts/story-timeline.ts` |
+| Architecture drawing and arrow connectors | `src/scripts/architecture.ts`, `src/scripts/story-connector.ts` |
+| Customer logo masters and optimized site assets | `public/logos/`, `public/media/logos/` |
+| Brand and certification assets | `public/brand/`, `public/certifications/` |
+
+See [the handoff](docs/design/HANDOFF.md) for detailed production notes and known limitations. Issue-tracker, triage-label, and domain-documentation conventions are in `docs/agents/`; the root `CLAUDE.md` points engineering skills to them.
