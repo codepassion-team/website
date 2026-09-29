@@ -192,6 +192,9 @@ ul {
 }
 /* Navigation */
 .site-header {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
   height: 92px;
   position: absolute;
   top: 0;
@@ -1363,12 +1366,6 @@ ul {
   gap: 25px;
   font-size: 12px;
   color: #92929c;
-}
-@media (min-width: 1601px) {
-  .site-header {
-    padding-left: max(var(--page-gutter), calc((100vw - 1440px) / 2));
-    padding-right: max(var(--page-gutter), calc((100vw - 1440px) / 2));
-  }
 }
 @media (max-width: 1100px) {
   .desktop-nav {
