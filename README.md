@@ -15,8 +15,8 @@ The animation is currently an original responsive canvas illustration. There are
 ## Run locally
 
 ```sh
-npm install
-npm run dev
+corepack pnpm install --frozen-lockfile
+corepack pnpm run dev
 ```
 
 Astro serves the site at `http://localhost:4321/` by default. Visit `/en/` for English and `/design/style-tile.html` for the design board.
@@ -24,10 +24,12 @@ Astro serves the site at `http://localhost:4321/` by default. Visit `/en/` for E
 ## Validate
 
 ```sh
-npm run build
+corepack pnpm run build
 node scripts/check-landing.mjs
 node scripts/check-story.mjs
 ```
+
+Cloudflare Pages uses the v2 build image for this project. The repo pins Node 22 in `.node-version` and pnpm 8.7.1 in `package.json`; its pnpm lockfile uses the format that pnpm 8 reads. Use `npm run build` or `pnpm run build` as the Pages build command and `dist` as the output directory. If Cloudflare still reports Node 18, check for a Pages `NODE_VERSION` environment variable overriding the repo pin.
 
 The content check examines the built Thai and English pages, local asset references, navigation targets, products, courses, portfolio entries, and logo assets. The story check verifies chapter holds, smooth forward and reverse progress, layer order, and connector geometry. Browser review is still needed for visual composition, accessibility interactions, and third-party iframe behavior. A local build does not publish the site.
 
