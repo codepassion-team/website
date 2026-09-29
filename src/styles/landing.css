@@ -3176,11 +3176,12 @@ html.menu-open,
 }
 @media (max-width: 800px) {
   .story-chapter--stack h1 {
-    line-height: 1.16;
+    font-size: clamp(40px, 10.5vw, 56px);
+    line-height: 1.12;
     margin-bottom: 20px;
   }
   :lang(th) .story-chapter--stack h1 {
-    line-height: 1.24;
+    line-height: 1.2;
   }
 }
 
