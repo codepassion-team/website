@@ -346,28 +346,31 @@ ul {
   z-index: 5;
   top: 110px;
   left: var(--page-gutter);
-  display: grid;
-  place-items: center;
-  width: 46px;
-  height: 46px;
-  border: 1px solid #ffffff1c;
-  border-radius: 50%;
-  background: #101114aa;
-  backdrop-filter: blur(12px);
-  transition:
-    border-color 180ms ease,
-    transform 180ms ease,
-    background-color 180ms ease;
+  display: block;
+  width: clamp(150px, 15vw, 220px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+.story-brand.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
 }
 .story-brand:hover {
-  transform: translateY(-2px);
-  border-color: #ffac8d77;
-  background: #171719dd;
+  opacity: 0.82;
 }
 .story-brand img {
   display: block;
-  width: 30px;
-  height: 30px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.footer-brand .brand img {
+  display: block;
+  width: clamp(108px, 10vw, 150px);
+  height: auto;
   object-fit: contain;
 }
 .stage-copy {
@@ -2610,12 +2613,7 @@ html.menu-open,
   .story-brand {
     top: calc(var(--mobile-header-height) + 8px);
     left: max(20px, env(safe-area-inset-left, 0px));
-    width: 42px;
-    height: 42px;
-  }
-  .story-brand img {
-    width: 27px;
-    height: 27px;
+    width: 150px;
   }
   .story-chapter,
   .is-enhanced .story-chapter {
