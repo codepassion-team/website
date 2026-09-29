@@ -341,6 +341,38 @@ ul {
 .canvas-ready .static-sculpture {
   display: none;
 }
+.story-brand {
+  position: absolute;
+  z-index: 5;
+  top: 110px;
+  left: var(--page-gutter);
+  display: block;
+  width: clamp(150px, 15vw, 220px);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: opacity 180ms ease, visibility 180ms ease;
+}
+.story-brand.is-visible {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+}
+.story-brand:hover {
+  opacity: 0.82;
+}
+.story-brand img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+.footer-brand .brand img {
+  display: block;
+  width: clamp(108px, 10vw, 150px);
+  height: auto;
+  object-fit: contain;
+}
 .stage-copy {
   position: relative;
   z-index: 2;
@@ -2577,6 +2609,11 @@ html.menu-open,
     inset: 0;
     padding: 0;
     display: block;
+  }
+  .story-brand {
+    top: calc(var(--mobile-header-height) + 8px);
+    left: max(20px, env(safe-area-inset-left, 0px));
+    width: 150px;
   }
   .story-chapter,
   .is-enhanced .story-chapter {
