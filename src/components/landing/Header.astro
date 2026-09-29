@@ -1,0 +1,102 @@
+---
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const { products } = getLandingContent(locale);
+---
+
+<header class="site-header" id="site-header">
+  <a href="#home" class="brand" aria-label={t("CodePassion home")}
+    ><img src="/brand/codepassion.svg" alt="" width="42" height="42" /><span
+      >CodePassion</span
+    ></a
+  >
+  <nav class="desktop-nav" aria-label={t("Main navigation")}>
+    <a href="#expertise">{t("Expertise")}</a><a href="#work">{t("Our work")}</a>
+    <details class="product-menu">
+      <summary>{t("Products")}<span aria-hidden="true">⌄</span></summary><div
+        class="product-dropdown"
+      >
+        {
+          products.map((product) => (
+            <a href={`#${product.id}`}>
+              <>
+                <span>{product.name}</span>
+                <span aria-hidden="true">↗</span>
+              </>
+            </a>
+          ))
+        }
+      </div>
+    </details>
+    <a href="#academy">{t("Academy")}</a>
+  </nav>
+  <nav class="language-switch" aria-label={t("Language")}>
+    <a
+      href="/"
+      lang="th"
+      hreflang="th"
+      aria-current={locale === "th" ? "page" : undefined}>TH</a
+    ><span aria-hidden="true">/</span><a
+      href="/en/"
+      lang="en"
+      hreflang="en"
+      aria-current={locale === "en" ? "page" : undefined}>EN</a
+    >
+  </nav>
+  <a href="#contact" class="header-cta"
+    >{t("Let’s talk")}<span aria-hidden="true">↗</span></a
+  >
+  <button
+    class="menu-toggle"
+    aria-expanded="false"
+    aria-haspopup="dialog"
+    aria-controls="mobile-menu"
+    aria-label={t("Open navigation")}><span></span><span></span></button
+  >
+  <dialog
+    class="mobile-dialog"
+    id="mobile-menu"
+    aria-labelledby="mobile-menu-title"
+  >
+    <div class="mobile-menu-heading">
+      <h2 id="mobile-menu-title">{t("Main navigation")}</h2><button
+        class="menu-close"
+        type="button"
+        aria-label={t("Close navigation")}
+        autofocus><span aria-hidden="true">×</span></button
+      >
+    </div>
+    <nav class="mobile-nav" id="mobile-nav" aria-label={t("Mobile navigation")}>
+      <a href="#expertise">{t("Expertise")}</a><a href="#work"
+        >{t("Our work")}</a
+      >
+      {products.map((product) => <a href={`#${product.id}`}>{product.name}</a>)}
+      <a href="#technologies">{t("Core technologies")}</a>
+      <a href="#academy">{t("Academy & courses")}</a><a href="#trust"
+        >{t("Customers & partners")}</a
+      ><a href="#contact">{t("Let’s talk ↗")}</a>
+    </nav>
+    <div class="mobile-menu-options">
+      <nav class="language-switch" aria-label={t("Language")}>
+        <a
+          href="/"
+          lang="th"
+          hreflang="th"
+          aria-current={locale === "th" ? "page" : undefined}>TH</a
+        ><span aria-hidden="true">/</span><a
+          href="/en/"
+          lang="en"
+          hreflang="en"
+          aria-current={locale === "en" ? "page" : undefined}>EN</a
+        >
+      </nav><button class="menu-motion-toggle" type="button" aria-pressed="true"
+        >{t("Motion on")}</button
+      >
+    </div>
+  </dialog>
+</header>

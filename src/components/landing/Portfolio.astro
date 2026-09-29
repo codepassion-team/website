@@ -1,0 +1,166 @@
+---
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+import { unavailablePreviews } from "~/data/landing";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const { projects } = getLandingContent(locale);
+---
+
+<section
+  class="section portfolio-section"
+  id="work"
+  aria-labelledby="work-heading"
+>
+  <div class="section-top">
+    <p class="eyebrow">{t("02 / SELECTED WORK")}</p><span class="micro"
+      >{t("CLIENT WEBSITES")}</span
+    >
+  </div>
+  <div class="section-heading">
+    <h2 id="work-heading">
+      {t("Websites we’ve built")}<br /><span>{t("for our clients.")}</span>
+    </h2><p>
+      {t("Browse our website projects.")}<br />{
+        t("Select a project to view it here")
+      }<br class="desktop-break" />{t("or open the website in a new tab.")}
+    </p>
+  </div>
+  <div class="portfolio-layout">
+    <div
+      class="project-list"
+      role="group"
+      aria-label={t("Choose a portfolio website")}
+    >
+      {
+        projects.map((project, i) => (
+          <button
+            class:list={["project-button", { "is-selected": i === 0 }]}
+            type="button"
+            data-project-url={`https://${project.domain}`}
+            data-project-name={project.name}
+            data-project-domain={project.domain}
+            data-preview-unavailable={String(
+              unavailablePreviews.includes(project.domain),
+            )}
+            aria-pressed={i === 0}
+            aria-controls="portfolio-frame"
+          >
+            <>
+              <span class="project-number">{project.number}</span>
+              <span>
+                <>
+                  <strong>{project.name}</strong>
+                  <small>{project.category}</small>
+                </>
+              </span>
+              <span class="project-arrow" aria-hidden="true">
+                ↗
+              </span>
+            </>
+          </button>
+        ))
+      }
+    </div>
+    <div class="project-preview">
+      <div class="browser-chrome">
+        <span class="browser-dots" aria-hidden="true"
+          ><i></i><i></i><i></i></span
+        ><span id="preview-domain">{projects[0].domain}</span><button
+          type="button"
+          id="close-preview"
+          aria-label={t("Close live preview")}
+          hidden>×</button
+        ><a
+          id="preview-external-top"
+          href={`https://${projects[0].domain}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={`${projects[0].name} ↗`}>↗</a
+        >
+      </div>
+      <div class="iframe-stage" id="iframe-stage">
+        <div class="preview-cover" id="preview-cover">
+          <img
+            id="preview-brand"
+            src="/media/logos/ktn.webp"
+            alt=""
+            width="120"
+            height="70"
+          /><span class="preview-mark" aria-hidden="true">↗</span><p
+            class="eyebrow"
+          >
+            {t("VIEW THE WEBSITE")}
+          </p><h3 id="preview-name">{projects[0].name}</h3><a
+            id="preview-open"
+            href={`https://${projects[0].domain}`}
+            class="button button-light"
+            target="_blank"
+            rel="noopener noreferrer"
+            hidden>{t("Open website")}<span aria-hidden="true">↗</span></a
+          ><span
+            class="preview-spinner"
+            id="preview-spinner"
+            aria-hidden="true"
+            hidden></span><button
+            class="button button-quiet"
+            type="button"
+            id="show-preview"
+            hidden>{t("Show preview")}</button
+          ><button class="button button-light" type="button" id="load-preview"
+            >{t("Load live preview")}<span aria-hidden="true">↗</span></button
+          ><p class="preview-privacy" id="preview-note">
+            {t("Loads the selected website here.")}
+          </p>
+        </div>
+        <iframe
+          id="portfolio-frame"
+          title={`${projects[0].name} — ${t("Our work")}`}
+          loading="lazy"
+          referrerpolicy="no-referrer"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+          hidden></iframe>
+      </div>
+      <div class="preview-bottom">
+        <p id="preview-status" role="status">
+          {
+            t(
+              "The preview opens as you scroll here. Some sites may restrict embedding.",
+            )
+          }
+        </p><a
+          id="preview-external"
+          href={`https://${projects[0].domain}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          >{t("Visit website")}<span aria-hidden="true">↗</span></a
+        >
+      </div>
+    </div>
+  </div>
+  <noscript
+    ><style>
+      #load-preview,
+      .project-list {
+        display: none !important;
+      }
+    </style><ul class="project-direct-links">
+      {
+        projects.map((project) => (
+          <li>
+            <a
+              href={`https://${project.domain}`}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {project.name} ↗
+            </a>
+          </li>
+        ))
+      }
+    </ul></noscript
+  >
+</section>
