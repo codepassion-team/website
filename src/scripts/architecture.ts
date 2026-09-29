@@ -455,8 +455,16 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
       const bottom = Math.max(
         ...geometry.map((layer) => -layer.height + 105 * layer.scale + 18),
       );
-      const frameTop = height < 650 ? 90 : 110;
-      const frameBottom = height < 650 ? height - 318 : height * 0.56;
+      const headerHeight =
+        document.getElementById("site-header")?.getBoundingClientRect().height ??
+        68;
+      const frameTop = height < 650 ? Math.max(86, headerHeight + 16) : 110;
+      const frameBottom =
+        height < 520
+          ? height * 0.38
+          : height < 650
+            ? height - 318
+            : height * 0.56;
       size = Math.min(size, (frameBottom - frameTop) / (bottom - top));
       centerY = (frameTop + frameBottom) / 2 - ((top + bottom) * size) / 2;
     }

@@ -326,16 +326,20 @@ function setupLogoMarquee(signal: AbortSignal) {
   let paused = false;
   let dragging = false;
   let lastX = 0;
-  let previousTime = 0;
-  let resumeAt = 0;
-  let animation = 0;
+  let resumeTimer = 0;
   function update() {
     toggle.hidden = preference.matches;
     toggle.setAttribute("aria-pressed", String(paused));
     toggle.textContent = paused ? t("Play logos") : t("Pause logos");
+    marquee.classList.toggle("is-paused", paused);
   }
   function noteInteraction() {
-    resumeAt = performance.now() + 900;
+    if (paused) return;
+    marquee.classList.add("is-paused");
+    window.clearTimeout(resumeTimer);
+    resumeTimer = window.setTimeout(() => {
+      marquee.classList.remove("is-paused");
+    }, 900);
   }
   toggle.addEventListener(
     "click",
@@ -381,31 +385,9 @@ function setupLogoMarquee(signal: AbortSignal) {
   });
   marquee.addEventListener("keydown", noteInteraction, { signal });
   preference.addEventListener("change", update, { signal });
-  function tick(time: number) {
-    const elapsed = Math.min(time - previousTime, 50);
-    previousTime = time;
-    const bounds = marquee.getBoundingClientRect();
-    const visible = bounds.bottom > 0 && bounds.top < window.innerHeight;
-    if (
-      visible &&
-      !paused &&
-      !dragging &&
-      time >= resumeAt &&
-      !preference.matches &&
-      !document.hidden
-    ) {
-      const loopWidth =
-        marquee.querySelector<HTMLElement>(".logo-set")?.offsetWidth ?? 0;
-      marquee.scrollLeft += elapsed * 0.05;
-      if (loopWidth && marquee.scrollLeft >= loopWidth)
-        marquee.scrollLeft -= loopWidth;
-    }
-    animation = requestAnimationFrame(tick);
-  }
-  animation = requestAnimationFrame(tick);
   update();
   return () => {
-    cancelAnimationFrame(animation);
+    window.clearTimeout(resumeTimer);
   };
 }
 
