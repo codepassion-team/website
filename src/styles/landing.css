@@ -2726,11 +2726,6 @@ html.menu-open,
 .logo-set .customer-logo:hover {
   transform: none;
 }
-.logo-marquee:hover .logo-track,
-.logo-marquee:focus-within .logo-track,
-.logo-marquee.is-paused .logo-track {
-  animation-play-state: paused;
-}
 .logo-controls {
   max-width: 1600px;
   margin: 15px auto 0;
@@ -3278,6 +3273,7 @@ html.menu-open,
 }
 .logo-marquee {
   overflow-x: auto;
+  scroll-behavior: auto;
   scrollbar-width: none;
   cursor: grab;
   overscroll-behavior-x: contain;

@@ -324,7 +324,6 @@ function setupLogoMarquee(signal: AbortSignal) {
   if (!marquee || !toggle) return () => {};
   const preference = matchMedia("(prefers-reduced-motion: reduce)");
   let paused = false;
-  let visible = false;
   let dragging = false;
   let lastX = 0;
   let previousTime = 0;
@@ -334,10 +333,6 @@ function setupLogoMarquee(signal: AbortSignal) {
     toggle.hidden = preference.matches;
     toggle.setAttribute("aria-pressed", String(paused));
     toggle.textContent = paused ? t("Play logos") : t("Pause logos");
-  }
-  function pause() {
-    paused = true;
-    update();
   }
   function noteInteraction() {
     resumeAt = performance.now() + 900;
@@ -386,13 +381,11 @@ function setupLogoMarquee(signal: AbortSignal) {
   });
   marquee.addEventListener("keydown", noteInteraction, { signal });
   preference.addEventListener("change", update, { signal });
-  const observer = new IntersectionObserver((entries) => {
-    visible = entries.some((entry) => entry.isIntersecting);
-  });
-  observer.observe(marquee);
   function tick(time: number) {
     const elapsed = Math.min(time - previousTime, 50);
     previousTime = time;
+    const bounds = marquee.getBoundingClientRect();
+    const visible = bounds.bottom > 0 && bounds.top < window.innerHeight;
     if (
       visible &&
       !paused &&
@@ -412,7 +405,6 @@ function setupLogoMarquee(signal: AbortSignal) {
   animation = requestAnimationFrame(tick);
   update();
   return () => {
-    observer.disconnect();
     cancelAnimationFrame(animation);
   };
 }

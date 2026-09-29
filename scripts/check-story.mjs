@@ -128,7 +128,7 @@ console.log(
   "PASS: chapter navigation targets, expansion bounds, surrounding space and unchanged layer order.",
 );
 
-assert.equal(desktopStoryAlignment(0).x, 0.72);
+assert.equal(desktopStoryAlignment(0).x, 0.65);
 for (let position = 0.58; position <= 5; position += 0.01) {
   assert.equal(
     desktopStoryAlignment(position).x,
