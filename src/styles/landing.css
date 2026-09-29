@@ -345,7 +345,7 @@ ul {
   position: absolute;
   z-index: 5;
   top: 110px;
-  right: var(--page-gutter);
+  left: var(--page-gutter);
   display: grid;
   place-items: center;
   width: 46px;
@@ -2609,7 +2609,7 @@ html.menu-open,
   }
   .story-brand {
     top: calc(var(--mobile-header-height) + 8px);
-    right: max(20px, env(safe-area-inset-right, 0px));
+    left: max(20px, env(safe-area-inset-left, 0px));
     width: 42px;
     height: 42px;
   }
