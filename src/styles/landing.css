@@ -3417,3 +3417,20 @@ html.menu-open,
     padding: 10px 16px;
   }
 }
+
+@media (max-width: 540px) {
+  .contact-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .contact-actions > .button {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+  }
+  .contact-actions > .phone-link {
+    align-self: flex-start;
+  }
+}
