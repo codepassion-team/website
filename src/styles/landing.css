@@ -2866,6 +2866,11 @@ html.menu-open,
   flex-shrink: 0;
   color: #06c755;
 }
+.button > .line-button-label {
+  flex-shrink: 0;
+  font-size: inherit;
+  white-space: nowrap;
+}
 .footer-top a:has(.line-icon) {
   display: flex;
   align-items: center;
