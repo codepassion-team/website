@@ -517,7 +517,9 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 name="fa-brands:line"
                 class="line-icon"
                 aria-hidden="true"
-              />{t("Let’s talk on LINE")}<span aria-hidden="true">↗</span></a
+              /><span class="line-button-label"
+                >{t("Let’s talk on LINE")}</span
+              ><span aria-hidden="true">↗</span></a
             ><a href={company.phoneUrl} class="phone-link">{company.phone}</a>
           </div>
         </div>

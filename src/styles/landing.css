@@ -192,6 +192,9 @@ ul {
 }
 /* Navigation */
 .site-header {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
   height: 92px;
   position: absolute;
   top: 0;
@@ -1364,12 +1367,6 @@ ul {
   font-size: 12px;
   color: #92929c;
 }
-@media (min-width: 1601px) {
-  .site-header {
-    padding-left: max(var(--page-gutter), calc((100vw - 1440px) / 2));
-    padding-right: max(var(--page-gutter), calc((100vw - 1440px) / 2));
-  }
-}
 @media (max-width: 1100px) {
   .desktop-nav {
     gap: 22px;
@@ -1801,8 +1798,8 @@ ul {
     font-size: 18px;
   }
   .static-sculpture {
-    left: 71%;
-    top: 76%;
+    left: 50%;
+    top: 72%;
     width: 115px;
     height: 115px;
   }
@@ -2624,6 +2621,14 @@ html.menu-open,
     width: calc(100% - 2 * var(--page-gutter));
     transform: none;
   }
+  .story-chapter--stack,
+  .is-enhanced .story-chapter--stack {
+    top: calc(var(--mobile-header-height) + 28px);
+    bottom: auto;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+  }
   .story-chapter .eyebrow,
   .hero-description,
   .sculpture-caption,
@@ -2860,6 +2865,11 @@ html.menu-open,
   height: 25px;
   flex-shrink: 0;
   color: #06c755;
+}
+.button > .line-button-label {
+  flex-shrink: 0;
+  font-size: inherit;
+  white-space: nowrap;
 }
 .footer-top a:has(.line-icon) {
   display: flex;
@@ -3171,11 +3181,12 @@ html.menu-open,
 }
 @media (max-width: 800px) {
   .story-chapter--stack h1 {
-    line-height: 1.16;
+    font-size: clamp(40px, 10.5vw, 56px);
+    line-height: 1.12;
     margin-bottom: 20px;
   }
   :lang(th) .story-chapter--stack h1 {
-    line-height: 1.24;
+    line-height: 1.2;
   }
 }
 
@@ -3409,5 +3420,22 @@ html.menu-open,
   .story-chapter .button {
     min-height: 44px;
     padding: 10px 16px;
+  }
+}
+
+@media (max-width: 540px) {
+  .contact-actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .contact-actions > .button {
+    box-sizing: border-box;
+    width: 100%;
+    justify-content: center;
+  }
+  .contact-actions > .phone-link {
+    align-self: flex-start;
   }
 }
