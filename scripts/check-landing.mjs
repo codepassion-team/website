@@ -87,10 +87,42 @@ for (const [locale, path] of [
   );
   assert(html.includes("ACADEMY</small>"));
   assert(html.includes(locale === "th" ? "ซอฟต์แวร์" : "Software"));
+  assert(
+    html.includes('href="/line-oa/"'),
+    `${locale}: link to LINE OA service`,
+  );
   console.log(
     `PASS ${locale}: ${localAssets.length} local references, ${ids.length} unique ids, anchors, locale, complete content and deferred Kantana preview.`,
   );
 }
+const lineOaHtml = await readFile("dist/line-oa/index.html", "utf8");
+assert(
+  lineOaHtml.includes(
+    '<link rel="canonical" href="https://codepassion.co/line-oa/"',
+  ),
+);
+assert(
+  lineOaHtml.includes(
+    '<meta property="og:url" content="https://codepassion.co/line-oa/"',
+  ),
+);
+assert.match(
+  lineOaHtml,
+  /<title>[^<]*Custom LINE OA[^<]*Code Passion<\/title>/,
+);
+const sitemap = await readFile("dist/sitemap.xml", "utf8");
+for (const url of [
+  "https://codepassion.co/",
+  "https://codepassion.co/en/",
+  "https://codepassion.co/line-oa/",
+])
+  assert(sitemap.includes(`<loc>${url}</loc>`), `Missing sitemap entry ${url}`);
+assert(sitemap.startsWith('<?xml version="1.0" encoding="UTF-8"?>'));
+const robots = await readFile("dist/robots.txt", "utf8");
+assert(robots.includes("Sitemap: https://codepassion.co/sitemap.xml"));
+console.log(
+  "PASS: LINE OA has a canonical URL, homepage links, and sitemap discovery.",
+);
 assert.equal(projects.length, 6);
 assert.equal(projects[2].domain, "trphospital.com");
 assert.equal(projects[2].category, "Hospital");
