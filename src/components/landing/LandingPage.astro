@@ -247,7 +247,14 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
         <div class="product-grid">
           {
             products.map((product, index) => (
-              <article class={`product-card product-${index}`} id={product.id}>
+              <article
+                class:list={[
+                  "product-card",
+                  `product-${index}`,
+                  { "product-featured": product.featured },
+                ]}
+                id={product.id}
+              >
                 <div class="product-art" aria-hidden="true">
                   <>
                     <div class="product-monogram">{product.glyph}</div>
@@ -517,8 +524,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 name="fa-brands:line"
                 class="line-icon"
                 aria-hidden="true"
-              /><span class="line-button-label"
-                >{t("Let’s talk on LINE")}</span
+              /><span class="line-button-label">{t("Let’s talk on LINE")}</span
               ><span aria-hidden="true">↗</span></a
             ><a href={company.phoneUrl} class="phone-link">{company.phone}</a>
           </div>

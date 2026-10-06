@@ -66,6 +66,13 @@ for (const [locale, path] of [
       "Product should be in desktop/mobile menus and footer",
     );
   }
+  const portalCard = html.match(
+    /<article\b[^>]*id="line-oa-customer-portal"[\s\S]*?<\/article>/,
+  )?.[0];
+  assert(portalCard, `${locale}: LINE OA Customer Portal product card`);
+  assert(portalCard.includes("product-featured"));
+  assert(portalCard.includes('href="/line-oa/"'));
+  assert(!portalCard.includes('target="_blank"'));
   for (const course of courses)
     assert(
       html.includes(`https://academy.codepassion.co/courses/${course.slug}/`),
@@ -128,7 +135,7 @@ assert.equal(projects[2].domain, "trphospital.com");
 assert.equal(projects[2].category, "Hospital");
 assert.equal(projects[5].domain, "www.franchiseexpothailand.com");
 assert.equal(courses.length, 4);
-assert.equal(products.length, 4);
+assert.equal(products.length, 5);
 assert.equal(certificates.length, 2);
 assert.equal(customerLogos.length, 35);
 const hash = async (path) =>
@@ -145,5 +152,5 @@ for (const logo of customerLogos)
     await stat(`public/media/logos/${logo.file.replace(".png", ".webp")}`)
   ).size;
 console.log(
-  `PASS: 6 projects, 4 courses, 4 products, 2 badges, 35 logos, unchanged logo master. Logo payload: ${logoBytes} bytes.`,
+  `PASS: 6 projects, 4 courses, 5 products, 2 badges, 35 logos, unchanged logo master. Logo payload: ${logoBytes} bytes.`,
 );
