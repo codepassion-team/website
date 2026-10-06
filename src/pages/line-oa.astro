@@ -3,10 +3,15 @@ import "~/styles/index.css";
 import "@fontsource-variable/noto-sans-thai";
 import "@fontsource/mitr";
 import "@fontsource/jetbrains-mono";
+import "@fontsource/prompt/700.css";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import Analytics from "~/components/landing/Analytics.astro";
 import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
+import supportAgentPhoto from "~/assets/line-oa/support-agent.jpg";
+import calibrationLabPhoto from "~/assets/line-oa/calibration-lab.jpg";
+import repairTechnicianPhoto from "~/assets/line-oa/repair-technician.jpg";
+import customerPhonePhoto from "~/assets/line-oa/customer-phone.jpg";
 import { channels as socialChannels, company } from "~/data/landing";
 
 const PRODUCT_NAME = "Customer Portal บน LINE OA";
@@ -92,16 +97,22 @@ const comparison = [
 const useCases = [
   {
     icon: "mdi:scale-balance",
+    photo: calibrationLabPhoto,
+    alt: "เจ้าหน้าที่ห้องปฏิบัติการกำลังบันทึกผลการทดสอบ",
     title: "งานสอบเทียบและตรวจวิเคราะห์",
     body: "ส่งคำขอบริการ ติดตามสถานะ เปิดรายงานหรือใบรับรอง และรับแจ้งเตือนรอบถัดไป",
   },
   {
     icon: "mdi:wrench-outline",
+    photo: repairTechnicianPhoto,
+    alt: "ช่างเทคนิคกำลังซ่อมอุปกรณ์ไฟฟ้า",
     title: "งานซ่อมและบริการหลังการขาย",
     body: "แจ้งปัญหาพร้อมข้อมูลอุปกรณ์ ติดตามงานซ่อม ดูประวัติ และตรวจสอบข้อมูลการรับประกัน",
   },
   {
     icon: "mdi:calendar-sync-outline",
+    photo: customerPhonePhoto,
+    alt: "ลูกค้ายิ้มขณะเช็กข้อมูลบริการบนมือถือ",
     title: "งานบริการแบบต่อเนื่อง",
     body: "ดูรอบนัดหมาย ส่งคำขอเพิ่มเติม และติดตามเอกสารที่เกี่ยวข้องกับบริการ",
   },
@@ -262,21 +273,12 @@ const lineLink = {
         aria-label="เมนูหลัก"
       >
         <a
-          class="flex items-center gap-2 justify-self-start"
-          href="/"
-          aria-label="CodePassion - หน้าแรก"
+          class="loa-logo justify-self-start"
+          href="#main"
+          aria-label="LINE OA สำหรับธุรกิจบริการ - กลับด้านบน"
         >
-          <Image
-            class="h-9 w-9 object-contain sm:h-10 sm:w-10"
-            src={codePassionLogo}
-            alt=""
-            width={40}
-            height={40}
-          />
-          <strong
-            class="whitespace-nowrap font-bold text-default text-base sm:text-lg"
-            >CodePassion</strong
-          >
+          <span class="loa-logo-badge">LINE OA</span>
+          <span class="loa-logo-text">สำหรับธุรกิจบริการ</span>
         </a>
         <ul class="loa-nav-links hidden items-center lg:flex">
           {
@@ -521,13 +523,23 @@ const lineLink = {
           <h2 class="font-bold text-default text-3xl md:text-4xl">
             งานบริการของคุณติดอยู่กับคำถามเหล่านี้หรือเปล่า?
           </h2>
-          <ul class="mt-10 grid gap-4 sm:grid-cols-2">
-            {
-              problemQuotes.map((quote) => (
-                <li class="loa-bubble">“{quote}”</li>
-              ))
-            }
-          </ul>
+          <div class="mt-10 grid items-center gap-8 md:grid-cols-[0.9fr_1.1fr]">
+            <Image
+              src={supportAgentPhoto}
+              alt="เจ้าหน้าที่บริการลูกค้าสวมชุดหูฟังตอบคำถามลูกค้า"
+              widths={[480, 720, 960]}
+              sizes="(min-width: 768px) 45vw, 100vw"
+              class="aspect-[4/3] w-full rounded-3xl object-cover"
+              loading="lazy"
+            />
+            <ul class="grid gap-3">
+              {
+                problemQuotes.map((quote) => (
+                  <li class="loa-bubble">“{quote}”</li>
+                ))
+              }
+            </ul>
+          </div>
           <p
             class="mt-10 max-w-3xl font-light leading-relaxed text-offset text-lg"
           >
@@ -535,7 +547,9 @@ const lineLink = {
             เจ้าหน้าที่ต้องสลับระหว่างตอบแชต ค้นข้อมูล และประสานงาน
             ขณะที่ลูกค้ายังต้องรอคำตอบ
           </p>
-          <p class="mt-4 max-w-3xl font-medium text-default text-lg">
+          <p
+            class="mt-4 max-w-3xl text-balance font-medium text-default text-lg"
+          >
             แม้บริษัทมีระบบจัดการงานอยู่แล้ว
             ลูกค้าอาจยังเข้าถึงข้อมูลเหล่านั้นด้วยตัวเองไม่ได้
           </p>
@@ -622,16 +636,26 @@ const lineLink = {
           <ul class="mt-12 grid gap-6 md:grid-cols-3">
             {
               useCases.map((item) => (
-                <li class="glass-card p-6">
-                  <div class="brand-gradient flex size-12 items-center justify-center rounded-lg">
-                    <Icon name={item.icon} class="size-6 text-white" />
+                <li class="glass-card overflow-hidden">
+                  <Image
+                    src={item.photo}
+                    alt={item.alt}
+                    widths={[400, 640, 800]}
+                    sizes="(min-width: 768px) 33vw, 100vw"
+                    class="aspect-[4/3] w-full object-cover"
+                    loading="lazy"
+                  />
+                  <div class="relative p-6 pt-8">
+                    <div class="brand-gradient absolute -top-6 left-6 flex size-12 items-center justify-center rounded-2xl ring-4 ring-[var(--color-background-card)]">
+                      <Icon name={item.icon} class="size-6 text-white" />
+                    </div>
+                    <h3 class="font-medium text-default text-lg">
+                      {item.title}
+                    </h3>
+                    <p class="mt-2 font-light leading-relaxed text-offset">
+                      {item.body}
+                    </p>
                   </div>
-                  <h3 class="mt-5 font-medium text-default text-lg">
-                    {item.title}
-                  </h3>
-                  <p class="mt-2 font-light leading-relaxed text-offset">
-                    {item.body}
-                  </p>
                 </li>
               ))
             }
@@ -1059,10 +1083,16 @@ const lineLink = {
       <div
         class="loa-gutter flex flex-col gap-3 border-t border-border py-6 font-light text-offset text-xs sm:flex-row sm:items-center sm:justify-between"
       >
-        <p>
-          © {new Date().getFullYear()}
-          {company.legalName} · บริษัท โค้ด แพชชั่น จำกัด
-        </p>
+        <div class="grid gap-1">
+          <p>
+            © {new Date().getFullYear()}
+            {company.legalName} · บริษัท โค้ด แพชชั่น จำกัด
+          </p>
+          <p class="opacity-80">
+            รูปภาพจาก Unsplash: BaljkanN4, ThisisEngineering, Emmanuel Ikwuegbu,
+            Vitaly Gariev
+          </p>
+        </div>
         <div class="flex items-center gap-5">
           {
             PRIVACY_POLICY_URL && (
@@ -1156,6 +1186,50 @@ const lineLink = {
         color: #fff;
         font-size: 0.8rem;
         font-weight: 700;
+      }
+
+      .loa-logo {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: "Prompt", var(--font-sans, sans-serif);
+        font-weight: 700;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .loa-logo-badge {
+        border-radius: 999px;
+        background: var(--loa-green);
+        padding: 0.4rem 0.7rem 0.35rem;
+        color: #fff;
+        font-size: 0.95rem;
+        letter-spacing: 0.01em;
+      }
+      .loa-logo-text {
+        color: var(--color-text);
+        font-size: 1.05rem;
+      }
+      @media (min-width: 1024px) {
+        .loa-logo-badge {
+          font-size: 1.1rem;
+        }
+        .loa-logo-text {
+          font-size: 1.25rem;
+        }
+      }
+      @media (max-width: 380px) {
+        .loa-logo-badge {
+          font-size: 0.82rem;
+        }
+        .loa-logo-text {
+          font-size: 0.9rem;
+        }
+      }
+      /* Headings use LINE CI green (large text) */
+      .loa-body .gradient-text {
+        background: none;
+        -webkit-text-fill-color: var(--loa-green);
+        color: var(--loa-green);
       }
 
       /* Thai-safe heading leading — restores upper marks that tight line-height clips */

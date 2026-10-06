@@ -141,6 +141,23 @@ for (const social of ["youtube", "facebook", "tiktok"])
   assert(footer.includes(social), `Footer social ${social}`);
 assert(footer.includes("Code Passion Co., Ltd."));
 
+// Navbar wordmark (Prompt bold) replaces the CodePassion logo
+const navLogo = html.match(/<a\b[^>]*class="loa-logo[^"]*"[\s\S]*?<\/a>/)[0];
+assert(navLogo.includes("LINE OA") && navLogo.includes("สำหรับธุรกิจบริการ"));
+const header = html.match(/<header\b[\s\S]*?<\/header>/)[0];
+assert(
+  !header.includes("CodePassion_Icon"),
+  "Navbar should not show CodePassion logo",
+);
+
+// Stock photos: optimized, described, credited
+const photos = [
+  ...html.matchAll(/<img\b[^>]*src="\/_astro\/[^"]+\.webp"[^>]*>/g),
+].map((match) => match[0]);
+assert(photos.length >= 4, `Expected 4 photos, got ${photos.length}`);
+for (const photo of photos) assert.match(photo, /alt="[^"]+"/);
+assert(footer.includes("Unsplash"), "Photo credit in footer");
+
 // Mock screen is labelled as an example
 assert(text.includes("ตัวอย่างหน้าจอ ปรับตามขอบเขตโครงการ"));
 
