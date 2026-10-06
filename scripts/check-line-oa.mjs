@@ -13,7 +13,8 @@ for (const match of html.matchAll(/href="#([^"]+)"/g))
   assert(ids.includes(match[1]), `Missing anchor ${match[1]}`);
 assert(html.includes('lang="th"'));
 assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
-assert(text.includes("ให้ลูกค้าเช็กงานเองผ่าน LINE"));
+const h1 = html.match(/<h1\b[\s\S]*?<\/h1>/)[0].replace(/<[^>]+>/g, "");
+assert(h1.includes("ให้ลูกค้าเช็กงานเองผ่าน LINE"));
 
 // Every primary CTA uses the same label, targets the one form, and is tagged
 const ctas = [
@@ -36,6 +37,24 @@ for (const name of ["name", "company", "channel", "contact", "topic"])
 assert(text.includes("ขอนัดดู Demo"));
 assert.match(html, /<[^>]+id="demo-success"[^>]*\bhidden\b/);
 assert(text.includes("ได้รับคำขอแล้วครับ"));
+
+// Mobile menu is a labelled disclosure that starts closed
+assert.match(
+  html,
+  /<button\b[^>]*id="loa-menu-toggle"[^>]*aria-expanded="false"[^>]*aria-controls="loa-mobile-menu"/,
+);
+assert.match(html, /<div\b[^>]*id="loa-mobile-menu"[^>]*\bhidden\b/);
+for (const link of ["#use-cases", "#offer", "#faq"])
+  assert.match(
+    html.match(/id="loa-mobile-menu"[\s\S]*?<\/div>/)[0],
+    new RegExp(`href="${link}"`),
+  );
+
+// Sticky mobile CTA starts hidden until the hero CTA scrolls away
+assert.match(
+  html,
+  /<a\b[^>]*class="loa-mobile-cta is-hidden"[^>]*aria-hidden="true"/,
+);
 
 // FAQ is native disclosure (keyboard accessible)
 assert.equal([...html.matchAll(/<details\b/g)].length, 6);

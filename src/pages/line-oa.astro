@@ -301,14 +301,51 @@ const fieldClass =
             class="brand-gradient hidden rounded-lg px-4 py-2 font-medium text-white transition-all text-sm hover:scale-[1.03] md:inline-flex"
             >{DEMO_CTA}</a
           >
+          <button
+            id="loa-menu-toggle"
+            type="button"
+            class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors lg:hidden"
+            aria-label="เปิดเมนู"
+            aria-expanded="false"
+            aria-controls="loa-mobile-menu"
+          >
+            <Icon id="loa-menu-open" name="mdi:menu" class="size-6" />
+            <Icon id="loa-menu-close" name="mdi:close" class="hidden size-6" />
+          </button>
         </div>
       </nav>
+      <div id="loa-mobile-menu" class="loa-menu lg:hidden" hidden>
+        <ul class="mx-auto grid max-w-7xl px-4 pb-6 pt-2 sm:px-6">
+          {
+            navLinks.map((link) => (
+              <li>
+                <a
+                  class="flex items-center justify-between border-b border-border py-4 text-default text-lg"
+                  href={link.href}
+                >
+                  {link.label}
+                  <Icon name="mdi:arrow-right" class="size-5 text-offset" />
+                </a>
+              </li>
+            ))
+          }
+          <li class="pt-6">
+            <a
+              href="#demo-form"
+              data-demo-cta="menu"
+              class:list={[ctaClass, "w-full"]}>{DEMO_CTA}</a
+            >
+          </li>
+        </ul>
+      </div>
     </header>
 
     <a
       href="#demo-form"
       data-demo-cta="mobile"
-      class="loa-mobile-cta"
+      class="loa-mobile-cta is-hidden"
+      aria-hidden="true"
+      tabindex="-1"
       id="loa-mobile-cta">{DEMO_CTA}</a
     >
 
@@ -335,9 +372,13 @@ const fieldClass =
             <h1
               class="mt-4 font-bold text-default text-4xl md:text-5xl lg:text-[3.4rem]"
             >
-              ให้ลูกค้าเช็กงานเองผ่าน LINE
-              <span class="gradient-text block"
-                >คืนเวลาให้เจ้าหน้าที่ดูแลงานที่ต้องใช้คน</span
+              ให้ลูกค้าเช็กงานเอง<span class="whitespace-nowrap">ผ่าน LINE</span
+              >
+              <span class="gradient-text mt-1 block text-[0.74em]"
+                ><span class="whitespace-nowrap">คืนเวลาให้เจ้าหน้าที่</span
+                ><wbr /><span class="whitespace-nowrap"
+                  >ดูแลงานที่ต้องใช้คน</span
+                ></span
               >
             </h1>
             <p
@@ -383,12 +424,21 @@ const fieldClass =
           </div>
 
           {/* Mock phone — demo data */}
-          <figure class="mx-auto w-full max-w-[340px]">
-            <div
-              class="loa-phone"
-              aria-label="ตัวอย่างหน้าจอ Customer Portal ใน LINE"
-              role="img"
-            >
+          <figure class="loa-hero-visual relative mx-auto w-full max-w-[360px]">
+            <div class="loa-notify" aria-hidden="true">
+              <span class="loa-notify-icon">
+                <Icon name="fa-brands:line" class="size-4 text-white" />
+              </span>
+              <span class="min-w-0">
+                <span class="block text-[11px] text-offset"
+                  >LINE · เมื่อสักครู่</span
+                >
+                <span class="block truncate text-default text-xs"
+                  >ใบรับรอง CAL-2409-102 พร้อมให้ดาวน์โหลด</span
+                >
+              </span>
+            </div>
+            <div class="loa-phone">
               <div class="loa-phone-bar">
                 <Icon name="fa-brands:line" class="size-4 text-[#06c755]" />
                 <span>งานของฉัน</span>
@@ -1042,11 +1092,89 @@ const fieldClass =
         background-color: rgba(255, 255, 255, 0.9);
       }
 
+      .loa-menu {
+        border-bottom: 1px solid var(--color-border);
+        backdrop-filter: blur(16px);
+      }
+      [data-theme="dark"] .loa-menu {
+        background-color: rgba(10, 10, 10, 0.94);
+      }
+      [data-theme="light"] .loa-menu {
+        background-color: rgba(255, 255, 255, 0.96);
+      }
+      #loa-navbar.menu-open {
+        border-bottom-color: transparent;
+      }
+      [data-theme="dark"] #loa-navbar.menu-open {
+        background-color: rgba(10, 10, 10, 0.94);
+      }
+      [data-theme="light"] #loa-navbar.menu-open {
+        background-color: rgba(255, 255, 255, 0.96);
+      }
+
+      .loa-hero-visual::before {
+        content: "";
+        position: absolute;
+        inset: 10% -12% -6%;
+        z-index: -1;
+        border-radius: 50%;
+        background: radial-gradient(
+          closest-side,
+          rgba(240, 77, 45, 0.22),
+          transparent
+        );
+        filter: blur(30px);
+      }
+      .loa-notify {
+        position: absolute;
+        z-index: 2;
+        top: -1.75rem;
+        left: -1.5rem;
+        right: 1.5rem;
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+        padding: 0.7rem 0.85rem;
+        border: 1px solid var(--color-border);
+        border-radius: 1rem;
+        background: var(--color-background-card);
+        box-shadow: 0 18px 40px rgba(0, 0, 0, 0.18);
+        animation: loa-notify-in 0.7s 0.9s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+      }
+      .loa-notify-icon {
+        display: inline-flex;
+        flex-shrink: 0;
+        align-items: center;
+        justify-content: center;
+        width: 2rem;
+        height: 2rem;
+        border-radius: 0.6rem;
+        background: #06c755;
+      }
+      @keyframes loa-notify-in {
+        from {
+          opacity: 0;
+          transform: translateY(-12px) scale(0.96);
+        }
+      }
+      @media (max-width: 480px) {
+        .loa-notify {
+          left: -0.5rem;
+          right: 0.5rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .loa-notify {
+          animation: none;
+        }
+      }
+
       .loa-phone {
         overflow: hidden;
         border: 1px solid var(--color-border);
         border-radius: 2rem;
         background: var(--color-background);
+        padding-top: 2.75rem;
         box-shadow:
           0 30px 80px rgba(0, 0, 0, 0.25),
           0 0 60px rgba(240, 77, 45, 0.08);

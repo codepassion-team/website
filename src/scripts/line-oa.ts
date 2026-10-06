@@ -199,28 +199,72 @@ if (form && contact && success && status) {
   });
 }
 
-// Mobile sticky CTA stays out of the way of the form
+// Mobile menu
+const menu = document.getElementById("loa-mobile-menu");
+const menuToggle = document.getElementById("loa-menu-toggle");
+let menuOpen = false;
+
+function setMenu(open: boolean) {
+  if (!menu || !menuToggle) return;
+  menuOpen = open;
+  menu.hidden = !open;
+  menuToggle.setAttribute("aria-expanded", String(open));
+  menuToggle.setAttribute("aria-label", open ? "ปิดเมนู" : "เปิดเมนู");
+  document.getElementById("loa-menu-open")?.classList.toggle("hidden", open);
+  document.getElementById("loa-menu-close")?.classList.toggle("hidden", !open);
+  nav?.classList.toggle("menu-open", open);
+  syncMobileCta();
+}
+
+menuToggle?.addEventListener("click", () => setMenu(!menuOpen));
+menu?.addEventListener("click", (event) => {
+  if ((event.target as HTMLElement).closest("a")) setMenu(false);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || !menuOpen) return;
+  setMenu(false);
+  menuToggle?.focus();
+});
+window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
+  if (event.matches) setMenu(false);
+});
+
+// Mobile sticky CTA: only once the hero CTA has scrolled away, and never
+// over the form, the closing CTA band, an open menu, or a focused field
+const visibleBlockers = new Set<Element>();
+let typing = false;
+
+function syncMobileCta() {
+  if (!mobileCta) return;
+  const hide = visibleBlockers.size > 0 || typing || menuOpen;
+  mobileCta.classList.toggle("is-hidden", hide);
+  mobileCta.setAttribute("aria-hidden", String(hide));
+  mobileCta.tabIndex = hide ? -1 : 0;
+}
+
 if (mobileCta) {
-  const demo = document.getElementById("demo");
-  let formVisible = false;
-  let typing = false;
-  const sync = () => {
-    const hide = formVisible || typing;
-    mobileCta.classList.toggle("is-hidden", hide);
-    mobileCta.setAttribute("aria-hidden", String(hide));
-    mobileCta.tabIndex = hide ? -1 : 0;
-  };
-  if (demo)
-    new IntersectionObserver(([entry]) => {
-      formVisible = entry.isIntersecting;
-      sync();
-    }).observe(demo);
+  const blockers = new IntersectionObserver((entries) => {
+    for (const entry of entries) {
+      if (entry.isIntersecting) visibleBlockers.add(entry.target);
+      else visibleBlockers.delete(entry.target);
+    }
+    syncMobileCta();
+  });
+  for (const selector of [
+    '[data-demo-cta="hero"]',
+    "#demo",
+    '[data-demo-cta="footer"]',
+  ]) {
+    const el = document.querySelector(selector);
+    if (el) blockers.observe(el);
+  }
   document.addEventListener("focusin", (event) => {
     typing = (event.target as HTMLElement).matches("input, select, textarea");
-    sync();
+    syncMobileCta();
   });
   document.addEventListener("focusout", () => {
     typing = false;
-    sync();
+    syncMobileCta();
   });
+  syncMobileCta();
 }
