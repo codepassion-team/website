@@ -16,27 +16,50 @@ assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
 const h1 = html.match(/<h1\b[\s\S]*?<\/h1>/)[0].replace(/<[^>]+>/g, "");
 assert(h1.includes("ให้ลูกค้าเช็กงานเองผ่าน LINE"));
 
-// Every primary CTA uses the same label, targets the one form, and is tagged
+// Every primary CTA adds the LINE OA as a friend, same label, tagged by position
+const LINE_URL = "https://line.me/ti/p/@codepassion";
 const ctas = [
-  ...html.matchAll(/<a\b[^>]*data-demo-cta="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g),
+  ...html.matchAll(/<a\b[^>]*data-line-cta="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g),
 ];
 const positions = ctas.map((match) => match[1]);
-for (const position of ["nav", "hero", "usecases", "offer", "footer", "mobile"])
-  assert(positions.includes(position), `Missing primary CTA at ${position}`);
-for (const [tag, , inner] of ctas) {
-  assert(tag.includes('href="#demo-form"'), `CTA must target form: ${tag}`);
+for (const position of [
+  "nav",
+  "menu",
+  "hero",
+  "usecases",
+  "offer",
+  "contact",
+  "footer",
+  "mobile",
+])
+  assert(positions.includes(position), `Missing LINE CTA at ${position}`);
+for (const [tag, position, inner] of ctas) {
+  assert(tag.includes(`href="${LINE_URL}"`), `CTA must open LINE: ${tag}`);
+  assert(tag.includes('rel="noopener noreferrer"'));
+  if (position === "footer-contact") continue;
   const label = inner.replace(/<[^>]+>/g, "").trim();
-  assert.equal(label, "นัดดู Demo สำหรับธุรกิจของคุณ", `CTA label drift`);
+  assert.equal(label, "เพิ่มเพื่อน LINE @codepassion", `CTA label drift`);
 }
-assert.equal([...html.matchAll(/<form\b/g)].length, 1);
-assert.match(html, /<form\b[^>]*id="demo-form"/);
 
-// Form fields from the spec
-for (const name of ["name", "company", "channel", "contact", "topic"])
-  assert.match(html, new RegExp(`name="${name}"`), `Missing field ${name}`);
-assert(text.includes("ขอนัดดู Demo"));
-assert.match(html, /<[^>]+id="demo-success"[^>]*\bhidden\b/);
-assert(text.includes("ได้รับคำขอแล้วครับ"));
+// No contact form: conversations start in LINE
+assert(!/<form\b/.test(html), "Contact form should be removed");
+assert(!html.includes("demo-form"));
+assert.match(
+  html,
+  /<img\b[^>]*src="\/qr\/line-codepassion\.svg"[^>]*alt="QR Code เพิ่มเพื่อน LINE @codepassion"/,
+);
+await access("dist/qr/line-codepassion.svg");
+
+// LINE CI: page opens light by default, palette scoped to the page
+assert(html.includes('data-theme="light"'));
+const css = (
+  await Promise.all(
+    [...html.matchAll(/<link rel="stylesheet" href="([^"]+)"/g)].map((match) =>
+      readFile(`dist${match[1]}`, "utf8"),
+    ),
+  )
+).join("\n");
+assert.match(css, /--loa-green:\s*#06c755/);
 
 // Mobile menu is a labelled disclosure that starts closed
 assert.match(
@@ -110,7 +133,7 @@ assert(nav.includes("loa-gutter"));
 
 // Footer: brand, page links, contact, social, legal line
 const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
-for (const link of ["#use-cases", "#offer", "#faq", "#demo-form", "#main", "/"])
+for (const link of ["#use-cases", "#offer", "#faq", "#contact", "#main", "/"])
   assert(footer.includes(`href="${link}"`), `Footer link ${link}`);
 assert(footer.includes('href="tel:+66886384566"'));
 assert(footer.includes('href="https://line.me/ti/p/@codepassion"'));
@@ -122,5 +145,5 @@ assert(footer.includes("Code Passion Co., Ltd."));
 assert(text.includes("ตัวอย่างหน้าจอ ปรับตามขอบเขตโครงการ"));
 
 console.log(
-  `PASS: LINE OA Customer Portal page — ${ctas.length} primary CTAs, 1 form, 6 FAQ, ${ids.length} unique ids.`,
+  `PASS: LINE OA Customer Portal page — ${ctas.length} LINE CTAs, no form, 6 FAQ, ${ids.length} unique ids.`,
 );
