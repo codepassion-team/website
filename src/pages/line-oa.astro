@@ -28,7 +28,7 @@ const DESCRIPTION =
 const OG_IMAGE = "https://codepassion.co/og/line-oa.png";
 const LINE_URL = "https://line.me/ti/p/@codepassion";
 const LINE_HANDLE = "@codepassion";
-const LINE_CTA = `เพิ่มเพื่อน LINE ${LINE_HANDLE}`;
+const LINE_CTA = "คุยกับเรา";
 const LINE_CTA_NOTE = "ทักแชทเพื่อนัดดู Demo 20 นาที ไม่มีค่าใช้จ่าย";
 const PRIVACY_POLICY_URL = import.meta.env.PUBLIC_PRIVACY_POLICY_URL ?? "";
 
@@ -275,10 +275,10 @@ const lineLink = {
         <a
           class="loa-logo justify-self-start"
           href="#main"
-          aria-label="LINE OA สำหรับธุรกิจบริการ - กลับด้านบน"
+          aria-label="LINE OA สำหรับธุรกิจของคุณ - กลับด้านบน"
         >
           <span class="loa-logo-badge">LINE OA</span>
-          <span class="loa-logo-text">สำหรับธุรกิจบริการ</span>
+          <span class="loa-logo-text">สำหรับธุรกิจของคุณ</span>
         </a>
         <ul class="loa-nav-links hidden items-center xl:flex">
           {
@@ -316,13 +316,9 @@ const lineLink = {
             {...lineLink}
             data-line-cta="nav"
             class="loa-btn-line hidden h-11 items-center gap-2 whitespace-nowrap rounded-full px-5 font-bold transition-all text-sm md:inline-flex"
-            ><Icon
-              name="fa-brands:line"
-              class="size-5"
-              aria-hidden="true"
-            />เพิ่มเพื่อน LINE<span class="-ml-1 hidden xl:inline"
-              >{` ${LINE_HANDLE}`}</span
-            ></a
+            ><Icon name="fa-brands:line" class="size-5" aria-hidden="true" />{
+              LINE_CTA
+            }</a
           >
           <button
             id="loa-menu-toggle"
@@ -1016,16 +1012,15 @@ const lineLink = {
           <h2 class="loa-footer-heading">{PRODUCT_NAME}</h2>
           <ul class="mt-4 grid gap-3">
             {
-              [
-                ...navLinks,
-                { href: "#contact", label: "เพิ่มเพื่อน LINE" },
-              ].map((link) => (
-                <li>
-                  <a class="loa-footer-link" href={link.href}>
-                    {link.label}
-                  </a>
-                </li>
-              ))
+              [...navLinks, { href: "#contact", label: LINE_CTA }].map(
+                (link) => (
+                  <li>
+                    <a class="loa-footer-link" href={link.href}>
+                      {link.label}
+                    </a>
+                  </li>
+                ),
+              )
             }
           </ul>
         </nav>

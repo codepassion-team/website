@@ -41,7 +41,7 @@ for (const [tag, position, inner] of ctas) {
     .replace(/<[^>]+>/g, "")
     .replace(/&nbsp;|\s+/g, " ")
     .trim();
-  assert.equal(label, "เพิ่มเพื่อน LINE @codepassion", `CTA label drift`);
+  assert.equal(label, "คุยกับเรา", `CTA label drift`);
 }
 
 // No contact form: conversations start in LINE
@@ -146,7 +146,7 @@ assert(footer.includes("Code Passion Co., Ltd."));
 
 // Navbar wordmark (Prompt bold) replaces the CodePassion logo
 const navLogo = html.match(/<a\b[^>]*class="loa-logo[^"]*"[\s\S]*?<\/a>/)[0];
-assert(navLogo.includes("LINE OA") && navLogo.includes("สำหรับธุรกิจบริการ"));
+assert(navLogo.includes("LINE OA") && navLogo.includes("สำหรับธุรกิจของคุณ"));
 const header = html.match(/<header\b[\s\S]*?<\/header>/)[0];
 assert(
   !header.includes("CodePassion_Icon"),
