@@ -269,7 +269,7 @@ const lineLink = {
       class="fixed top-0 z-50 w-full border-b border-transparent transition-all duration-300"
     >
       <nav
-        class="loa-gutter flex items-center justify-between gap-4 py-3 sm:py-4 lg:grid lg:grid-cols-[1fr_auto_1fr]"
+        class="loa-gutter flex items-center justify-between gap-4 py-3 sm:py-4 xl:grid xl:grid-cols-[1fr_auto_1fr]"
         aria-label="เมนูหลัก"
       >
         <a
@@ -280,7 +280,7 @@ const lineLink = {
           <span class="loa-logo-badge">LINE OA</span>
           <span class="loa-logo-text">สำหรับธุรกิจบริการ</span>
         </a>
-        <ul class="loa-nav-links hidden items-center lg:flex">
+        <ul class="loa-nav-links hidden items-center xl:flex">
           {
             navLinks.map((link) => (
               <li>
@@ -315,15 +315,19 @@ const lineLink = {
           <a
             {...lineLink}
             data-line-cta="nav"
-            class="loa-btn-line hidden items-center gap-2 rounded-full px-5 py-2 font-bold transition-all text-sm md:inline-flex"
-            ><Icon name="fa-brands:line" class="size-5" aria-hidden="true" />{
-              LINE_CTA
-            }</a
+            class="loa-btn-line hidden h-11 items-center gap-2 whitespace-nowrap rounded-full px-5 font-bold transition-all text-sm md:inline-flex"
+            ><Icon
+              name="fa-brands:line"
+              class="size-5"
+              aria-hidden="true"
+            />เพิ่มเพื่อน LINE<span class="hidden xl:inline"
+              >{` ${LINE_HANDLE}`}</span
+            ></a
           >
           <button
             id="loa-menu-toggle"
             type="button"
-            class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors lg:hidden"
+            class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors xl:hidden"
             aria-label="เปิดเมนู"
             aria-expanded="false"
             aria-controls="loa-mobile-menu"
@@ -333,7 +337,7 @@ const lineLink = {
           </button>
         </div>
       </nav>
-      <div id="loa-mobile-menu" class="loa-menu lg:hidden" hidden>
+      <div id="loa-mobile-menu" class="loa-menu xl:hidden" hidden>
         <ul class="loa-gutter grid pb-6 pt-2">
           {
             navLinks.map((link) => (
@@ -1209,12 +1213,20 @@ const lineLink = {
         color: var(--color-text);
         font-size: 1.05rem;
       }
-      @media (min-width: 1024px) {
+      /* From md up the logo matches the 44px (h-11) nav CTA */
+      @media (min-width: 768px) {
+        .loa-logo {
+          gap: 0.6rem;
+        }
         .loa-logo-badge {
-          font-size: 1.1rem;
+          display: inline-flex;
+          height: 2.75rem;
+          align-items: center;
+          padding: 0.1rem 0.95rem 0;
+          font-size: 1.25rem;
         }
         .loa-logo-text {
-          font-size: 1.25rem;
+          font-size: 1.45rem;
         }
       }
       @media (max-width: 380px) {

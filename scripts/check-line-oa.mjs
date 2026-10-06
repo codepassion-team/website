@@ -37,7 +37,10 @@ for (const [tag, position, inner] of ctas) {
   assert(tag.includes(`href="${LINE_URL}"`), `CTA must open LINE: ${tag}`);
   assert(tag.includes('rel="noopener noreferrer"'));
   if (position === "footer-contact") continue;
-  const label = inner.replace(/<[^>]+>/g, "").trim();
+  const label = inner
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;|\s+/g, " ")
+    .trim();
   assert.equal(label, "เพิ่มเพื่อน LINE @codepassion", `CTA label drift`);
 }
 

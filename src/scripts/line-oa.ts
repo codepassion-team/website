@@ -95,7 +95,7 @@ document.addEventListener("keydown", (event) => {
   setMenu(false);
   menuToggle?.focus();
 });
-window.matchMedia("(min-width: 1024px)").addEventListener("change", (event) => {
+window.matchMedia("(min-width: 1280px)").addEventListener("change", (event) => {
   if (event.matches) setMenu(false);
 });
 
