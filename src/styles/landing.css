@@ -3439,3 +3439,43 @@ html.menu-open,
     align-self: flex-start;
   }
 }
+
+/* Featured product: spans the grid, art beside copy on wider screens */
+.product-featured {
+  grid-column: 1 / -1;
+}
+@media (min-width: 801px) {
+  .product-featured {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+  .product-featured .product-art {
+    height: auto;
+    min-height: 280px;
+  }
+  .product-featured .product-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 40px;
+  }
+  .product-featured .product-info > p:not(.eyebrow) {
+    min-height: 0;
+  }
+}
+.product-4 .product-art {
+  background: radial-gradient(ellipse at 30% 100%, #06c75530, transparent 65%),
+    radial-gradient(ellipse at 85% 10%, #f04d2d22, transparent 60%), #0f1712;
+}
+.product-4 .product-monogram {
+  color: #b6e6c6;
+  text-shadow: 6px 6px 0 #1f4a30;
+}
+.product-4 .product-art > .micro {
+  color: #86b497;
+}
+.product-4 .product-orbit,
+.product-4 .product-orbit::before,
+.product-4 .product-orbit::after {
+  border-color: #5fbf8433;
+}

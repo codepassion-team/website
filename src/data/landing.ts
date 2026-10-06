@@ -172,6 +172,17 @@ export const products = [
     action: "Explore WorkEngine",
     glyph: "WE",
   },
+  {
+    id: "line-oa-customer-portal",
+    name: "LINE OA Customer Portal",
+    category: "Customer portal on LINE OA",
+    description:
+      "Let customers check job status, request documents, and get service updates through the LINE they already use.",
+    href: "/line-oa/",
+    action: "See the LINE OA Customer Portal",
+    glyph: "CP",
+    featured: true,
+  },
 ];
 
 export const projects = [

@@ -92,7 +92,7 @@ const thai: Record<string, string> = {
   "Our work": "ผลงานของเรา",
   "Customers & partners": "ลูกค้าและพาร์ตเนอร์",
   "Certificates & standards": "ใบรับรองและมาตรฐาน",
-  "Custom LINE OA development": "พัฒนาระบบ Custom LINE OA",
+  "LINE OA Customer Portal": "Customer Portal บน LINE OA",
   "Our products": "ผลิตภัณฑ์ของเรา",
   "Stay connected": "ติดตามเรา",
   "Software development & systems integration.":

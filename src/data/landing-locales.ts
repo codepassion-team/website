@@ -122,6 +122,13 @@ const thai = {
           "เฟรมเวิร์กสถาปัตยกรรมซอฟต์แวร์สำหรับออกแบบและพัฒนาแอปพลิเคชันธุรกิจ",
         action: "รู้จัก WorkEngine",
       },
+      {
+        name: "Customer Portal บน LINE OA",
+        category: "ระบบบริการลูกค้าผ่าน LINE",
+        description:
+          "ให้ลูกค้าเช็กสถานะงาน ขอเอกสาร และรับแจ้งเตือนบริการได้เองผ่าน LINE ที่ใช้อยู่",
+        action: "ดู Customer Portal บน LINE OA",
+      },
     ][index],
   })),
   projects: base.projects.map((project) => ({
