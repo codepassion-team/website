@@ -146,7 +146,7 @@ assert(footer.includes("Code Passion Co., Ltd."));
 
 // Navbar wordmark (Prompt bold) replaces the CodePassion logo
 const navLogo = html.match(/<a\b[^>]*class="loa-logo[^"]*"[\s\S]*?<\/a>/)[0];
-assert(navLogo.includes("LINE OA") && navLogo.includes("สำหรับธุรกิจของคุณ"));
+assert(navLogo.includes("LINE OA") && navLogo.includes("สำหรับธุรกิจคุณ"));
 const header = html.match(/<header\b[\s\S]*?<\/header>/)[0];
 assert(
   !header.includes("CodePassion_Icon"),
