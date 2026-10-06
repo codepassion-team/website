@@ -8,8 +8,12 @@ import { Icon } from "astro-icon/components";
 import Analytics from "~/components/landing/Analytics.astro";
 import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
 
-const TITLE =
-  "Custom LINE OA Customer Portal สำหรับธุรกิจบริการ | Code Passion";
+const PRODUCT_NAME = "Customer Portal บน LINE OA";
+const PAGE_URL = "https://codepassion.co/line-oa/";
+const TITLE = `${PRODUCT_NAME} ให้ลูกค้าเช็กงานเอง | CodePassion`;
+const DESCRIPTION =
+  "ให้ลูกค้าติดตามสถานะงาน ขอเอกสาร และรับแจ้งเตือนเองผ่าน LINE OA ออกแบบให้เข้ากับงานบริการและระบบเดิมของคุณ นัดดู Demo 20 นาที ไม่มีค่าใช้จ่าย";
+const OG_IMAGE = "https://codepassion.co/og/line-oa.png";
 const DEMO_CTA = "นัดดู Demo สำหรับธุรกิจของคุณ";
 const LINE_URL = "https://line.me/ti/p/@codepassion";
 const LINE_HANDLE = "@codepassion";
@@ -196,27 +200,45 @@ const fieldClass =
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta charset="utf-8" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <link rel="canonical" href="https://codepassion.co/line-oa/" />
+    <link rel="canonical" href={PAGE_URL} />
 
     <title>{TITLE}</title>
-    <meta
-      name="description"
-      content="ให้ลูกค้าเช็กสถานะงาน ขอเอกสาร และรับแจ้งเตือนเองผ่าน LINE OA บริษัท โค้ด แพชชั่น จำกัด ออกแบบและพัฒนา Customer Portal ให้เข้ากับกระบวนการบริการและระบบเดิมของคุณ"
-    />
+    <meta name="description" content={DESCRIPTION} />
     <meta name="robots" content="index, follow" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="th_TH" />
-    <meta property="og:url" content="https://codepassion.co/line-oa/" />
-    <meta
-      property="og:title"
-      content="ให้ลูกค้าเช็กงานเองผ่าน LINE — Customer Portal บน LINE OA"
-    />
+    <meta property="og:url" content={PAGE_URL} />
+    <meta property="og:title" content={TITLE} />
     <meta
       property="og:description"
       content="คืนเวลาให้เจ้าหน้าที่ดูแลงานที่ต้องใช้คน นัดดู Demo และคุยปัญหา 20 นาที ไม่มีค่าใช้จ่าย"
     />
-    <meta property="og:image" content={new URL("cover.jpg", Astro.site)} />
+    <meta property="og:image" content={OG_IMAGE} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={TITLE} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={OG_IMAGE} />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Service",
+        name: PRODUCT_NAME,
+        serviceType: "Customer portal development on LINE Official Account",
+        description: DESCRIPTION,
+        url: PAGE_URL,
+        areaServed: { "@type": "Country", name: "Thailand" },
+        availableLanguage: "Thai",
+        provider: {
+          "@type": "Organization",
+          "@id": "https://codepassion.co/#organization",
+          name: "CodePassion",
+          legalName: "Code Passion Co., Ltd.",
+          url: "https://codepassion.co",
+        },
+      })}
+    />
 
     <script is:inline>
       const themeSaved = localStorage.getItem("theme");
@@ -249,7 +271,7 @@ const fieldClass =
         <a
           class="flex items-center gap-2"
           href="/"
-          aria-label="Code Passion - หน้าแรก"
+          aria-label="CodePassion - หน้าแรก"
         >
           <Image
             class="h-9 w-9 object-contain sm:h-10 sm:w-10"

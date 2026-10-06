@@ -9,9 +9,6 @@ export default defineConfig({
     ssr: {
       external: ['svgo'],
     },
-    build: {
-      cssMinify: false,
-    },
   },
   integrations: [tailwind(), react(), icon()],
 });

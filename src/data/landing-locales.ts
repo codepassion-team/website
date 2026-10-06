@@ -123,10 +123,11 @@ const thai = {
         action: "รู้จัก WorkEngine",
       },
       {
-        category: "Customer Portal บน LINE OA",
+        name: "Customer Portal บน LINE OA",
+        category: "ระบบบริการลูกค้าผ่าน LINE",
         description:
           "ให้ลูกค้าเช็กสถานะงาน ขอเอกสาร และรับแจ้งเตือนบริการได้เองผ่าน LINE ที่ใช้อยู่",
-        action: "ดูตัวอย่างและนัดดู Demo",
+        action: "ดู Customer Portal บน LINE OA",
       },
     ][index],
   })),

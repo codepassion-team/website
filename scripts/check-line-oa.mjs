@@ -1,5 +1,5 @@
 import assert from "node:assert/strict";
-import { readFile } from "node:fs/promises";
+import { access, readFile } from "node:fs/promises";
 
 const html = await readFile("dist/line-oa/index.html", "utf8");
 const text = html
@@ -78,6 +78,30 @@ for (const forbidden of [
   "LINE Partner",
 ])
   assert(!text.includes(forbidden), `Forbidden copy on page: ${forbidden}`);
+
+// SEO: Thai-first title, one product name, page-specific share image, Service schema
+assert.match(
+  html,
+  /<title>Customer Portal บน LINE OA[^<]*\| CodePassion<\/title>/,
+);
+const description = html.match(/<meta name="description" content="([^"]+)"/)[1];
+assert(
+  description.length <= 160,
+  `Meta description ${description.length} chars`,
+);
+assert(html.includes('content="https://codepassion.co/og/line-oa.png"'));
+await access("dist/og/line-oa.png");
+const jsonLd = [
+  ...html.matchAll(
+    /<script type="application\/ld\+json">([\s\S]*?)<\/script>/g,
+  ),
+].map((match) => JSON.parse(match[1]));
+const service = jsonLd.find((data) => data["@type"] === "Service");
+assert(service, "Service JSON-LD");
+assert.equal(service.name, "Customer Portal บน LINE OA");
+assert.equal(service.url, "https://codepassion.co/line-oa/");
+assert.equal(service.provider["@id"], "https://codepassion.co/#organization");
+assert(!/Code Passion(?! Co\.)/.test(text), "Use the CodePassion brand name");
 
 // Mock screen is labelled as an example
 assert(text.includes("ตัวอย่างหน้าจอ ปรับตามขอบเขตโครงการ"));

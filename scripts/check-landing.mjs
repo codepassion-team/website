@@ -73,6 +73,14 @@ for (const [locale, path] of [
   assert(portalCard.includes("product-featured"));
   assert(portalCard.includes('href="/line-oa/"'));
   assert(!portalCard.includes('target="_blank"'));
+  assert(
+    portalCard.includes(
+      locale === "th"
+        ? "Customer Portal บน LINE OA"
+        : "LINE OA Customer Portal",
+    ),
+  );
+  assert(html.includes('"@id":"https://codepassion.co/#organization"'));
   for (const course of courses)
     assert(
       html.includes(`https://academy.codepassion.co/courses/${course.slug}/`),
@@ -115,7 +123,7 @@ assert(
 );
 assert.match(
   lineOaHtml,
-  /<title>[^<]*Custom LINE OA[^<]*Code Passion<\/title>/,
+  /<title>Customer Portal บน LINE OA[^<]*CodePassion<\/title>/,
 );
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
 for (const url of [

@@ -179,7 +179,7 @@ export const products = [
     description:
       "Let customers check job status, request documents, and get service updates through the LINE they already use.",
     href: "/line-oa/",
-    action: "See how it works",
+    action: "See the LINE OA Customer Portal",
     glyph: "CP",
     featured: true,
   },
