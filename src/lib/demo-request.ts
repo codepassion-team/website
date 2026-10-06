@@ -42,7 +42,7 @@ function normalizeContact(channel: ContactChannel, raw: string): string | null {
     const digits = raw.replace(/[\s-]/g, "");
     if (!/^\+?\d+$/.test(digits)) return null;
     const local = digits.replace(/^\+66/, "0");
-    return /^0\d{8,9}$/.test(local) ? digits : null;
+    return /^0\d{8,9}$/.test(local) ? local : null;
   }
   if (channel === "email") return EMAIL.test(raw) ? raw.toLowerCase() : null;
   return LINE_ID.test(raw) ? raw : null;
@@ -72,9 +72,15 @@ export function validateDemoRequest(input: DemoRequestInput): DemoValidation {
     if (!normalizedContact) errors.contact = CONTACT_ERRORS[channel];
   }
 
-  if (topic && !isTopic(topic)) errors.topic = "กรุณาเลือกเรื่องจากรายการ";
+  const validTopic = topic === "" || isTopic(topic);
+  if (!validTopic) errors.topic = "กรุณาเลือกเรื่องจากรายการ";
 
-  if (Object.keys(errors).length || !isChannel(channel) || !normalizedContact)
+  if (
+    Object.keys(errors).length ||
+    !isChannel(channel) ||
+    !normalizedContact ||
+    !validTopic
+  )
     return { ok: false, errors };
 
   return {
@@ -84,7 +90,7 @@ export function validateDemoRequest(input: DemoRequestInput): DemoValidation {
       company,
       channel,
       contact: normalizedContact,
-      topic: topic as DemoTopic | "",
+      topic,
     },
   };
 }

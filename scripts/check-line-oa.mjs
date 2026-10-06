@@ -16,7 +16,9 @@ assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
 assert(text.includes("ให้ลูกค้าเช็กงานเองผ่าน LINE"));
 
 // Every primary CTA uses the same label, targets the one form, and is tagged
-const ctas = [...html.matchAll(/<a\b[^>]*data-demo-cta="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g)];
+const ctas = [
+  ...html.matchAll(/<a\b[^>]*data-demo-cta="([^"]+)"[^>]*>([\s\S]*?)<\/a>/g),
+];
 const positions = ctas.map((match) => match[1]);
 for (const position of ["nav", "hero", "usecases", "offer", "footer", "mobile"])
   assert(positions.includes(position), `Missing primary CTA at ${position}`);

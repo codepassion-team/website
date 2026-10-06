@@ -8,6 +8,8 @@ import { Icon } from "astro-icon/components";
 import Analytics from "~/components/landing/Analytics.astro";
 import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
 
+const TITLE =
+  "Custom LINE OA Customer Portal สำหรับธุรกิจบริการ | Code Passion";
 const DEMO_CTA = "นัดดู Demo สำหรับธุรกิจของคุณ";
 const LINE_URL = "https://line.me/ti/p/@codepassion";
 const LINE_HANDLE = "@codepassion";
@@ -26,9 +28,25 @@ const heroPoints = [
 ];
 
 const mockJobs = [
-  { id: "CAL-2410-018", title: "สอบเทียบเครื่องชั่ง 3 รายการ", status: "กำลังดำเนินการ", tone: "progress" },
-  { id: "CAL-2409-102", title: "สอบเทียบเทอร์โมมิเตอร์", status: "ใบรับรองพร้อม", tone: "done", doc: true },
-  { id: "SRV-2409-077", title: "ซ่อมบำรุงตู้ควบคุมอุณหภูมิ", status: "รอรับเครื่อง", tone: "waiting" },
+  {
+    id: "CAL-2410-018",
+    title: "สอบเทียบเครื่องชั่ง 3 รายการ",
+    status: "กำลังดำเนินการ",
+    tone: "progress",
+  },
+  {
+    id: "CAL-2409-102",
+    title: "สอบเทียบเทอร์โมมิเตอร์",
+    status: "ใบรับรองพร้อม",
+    tone: "done",
+    doc: true,
+  },
+  {
+    id: "SRV-2409-077",
+    title: "ซ่อมบำรุงตู้ควบคุมอุณหภูมิ",
+    status: "รอรับเครื่อง",
+    tone: "waiting",
+  },
 ];
 
 const problemQuotes = [
@@ -47,10 +65,16 @@ const journey = [
 ];
 
 const comparison = [
-  ["ลูกค้าทักถาม เจ้าหน้าที่ค้นสถานะแล้วตอบ", "ลูกค้าดูสถานะจากข้อมูลที่ระบบเปิดให้เข้าถึง"],
+  [
+    "ลูกค้าทักถาม เจ้าหน้าที่ค้นสถานะแล้วตอบ",
+    "ลูกค้าดูสถานะจากข้อมูลที่ระบบเปิดให้เข้าถึง",
+  ],
   ["ส่งรายละเอียดกระจัดกระจายในแชต", "ส่งคำขอผ่านแบบฟอร์มที่กำหนดข้อมูลจำเป็น"],
   ["ขอเอกสารเดิมซ้ำ", "เปิดเอกสารของตนเองตามสิทธิ์"],
-  ["เจ้าหน้าที่จำวันติดตามแต่ละราย", "ตั้งเงื่อนไขแจ้งเตือนจากข้อมูลวันที่และสถานะ"],
+  [
+    "เจ้าหน้าที่จำวันติดตามแต่ละราย",
+    "ตั้งเงื่อนไขแจ้งเตือนจากข้อมูลวันที่และสถานะ",
+  ],
 ];
 
 const useCases = [
@@ -74,15 +98,27 @@ const useCases = [
 const integrationPaths = [
   ["หากมี API ที่เหมาะสม", "วางแผนรับส่งข้อมูลตามสิทธิ์และความสามารถของระบบ"],
   ["หากส่งออกข้อมูลได้", "พิจารณาการนำเข้าหรืออัปเดตเป็นรอบ พร้อมระบุข้อจำกัด"],
-  ["หากระบบยังเปิดข้อมูลไม่ได้", "สรุปสิ่งที่ต้องประสานกับผู้ให้บริการเดิมก่อนตัดสินใจ"],
+  [
+    "หากระบบยังเปิดข้อมูลไม่ได้",
+    "สรุปสิ่งที่ต้องประสานกับผู้ให้บริการเดิมก่อนตัดสินใจ",
+  ],
 ];
 
 const offerItems = [
-  ["สรุปขั้นตอนงานและขอบเขตเป็นลายลักษณ์อักษร", "เห็นตรงกันว่าระบบแก้ปัญหาอะไร"],
+  [
+    "สรุปขั้นตอนงานและขอบเขตเป็นลายลักษณ์อักษร",
+    "เห็นตรงกันว่าระบบแก้ปัญหาอะไร",
+  ],
   ["แบบหน้าจอและเส้นทางใช้งานก่อนพัฒนา", "เห็นภาพและให้ความเห็นก่อนลงมือสร้าง"],
   ["Portal สำหรับหนึ่งกระบวนการ", "เริ่มจากงานที่สำคัญและตรวจรับได้"],
-  ["การเชื่อมแหล่งข้อมูลตามขอบเขตที่ตรวจสอบแล้ว", "มีแนวทางเชื่อมต่อและข้อจำกัดที่ชัดเจน"],
-  ["ทดสอบสิทธิ์และสถานการณ์หลักก่อนเปิดใช้", "ตรวจว่าลูกค้าเข้าถึงข้อมูลที่ตนมีสิทธิ์"],
+  [
+    "การเชื่อมแหล่งข้อมูลตามขอบเขตที่ตรวจสอบแล้ว",
+    "มีแนวทางเชื่อมต่อและข้อจำกัดที่ชัดเจน",
+  ],
+  [
+    "ทดสอบสิทธิ์และสถานการณ์หลักก่อนเปิดใช้",
+    "ตรวจว่าลูกค้าเข้าถึงข้อมูลที่ตนมีสิทธิ์",
+  ],
   ["เปิดใช้กับกลุ่มนำร่องและส่งมอบคู่มือ", "ช่วยให้เริ่มใช้งานได้เป็นขั้นตอน"],
 ];
 
@@ -105,7 +141,7 @@ const assurances = [
   "อนุมัติแบบหน้าจอและขั้นตอนงานก่อนเริ่มพัฒนา",
   "กำหนดรายการทดสอบและเกณฑ์ตรวจรับร่วมกัน",
   "งวดสุดท้ายชำระเมื่อผ่านการตรวจรับตามข้อตกลง",
-  "รับแก้ไขข้อบกพร่องที่ทำให้ระบบไม่ตรงขอบเขตที่ตรวจรับ เป็นเวลา 60 วันหลังส่งมอบ โดยไม่คิดค่าแก้ไขเพิ่มเติม",
+  "เสนอรับแก้ไขข้อบกพร่องที่ทำให้ระบบไม่ตรงขอบเขตที่ตรวจรับ เป็นเวลา 60 วันหลังส่งมอบ โดยไม่คิดค่าแก้ไขเพิ่มเติม",
 ];
 
 const faqs = [
@@ -162,7 +198,7 @@ const fieldClass =
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href="https://codepassion.co/line-oa/" />
 
-    <title>Custom LINE OA Customer Portal สำหรับธุรกิจบริการ | Code Passion</title>
+    <title>{TITLE}</title>
     <meta
       name="description"
       content="ให้ลูกค้าเช็กสถานะงาน ขอเอกสาร และรับแจ้งเตือนเองผ่าน LINE OA บริษัท โค้ด แพชชั่น จำกัด ออกแบบและพัฒนา Customer Portal ให้เข้ากับกระบวนการบริการและระบบเดิมของคุณ"
@@ -210,7 +246,11 @@ const fieldClass =
         class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4"
         aria-label="เมนูหลัก"
       >
-        <a class="flex items-center gap-2" href="/" aria-label="Code Passion - หน้าแรก">
+        <a
+          class="flex items-center gap-2"
+          href="/"
+          aria-label="Code Passion - หน้าแรก"
+        >
           <Image
             class="h-9 w-9 object-contain sm:h-10 sm:w-10"
             src={codePassionLogo}
@@ -218,7 +258,8 @@ const fieldClass =
             width={40}
             height={40}
           />
-          <strong class="whitespace-nowrap text-base font-bold text-default sm:text-lg"
+          <strong
+            class="whitespace-nowrap font-bold text-default text-base sm:text-lg"
             >CodePassion</strong
           >
         </a>
@@ -227,7 +268,7 @@ const fieldClass =
             navLinks.map((link) => (
               <li>
                 <a
-                  class="text-sm font-light text-offset transition-colors hover:text-default"
+                  class="font-light text-offset transition-colors text-sm hover:text-default"
                   href={link.href}
                 >
                   {link.label}
@@ -240,24 +281,35 @@ const fieldClass =
           <button
             id="loa-theme-toggle"
             type="button"
-            class="rounded-lg p-2 text-default transition-colors hover:bg-background-offset"
+            class="hover:bg-background-offset rounded-lg p-2 text-default transition-colors"
             aria-label="สลับธีมสว่าง/มืด"
           >
-            <Icon id="loa-icon-light" name="mdi:white-balance-sunny" class="size-5" />
-            <Icon id="loa-icon-dark" name="mdi:weather-night" class="hidden size-5" />
+            <Icon
+              id="loa-icon-light"
+              name="mdi:white-balance-sunny"
+              class="size-5"
+            />
+            <Icon
+              id="loa-icon-dark"
+              name="mdi:weather-night"
+              class="hidden size-5"
+            />
           </button>
           <a
             href="#demo-form"
             data-demo-cta="nav"
-            class="brand-gradient hidden rounded-lg px-4 py-2 text-sm font-medium text-white transition-all hover:scale-[1.03] md:inline-flex"
+            class="brand-gradient hidden rounded-lg px-4 py-2 font-medium text-white transition-all text-sm hover:scale-[1.03] md:inline-flex"
             >{DEMO_CTA}</a
           >
         </div>
       </nav>
     </header>
 
-    <a href="#demo-form" data-demo-cta="mobile" class="loa-mobile-cta" id="loa-mobile-cta"
-      >{DEMO_CTA}</a
+    <a
+      href="#demo-form"
+      data-demo-cta="mobile"
+      class="loa-mobile-cta"
+      id="loa-mobile-cta">{DEMO_CTA}</a
     >
 
     <main id="main">
@@ -277,14 +329,20 @@ const fieldClass =
           class="relative z-10 mx-auto grid max-w-7xl items-center gap-14 lg:grid-cols-[1.15fr_0.85fr]"
         >
           <div>
-            <p class="text-sm font-light tracking-wide text-brand-red">
+            <p class="font-light tracking-wide text-brand-red text-sm">
               Customer Portal บน LINE OA สำหรับธุรกิจบริการ
             </p>
-            <h1 class="mt-4 text-4xl font-bold text-default md:text-5xl lg:text-[3.4rem]">
+            <h1
+              class="mt-4 font-bold text-default text-4xl md:text-5xl lg:text-[3.4rem]"
+            >
               ให้ลูกค้าเช็กงานเองผ่าน LINE
-              <span class="gradient-text block">คืนเวลาให้เจ้าหน้าที่ดูแลงานที่ต้องใช้คน</span>
+              <span class="gradient-text block"
+                >คืนเวลาให้เจ้าหน้าที่ดูแลงานที่ต้องใช้คน</span
+              >
             </h1>
-            <p class="mt-6 max-w-2xl text-lg font-light leading-relaxed text-offset">
+            <p
+              class="mt-6 max-w-2xl font-light leading-relaxed text-offset text-lg"
+            >
               เปลี่ยนคำถามซ้ำ ๆ อย่าง “งานถึงไหนแล้ว?” “ขอเอกสารอีกครั้งได้ไหม?”
               ให้ลูกค้าเข้าดูข้อมูลของตัวเองได้ผ่าน LINE ที่ใช้อยู่
             </p>
@@ -308,14 +366,17 @@ const fieldClass =
             </ul>
             <div class="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4">
               <div>
-                <a href="#demo-form" data-demo-cta="hero" class={ctaClass}>{DEMO_CTA}</a>
-                <p class="mt-3 text-sm font-light text-offset">
-                  คุย 20 นาที ไม่มีค่าใช้จ่าย เริ่มจากขั้นตอนงานที่คุณอยากปรับปรุง
+                <a href="#demo-form" data-demo-cta="hero" class={ctaClass}
+                  >{DEMO_CTA}</a
+                >
+                <p class="mt-3 font-light text-offset text-sm">
+                  คุย 20 นาที ไม่มีค่าใช้จ่าย
+                  เริ่มจากขั้นตอนงานที่คุณอยากปรับปรุง
                 </p>
               </div>
               <a
                 href="#use-cases"
-                class="self-start pt-3 text-sm text-default underline decoration-border underline-offset-4 transition-colors hover:decoration-brand-red"
+                class="self-start pt-3 text-default underline decoration-border underline-offset-4 transition-colors text-sm hover:decoration-brand-red"
                 >ดูตัวอย่างการใช้งาน ↓</a
               >
             </div>
@@ -323,7 +384,11 @@ const fieldClass =
 
           {/* Mock phone — demo data */}
           <figure class="mx-auto w-full max-w-[340px]">
-            <div class="loa-phone" aria-label="ตัวอย่างหน้าจอ Customer Portal ใน LINE" role="img">
+            <div
+              class="loa-phone"
+              aria-label="ตัวอย่างหน้าจอ Customer Portal ใน LINE"
+              role="img"
+            >
               <div class="loa-phone-bar">
                 <Icon name="fa-brands:line" class="size-4 text-[#06c755]" />
                 <span>งานของฉัน</span>
@@ -331,19 +396,26 @@ const fieldClass =
               <ul class="grid gap-3 p-4">
                 {
                   mockJobs.map((job) => (
-                    <li class="rounded-xl border border-border bg-background-card p-3.5">
+                    <li class="bg-background-card rounded-xl border border-border p-3.5">
                       <div class="flex items-center justify-between gap-2">
-                        <span class="font-mono text-[11px] text-offset">{job.id}</span>
-                        <span class={`loa-status loa-status-${job.tone}`}>{job.status}</span>
+                        <span class="font-mono text-[11px] text-offset">
+                          {job.id}
+                        </span>
+                        <span class={`loa-status loa-status-${job.tone}`}>
+                          {job.status}
+                        </span>
                       </div>
-                      <p class="mt-1.5 text-sm text-default">{job.title}</p>
+                      <p class="mt-1.5 text-default text-sm">{job.title}</p>
                       {job.doc ? (
-                        <span class="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-background-offset px-3 py-1.5 text-xs text-default">
-                          <Icon name="mdi:file-document-outline" class="size-4" />
+                        <span class="bg-background-offset mt-3 inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-default text-xs">
+                          <Icon
+                            name="mdi:file-document-outline"
+                            class="size-4"
+                          />
                           ดูใบรับรอง
                         </span>
                       ) : (
-                        <div class="mt-3 h-1.5 overflow-hidden rounded-full bg-background-offset">
+                        <div class="bg-background-offset mt-3 h-1.5 overflow-hidden rounded-full">
                           <div
                             class="brand-gradient h-full rounded-full"
                             style={`width:${job.tone === "progress" ? 60 : 25}%`}
@@ -354,11 +426,13 @@ const fieldClass =
                   ))
                 }
               </ul>
-              <div class="border-t border-border px-4 py-3 text-center text-xs text-offset">
+              <div
+                class="border-t border-border px-4 py-3 text-center text-offset text-xs"
+              >
                 ติดต่อเจ้าหน้าที่
               </div>
             </div>
-            <figcaption class="mt-3 text-center text-xs font-light text-offset">
+            <figcaption class="mt-3 text-center font-light text-offset text-xs">
               ตัวอย่างหน้าจอ ปรับตามขอบเขตโครงการ
             </figcaption>
           </figure>
@@ -368,7 +442,7 @@ const fieldClass =
       {/* 2 — PROBLEM */}
       <section id="problem" class="animate-on-scroll px-6 py-24 md:px-12">
         <div class="mx-auto max-w-5xl">
-          <h2 class="text-3xl font-bold text-default md:text-4xl">
+          <h2 class="font-bold text-default text-3xl md:text-4xl">
             งานบริการของคุณติดอยู่กับคำถามเหล่านี้หรือเปล่า?
           </h2>
           <ul class="mt-10 grid gap-4 sm:grid-cols-2">
@@ -378,12 +452,14 @@ const fieldClass =
               ))
             }
           </ul>
-          <p class="mt-10 max-w-3xl text-lg font-light leading-relaxed text-offset">
+          <p
+            class="mt-10 max-w-3xl font-light leading-relaxed text-offset text-lg"
+          >
             แต่ละคำถามอาจใช้เวลาเพียงไม่กี่นาที แต่เมื่อเกิดขึ้นทุกวัน
             เจ้าหน้าที่ต้องสลับระหว่างตอบแชต ค้นข้อมูล และประสานงาน
             ขณะที่ลูกค้ายังต้องรอคำตอบ
           </p>
-          <p class="mt-4 max-w-3xl text-lg font-medium text-default">
+          <p class="mt-4 max-w-3xl font-medium text-default text-lg">
             แม้บริษัทมีระบบจัดการงานอยู่แล้ว
             ลูกค้าอาจยังเข้าถึงข้อมูลเหล่านั้นด้วยตัวเองไม่ได้
           </p>
@@ -393,24 +469,33 @@ const fieldClass =
       {/* 3 — EDUCATION */}
       <section id="how-it-works" class="animate-on-scroll px-6 py-24 md:px-12">
         <div class="mx-auto max-w-5xl">
-          <h2 class="gradient-text text-3xl font-bold md:text-4xl">
+          <h2 class="gradient-text font-bold text-3xl md:text-4xl">
             Customer Portal บน LINE OA คืออะไร?
           </h2>
-          <p class="mt-6 max-w-3xl text-lg font-light leading-relaxed text-offset">
-            คือพื้นที่บริการส่วนตัวที่ลูกค้าเปิดจากเมนูใน LINE OA
-            เพื่อดูงาน เอกสาร หรือประวัติที่เกี่ยวข้องกับตนเอง
+          <p
+            class="mt-6 max-w-3xl font-light leading-relaxed text-offset text-lg"
+          >
+            คือพื้นที่บริการส่วนตัวที่ลูกค้าเปิดจากเมนูใน LINE OA เพื่อดูงาน
+            เอกสาร หรือประวัติที่เกี่ยวข้องกับตนเอง
             หลังยืนยันตัวตนและเชื่อมบัญชีตามวิธีที่ตกลงไว้
           </p>
 
-          <ol class="mt-10 flex flex-wrap items-center gap-2" aria-label="ตัวอย่างการใช้งาน">
+          <ol
+            class="mt-10 flex flex-wrap items-center gap-2"
+            aria-label="ตัวอย่างการใช้งาน"
+          >
             {
               journey.map((step, i) => (
                 <li class="flex items-center gap-2">
-                  <span class="rounded-full border border-border bg-background-card px-4 py-2 text-sm text-default">
+                  <span class="bg-background-card rounded-full border border-border px-4 py-2 text-default text-sm">
                     {step}
                   </span>
                   {i < journey.length - 1 && (
-                    <Icon name="mdi:arrow-right" class="size-4 text-brand-red" aria-hidden="true" />
+                    <Icon
+                      name="mdi:arrow-right"
+                      class="size-4 text-brand-red"
+                      aria-hidden="true"
+                    />
                   )}
                 </li>
               ))
@@ -426,7 +511,9 @@ const fieldClass =
             <table class="w-full min-w-[520px] text-left text-sm">
               <thead>
                 <tr class="border-b border-border">
-                  <th scope="col" class="p-4 font-medium text-offset">สิ่งที่เกิดขึ้นวันนี้</th>
+                  <th scope="col" class="p-4 font-medium text-offset"
+                    >สิ่งที่เกิดขึ้นวันนี้</th
+                  >
                   <th scope="col" class="p-4 font-medium text-default">
                     เมื่อมีกระบวนการผ่าน Portal
                   </th>
@@ -448,9 +535,12 @@ const fieldClass =
       </section>
 
       {/* 4 — USE CASES */}
-      <section id="use-cases" class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12">
+      <section
+        id="use-cases"
+        class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12"
+      >
         <div class="mx-auto max-w-7xl">
-          <h2 class="text-3xl font-bold text-default md:text-4xl">
+          <h2 class="font-bold text-default text-3xl md:text-4xl">
             เริ่มจากงานที่ลูกค้าต้องติดต่อคุณบ่อยที่สุด
           </h2>
           <ul class="mt-12 grid gap-6 md:grid-cols-3">
@@ -460,45 +550,62 @@ const fieldClass =
                   <div class="brand-gradient flex size-12 items-center justify-center rounded-lg">
                     <Icon name={item.icon} class="size-6 text-white" />
                   </div>
-                  <h3 class="mt-5 text-lg font-medium text-default">{item.title}</h3>
-                  <p class="mt-2 font-light leading-relaxed text-offset">{item.body}</p>
+                  <h3 class="mt-5 font-medium text-default text-lg">
+                    {item.title}
+                  </h3>
+                  <p class="mt-2 font-light leading-relaxed text-offset">
+                    {item.body}
+                  </p>
                 </li>
               ))
             }
           </ul>
           <p class="mt-10 font-light text-offset">
-            เริ่มเลือกหนึ่งกระบวนการที่มีปัญหาชัดเจน แล้วขยายเมื่อเห็นการใช้งานจริง
+            เริ่มเลือกหนึ่งกระบวนการที่มีปัญหาชัดเจน
+            แล้วขยายเมื่อเห็นการใช้งานจริง
           </p>
-          <a href="#demo-form" data-demo-cta="usecases" class:list={[ctaClass, "mt-6"]}
-            >{DEMO_CTA}</a
+          <a
+            href="#demo-form"
+            data-demo-cta="usecases"
+            class:list={[ctaClass, "mt-6"]}>{DEMO_CTA}</a
           >
         </div>
       </section>
 
       {/* 5 — EXISTING SYSTEMS */}
-      <section id="existing-systems" class="animate-on-scroll px-6 py-24 md:px-12">
+      <section
+        id="existing-systems"
+        class="animate-on-scroll px-6 py-24 md:px-12"
+      >
         <div class="mx-auto max-w-5xl">
-          <h2 class="text-3xl font-bold text-default md:text-4xl">
-            มีระบบเดิมอยู่แล้ว? <span class="gradient-text">เริ่มจากดูว่าเชื่อมกันอย่างไร</span>
+          <h2 class="font-bold text-default text-3xl md:text-4xl">
+            มีระบบเดิมอยู่แล้ว? <span class="gradient-text"
+              >เริ่มจากดูว่าเชื่อมกันอย่างไร</span
+            >
           </h2>
-          <p class="mt-6 max-w-3xl text-lg font-light leading-relaxed text-offset">
+          <p
+            class="mt-6 max-w-3xl font-light leading-relaxed text-offset text-lg"
+          >
             เราตรวจสอบข้อมูลที่ต้องใช้ ช่องทางเชื่อมต่อ
             และสิทธิ์เข้าถึงร่วมกับผู้ดูแลระบบของคุณ ก่อนเสนอวิธีพัฒนา
           </p>
           <ul class="mt-10 grid gap-4">
             {
               integrationPaths.map(([when, then]) => (
-                <li class="flex flex-col gap-1 rounded-xl border border-border border-l-2 border-l-brand-red bg-background-card p-5 sm:flex-row sm:gap-4">
-                  <span class="shrink-0 font-medium text-default sm:w-56">{when}</span>
+                <li class="bg-background-card flex flex-col gap-1 rounded-xl border border-l-2 border-border border-l-brand-red p-5 sm:flex-row sm:gap-4">
+                  <span class="shrink-0 font-medium text-default sm:w-56">
+                    {when}
+                  </span>
                   <span class="font-light text-offset">{then}</span>
                 </li>
               ))
             }
           </ul>
-          <p class="mt-8 text-lg font-medium text-default">
-            คุณจะรู้ก่อนเริ่มว่าอะไรเชื่อมได้ ต้องเตรียมอะไร และมีค่าใช้จ่ายส่วนไหนบ้าง
+          <p class="mt-8 font-medium text-default text-lg">
+            คุณจะรู้ก่อนเริ่มว่าอะไรเชื่อมได้ ต้องเตรียมอะไร
+            และมีค่าใช้จ่ายส่วนไหนบ้าง
           </p>
-          <p class="mt-3 text-sm font-light text-offset">
+          <p class="mt-3 font-light text-offset text-sm">
             ขอบเขตการตรวจสอบเบื้องต้นใช้ข้อมูลที่ลูกค้าให้
             การทดสอบเชิงลึกและการทำงานกับผู้ให้บริการภายนอกต้องตกลงในขอบเขตโครงการ
           </p>
@@ -506,23 +613,35 @@ const fieldClass =
       </section>
 
       {/* 6 — OFFER */}
-      <section id="offer" class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12">
+      <section
+        id="offer"
+        class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12"
+      >
         <div class="mx-auto max-w-5xl">
-          <p class="font-mono text-sm text-brand-red">LINE Service Launch</p>
-          <h2 class="mt-2 text-3xl font-bold text-default md:text-4xl">
-            เริ่มหนึ่งกระบวนการ <span class="gradient-text">พร้อมเครื่องมือช่วยให้คนใช้เป็น</span>
+          <p class="font-mono text-brand-red text-sm">LINE Service Launch</p>
+          <h2 class="mt-2 font-bold text-default text-3xl md:text-4xl">
+            เริ่มหนึ่งกระบวนการ <span class="gradient-text"
+              >พร้อมเครื่องมือช่วยให้คนใช้เป็น</span
+            >
           </h2>
-          <p class="mt-6 max-w-3xl text-lg font-light leading-relaxed text-offset">
+          <p
+            class="mt-6 max-w-3xl font-light leading-relaxed text-offset text-lg"
+          >
             เราออกแบบ พัฒนา และช่วยเริ่มใช้งาน Customer Portal
-            สำหรับหนึ่งกระบวนการที่ตกลงร่วมกัน พร้อมวางเกณฑ์ตรวจรับตั้งแต่ก่อนพัฒนา
+            สำหรับหนึ่งกระบวนการที่ตกลงร่วมกัน
+            พร้อมวางเกณฑ์ตรวจรับตั้งแต่ก่อนพัฒนา
           </p>
 
           <div class="glass-card mt-10 overflow-x-auto">
             <table class="w-full min-w-[520px] text-left text-sm">
               <thead>
                 <tr class="border-b border-border">
-                  <th scope="col" class="p-4 font-medium text-default">สิ่งที่รวมในข้อเสนอ</th>
-                  <th scope="col" class="p-4 font-medium text-offset">ช่วยคุณอย่างไร</th>
+                  <th scope="col" class="p-4 font-medium text-default"
+                    >สิ่งที่รวมในข้อเสนอ</th
+                  >
+                  <th scope="col" class="p-4 font-medium text-offset"
+                    >ช่วยคุณอย่างไร</th
+                  >
                 </tr>
               </thead>
               <tbody>
@@ -538,57 +657,66 @@ const fieldClass =
             </table>
           </div>
 
-          <h3 class="mt-16 text-2xl font-bold text-default">
+          <h3 class="mt-16 font-bold text-default text-2xl">
             พร้อมชุดช่วยเริ่มใช้งาน รวมในขอบเขตแพ็กเกจ
           </h3>
           <ol class="mt-8 grid gap-6 md:grid-cols-3">
             {
               launchKits.map((kit, i) => (
                 <li class="glass-card p-6">
-                  <span class="font-mono text-sm text-brand-red">
+                  <span class="font-mono text-brand-red text-sm">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h4 class="mt-2 font-medium text-default">{kit.title}</h4>
-                  <p class="mt-2 text-sm font-light leading-relaxed text-offset">{kit.body}</p>
+                  <p class="mt-2 font-light leading-relaxed text-offset text-sm">
+                    {kit.body}
+                  </p>
                 </li>
               ))
             }
           </ol>
 
-          <h3 class="mt-16 text-2xl font-bold text-default">เห็นก่อนสร้าง ตรวจรับก่อนปิดโครงการ</h3>
+          <h3 class="mt-16 font-bold text-default text-2xl">
+            เห็นก่อนสร้าง ตรวจรับก่อนปิดโครงการ
+          </h3>
           <ul class="mt-6 grid gap-3">
             {
               assurances.map((item) => (
                 <li class="flex items-start gap-3 text-default">
-                  <Icon name="mdi:shield-check-outline" class="mt-0.5 size-5 shrink-0 text-brand-red" />
+                  <Icon
+                    name="mdi:shield-check-outline"
+                    class="mt-0.5 size-5 shrink-0 text-brand-red"
+                  />
                   <span class="font-light">{item}</span>
                 </li>
               ))
             }
           </ul>
-          <p class="mt-4 text-sm font-light text-offset">
+          <p class="mt-4 font-light text-offset text-sm">
             การรับประกันข้างต้นไม่รวมฟีเจอร์ใหม่ การเปลี่ยนวิธีทำงาน
             และผลกระทบจากระบบภายนอกที่อยู่นอกขอบเขต
           </p>
 
-          <h3 class="mt-16 text-2xl font-bold text-default">ราคาและระยะเวลา</h3>
+          <h3 class="mt-16 font-bold text-default text-2xl">ราคาและระยะเวลา</h3>
           <p class="mt-4 max-w-3xl font-light leading-relaxed text-offset">
             ประเมินตามกระบวนการ จุดเชื่อมต่อ และการเตรียมข้อมูล โดยระบุค่าพัฒนา
             ค่าใช้จ่ายประจำ และค่าใช้จ่ายภายนอกให้เห็นก่อนเริ่ม
           </p>
 
           <div class="loa-card-accent glass-card mt-10 p-8">
-            <p class="text-xl font-medium text-default">
+            <p class="font-medium text-default text-xl">
               เริ่มต้นด้วยการดู Demo และคุยปัญหา 20 นาที ไม่มีค่าใช้จ่าย
             </p>
             <p class="mt-2 font-light text-offset">
               เพื่อช่วยระบุว่าควรเริ่มจากงานใด
               และต้องขอข้อมูลอะไรเพื่อตรวจสอบการเชื่อมต่อ
             </p>
-            <a href="#demo-form" data-demo-cta="offer" class:list={[ctaClass, "mt-6"]}
-              >{DEMO_CTA}</a
+            <a
+              href="#demo-form"
+              data-demo-cta="offer"
+              class:list={[ctaClass, "mt-6"]}>{DEMO_CTA}</a
             >
-            <p class="mt-3 text-sm font-light text-offset">
+            <p class="mt-3 font-light text-offset text-sm">
               ยังไม่ต้องมีเอกสาร Requirement เล่าขั้นตอนงานปัจจุบันให้เราฟังได้
             </p>
           </div>
@@ -598,26 +726,33 @@ const fieldClass =
       {/* 7 — CREDIBILITY (company only until verified proof is added) */}
       <section id="about" class="animate-on-scroll px-6 py-24 md:px-12">
         <div class="mx-auto max-w-3xl text-center">
-          <h2 class="text-3xl font-bold text-default md:text-4xl">
-            ทำความเข้าใจงานบริการ <span class="gradient-text">ก่อนออกแบบระบบให้ใช้งานจริง</span>
+          <h2 class="font-bold text-default text-3xl md:text-4xl">
+            ทำความเข้าใจงานบริการ <span class="gradient-text"
+              >ก่อนออกแบบระบบให้ใช้งานจริง</span
+            >
           </h2>
-          <p class="mt-6 text-lg font-light leading-relaxed text-offset">
+          <p class="mt-6 font-light leading-relaxed text-offset text-lg">
             บริษัท โค้ด แพชชั่น จำกัด
-            ให้บริการออกแบบและพัฒนาระบบตามกระบวนการขององค์กร ตั้งแต่การวิเคราะห์งาน
-            ออกแบบประสบการณ์ใช้งาน พัฒนา เชื่อมต่อข้อมูล
+            ให้บริการออกแบบและพัฒนาระบบตามกระบวนการขององค์กร
+            ตั้งแต่การวิเคราะห์งาน ออกแบบประสบการณ์ใช้งาน พัฒนา เชื่อมต่อข้อมูล
             ไปจนถึงการส่งมอบและดูแลระบบตามขอบเขตที่ตกลง
           </p>
         </div>
       </section>
 
       {/* 8 — FAQ */}
-      <section id="faq" class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12">
+      <section
+        id="faq"
+        class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12"
+      >
         <div class="mx-auto max-w-3xl">
-          <h2 class="text-3xl font-bold text-default md:text-4xl">คำถามที่พบบ่อย</h2>
+          <h2 class="font-bold text-default text-3xl md:text-4xl">
+            คำถามที่พบบ่อย
+          </h2>
           <div class="mt-10 grid gap-3">
             {
               faqs.map((faq) => (
-                <details class="loa-faq group rounded-xl border border-border bg-background-card">
+                <details class="loa-faq bg-background-card group rounded-xl border border-border">
                   <summary class="flex cursor-pointer list-none items-center justify-between gap-4 rounded-xl p-5 font-medium text-default focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand-red">
                     {faq.q}
                     <Icon
@@ -626,7 +761,9 @@ const fieldClass =
                       aria-hidden="true"
                     />
                   </summary>
-                  <p class="px-5 pb-5 font-light leading-relaxed text-offset">{faq.a}</p>
+                  <p class="px-5 pb-5 font-light leading-relaxed text-offset">
+                    {faq.a}
+                  </p>
                 </details>
               ))
             }
@@ -635,16 +772,22 @@ const fieldClass =
       </section>
 
       {/* 9 — FINAL CTA + FORM */}
-      <section id="demo" class="animate-on-scroll scroll-mt-20 px-6 py-24 md:px-12 lg:py-32">
-        <div class="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.1fr]">
+      <section
+        id="demo"
+        class="animate-on-scroll scroll-mt-20 px-6 py-24 md:px-12 lg:py-32"
+      >
+        <div
+          class="mx-auto grid max-w-6xl items-start gap-12 lg:grid-cols-[1fr_1.1fr]"
+        >
           <div>
-            <h2 class="text-3xl font-bold text-default md:text-4xl">
+            <h2 class="font-bold text-default text-3xl md:text-4xl">
               ถ้าลูกค้าเช็กข้อมูลเองได้หนึ่งเรื่อง
               <span class="gradient-text block">คุณอยากเริ่มจากเรื่องไหน?</span>
             </h2>
-            <p class="mt-6 text-lg font-light leading-relaxed text-offset">
-              เล่างานที่เจ้าหน้าที่ต้องตอบหรือทำซ้ำให้เราฟัง เราจะช่วยดูว่า Custom LINE OA
-              เหมาะกับปัญหานั้นอย่างไร และต้องตรวจสอบอะไรเพิ่มเติมก่อนเริ่ม
+            <p class="mt-6 font-light leading-relaxed text-offset text-lg">
+              เล่างานที่เจ้าหน้าที่ต้องตอบหรือทำซ้ำให้เราฟัง เราจะช่วยดูว่า
+              Custom LINE OA เหมาะกับปัญหานั้นอย่างไร
+              และต้องตรวจสอบอะไรเพิ่มเติมก่อนเริ่ม
             </p>
           </div>
 
@@ -652,8 +795,13 @@ const fieldClass =
             <form id="demo-form" class="scroll-mt-28" novalidate>
               <div class="grid gap-5">
                 <div>
-                  <label for="demo-name" class="text-sm font-medium text-default"
-                    >ชื่อที่ให้เรียก <span class="text-brand-red" aria-hidden="true">*</span></label
+                  <label
+                    for="demo-name"
+                    class="font-medium text-default text-sm"
+                    >ชื่อที่ให้เรียก <span
+                      class="text-brand-red"
+                      aria-hidden="true">*</span
+                    ></label
                   >
                   <input
                     id="demo-name"
@@ -665,12 +813,22 @@ const fieldClass =
                     aria-describedby="demo-name-error"
                     class={fieldClass}
                   />
-                  <p id="demo-name-error" class="loa-error" data-error-for="name"></p>
+                  <p
+                    id="demo-name-error"
+                    class="loa-error"
+                    data-error-for="name"
+                  >
+                  </p>
                 </div>
 
                 <div>
-                  <label for="demo-company" class="text-sm font-medium text-default"
-                    >บริษัท / ประเภทธุรกิจ <span class="text-brand-red" aria-hidden="true">*</span></label
+                  <label
+                    for="demo-company"
+                    class="font-medium text-default text-sm"
+                    >บริษัท / ประเภทธุรกิจ <span
+                      class="text-brand-red"
+                      aria-hidden="true">*</span
+                    ></label
                   >
                   <input
                     id="demo-company"
@@ -682,14 +840,22 @@ const fieldClass =
                     aria-describedby="demo-company-error"
                     class={fieldClass}
                   />
-                  <p id="demo-company-error" class="loa-error" data-error-for="company"></p>
+                  <p
+                    id="demo-company-error"
+                    class="loa-error"
+                    data-error-for="company"
+                  >
+                  </p>
                 </div>
 
                 <fieldset aria-describedby="demo-channel-error">
-                  <legend class="text-sm font-medium text-default">
-                    ช่องทางให้ติดต่อกลับ <span class="text-brand-red" aria-hidden="true">*</span>
+                  <legend class="font-medium text-default text-sm">
+                    ช่องทางให้ติดต่อกลับ <span
+                      class="text-brand-red"
+                      aria-hidden="true">*</span
+                    >
                   </legend>
-                  <p class="mt-1 text-xs font-light text-offset">
+                  <p class="mt-1 font-light text-offset text-xs">
                     เลือกเบอร์โทร อีเมล หรือ LINE แล้วกรอกเพียงช่องทางเดียว
                   </p>
                   <div class="mt-3 flex flex-wrap gap-2">
@@ -708,8 +874,16 @@ const fieldClass =
                       ))
                     }
                   </div>
-                  <p id="demo-channel-error" class="loa-error" data-error-for="channel"></p>
-                  <label for="demo-contact" class="sr-only" id="demo-contact-label"
+                  <p
+                    id="demo-channel-error"
+                    class="loa-error"
+                    data-error-for="channel"
+                  >
+                  </p>
+                  <label
+                    for="demo-contact"
+                    id="demo-contact-label"
+                    class="mt-4 block font-medium text-default text-sm"
                     >ข้อมูลติดต่อ</label
                   >
                   <input
@@ -722,12 +896,21 @@ const fieldClass =
                     aria-describedby="demo-contact-error"
                     class={fieldClass}
                   />
-                  <p id="demo-contact-error" class="loa-error" data-error-for="contact"></p>
+                  <p
+                    id="demo-contact-error"
+                    class="loa-error"
+                    data-error-for="contact"
+                  >
+                  </p>
                 </fieldset>
 
                 <div>
-                  <label for="demo-topic" class="text-sm font-medium text-default"
-                    >เรื่องที่อยากปรับปรุง <span class="font-light text-offset">(ไม่บังคับ)</span></label
+                  <label
+                    for="demo-topic"
+                    class="font-medium text-default text-sm"
+                    >เรื่องที่อยากปรับปรุง <span class="font-light text-offset"
+                      >(ไม่บังคับ)</span
+                    ></label
                   >
                   <select
                     id="demo-topic"
@@ -736,9 +919,18 @@ const fieldClass =
                     class={fieldClass}
                   >
                     <option value="">ยังไม่ระบุ</option>
-                    {topics.map((topic) => <option value={topic.value}>{topic.label}</option>)}
+                    {
+                      topics.map((topic) => (
+                        <option value={topic.value}>{topic.label}</option>
+                      ))
+                    }
                   </select>
-                  <p id="demo-topic-error" class="loa-error" data-error-for="topic"></p>
+                  <p
+                    id="demo-topic-error"
+                    class="loa-error"
+                    data-error-for="topic"
+                  >
+                  </p>
                 </div>
 
                 <button
@@ -748,9 +940,10 @@ const fieldClass =
                   ขอนัดดู Demo
                 </button>
 
-                <p id="demo-status" class="text-sm text-brand-red" role="alert"></p>
+                <p id="demo-status" class="text-brand-red text-sm" role="alert">
+                </p>
 
-                <p class="text-xs font-light leading-relaxed text-offset">
+                <p class="font-light leading-relaxed text-offset text-xs">
                   ใช้ข้อมูลเพื่อติดต่อเรื่องคำขอนี้
                   {
                     PRIVACY_POLICY_URL && (
@@ -769,10 +962,19 @@ const fieldClass =
               </div>
             </form>
 
-            <div id="demo-success" class="py-10 text-center" tabindex="-1" hidden>
-              <Icon name="mdi:check-circle" class="mx-auto size-12 text-brand-red" />
-              <p class="mt-4 text-lg font-medium text-default">
-                ได้รับคำขอแล้วครับ เราจะติดต่อกลับทางช่องทางที่คุณระบุเพื่อนัดเวลาที่สะดวก
+            <div
+              id="demo-success"
+              class="py-10 text-center"
+              tabindex="-1"
+              hidden
+            >
+              <Icon
+                name="mdi:check-circle"
+                class="mx-auto size-12 text-brand-red"
+              />
+              <p class="mt-4 font-medium text-default text-lg">
+                ได้รับคำขอแล้วครับ
+                เราจะติดต่อกลับทางช่องทางที่คุณระบุเพื่อนัดเวลาที่สะดวก
               </p>
             </div>
           </div>
@@ -783,13 +985,13 @@ const fieldClass =
         <div class="brand-gradient absolute inset-0 opacity-90"></div>
         <div class="noise-overlay absolute inset-0"></div>
         <div class="relative z-10 mx-auto max-w-4xl px-6 py-16 text-center">
-          <p class="text-2xl font-bold text-white md:text-3xl">
-            เริ่มจากหนึ่งงานที่ลูกค้าถามบ่อยที่สุด
+          <p class="font-medium text-white text-xl md:text-2xl">
+            คุย 20 นาที ไม่มีค่าใช้จ่าย เริ่มจากขั้นตอนงานที่คุณอยากปรับปรุง
           </p>
           <a
             href="#demo-form"
             data-demo-cta="footer"
-            class="mt-6 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 text-sm font-medium text-[#252525] transition-transform hover:scale-[1.03]"
+            class="mt-6 inline-flex items-center justify-center rounded-xl bg-white px-6 py-3 font-medium text-[#252525] transition-transform text-sm hover:scale-[1.03]"
             >{DEMO_CTA}</a
           >
         </div>
@@ -798,9 +1000,11 @@ const fieldClass =
 
     <footer class="border-t border-border px-6 pb-28 pt-8 md:pb-8">
       <div
-        class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 text-xs font-light text-offset"
+        class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 font-light text-offset text-xs"
       >
-        <a class="transition-colors hover:text-brand-red" href="/">← codepassion.co</a>
+        <a class="transition-colors hover:text-brand-red" href="/"
+          >← codepassion.co</a
+        >
         <span>บริษัท โค้ด แพชชั่น จำกัด</span>
         <a
           class="transition-colors hover:text-brand-red"
@@ -813,11 +1017,19 @@ const fieldClass =
 
     <style is:global>
       /* Thai-safe heading leading — restores upper marks that tight line-height clips */
-      .loa-body h1 { line-height: 1.35; }
-      .loa-body h2 { line-height: 1.4; }
+      .loa-body h1 {
+        line-height: 1.35;
+      }
+      .loa-body h2 {
+        line-height: 1.4;
+      }
       .loa-body h3,
-      .loa-body h4 { line-height: 1.45; }
-      .loa-body .gradient-text { padding-top: 0.15em; }
+      .loa-body h4 {
+        line-height: 1.45;
+      }
+      .loa-body .gradient-text {
+        padding-top: 0.15em;
+      }
 
       #loa-navbar.scrolled {
         backdrop-filter: blur(16px);
@@ -835,7 +1047,9 @@ const fieldClass =
         border: 1px solid var(--color-border);
         border-radius: 2rem;
         background: var(--color-background);
-        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.25), 0 0 60px rgba(240, 77, 45, 0.08);
+        box-shadow:
+          0 30px 80px rgba(0, 0, 0, 0.25),
+          0 0 60px rgba(240, 77, 45, 0.08);
       }
       .loa-phone-bar {
         display: flex;
@@ -859,7 +1073,10 @@ const fieldClass =
       }
       .loa-status-done {
         background: rgba(6, 199, 85, 0.14);
-        color: #04a046;
+        color: #036b2f;
+      }
+      [data-theme="dark"] .loa-status-done {
+        color: #4ade80;
       }
       .loa-status-waiting {
         background: var(--color-background-offset);
@@ -921,12 +1138,18 @@ const fieldClass =
         justify-content: center;
         padding: 0.9rem 1rem;
         border-radius: 14px;
-        background: linear-gradient(135deg, var(--color-brand-red), var(--color-brand-pink-red));
+        background: linear-gradient(
+          135deg,
+          var(--color-brand-red),
+          var(--color-brand-pink-red)
+        );
         color: #fff;
         font-weight: 600;
         font-size: 0.95rem;
         box-shadow: 0 10px 40px rgba(240, 77, 45, 0.4);
-        transition: opacity 0.2s, transform 0.2s;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
       }
       .loa-mobile-cta.is-hidden {
         opacity: 0;

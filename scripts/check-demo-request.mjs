@@ -63,6 +63,12 @@ for (const [channel, contact, ok] of [
   if (!ok) assert(result.errors.contact || result.errors.channel);
 }
 
+// Phone numbers are stored in one local format
+assert.equal(
+  validateDemoRequest({ ...valid, contact: "+66 81 234 5678" }).value.contact,
+  "0812345678",
+);
+
 // Topic is optional but limited to known values
 assert.equal(validateDemoRequest({ ...valid, topic: "documents" }).ok, true);
 assert.equal(validateDemoRequest({ ...valid, topic: "other" }).ok, true);

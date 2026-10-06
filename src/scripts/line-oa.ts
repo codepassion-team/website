@@ -13,7 +13,11 @@ declare global {
 }
 
 const ENDPOINT = import.meta.env.PUBLIC_DEMO_REQUEST_ENDPOINT ?? "";
-const LINE_FALLBACK = "หรือทักเราทาง LINE @codepassion";
+const LINE_URL = "https://line.me/ti/p/@codepassion";
+const FAILURE_MESSAGE = {
+  unconfigured: "ขณะนี้ยังส่งคำขอผ่านแบบฟอร์มไม่ได้",
+  error: "ส่งคำขอไม่สำเร็จ กรุณาลองใหม่อีกครั้ง",
+};
 
 function track(event: string, params: Record<string, string> = {}) {
   window.gtag?.("event", event, params);
@@ -30,14 +34,20 @@ onScroll();
 // Theme toggle
 const updateThemeIcons = () => {
   const isDark = document.documentElement.dataset.theme !== "light";
-  document.getElementById("loa-icon-light")?.classList.toggle("hidden", !isDark);
+  document
+    .getElementById("loa-icon-light")
+    ?.classList.toggle("hidden", !isDark);
   document.getElementById("loa-icon-dark")?.classList.toggle("hidden", isDark);
 };
 document.getElementById("loa-theme-toggle")?.addEventListener("click", () => {
   const next =
     document.documentElement.dataset.theme === "dark" ? "light" : "dark";
   document.documentElement.dataset.theme = next;
-  localStorage.setItem("theme", next);
+  try {
+    localStorage.setItem("theme", next);
+  } catch {
+    // Storage blocked (private mode); theme still applies for this visit
+  }
   updateThemeIcons();
 });
 updateThemeIcons();
@@ -58,27 +68,55 @@ document
   .forEach((el) => reveal.observe(el));
 
 // Primary CTA clicks, tagged by position
-document.querySelectorAll<HTMLAnchorElement>("[data-demo-cta]").forEach((cta) =>
-  cta.addEventListener("click", () =>
-    track("demo_cta_click", { position: cta.dataset.demoCta ?? "" }),
-  ),
-);
+document
+  .querySelectorAll<HTMLAnchorElement>("[data-demo-cta]")
+  .forEach((cta) =>
+    cta.addEventListener("click", () =>
+      track("demo_cta_click", { position: cta.dataset.demoCta ?? "" }),
+    ),
+  );
 
 // Demo form
 const form = document.getElementById("demo-form") as HTMLFormElement | null;
 const success = document.getElementById("demo-success");
 const status = document.getElementById("demo-status");
-const contact = document.getElementById("demo-contact") as HTMLInputElement | null;
+const contact = document.getElementById(
+  "demo-contact",
+) as HTMLInputElement | null;
 const contactLabel = document.getElementById("demo-contact-label");
 const mobileCta = document.getElementById("loa-mobile-cta");
 
 const CONTACT_INPUT: Record<
   ContactChannel,
-  { label: string; type: string; inputMode: string; autocomplete: string; placeholder: string }
+  {
+    label: string;
+    type: string;
+    inputMode: string;
+    autocomplete: string;
+    placeholder: string;
+  }
 > = {
-  phone: { label: "เบอร์โทร", type: "tel", inputMode: "tel", autocomplete: "tel", placeholder: "เช่น 081 234 5678" },
-  email: { label: "อีเมล", type: "email", inputMode: "email", autocomplete: "email", placeholder: "name@company.com" },
-  line: { label: "LINE ID", type: "text", inputMode: "text", autocomplete: "off", placeholder: "LINE ID ของคุณ" },
+  phone: {
+    label: "เบอร์โทร",
+    type: "tel",
+    inputMode: "tel",
+    autocomplete: "tel",
+    placeholder: "เช่น 081 234 5678",
+  },
+  email: {
+    label: "อีเมล",
+    type: "email",
+    inputMode: "email",
+    autocomplete: "email",
+    placeholder: "name@company.com",
+  },
+  line: {
+    label: "LINE ID",
+    type: "text",
+    inputMode: "text",
+    autocomplete: "off",
+    placeholder: "LINE ID ของคุณ",
+  },
 };
 
 if (form && contact && success && status) {
@@ -89,18 +127,19 @@ if (form && contact && success && status) {
     track("demo_form_start");
   });
 
-  form.querySelectorAll<HTMLInputElement>('input[name="channel"]').forEach((radio) =>
-    radio.addEventListener("change", () => {
-      const config = CONTACT_INPUT[radio.value as ContactChannel];
-      contact.type = config.type;
-      contact.inputMode = config.inputMode;
-      contact.autocomplete = config.autocomplete as AutoFill;
-      contact.placeholder = config.placeholder;
-      if (contactLabel) contactLabel.textContent = config.label;
-      contact.value = "";
-      contact.focus();
-    }),
-  );
+  form
+    .querySelectorAll<HTMLInputElement>('input[name="channel"]')
+    .forEach((radio) =>
+      radio.addEventListener("change", () => {
+        const config = CONTACT_INPUT[radio.value as ContactChannel];
+        contact.type = config.type;
+        contact.inputMode = config.inputMode;
+        contact.autocomplete = config.autocomplete as AutoFill;
+        contact.placeholder = config.placeholder;
+        if (contactLabel) contactLabel.textContent = config.label;
+        contact.focus();
+      }),
+    );
 
   const showErrors = (errors: Partial<Record<DemoField, string>>) => {
     form.querySelectorAll<HTMLElement>("[data-error-for]").forEach((el) => {
@@ -116,7 +155,7 @@ if (form && contact && success && status) {
 
   form.addEventListener("submit", async (event) => {
     event.preventDefault();
-    status.textContent = "";
+    status.replaceChildren();
     const data = new FormData(form);
     const result = validateDemoRequest({
       name: String(data.get("name") ?? ""),
@@ -131,13 +170,24 @@ if (form && contact && success && status) {
       return;
     }
 
-    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const button = form.querySelector<HTMLButtonElement>(
+      'button[type="submit"]',
+    );
     if (button) button.disabled = true;
     const outcome = await submitDemoRequest(ENDPOINT, result.value);
     if (button) button.disabled = false;
 
     if (outcome !== "success") {
-      status.textContent = `ส่งคำขอไม่สำเร็จ กรุณาลองใหม่อีกครั้ง ${LINE_FALLBACK}`;
+      const line = document.createElement("a");
+      line.href = LINE_URL;
+      line.target = "_blank";
+      line.rel = "noopener noreferrer";
+      line.className = "underline underline-offset-2";
+      line.textContent = "LINE @codepassion";
+      status.replaceChildren(
+        `${FAILURE_MESSAGE[outcome]} หรือทักเราทาง `,
+        line,
+      );
       return;
     }
 
@@ -157,7 +207,7 @@ if (mobileCta) {
   const sync = () => {
     const hide = formVisible || typing;
     mobileCta.classList.toggle("is-hidden", hide);
-    mobileCta.toggleAttribute("aria-hidden", hide);
+    mobileCta.setAttribute("aria-hidden", String(hide));
     mobileCta.tabIndex = hide ? -1 : 0;
   };
   if (demo)
