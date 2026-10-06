@@ -103,6 +103,21 @@ assert.equal(service.url, "https://codepassion.co/line-oa/");
 assert.equal(service.provider["@id"], "https://codepassion.co/#organization");
 assert(!/Code Passion(?! Co\.)/.test(text), "Use the CodePassion brand name");
 
+// Fluid navbar: no fixed max-width container
+const nav = html.match(/<nav\b[^>]*aria-label="เมนูหลัก"[^>]*>/)[0];
+assert(!nav.includes("max-w-"), "Navbar should be full-width");
+assert(nav.includes("loa-gutter"));
+
+// Footer: brand, page links, contact, social, legal line
+const footer = html.match(/<footer\b[\s\S]*?<\/footer>/)[0];
+for (const link of ["#use-cases", "#offer", "#faq", "#demo-form", "#main", "/"])
+  assert(footer.includes(`href="${link}"`), `Footer link ${link}`);
+assert(footer.includes('href="tel:+66886384566"'));
+assert(footer.includes('href="https://line.me/ti/p/@codepassion"'));
+for (const social of ["youtube", "facebook", "tiktok"])
+  assert(footer.includes(social), `Footer social ${social}`);
+assert(footer.includes("Code Passion Co., Ltd."));
+
 // Mock screen is labelled as an example
 assert(text.includes("ตัวอย่างหน้าจอ ปรับตามขอบเขตโครงการ"));
 

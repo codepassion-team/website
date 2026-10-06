@@ -7,8 +7,15 @@ import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
 import Analytics from "~/components/landing/Analytics.astro";
 import codePassionLogo from "~/assets/logos/CodePassion_Icon.svg";
+import { channels as socialChannels, company } from "~/data/landing";
 
 const PRODUCT_NAME = "Customer Portal บน LINE OA";
+const SOCIAL_ICONS: Record<string, string> = {
+  YouTube: "fa-brands:youtube",
+  "LINE OA": "fa-brands:line",
+  Facebook: "fa-brands:facebook",
+  TikTok: "fa-brands:tiktok",
+};
 const PAGE_URL = "https://codepassion.co/line-oa/";
 const TITLE = `${PRODUCT_NAME} ให้ลูกค้าเช็กงานเอง | CodePassion`;
 const DESCRIPTION =
@@ -265,11 +272,11 @@ const fieldClass =
       class="fixed top-0 z-50 w-full border-b border-transparent transition-all duration-300"
     >
       <nav
-        class="mx-auto flex max-w-7xl items-center justify-between gap-4 px-4 py-3 sm:px-6 sm:py-4"
+        class="loa-gutter flex items-center justify-between gap-4 py-3 sm:py-4 lg:grid lg:grid-cols-[1fr_auto_1fr]"
         aria-label="เมนูหลัก"
       >
         <a
-          class="flex items-center gap-2"
+          class="flex items-center gap-2 justify-self-start"
           href="/"
           aria-label="CodePassion - หน้าแรก"
         >
@@ -285,12 +292,12 @@ const fieldClass =
             >CodePassion</strong
           >
         </a>
-        <ul class="hidden items-center gap-6 lg:flex">
+        <ul class="loa-nav-links hidden items-center lg:flex">
           {
             navLinks.map((link) => (
               <li>
                 <a
-                  class="font-light text-offset transition-colors text-sm hover:text-default"
+                  class="loa-nav-link font-light text-offset transition-colors text-sm hover:text-default"
                   href={link.href}
                 >
                   {link.label}
@@ -299,7 +306,7 @@ const fieldClass =
             ))
           }
         </ul>
-        <div class="flex items-center gap-1 sm:gap-2">
+        <div class="flex items-center gap-1 justify-self-end sm:gap-2">
           <button
             id="loa-theme-toggle"
             type="button"
@@ -337,7 +344,7 @@ const fieldClass =
         </div>
       </nav>
       <div id="loa-mobile-menu" class="loa-menu lg:hidden" hidden>
-        <ul class="mx-auto grid max-w-7xl px-4 pb-6 pt-2 sm:px-6">
+        <ul class="loa-gutter grid pb-6 pt-2">
           {
             navLinks.map((link) => (
               <li>
@@ -1070,21 +1077,153 @@ const fieldClass =
       </section>
     </main>
 
-    <footer class="border-t border-border px-6 pb-28 pt-8 md:pb-8">
+    <footer class="loa-footer relative overflow-hidden border-t border-border">
       <div
-        class="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 font-light text-offset text-xs"
+        class="loa-gutter grid grid-cols-2 gap-x-6 gap-y-12 pb-12 pt-16 lg:grid-cols-[1.5fr_1fr_1fr_1.2fr] lg:gap-10"
       >
-        <a class="transition-colors hover:text-brand-red" href="/"
-          >← codepassion.co</a
-        >
-        <span>บริษัท โค้ด แพชชั่น จำกัด</span>
-        <a
-          class="transition-colors hover:text-brand-red"
-          href={LINE_URL}
-          target="_blank"
-          rel="noopener noreferrer">LINE {LINE_HANDLE} →</a
-        >
+        <div class="col-span-2 max-w-sm lg:col-span-1">
+          <a
+            href="/"
+            class="inline-flex items-center gap-2"
+            aria-label="CodePassion - หน้าแรก"
+          >
+            <Image
+              src={codePassionLogo}
+              alt=""
+              width={32}
+              height={32}
+              class="size-8"
+            />
+            <strong class="text-default text-lg">CodePassion</strong>
+          </a>
+          <p class="mt-4 font-light leading-relaxed text-offset text-sm">
+            ออกแบบและพัฒนาระบบตามกระบวนการขององค์กร ตั้งแต่วิเคราะห์งาน พัฒนา
+            เชื่อมต่อข้อมูล จนถึงส่งมอบและดูแลระบบ
+          </p>
+          <ul class="mt-6 flex gap-2" aria-label="ช่องทางโซเชียล">
+            {
+              socialChannels.map((channel) => (
+                <li>
+                  <a
+                    href={channel.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={`${channel.name}: ${channel.label}`}
+                    class="loa-social"
+                  >
+                    <Icon name={SOCIAL_ICONS[channel.name]} class="size-4" />
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <nav aria-label="หน้านี้">
+          <h2 class="loa-footer-heading">{PRODUCT_NAME}</h2>
+          <ul class="mt-4 grid gap-3">
+            {
+              [...navLinks, { href: "#demo-form", label: "นัดดู Demo" }].map(
+                (link) => (
+                  <li>
+                    <a class="loa-footer-link" href={link.href}>
+                      {link.label}
+                    </a>
+                  </li>
+                ),
+              )
+            }
+          </ul>
+        </nav>
+
+        <nav aria-label="CodePassion">
+          <h2 class="loa-footer-heading">CodePassion</h2>
+          <ul class="mt-4 grid gap-3">
+            <li><a class="loa-footer-link" href="/">หน้าแรก</a></li>
+            <li>
+              <a class="loa-footer-link" href="/#products">ผลิตภัณฑ์ทั้งหมด</a>
+            </li>
+            <li><a class="loa-footer-link" href="/#work">ผลงานของเรา</a></li>
+            <li>
+              <a
+                class="loa-footer-link"
+                href={company.academyUrl}
+                target="_blank"
+                rel="noopener noreferrer">CodePassion Academy ↗</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="col-span-2 lg:col-span-1">
+          <h2 class="loa-footer-heading">ติดต่อเรา</h2>
+          <ul class="mt-4 grid gap-3">
+            <li>
+              <a
+                class="loa-footer-link inline-flex items-center gap-2"
+                href={LINE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <Icon name="fa-brands:line" class="size-4 text-[#06c755]" />
+                LINE {LINE_HANDLE}
+              </a>
+            </li>
+            <li>
+              <a
+                class="loa-footer-link inline-flex items-center gap-2"
+                href={company.phoneUrl}
+              >
+                <Icon name="mdi:phone-outline" class="size-4" />
+                {company.phone}
+              </a>
+            </li>
+          </ul>
+          <a
+            href="#demo-form"
+            class="mt-6 inline-flex items-center gap-2 rounded-xl border border-border px-4 py-2.5 text-default transition-colors text-sm hover:border-brand-red hover:text-brand-red"
+          >
+            นัดดู Demo 20 นาที
+            <Icon name="mdi:arrow-top-right" class="size-4" />
+          </a>
+        </div>
       </div>
+
+      <div
+        class="loa-gutter flex flex-col gap-3 border-t border-border py-6 font-light text-offset text-xs sm:flex-row sm:items-center sm:justify-between"
+      >
+        <p>
+          © {new Date().getFullYear()}
+          {company.legalName} · บริษัท โค้ด แพชชั่น จำกัด
+        </p>
+        <div class="flex items-center gap-5">
+          {
+            PRIVACY_POLICY_URL && (
+              <a class="hover:text-default" href={PRIVACY_POLICY_URL}>
+                นโยบายความเป็นส่วนตัว
+              </a>
+            )
+          }
+          <a
+            class="inline-flex items-center gap-1 hover:text-default"
+            href="#main"
+          >
+            กลับขึ้นด้านบน
+            <Icon name="mdi:arrow-up" class="size-3.5" />
+          </a>
+        </div>
+      </div>
+
+      <svg
+        class="loa-wordmark"
+        viewBox="0 0 1000 150"
+        aria-hidden="true"
+        focusable="false"
+      >
+        <text x="0" y="138" textLength="1000" lengthAdjust="spacingAndGlyphs"
+          >CodePassion</text
+        >
+      </svg>
     </footer>
 
     <style is:global>
@@ -1112,6 +1251,90 @@ const fieldClass =
       }
       [data-theme="light"] #loa-navbar.scrolled {
         background-color: rgba(255, 255, 255, 0.9);
+      }
+
+      .loa-gutter {
+        padding-inline: clamp(1rem, 4vw, 4.5rem);
+      }
+      .loa-nav-links {
+        gap: clamp(1.25rem, 2.6vw, 3rem);
+      }
+      .loa-nav-link {
+        position: relative;
+        padding-block: 0.35rem;
+      }
+      .loa-nav-link::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1px;
+        background: var(--color-brand-red);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform 0.25s;
+      }
+      .loa-nav-link:hover::after,
+      .loa-nav-link:focus-visible::after {
+        transform: scaleX(1);
+      }
+
+      .loa-footer {
+        background: var(--color-background-card);
+        padding-bottom: 5.5rem;
+      }
+      @media (min-width: 768px) {
+        .loa-footer {
+          padding-bottom: 0;
+        }
+      }
+      .loa-footer-heading {
+        font-size: 0.75rem;
+        font-weight: 500;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--color-text);
+      }
+      .loa-footer-link {
+        font-size: 0.875rem;
+        font-weight: 300;
+        color: var(--color-text-offset);
+        transition: color 0.2s;
+      }
+      .loa-footer-link:hover {
+        color: var(--color-text);
+      }
+      .loa-social {
+        display: inline-flex;
+        width: 2.25rem;
+        height: 2.25rem;
+        align-items: center;
+        justify-content: center;
+        border: 1px solid var(--color-border);
+        border-radius: 999px;
+        color: var(--color-text-offset);
+        transition: all 0.2s;
+      }
+      .loa-social:hover {
+        border-color: var(--color-brand-red);
+        color: var(--color-brand-red);
+      }
+      .loa-wordmark {
+        display: block;
+        width: calc(100% - 2 * clamp(1rem, 4vw, 4.5rem));
+        margin: 0.5rem auto -1.5%;
+        overflow: visible;
+        user-select: none;
+        pointer-events: none;
+      }
+      .loa-wordmark text {
+        font-family: inherit;
+        font-size: 176px;
+        font-weight: 700;
+        fill: transparent;
+        stroke: var(--color-border);
+        stroke-width: 1.2;
       }
 
       .loa-menu {
