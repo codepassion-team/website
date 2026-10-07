@@ -2,7 +2,6 @@
 import "~/styles/index.css";
 import "@fontsource-variable/noto-sans-thai";
 import "@fontsource/mitr";
-import "@fontsource/jetbrains-mono";
 import "@fontsource/prompt/700.css";
 import { Image } from "astro:assets";
 import { Icon } from "astro-icon/components";
@@ -476,7 +475,7 @@ const lineLink = {
                   mockJobs.map((job) => (
                     <li class="bg-background-card rounded-xl border border-border p-3.5">
                       <div class="flex items-center justify-between gap-2">
-                        <span class="font-mono text-[11px] text-offset">
+                        <span class="tabular-nums tracking-wide text-[11px] text-offset">
                           {job.id}
                         </span>
                         <span class={`loa-status loa-status-${job.tone}`}>
@@ -721,10 +720,14 @@ const lineLink = {
         class="animate-on-scroll scroll-mt-24 px-6 py-24 md:px-12"
       >
         <div class="mx-auto max-w-5xl">
-          <p class="font-mono text-brand-red text-sm">LINE Service Launch</p>
+          <p class="font-semibold text-brand-red text-sm">
+            LINE Service Launch
+          </p>
           <h2 class="mt-2 font-bold text-default text-3xl md:text-4xl">
-            เริ่มหนึ่งกระบวนการ <span class="gradient-text"
-              >พร้อมเครื่องมือช่วยให้คนใช้เป็น</span
+            <span class="whitespace-nowrap">เริ่มหนึ่งกระบวนการ</span>
+            <span class="gradient-text"
+              ><span class="whitespace-nowrap">พร้อมเครื่องมือ</span><wbr
+              /><span class="whitespace-nowrap">ช่วยให้คนใช้เป็น</span></span
             >
           </h2>
           <p
@@ -767,7 +770,7 @@ const lineLink = {
             {
               launchKits.map((kit, i) => (
                 <li class="glass-card p-6">
-                  <span class="font-mono text-brand-red text-sm">
+                  <span class="font-semibold tabular-nums text-brand-red text-sm">
                     {String(i + 1).padStart(2, "0")}
                   </span>
                   <h4 class="mt-2 font-medium text-default">{kit.title}</h4>
@@ -918,7 +921,7 @@ const lineLink = {
               class="mx-auto mt-6 hidden rounded-2xl border border-border bg-white p-3 sm:block"
               loading="lazy"
             />
-            <p class="mt-5 font-mono text-default text-xl">{LINE_HANDLE}</p>
+            <p class="mt-5 font-bold text-default text-xl">{LINE_HANDLE}</p>
             <p class="mt-1 hidden font-light text-offset text-xs sm:block">
               สแกนด้วยแอป LINE หรือกดปุ่มด้านล่าง
             </p>
