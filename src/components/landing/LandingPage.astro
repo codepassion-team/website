@@ -271,7 +271,9 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                     <h3>
                       {product.name}
                       {product.badge && (
-                        <span class="product-badge">{product.badge}</span>
+                        <span class="product-badge" data-status={product.badge.toLowerCase()}>
+                          {product.badge}
+                        </span>
                       )}
                     </h3>
                     <p>{product.description}</p>

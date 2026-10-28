@@ -142,6 +142,7 @@ export const products = [
     href: "https://sekweb.site",
     action: "Explore Sekweb",
     glyph: "S",
+    badge: "Live",
   },
   {
     id: "memberconnex",

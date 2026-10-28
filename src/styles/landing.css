@@ -3492,3 +3492,63 @@ html.menu-open,
   text-transform: uppercase;
   vertical-align: middle;
 }
+
+/* Card system: services and products share one shell */
+.service-grid {
+  gap: 22px;
+  border: 0;
+}
+.service-card,
+.service-card:last-child,
+.product-card {
+  position: relative;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: linear-gradient(150deg, #ffffff05, transparent 60%);
+  transition:
+    border-color 0.3s,
+    transform 0.3s,
+    background 0.3s;
+}
+.service-card:hover,
+.product-card:hover,
+.product-card:focus-within {
+  border-color: #ffffff3d;
+  background: linear-gradient(150deg, #ffffff0a, transparent 60%);
+  transform: translateY(-3px);
+}
+.service-card:hover .service-card-top > span:last-child {
+  color: var(--signal);
+}
+/* Whole product card is clickable through its CTA */
+.product-info > .text-link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+.product-info > .text-link:focus-visible {
+  outline: none;
+}
+.product-card:has(.text-link:focus-visible) {
+  outline: 2px solid var(--signal);
+  outline-offset: 3px;
+}
+.product-card:hover .text-link {
+  color: var(--signal);
+  border-color: var(--signal);
+}
+.product-badge[data-status="live"] {
+  border-color: #3f8f6a;
+  color: #7fd1a8;
+}
+.product-badge[data-status="beta"] {
+  border-color: #8f7a3f;
+  color: #e0c57f;
+}
+@media (prefers-reduced-motion: reduce) {
+  .service-card:hover,
+  .product-card:hover,
+  .product-card:focus-within {
+    transform: none;
+  }
+}
