@@ -118,6 +118,16 @@ h2 > span {
 .desktop-nav a:hover {
   color: var(--paper);
 }
+/* Over the hero the menu sits on the planet, so it reads in light text. */
+.site-header:not(.is-docked) .desktop-nav {
+  color: #f5f5f7d9;
+}
+.site-header:not(.is-docked) .desktop-nav a:hover {
+  color: #fff;
+}
+.site-header:not(.is-docked) .language-switch a:not([aria-current]) {
+  color: #f5f5f7a6;
+}
 /* Language switch: a segmented pill; the active language sits in a lit segment */
 .language-switch {
   gap: 2px;
@@ -622,8 +632,8 @@ h2 > span {
 .technology-layer li {
   display: flex;
   align-items: center;
-  gap: 10px;
-  padding: 6px 16px 6px 6px;
+  gap: 12px;
+  padding: 7px 20px 7px 7px;
   border-color: var(--line);
   border-radius: 999px;
   background: var(--surface);
@@ -631,9 +641,9 @@ h2 > span {
   font-size: 15px;
 }
 .technology-icon {
-  width: 30px;
-  height: 30px;
-  padding: 5px;
+  width: 44px;
+  height: 44px;
+  padding: 7px;
   border-radius: 999px;
 }
 
