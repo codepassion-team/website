@@ -113,6 +113,19 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
+    // Contact shadow and floor light ground the stack instead of floating it.
+    const floor = geometry[STORY_LAYER_COUNT - 1];
+    surfaceScale = floor.scale;
+    ctx.save();
+    ctx.filter = `blur(${Math.round(34 * scale)}px)`;
+    polygon(square(185, floor.height - 70), "#000000c0");
+    ctx.filter = `blur(${Math.round(10 * scale)}px)`;
+    polygon(square(160, floor.height - 30), "#000000d0");
+    ctx.filter = `blur(${Math.round(18 * scale)}px)`;
+    ctx.globalCompositeOperation = "lighter";
+    polygon(square(200, floor.height - 60), undefined, "#c2413a55", 3 * scale);
+    ctx.restore();
+    surfaceScale = 1;
     for (let layer = STORY_LAYER_COUNT - 1; layer >= 0; layer--) {
       const emphasis = geometry[layer].focus;
       const y = geometry[layer].height;
