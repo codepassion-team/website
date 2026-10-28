@@ -18,7 +18,7 @@ const base: Layer = {
     colorC: "#a6133f",
     colorD: "#b53a22",
     speed: 1.2,
-    distortion: 0.85,
+    distortion: 0.55,
   },
 };
 
