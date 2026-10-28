@@ -74,10 +74,38 @@ h2 > span {
   box-shadow: 0 0 0 4px #ffffff14;
 }
 
-/* Header */
+/* Header: transparent over the hero; docks with its background once the
+   first section scrolls into the upper half of the screen. */
 .site-header {
+  background: transparent;
+  border-bottom-color: transparent;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
+  transition:
+    background 0.3s,
+    border-color 0.3s;
+}
+.site-header.is-docked {
+  position: fixed;
   background: #08090acc;
   border-bottom-color: #ffffff0f;
+  -webkit-backdrop-filter: blur(18px) saturate(160%);
+  backdrop-filter: blur(18px) saturate(160%);
+}
+@media (min-width: 801px) {
+  .site-header.is-docked {
+    animation: header-dock 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+}
+@keyframes header-dock {
+  from {
+    transform: translateY(-100%);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .site-header.is-docked {
+    animation: none;
+  }
 }
 .desktop-nav {
   gap: 28px;

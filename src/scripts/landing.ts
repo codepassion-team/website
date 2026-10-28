@@ -121,6 +121,21 @@ function setupNavigation(signal: AbortSignal) {
       { signal },
     ),
   );
+  // The header is transparent over the hero and docks, with its background,
+  // once the first section reaches the upper half of the screen. A midpoint
+  // still counts anchor jumps, which stop short of the top (scroll-padding).
+  const header = document.getElementById("site-header");
+  const firstSection = document.getElementById("expertise");
+  const updateDock = () => {
+    if (!header || !firstSection) return;
+    header.classList.toggle(
+      "is-docked",
+      firstSection.getBoundingClientRect().top <= window.innerHeight / 2,
+    );
+  };
+  window.addEventListener("scroll", updateDock, { passive: true, signal });
+  window.addEventListener("resize", updateDock, { passive: true, signal });
+  updateDock();
   return () => {
     returnFocus = null;
     closeMenu();
