@@ -432,7 +432,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     const alignment = desktopStoryAlignment(progress);
     const centerX = width * (mobile ? 0.5 : alignment.x);
     let centerY = height * (mobile ? 0.43 : alignment.y);
-    const openingSize = Math.min(width / 980, height / 520, 2.65);
+    const openingSize = Math.min(width / 1150, height / 640, 2.2);
     const centeredSize = Math.min(width / 1450, height / 620, 2.2);
     let size = mobile
       ? Math.min(width / 550, height / (height < 650 ? 1380 : 1100), 0.9)

@@ -3577,3 +3577,34 @@ html.menu-open,
 .stage-halo::after {
   display: none;
 }
+
+/* Desktop opening: headline centered on top, stack centered below */
+@media (min-width: 801px) {
+  .story-chapter--stack,
+  .is-enhanced .story-chapter--stack {
+    top: max(150px, 17svh);
+    left: 50%;
+    width: min(1100px, calc(100% - 2 * var(--page-gutter)));
+    transform: translateX(-50%);
+    text-align: center;
+  }
+  .story-chapter--stack h1 {
+    font-size: clamp(48px, 5.4vw, 84px);
+    margin-bottom: 20px;
+  }
+  .story-chapter--stack h1 > .desktop-line {
+    display: inline;
+  }
+  .story-chapter--stack h1 > .desktop-line + .desktop-line::before {
+    content: " ";
+  }
+  .story-chapter--stack > .eyebrow {
+    justify-content: center;
+    margin-bottom: 22px;
+  }
+  .story-chapter--stack .hero-description {
+    max-width: 680px;
+    margin-inline: auto;
+    margin-bottom: 24px;
+  }
+}
