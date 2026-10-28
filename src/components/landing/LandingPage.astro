@@ -256,22 +256,17 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 ]}
                 id={product.id}
               >
-                <div class="product-art" aria-hidden="true">
-                  <>
-                    <div class="product-monogram">{product.glyph}</div>
-                    <div class="product-orbit" />
-                    <span class="micro">
-                      CODEPASSION / {String(index + 1).padStart(2, "0")}
-                    </span>
-                  </>
-                </div>
+                <div class="product-art" aria-hidden="true" />
                 <div class="product-info">
                   <>
                     <p class="eyebrow">{product.category}</p>
                     <h3>
                       {product.name}
                       {product.badge && (
-                        <span class="product-badge" data-status={product.badge.toLowerCase()}>
+                        <span
+                          class="product-badge"
+                          data-status={product.badge.toLowerCase()}
+                        >
                           {product.badge}
                         </span>
                       )}
@@ -451,8 +446,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
               href={company.academyUrl}
               class="text-link"
               target="_blank"
-              rel="noopener noreferrer"
-              >{t("Visit the academy")}</a
+              rel="noopener noreferrer">{t("Visit the academy")}</a
             >
           </div>
           <div class="academy-heading">
@@ -493,9 +487,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                         <p class="course-summary">{course.summary}</p>
                       </>
                     </div>
-                    <span class="course-action">
-                      {t("Explore course")}
-                    </span>
+                    <span class="course-action">{t("Explore course")}</span>
                   </>
                 </a>
               ))
