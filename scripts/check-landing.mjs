@@ -62,9 +62,22 @@ for (const [locale, path] of [
     assert(ids.includes(product.id));
     assert.equal(
       [...html.matchAll(new RegExp(`href="#${product.id}"`, "g"))].length,
-      3,
-      "Product should be in desktop/mobile menus and footer",
+      1,
+      "Product should be linked from the footer",
     );
+  }
+  for (const nav of [
+    html.match(/<nav class="desktop-nav"[\s\S]*?<\/nav>/)?.[0],
+    html.match(/<nav class="mobile-nav"[\s\S]*?<\/nav>/)?.[0],
+  ]) {
+    assert(nav, `${locale}: desktop and mobile navigation`);
+    for (const href of [
+      "#expertise",
+      "https://connex.codepassion.co",
+      "/line-oa/",
+      "https://academy.codepassion.co/",
+    ])
+      assert(nav.includes(`href="${href}"`), `${locale}: nav links ${href}`);
   }
   const portalCard = html.match(
     /<article\b[^>]*id="line-oa-customer-portal"[\s\S]*?<\/article>/,

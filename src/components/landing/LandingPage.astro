@@ -109,7 +109,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
           <span>{t("Solution architecture")}</span><span
             >{t("Software development")}</span
           ><span>{t("Systems integration")}</span>
-        </div><span class="intro-symbol" aria-hidden="true">↗</span>
+        </div>
       </section>
       <section
         class="section expertise-section"
@@ -141,7 +141,6 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                     <span class="micro">
                       {service.number} / {service.category}
                     </span>
-                    <span aria-hidden="true">↗</span>
                   </>
                 </div>
                 <div
@@ -291,7 +290,6 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                       }
                     >
                       {product.action}
-                      <span aria-hidden="true">↗</span>
                     </a>
                   </>
                 </div>
@@ -454,7 +452,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
               class="text-link"
               target="_blank"
               rel="noopener noreferrer"
-              >{t("Visit the academy")}<span aria-hidden="true">↗</span></a
+              >{t("Visit the academy")}</a
             >
           </div>
           <div class="academy-heading">
@@ -497,7 +495,6 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                     </div>
                     <span class="course-action">
                       {t("Explore course")}
-                      <span aria-hidden="true">↗</span>
                     </span>
                   </>
                 </a>
@@ -534,7 +531,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 class="line-icon"
                 aria-hidden="true"
               /><span class="line-button-label">{t("Let’s talk on LINE")}</span
-              ><span aria-hidden="true">↗</span></a
+              ></a
             ><a href={company.phoneUrl} class="phone-link">{company.phone}</a>
           </div>
         </div>
@@ -567,7 +564,7 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
           }<a
             href={company.academyUrl}
             target="_blank"
-            rel="noopener noreferrer">CodePassion Academy ↗</a
+            rel="noopener noreferrer">CodePassion Academy</a
           >
         </div><div>
           <h2>{t("Stay connected")}</h2>{
@@ -579,7 +576,6 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 aria-label={`${channel.name}: ${channel.label}`}
               >
                 {channel.name}
-                <span aria-hidden="true">↗</span>
               </a>
             ))
           }

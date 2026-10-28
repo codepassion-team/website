@@ -107,7 +107,6 @@ const thai: Record<string, string> = {
   "Close navigation": "ปิดเมนู",
   "Mobile navigation": "เมนูบนมือถือ",
   "Academy & courses": "Academy และหลักสูตร",
-  "Let’s talk ↗": "คุยกับเรา ↗",
   "The CodePassion story": "เรื่องราวของ CodePassion",
   "01 / THE ARCHITECTURE": "01 / สถาปัตยกรรม",
   "02 / THE CONNECTION": "02 / การเชื่อมต่อ",
@@ -116,7 +115,7 @@ const thai: Record<string, string> = {
   "Scroll to explore each layer": "เลื่อนเพื่อดูแต่ละชั้นของระบบ",
   "Motion on": "เปิดแอนิเมชันอยู่",
   "Motion off": "ปิดแอนิเมชันอยู่",
-  "Skip the story ↗": "ข้ามไปดูบริการ ↗",
+  "Skip the story": "ข้ามไปดูบริการ",
   "02 / SELECTED WORK": "02 / ผลงานที่คัดสรร",
   "CLIENT WEBSITES": "เว็บไซต์ที่เราพัฒนา",
   "Websites we’ve built": "เว็บไซต์ที่เราพัฒนา",
@@ -133,8 +132,7 @@ const thai: Record<string, string> = {
   "The preview opens as you scroll here. Some sites may restrict embedding.":
     "ตัวอย่างจะเปิดเมื่อเลื่อนมาถึง บางเว็บไซต์อาจจำกัดการแสดงผลในหน้านี้",
   "Visit website": "ไปที่เว็บไซต์",
-  "Try embedded preview ↗": "ลองแสดงตัวอย่างในหน้านี้ ↗",
-  "Load live preview ↗": "ดูเว็บไซต์ตัวอย่าง ↗",
+  "Try embedded preview": "ลองแสดงตัวอย่างในหน้านี้",
   "Best explored on its own website.": "แนะนำให้เปิดชมบนเว็บไซต์โดยตรง",
   "Preview requested. If it is unavailable, use Visit website to open the original.":
     "กำลังแสดงเว็บไซต์ หากไม่ปรากฏ เลือก “ไปที่เว็บไซต์” เพื่อเปิดโดยตรง",
@@ -150,4 +148,4 @@ const thai: Record<string, string> = {
   Language: "เลือกภาษา",
 };
 export const translate = (locale: Locale, text: string) =>
-  locale === "th" ? (thai[text] ?? text) : text;
+  locale === "th" ? thai[text] ?? text : text;

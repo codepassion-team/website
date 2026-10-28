@@ -15,10 +15,10 @@ export const chapters = [
     key: "stack",
     layer: "FULL STACK",
     eyebrow: "SOFTWARE DEVELOPMENT & ARCHITECTURE",
-    lines: ["Software built", "around your", "business."],
-    mobileLines: ["Software built", "around your work."],
+    lines: ["Software built", "around how you work."],
+    mobileLines: ["Software built", "around how you work."],
     description:
-      "We design and build software around your workflows, connecting your tools, data and AI.",
+      "We design, build and connect your systems, from infrastructure and data to applications and AI agents.",
     action: "Talk about your project",
     href: "#contact",
     details: [

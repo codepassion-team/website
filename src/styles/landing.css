@@ -3317,7 +3317,7 @@ html.menu-open,
 }
 .browser-chrome #close-preview {
   position: absolute;
-  right: 54px;
+  right: 16px;
   top: 7px;
   min-width: 30px;
   min-height: 44px;
@@ -3365,7 +3365,7 @@ html.menu-open,
     font-size: 10px;
   }
   .browser-chrome #close-preview {
-    right: 44px;
+    right: 10px;
   }
   .logo-set .customer-logo {
     padding: 5px;
@@ -3582,29 +3582,33 @@ html.menu-open,
 @media (min-width: 801px) {
   .story-chapter--stack,
   .is-enhanced .story-chapter--stack {
-    top: clamp(96px, 15svh, 170px);
-    left: 50%;
     width: min(1100px, calc(100% - 2 * var(--page-gutter)));
-    transform: translateX(-50%);
     text-align: center;
   }
+  .is-enhanced .story-chapter--stack {
+    top: clamp(96px, 15svh, 170px);
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .static-story .story-chapter--stack {
+    align-self: flex-start;
+    margin-inline: auto;
+    transform: none;
+  }
   .story-chapter--stack h1 {
-    font-size: clamp(44px, min(5.4vw, 8.5svh), 84px);
-    margin-bottom: 20px;
-  }
-  .story-chapter--stack h1 > .desktop-line {
-    display: inline;
-  }
-  .story-chapter--stack h1 > .desktop-line + .desktop-line::before {
-    content: " ";
+    font-size: clamp(42px, min(5.2vw, 8svh), 80px);
+    line-height: 1.04;
+    margin-bottom: 22px;
   }
   .story-chapter--stack > .eyebrow {
     justify-content: center;
-    margin-bottom: 22px;
+    margin-bottom: 26px;
   }
   .story-chapter--stack .hero-description {
-    max-width: 720px;
+    max-width: 600px;
     margin-inline: auto;
-    margin-bottom: 24px;
+    margin-bottom: 30px;
+    font-size: clamp(16px, 1.3vw, 19px);
+    line-height: 1.65;
   }
 }

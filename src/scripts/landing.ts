@@ -144,7 +144,7 @@ function setupPortfolio(signal: AbortSignal) {
   const direct = document.querySelector<HTMLAnchorElement>("#preview-open");
   const preview = document.querySelector<HTMLElement>(".project-preview");
   const links = document.querySelectorAll<HTMLAnchorElement>(
-    "#preview-external, #preview-external-top, #preview-open",
+    "#preview-external, #preview-open",
   );
   const buttons = [
     ...document.querySelectorAll<HTMLButtonElement>(".project-button"),
@@ -247,8 +247,8 @@ function setupPortfolio(signal: AbortSignal) {
       load.classList.toggle("button-light", !unavailable);
       load.classList.toggle("button-quiet", unavailable);
       load.textContent = unavailable
-        ? t("Try embedded preview ↗")
-        : t("Load live preview ↗");
+        ? t("Try embedded preview")
+        : t("Load live preview");
     }
     if (note)
       note.textContent = unavailable
@@ -261,7 +261,10 @@ function setupPortfolio(signal: AbortSignal) {
     frame!.title = `${button.dataset.projectName} — ${t("Our work")}`;
     links.forEach((link) => {
       link.href = button.dataset.projectUrl!;
-      link.setAttribute("aria-label", `${button.dataset.projectName} ↗`);
+      link.setAttribute(
+        "aria-label",
+        `${t("Open website")} ${button.dataset.projectName}`,
+      );
     });
     buttons.forEach((item) => {
       item.setAttribute("aria-pressed", String(item === button));
@@ -301,7 +304,7 @@ function setupPortfolio(signal: AbortSignal) {
       attempted = true;
       if (load) {
         load.hidden = false;
-        load.textContent = t("Load live preview ↗");
+        load.textContent = t("Load live preview");
       }
       if (note) note.textContent = t("Loads the selected website here.");
       status!.textContent = t(

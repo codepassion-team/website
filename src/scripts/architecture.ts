@@ -95,17 +95,17 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
       cy + 85 * scale,
       330 * scale,
     );
-    reflection.addColorStop(0, "#ffffff0a");
-    reflection.addColorStop(0.5, "#ffffff03");
+    reflection.addColorStop(0, "#b7353020");
+    reflection.addColorStop(0.5, "#52152208");
     reflection.addColorStop(1, "#00000000");
     ctx.fillStyle = reflection;
     ctx.fillRect(cx - 340 * scale, cy - 220 * scale, 680 * scale, 640 * scale);
     // A soft centered glow frames the stack without competing with its layers.
     ctx.save();
     const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, 360 * scale);
-    halo.addColorStop(0, "#ffffff06");
-    halo.addColorStop(0.72, "#ffffff03");
-    halo.addColorStop(1, "#ffffff00");
+    halo.addColorStop(0, "#ff8d6a08");
+    halo.addColorStop(0.72, "#ff8d6a05");
+    halo.addColorStop(1, "#ff8d6a00");
     ctx.fillStyle = halo;
     ctx.beginPath();
     ctx.arc(cx, cy, 360 * scale, 0, Math.PI * 2);
@@ -113,7 +113,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
-    // Contact shadows ground the stack instead of floating it.
+    // Contact shadow and floor light ground the stack instead of floating it.
     const floor = geometry[STORY_LAYER_COUNT - 1];
     surfaceScale = floor.scale;
     ctx.save();
@@ -121,6 +121,9 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     polygon(square(185, floor.height - 70), "#000000c0");
     ctx.filter = `blur(${Math.round(10 * scale)}px)`;
     polygon(square(160, floor.height - 30), "#000000d0");
+    ctx.filter = `blur(${Math.round(18 * scale)}px)`;
+    ctx.globalCompositeOperation = "lighter";
+    polygon(square(200, floor.height - 60), undefined, "#c2413a55", 3 * scale);
     ctx.restore();
     surfaceScale = 1;
     for (let layer = STORY_LAYER_COUNT - 1; layer >= 0; layer--) {
@@ -149,10 +152,10 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         cx + 150 * scale,
         cy + 50,
       );
-      side.addColorStop(0, "#0c0d0f");
-      side.addColorStop(0.45, "#2a2c31");
-      side.addColorStop(0.5, "#111215");
-      side.addColorStop(1, "#08090a");
+      side.addColorStop(0, "#17151d");
+      side.addColorStop(0.45, "#51414b");
+      side.addColorStop(0.5, "#211b24");
+      side.addColorStop(1, "#0d0d12");
       for (let face = 0; face < 8; face++)
         polygon(
           [
@@ -162,7 +165,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
             bottom[face],
           ],
           side,
-          "#ffffff1a",
+          "#b699a519",
           0.5,
         );
       const metal = ctx.createLinearGradient(
@@ -171,29 +174,29 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         cx + 170 * scale,
         cy + 60 * scale - y * scale,
       );
-      metal.addColorStop(0, "#2b2d32");
-      metal.addColorStop(0.18, "#1a1b1f");
-      metal.addColorStop(0.48, "#0f1012");
-      metal.addColorStop(0.7, "#141518");
-      metal.addColorStop(1, "#0b0c0e");
-      polygon(top, metal, "#ffffff66", 0.85);
+      metal.addColorStop(0, "#62616b");
+      metal.addColorStop(0.18, "#36343f");
+      metal.addColorStop(0.48, "#191920");
+      metal.addColorStop(0.7, "#24212b");
+      metal.addColorStop(1, "#100f15");
+      polygon(top, metal, "#9d919b99", 0.85);
       ctx.save();
       ctx.globalAlpha *= emphasis;
-      polygon(top, undefined, "#ffffffcc", 0.85 + emphasis);
+      polygon(top, undefined, "#ffac8d", 0.85 + emphasis);
       ctx.restore();
       if (emphasis > 0) {
         ctx.save();
         ctx.globalAlpha *= emphasis;
-        ctx.shadowColor = "#ffffff";
+        ctx.shadowColor = "#f04d2d";
         ctx.shadowBlur = 24 * scale;
-        polygon(square(radius - 7, y + 1), undefined, "#ffffffb3", 1.4);
+        polygon(square(radius - 7, y + 1), undefined, "#ff836a", 1.4);
         ctx.restore();
       }
       polygon(square(radius - 4, y + 0.2), undefined, "#ffffff15", 0.6);
       polygon(
         square(radius - 11, y + 0.4),
         undefined,
-        layer === 1 ? "#ffffff40" : "#ffffff1f",
+        layer === 1 ? "#e7736b88" : "#b9a7b733",
         0.7,
       );
       // Fine etched traces follow the top surface, rather than screen-space grids.
@@ -204,16 +207,12 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         ctx.beginPath();
         ctx.moveTo(start.x, start.y);
         ctx.lineTo(end.x, end.y);
-        ctx.strokeStyle = trace % 3 ? "#ffffff0d" : "#ffffff1c";
+        ctx.strokeStyle = trace % 3 ? "#cbbdc012" : "#e9d8de29";
         ctx.lineWidth = 0.55;
         ctx.stroke();
       }
       // Each surface has its own schematic, projected onto the same material.
-      const line = (
-        points: number[][],
-        color = "#ffffff8c",
-        thickness = 1.5,
-      ) => {
+      const line = (points: number[][], color = "#ffac8d", thickness = 1.5) => {
         ctx.beginPath();
         points.forEach(([x, z], index) => {
           const point = project(x, y + 3, z);
@@ -229,7 +228,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         z: number,
         w: number,
         h: number,
-        fill = "#131417",
+        fill = "#28212c",
       ) => {
         polygon(
           [
@@ -239,7 +238,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
             [x, z + h],
           ].map(([px, pz]) => project(px, y + 2, pz)),
           fill,
-          "#ffffff4d",
+          "#dd9c9777",
           scale,
         );
       };
@@ -257,46 +256,46 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
               [x * 0.6, z],
               [x, z],
             ],
-            "#ffffff80",
+            "#da9f93",
           );
-          panel(x - 13, z - 12, 26, 24, "#ffffff0f");
+          panel(x - 13, z - 12, 26, 24, "#86525988");
         }
-        panel(-30, -30, 60, 60, "#f04d2d33");
-        panel(-18, -18, 36, 36, "#f04d2d99");
+        panel(-30, -30, 60, 60, "#bf685d66");
+        panel(-18, -18, 36, 36, "#ffc9a599");
         for (let pin = -18; pin <= 18; pin += 12) {
           line(
             [
               [pin, -40],
               [pin, -31],
             ],
-            "#ffffffb3",
+            "#ffe3c4",
           );
           line(
             [
               [pin, 31],
               [pin, 40],
             ],
-            "#ffffffb3",
+            "#ffe3c4",
           );
         }
       } else if (layer === 1) {
-        panel(-82, -65, 164, 130, "#0f1012");
+        panel(-82, -65, 164, 130, "#17141d");
         line(
           [
             [-82, -40],
             [82, -40],
           ],
-          "#ffffff59",
+          "#b5a3b7",
         );
-        panel(-67, -23, 38, 70, "#ffffff12");
-        panel(-16, -23, 80, 24, "#ffffff1a");
+        panel(-67, -23, 38, 70, "#944d5266");
+        panel(-16, -23, 80, 24, "#ee896b55");
         for (let row = 0; row < 3; row++)
           line(
             [
               [-16, 18 + row * 13],
               [64 - row * 12, 18 + row * 13],
             ],
-            "#ffffff66",
+            "#cebac0",
           );
       } else if (layer === 2) {
         line([
@@ -316,11 +315,11 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
           [65, -50],
           [65, 50],
         ])
-          panel(x - 13, z - 13, 26, 26, "#ffffff12");
+          panel(x - 13, z - 13, 26, 26, "#9f4c4966");
       } else if (layer === 3) {
         for (let row = 0; row < 3; row++) {
           const z = -48 + row * 48;
-          panel(-91, z - 10, 26 + row * 12, 20, "#ffffff12");
+          panel(-91, z - 10, 26 + row * 12, 20, "#71658266");
           line(
             [
               [-30, z],
@@ -328,22 +327,22 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
               [15, 0],
               [37, z],
             ],
-            "#ffffff80",
+            "#e59980",
           );
-          panel(42, z - 10, 49, 20, "#ffffff1a");
+          panel(42, z - 10, 49, 20, "#d8745355");
         }
       } else {
         for (let rack = 0; rack < 3; rack++) {
           const z = -58 + rack * 44;
-          panel(-80, z, 160, 30, "#121316");
+          panel(-80, z, 160, 30, "#26232f");
           for (let led = 0; led < 3; led++)
-            panel(-66 + led * 14, z + 10, 5, 8, "#f04d2d");
+            panel(-66 + led * 14, z + 10, 5, 8, "#ffac8d");
           line(
             [
               [0, z + 15],
               [64, z + 15],
             ],
-            "#ffffff59",
+            "#afa2b8",
           );
         }
       }
@@ -356,20 +355,20 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         const p = project(sx * (radius - 21), y + 2, sz * (radius - 21));
         ctx.beginPath();
         ctx.ellipse(p.x, p.y, 2 * scale, 1.2 * scale, 0, 0, Math.PI * 2);
-        ctx.fillStyle = "#ffffff40";
+        ctx.fillStyle = "#b5a6ae99";
         ctx.fill();
       });
       if (layer === 1 || layer === 2) {
         ctx.save();
-        ctx.shadowColor = "#ffffff";
+        ctx.shadowColor = "#ef3544";
         ctx.shadowBlur = 13 * scale;
         const start = project(-radius + 12, y - 7, radius);
         const end = project(radius - 12, y - 7, radius);
         const edge = ctx.createLinearGradient(start.x, start.y, end.x, end.y);
-        edge.addColorStop(0, "#ffffff00");
-        edge.addColorStop(0.3, "#ffffff99");
-        edge.addColorStop(0.7, "#ffffff66");
-        edge.addColorStop(1, "#ffffff00");
+        edge.addColorStop(0, "#f04d2d00");
+        edge.addColorStop(0.3, "#ff825a");
+        edge.addColorStop(0.7, "#ed1b5dcc");
+        edge.addColorStop(1, "#ed1b5d00");
         ctx.strokeStyle = edge;
         ctx.lineWidth = 1.5 * scale;
         ctx.beginPath();
@@ -383,8 +382,8 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     if (callout && arrowTarget && callout.opacity > 0.01) {
       ctx.save();
       ctx.globalAlpha = callout.opacity;
-      ctx.strokeStyle = "#ffffff99";
-      ctx.fillStyle = "#ffffff";
+      ctx.strokeStyle = "#ffac8dcc";
+      ctx.fillStyle = "#ffac8d";
       ctx.lineWidth = 1.2;
       ctx.lineJoin = "round";
       ctx.lineCap = "round";
@@ -430,7 +429,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
           { x: arrowTarget.x + direction * 7, y: arrowTarget.y - 3 },
           { x: arrowTarget.x + direction * 7, y: arrowTarget.y + 3 },
         ],
-        "#ffffff",
+        "#ffac8d",
       );
       ctx.beginPath();
       ctx.arc(callout.x, callout.y, 2, 0, Math.PI * 2);

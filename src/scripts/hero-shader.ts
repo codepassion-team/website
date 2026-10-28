@@ -8,14 +8,14 @@ type Layer = {
 
 const grain: Layer = { type: "FilmGrain", props: { strength: 0.03 } };
 
-// Near-black base with soft graphite light that slowly drifts.
+// Near-black base drifting through the stack's plum metal and ember glow.
 const base: Layer = {
   type: "FlowingGradient",
   props: {
-    colorA: "#08090a",
-    colorB: "#0b0c0e",
-    colorC: "#24262b",
-    colorD: "#111317",
+    colorA: "#08080a",
+    colorB: "#121016",
+    colorC: "#4a1c21",
+    colorD: "#231c2b",
     speed: 0.4,
     distortion: 0.55,
   },

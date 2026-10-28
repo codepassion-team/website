@@ -93,10 +93,20 @@ const { chapters } = getLandingContent(locale);
                 ))}
               </ul>
             )}
-            <a class="button button-light" href={chapter.href}>
-              {chapter.action}
-              <span aria-hidden="true">↗</span>
-            </a>
+            {index === 0 ? (
+              <div class="hero-actions">
+                <a class="button button-light" href={chapter.href}>
+                  {chapter.action}
+                </a>
+                <a class="button button-ghost" href="#work">
+                  {t("Our work")}
+                </a>
+              </div>
+            ) : (
+              <a class="button button-light" href={chapter.href}>
+                {chapter.action}
+              </a>
+            )}
           </article>
         ))
       }
@@ -130,7 +140,7 @@ const { chapters } = getLandingContent(locale);
       </nav><div class="story-controls">
         <button id="motion-toggle" type="button" aria-pressed="true" hidden
           >{t("Motion on")}</button
-        ><a href="#expertise" class="skip-story">{t("Skip the story ↗")}</a>
+        ><a href="#expertise" class="skip-story">{t("Skip the story")}</a>
       </div>
     </div>
   </div>
