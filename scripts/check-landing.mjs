@@ -101,8 +101,11 @@ for (const [locale, path] of [
   for (const technology of technologyLayers.flatMap((layer) => layer.items))
     assert(html.includes(technology));
   assert(html.includes('id="motion-toggle"'));
-  assert(html.includes('id="story-next"'));
-  assert(html.includes('id="story-previous"'));
+  assert.equal(
+    [...html.matchAll(/data-chapter-target="[0-5]"/g)].length,
+    6,
+    `${locale}: one story dot per chapter`,
+  );
   assert.equal([...html.matchAll(/data-copy-side="right"/g)].length, 2);
   assert.equal([...html.matchAll(/class="technology-icon"/g)].length, 16);
   assert.equal([...html.matchAll(/data-icon="fa-brands:line"/g)].length, 1);

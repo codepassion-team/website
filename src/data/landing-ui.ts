@@ -1,10 +1,6 @@
 export type Locale = "th" | "en";
 const thai: Record<string, string> = {
   "Story navigation": "เลือกตอนของเรื่องราว",
-  "Previous chapter": "ตอนก่อนหน้า",
-  "Next chapter": "ตอนถัดไป",
-  Previous: "ก่อนหน้า",
-  Next: "ถัดไป",
   "Pause logos": "หยุดโลโก้ชั่วคราว",
   "Play logos": "เลื่อนโลโก้ต่อ",
   "Loading website…": "กำลังโหลดเว็บไซต์…",
@@ -112,9 +108,10 @@ const thai: Record<string, string> = {
   "02 / THE CONNECTION": "02 / การเชื่อมต่อ",
   "03 / THE SYSTEM": "03 / ระบบที่ลงตัว",
   "03 / BUILT TO EVOLVE": "03 / พร้อมเติบโต",
-  "Scroll to explore each layer": "เลื่อนเพื่อดูแต่ละชั้นของระบบ",
   "Motion on": "เปิดแอนิเมชันอยู่",
   "Motion off": "ปิดแอนิเมชันอยู่",
+  "Pause motion": "หยุดแอนิเมชัน",
+  "Play motion": "เล่นแอนิเมชัน",
   "Skip the story": "ข้ามไปดูบริการ",
   "02 / SELECTED WORK": "02 / ผลงานที่คัดสรร",
   "CLIENT WEBSITES": "เว็บไซต์ที่เราพัฒนา",

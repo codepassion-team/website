@@ -117,31 +117,39 @@ const { chapters } = getLandingContent(locale);
       ><span class="caption-line"></span>
     </div>
     <div class="story-bottom">
-      <span class="scroll-prompt"
-        ><span aria-hidden="true">↓</span>{
-          t("Scroll to explore each layer")
-        }</span
-      ><nav class="story-navigation" aria-label={t("Story navigation")} hidden>
-        <button
-          id="story-previous"
+      <div class="story-dock">
+        <nav class="story-navigation" aria-label={t("Story navigation")} hidden>
+          {
+            chapters.map((chapter, index) => (
+              <button
+                type="button"
+                class="story-dot"
+                data-chapter-target={index}
+                aria-label={chapter.lines.join(" ")}
+                aria-current={index === 0 ? "step" : undefined}
+              />
+            ))
+          }
+        </nav><button
+          id="motion-toggle"
+          class="story-play"
           type="button"
-          aria-label={t("Previous chapter")}
-          disabled
-          ><span aria-hidden="true">←</span><span>{t("Previous")}</span></button
+          aria-label={t("Pause motion")}
+          hidden
+          ><svg class="icon-pause" viewBox="0 0 14 14" aria-hidden="true"
+            ><rect x="3" y="2" width="2.6" height="10" rx="1"></rect><rect
+              x="8.4"
+              y="2"
+              width="2.6"
+              height="10"
+              rx="1"></rect></svg
+          ><svg class="icon-play" viewBox="0 0 14 14" aria-hidden="true"
+            ><path
+              d="M4 2.6v8.8a.8.8 0 0 0 1.2.7l7.2-4.4a.8.8 0 0 0 0-1.4L5.2 1.9a.8.8 0 0 0-1.2.7Z"
+            ></path></svg
+          ></button
         >
-        <span class="story-count" aria-live="polite" aria-atomic="true"
-          ><span id="story-current">01</span><span aria-hidden="true">
-            / {String(chapters.length).padStart(2, "0")}</span
-          ></span
-        >
-        <button id="story-next" type="button" aria-label={t("Next chapter")}
-          ><span>{t("Next")}</span><span aria-hidden="true">→</span></button
-        >
-      </nav><div class="story-controls">
-        <button id="motion-toggle" type="button" aria-pressed="true" hidden
-          >{t("Motion on")}</button
-        ><a href="#expertise" class="skip-story">{t("Skip the story")}</a>
-      </div>
+      </div><a href="#expertise" class="skip-story">{t("Skip the story")}</a>
     </div>
   </div>
   <div class="story-layer-summary">

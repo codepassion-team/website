@@ -405,9 +405,9 @@ function setupStory(signal: AbortSignal) {
   );
   const siteHeader = document.querySelector<HTMLElement>("#site-header");
   const navigation = document.querySelector<HTMLElement>(".story-navigation");
-  const previous = document.querySelector<HTMLButtonElement>("#story-previous");
-  const next = document.querySelector<HTMLButtonElement>("#story-next");
-  const currentNumber = document.getElementById("story-current");
+  const dots = Array.from(
+    document.querySelectorAll<HTMLButtonElement>(".story-dot"),
+  );
   const label = document.getElementById("sculpture-label");
   const motionToggles = document.querySelectorAll<HTMLButtonElement>(
     "#motion-toggle, .menu-motion-toggle",
@@ -512,10 +512,10 @@ function setupStory(signal: AbortSignal) {
         : undefined,
       openingBounds.bottom - canvasBounds.top,
     );
-    if (currentNumber)
-      currentNumber.textContent = String(activeIndex + 1).padStart(2, "0");
-    if (previous) previous.disabled = activeIndex === 0;
-    if (next) next.disabled = activeIndex === chapters.length - 1;
+    dots.forEach((dot, index) => {
+      if (index === activeIndex) dot.setAttribute("aria-current", "step");
+      else dot.removeAttribute("aria-current");
+    });
     if (
       navigationChapter !== null &&
       Math.abs(progress - navigationChapter) < 0.01
@@ -549,8 +549,15 @@ function setupStory(signal: AbortSignal) {
         preference.matches ||
         constrained ||
         shortViewport.matches;
-      toggle.textContent = animated ? t("Motion on") : t("Motion off");
-      toggle.setAttribute("aria-pressed", String(animated));
+      if (toggle.id === "motion-toggle")
+        toggle.setAttribute(
+          "aria-label",
+          animated ? t("Pause motion") : t("Play motion"),
+        );
+      else {
+        toggle.textContent = animated ? t("Motion on") : t("Motion off");
+        toggle.setAttribute("aria-pressed", String(animated));
+      }
     });
     cachedProgress = -1;
     displayedScroll = null;
@@ -558,14 +565,9 @@ function setupStory(signal: AbortSignal) {
     renderer?.resize();
     schedule();
   }
-  function navigateChapter(direction: number) {
+  function navigateToChapter(index: number) {
     if (!animated) return;
-    const current =
-      navigationChapter ?? Math.round(Math.max(0, cachedProgress));
-    navigationChapter = Math.max(
-      0,
-      Math.min(chapters.length - 1, current + direction),
-    );
+    navigationChapter = Math.max(0, Math.min(chapters.length - 1, index));
     const stage = story!.querySelector<HTMLElement>(".story-stage")!;
     const distance = story!.offsetHeight - stage.offsetHeight;
     const top = window.scrollY + story!.getBoundingClientRect().top;
@@ -577,8 +579,9 @@ function setupStory(signal: AbortSignal) {
       behavior: "smooth",
     });
   }
-  previous?.addEventListener("click", () => navigateChapter(-1), { signal });
-  next?.addEventListener("click", () => navigateChapter(1), { signal });
+  dots.forEach((dot, index) =>
+    dot.addEventListener("click", () => navigateToChapter(index), { signal }),
+  );
   const cancelNavigation = () => {
     navigationChapter = null;
   };
