@@ -21,15 +21,7 @@ const base: Layer = {
   },
 };
 
-// A fine, slowly twinkling dot matrix over the glow.
-const components: Layer[] = [
-  base,
-  {
-    type: "DotGrid",
-    props: { color: "#ffffff0d", density: 70, dotSize: 0.07, twinkle: 0.3 },
-  },
-  grain,
-];
+const components: Layer[] = [base, grain];
 
 export async function setupHeroShader() {
   const canvas = document.getElementById("hero-shader");
