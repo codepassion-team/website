@@ -322,16 +322,6 @@ h2 > span {
 .static-story .story-play .icon-play {
   display: block;
 }
-.story-bottom .skip-story {
-  position: absolute;
-  right: 0;
-  font: inherit;
-  color: inherit;
-  transition: color 0.2s;
-}
-.story-bottom .skip-story:hover {
-  color: #f5f5f7;
-}
 @media (max-width: 800px) {
   .story-bottom {
     justify-content: center;
@@ -342,13 +332,6 @@ h2 > span {
     justify-content: center;
     padding: 0 10px;
     gap: 0;
-  }
-  .story-bottom .skip-story:not(:focus-visible) {
-    width: 1px;
-    height: 1px;
-    overflow: hidden;
-    clip-path: inset(50%);
-    white-space: nowrap;
   }
 }
 @media (prefers-reduced-motion: reduce) {

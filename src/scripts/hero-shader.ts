@@ -7,9 +7,10 @@ type Layer = {
   children?: Layer[];
 };
 
-// A planet rising behind the hero: purple ambient light, a dark body that
-// holds the copy and stack, and an animated rim in the logo's rose, ember and
-// a gold highlight. Sizes are in canvas heights: a Circle radius of 1 is half
+// A planet rising behind the hero: deep indigo ambient light, a dark body
+// that holds the copy and stack, and a soft rim that warms from plum at the
+// sides to peach and gold at the top. Colours are sampled from the design
+// reference. Sizes are in canvas heights: a Circle radius of 1 is half
 // a height, and the LightEdge sphere's radius is 0.35 x scale heights.
 const RIM_TOP = 0.08;
 const RIM_DROP = 0.37;
@@ -39,10 +40,10 @@ function layers(width: number, height: number): Layer[] {
     {
       type: "FlowingGradient",
       props: {
-        colorA: "#120a2e",
-        colorB: "#3a1a8c",
-        colorC: "#6b2fa0",
-        colorD: "#24126a",
+        colorA: "#100636",
+        colorB: "#2d167e",
+        colorC: "#3e1d7f",
+        colorD: "#160741",
         speed: 0.5,
         distortion: 0.5,
       },
@@ -50,7 +51,7 @@ function layers(width: number, height: number): Layer[] {
     {
       type: "Circle",
       id: "body",
-      props: { ...bodyProps(planet), color: "#05040b", softness: 0.08 },
+      props: { ...bodyProps(planet), color: "#040216", softness: 0.08 },
     },
     // Indigo light pooling low inside the planet.
     {
@@ -58,7 +59,7 @@ function layers(width: number, height: number): Layer[] {
       props: {
         center: { x: 0.42, y: 1.3 },
         radius: 1.8,
-        color: "#3a22a088",
+        color: "#25128099",
         softness: 1.4,
       },
     },
@@ -68,19 +69,20 @@ function layers(width: number, height: number): Layer[] {
       props: {
         ...rimProps(planet),
         stops: [
-          { color: "#ed1b5d", position: 0 },
-          { color: "#f04d2d", position: 0.35 },
-          { color: "#ffc58a", position: 0.6 },
-          { color: "#ed1b5d", position: 1 },
+          { color: "#9a367d", position: 0 },
+          { color: "#ae6075", position: 0.3 },
+          { color: "#ca8765", position: 0.5 },
+          { color: "#c9986e", position: 0.65 },
+          { color: "#943581", position: 1 },
         ],
         thickness: 0.012,
-        softness: 0.25,
-        intensity: 0.8,
-        bloom: 0.3,
+        softness: 0.6,
+        intensity: 0.45,
+        bloom: 0.1,
         spots: 2,
-        spotSize: 0.6,
-        smoke: 0.15,
-        speed: 0.5,
+        spotSize: 0.8,
+        smoke: 0.05,
+        speed: 0.35,
       },
     },
     { type: "FilmGrain", props: { strength: 0.03 } },

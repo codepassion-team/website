@@ -112,7 +112,7 @@ const thai: Record<string, string> = {
   "Motion off": "ปิดแอนิเมชันอยู่",
   "Pause motion": "หยุดแอนิเมชัน",
   "Play motion": "เล่นแอนิเมชัน",
-  "Skip the story": "ข้ามไปดูบริการ",
+  "Our services": "บริการของเรา",
   "02 / SELECTED WORK": "02 / ผลงานที่คัดสรร",
   "CLIENT WEBSITES": "เว็บไซต์ที่เราพัฒนา",
   "Websites we’ve built": "เว็บไซต์ที่เราพัฒนา",
