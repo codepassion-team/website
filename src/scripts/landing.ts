@@ -3,6 +3,7 @@ const t = (text: string) =>
   translate(document.documentElement.lang === "th" ? "th" : "en", text);
 
 import { createArchitectureRenderer } from "./architecture";
+import { setupHeroShader } from "./hero-shader";
 import {
   layerStoryPosition,
   chapterOpacity,
@@ -655,3 +656,5 @@ window.addEventListener("pagehide", () => cleanup());
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) initialize();
 });
+
+void setupHeroShader();

@@ -11,6 +11,7 @@ const { chapters } = getLandingContent(locale);
 
 <section class="story" id="home" aria-label={t("The CodePassion story")}>
   <div class="story-stage">
+    <canvas id="hero-shader" aria-hidden="true"></canvas>
     <div class="stage-grid" aria-hidden="true"></div>
     <div class="stage-halo" aria-hidden="true"></div>
     <canvas id="architecture-canvas" aria-hidden="true"></canvas>

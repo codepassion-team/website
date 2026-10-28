@@ -3552,3 +3552,18 @@ html.menu-open,
     transform: none;
   }
 }
+
+/* Hero WebGPU shader: fades in over the static background once ready */
+#hero-shader {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 1.2s;
+  mask-image: linear-gradient(90deg, transparent 15%, #000 70%);
+}
+#hero-shader.is-ready {
+  opacity: 0.7;
+}
