@@ -3562,11 +3562,7 @@ html.menu-open,
   pointer-events: none;
   opacity: 0;
   transition: opacity 1.2s;
-  mask-image: radial-gradient(
-    ellipse 75% 70% at 50% 50%,
-    #000 35%,
-    transparent 100%
-  );
+  mask-image: linear-gradient(#000 78%, transparent);
 }
 #hero-shader.is-ready {
   opacity: 0.9;
