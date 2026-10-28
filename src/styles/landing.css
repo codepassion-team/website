@@ -3582,14 +3582,14 @@ html.menu-open,
 @media (min-width: 801px) {
   .story-chapter--stack,
   .is-enhanced .story-chapter--stack {
-    top: max(150px, 17svh);
+    top: clamp(96px, 15svh, 170px);
     left: 50%;
     width: min(1100px, calc(100% - 2 * var(--page-gutter)));
     transform: translateX(-50%);
     text-align: center;
   }
   .story-chapter--stack h1 {
-    font-size: clamp(48px, 5.4vw, 84px);
+    font-size: clamp(44px, min(5.4vw, 8.5svh), 84px);
     margin-bottom: 20px;
   }
   .story-chapter--stack h1 > .desktop-line {
@@ -3603,7 +3603,7 @@ html.menu-open,
     margin-bottom: 22px;
   }
   .story-chapter--stack .hero-description {
-    max-width: 680px;
+    max-width: 720px;
     margin-inline: auto;
     margin-bottom: 24px;
   }

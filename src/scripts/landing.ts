@@ -482,6 +482,7 @@ function setupStory(signal: AbortSignal) {
     const canvasBounds = canvas!.getBoundingClientRect();
     const kickerBounds = kicker?.getBoundingClientRect();
     const chapterBounds = activeChapter.getBoundingClientRect();
+    const openingBounds = chapters[0].getBoundingClientRect();
     renderer?.draw(
       progress,
       kickerBounds
@@ -506,6 +507,7 @@ function setupStory(signal: AbortSignal) {
             opacity: opacity[activeIndex],
           }
         : undefined,
+      openingBounds.bottom - canvasBounds.top,
     );
     if (currentNumber)
       currentNumber.textContent = String(activeIndex + 1).padStart(2, "0");

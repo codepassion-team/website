@@ -8,16 +8,16 @@ type Layer = {
 
 const grain: Layer = { type: "FilmGrain", props: { strength: 0.03 } };
 
-// Near-black base with crimson and deep-navy light that visibly drifts.
+// Near-black base with soft graphite light that slowly drifts.
 const base: Layer = {
   type: "FlowingGradient",
   props: {
-    colorA: "#040405",
-    colorB: "#0a0a0e",
-    colorC: "#9a2a2e",
-    colorD: "#1a2747",
-    speed: 0.7,
-    distortion: 0.75,
+    colorA: "#08090a",
+    colorB: "#0b0c0e",
+    colorC: "#24262b",
+    colorD: "#111317",
+    speed: 0.4,
+    distortion: 0.55,
   },
 };
 
@@ -30,12 +30,21 @@ export async function setupHeroShader() {
   if (!("gpu" in navigator)) return;
 
   const { createShader } = await import("shaders/js");
-  await createShader(
+  const shader = await createShader(
     canvas,
     { components },
     { onError: () => canvas.remove() },
-  ).then(
-    () => canvas.classList.add("is-ready"),
-    () => canvas.remove(),
-  );
+  ).catch(() => null);
+  if (!shader) {
+    canvas.remove();
+    return;
+  }
+  canvas.classList.add("is-ready");
+
+  // The library pins the canvas to its first size, so follow the stage instead.
+  const stage = canvas.parentElement;
+  if (stage)
+    new ResizeObserver(() =>
+      shader.resize(stage.clientWidth, stage.clientHeight),
+    ).observe(stage);
 }
