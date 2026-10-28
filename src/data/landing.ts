@@ -15,10 +15,10 @@ export const chapters = [
     key: "stack",
     layer: "FULL STACK",
     eyebrow: "SOFTWARE DEVELOPMENT & ARCHITECTURE",
-    lines: ["Software built", "around your", "business."],
-    mobileLines: ["Software built", "around your work."],
+    lines: ["Software built", "around how you work."],
+    mobileLines: ["Software built", "around how you work."],
     description:
-      "We design and build software around your workflows, connecting your tools, data and AI.",
+      "We design, build and connect your systems, from infrastructure and data to applications and AI agents.",
     action: "Talk about your project",
     href: "#contact",
     details: [
@@ -141,7 +141,6 @@ export const products = [
     description: "An AI website builder for creating your business website.",
     href: "https://sekweb.site",
     action: "Explore Sekweb",
-    glyph: "S",
     badge: "Live",
   },
   {
@@ -151,7 +150,6 @@ export const products = [
     description: "Manage your membership program through LINE OA.",
     href: "https://connex.codepassion.co",
     action: "Explore MemberConnex",
-    glyph: "M",
     badge: "Beta",
   },
   {
@@ -162,7 +160,6 @@ export const products = [
       "Contact our team for product details and to discuss whether Workery suits your business.",
     href: "#contact",
     action: "Ask about Workery",
-    glyph: "W",
   },
   {
     id: "workengine",
@@ -172,7 +169,6 @@ export const products = [
       "A software architecture framework for designing and building business applications.",
     href: "#contact",
     action: "Explore WorkEngine",
-    glyph: "WE",
   },
   {
     id: "line-oa-customer-portal",
@@ -182,7 +178,6 @@ export const products = [
       "Let customers check job status, request documents, and get service updates through the LINE they already use.",
     href: "/line-oa/",
     action: "See the LINE OA Customer Portal",
-    glyph: "CP",
     featured: true,
   },
 ];

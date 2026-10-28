@@ -100,7 +100,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     reflection.addColorStop(1, "#00000000");
     ctx.fillStyle = reflection;
     ctx.fillRect(cx - 340 * scale, cy - 220 * scale, 680 * scale, 640 * scale);
-    // A centered orbital ring frames the stack without competing with its layers.
+    // A soft centered glow frames the stack without competing with its layers.
     ctx.save();
     const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, 360 * scale);
     halo.addColorStop(0, "#ff8d6a08");
@@ -110,18 +110,22 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     ctx.beginPath();
     ctx.arc(cx, cy, 360 * scale, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "#ffac8d1c";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 332 * scale, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.strokeStyle = "#ffac8d2c";
-    ctx.beginPath();
-    ctx.arc(cx, cy, 356 * scale, -Math.PI * 0.73, -Math.PI * 0.28);
-    ctx.stroke();
     ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
+    // Contact shadow and floor light ground the stack instead of floating it.
+    const floor = geometry[STORY_LAYER_COUNT - 1];
+    surfaceScale = floor.scale;
+    ctx.save();
+    ctx.filter = `blur(${Math.round(34 * scale)}px)`;
+    polygon(square(185, floor.height - 70), "#000000c0");
+    ctx.filter = `blur(${Math.round(10 * scale)}px)`;
+    polygon(square(160, floor.height - 30), "#000000d0");
+    ctx.filter = `blur(${Math.round(18 * scale)}px)`;
+    ctx.globalCompositeOperation = "lighter";
+    polygon(square(200, floor.height - 60), undefined, "#c2413a55", 3 * scale);
+    ctx.restore();
+    surfaceScale = 1;
     for (let layer = STORY_LAYER_COUNT - 1; layer >= 0; layer--) {
       const emphasis = geometry[layer].focus;
       const y = geometry[layer].height;
@@ -434,14 +438,14 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     }
   }
 
-  function draw(progress: number, callout?: LayerCallout) {
+  function draw(progress: number, callout?: LayerCallout, copyBottom?: number) {
     if (!width || !height) resize();
     ctx.clearRect(0, 0, width, height);
     const mobile = width <= 800;
     const alignment = desktopStoryAlignment(progress);
     const centerX = width * (mobile ? 0.5 : alignment.x);
     let centerY = height * (mobile ? 0.43 : alignment.y);
-    const openingSize = Math.min(width / 980, height / 520, 2.65);
+    const openingSize = Math.min(width / 1150, height / 640, 2.2);
     const centeredSize = Math.min(width / 1450, height / 620, 2.2);
     let size = mobile
       ? Math.min(width / 550, height / (height < 650 ? 1380 : 1100), 0.9)
@@ -470,6 +474,23 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         openingBottom + (storyBottom - openingBottom) * storyComposition;
       size = Math.min(size, (frameBottom - frameTop) / (bottom - top));
       centerY = (frameTop + frameBottom) / 2 - ((top + bottom) * size) / 2;
+    } else if (copyBottom !== undefined) {
+      // Fit the opening stack between the centered headline and the controls.
+      const geometry = layerGeometry(progress);
+      const top = Math.min(
+        ...geometry.map((layer) => -layer.height - 105 * layer.scale),
+      );
+      const bottom = Math.max(
+        ...geometry.map((layer) => -layer.height + 105 * layer.scale + 18),
+      );
+      const frameTop = copyBottom + 32;
+      const frameBottom = height - 96;
+      const fitted = Math.min(size, (frameBottom - frameTop) / (bottom - top));
+      const fittedY =
+        (frameTop + frameBottom) / 2 - ((top + bottom) * fitted) / 2;
+      const opening = 1 - alignment.centered;
+      size += (fitted - size) * opening;
+      centerY += (fittedY - centerY) * opening;
     }
     structure(centerX, centerY, size, progress, 0.64, callout);
   }

@@ -3,6 +3,7 @@ const t = (text: string) =>
   translate(document.documentElement.lang === "th" ? "th" : "en", text);
 
 import { createArchitectureRenderer } from "./architecture";
+import { setupHeroShader } from "./hero-shader";
 import {
   layerStoryPosition,
   chapterOpacity,
@@ -120,6 +121,21 @@ function setupNavigation(signal: AbortSignal) {
       { signal },
     ),
   );
+  // The header is transparent over the hero and docks, with its background,
+  // once the first section reaches the upper half of the screen. A midpoint
+  // still counts anchor jumps, which stop short of the top (scroll-padding).
+  const header = document.getElementById("site-header");
+  const firstSection = document.getElementById("expertise");
+  const updateDock = () => {
+    if (!header || !firstSection) return;
+    header.classList.toggle(
+      "is-docked",
+      firstSection.getBoundingClientRect().top <= window.innerHeight / 2,
+    );
+  };
+  window.addEventListener("scroll", updateDock, { passive: true, signal });
+  window.addEventListener("resize", updateDock, { passive: true, signal });
+  updateDock();
   return () => {
     returnFocus = null;
     closeMenu();
@@ -143,7 +159,7 @@ function setupPortfolio(signal: AbortSignal) {
   const direct = document.querySelector<HTMLAnchorElement>("#preview-open");
   const preview = document.querySelector<HTMLElement>(".project-preview");
   const links = document.querySelectorAll<HTMLAnchorElement>(
-    "#preview-external, #preview-external-top, #preview-open",
+    "#preview-external, #preview-open",
   );
   const buttons = [
     ...document.querySelectorAll<HTMLButtonElement>(".project-button"),
@@ -246,8 +262,8 @@ function setupPortfolio(signal: AbortSignal) {
       load.classList.toggle("button-light", !unavailable);
       load.classList.toggle("button-quiet", unavailable);
       load.textContent = unavailable
-        ? t("Try embedded preview ↗")
-        : t("Load live preview ↗");
+        ? t("Try embedded preview")
+        : t("Load live preview");
     }
     if (note)
       note.textContent = unavailable
@@ -260,7 +276,10 @@ function setupPortfolio(signal: AbortSignal) {
     frame!.title = `${button.dataset.projectName} — ${t("Our work")}`;
     links.forEach((link) => {
       link.href = button.dataset.projectUrl!;
-      link.setAttribute("aria-label", `${button.dataset.projectName} ↗`);
+      link.setAttribute(
+        "aria-label",
+        `${t("Open website")} ${button.dataset.projectName}`,
+      );
     });
     buttons.forEach((item) => {
       item.setAttribute("aria-pressed", String(item === button));
@@ -300,7 +319,7 @@ function setupPortfolio(signal: AbortSignal) {
       attempted = true;
       if (load) {
         load.hidden = false;
-        load.textContent = t("Load live preview ↗");
+        load.textContent = t("Load live preview");
       }
       if (note) note.textContent = t("Loads the selected website here.");
       status!.textContent = t(
@@ -401,9 +420,9 @@ function setupStory(signal: AbortSignal) {
   );
   const siteHeader = document.querySelector<HTMLElement>("#site-header");
   const navigation = document.querySelector<HTMLElement>(".story-navigation");
-  const previous = document.querySelector<HTMLButtonElement>("#story-previous");
-  const next = document.querySelector<HTMLButtonElement>("#story-next");
-  const currentNumber = document.getElementById("story-current");
+  const dots = Array.from(
+    document.querySelectorAll<HTMLButtonElement>(".story-dot"),
+  );
   const label = document.getElementById("sculpture-label");
   const motionToggles = document.querySelectorAll<HTMLButtonElement>(
     "#motion-toggle, .menu-motion-toggle",
@@ -481,6 +500,7 @@ function setupStory(signal: AbortSignal) {
     const canvasBounds = canvas!.getBoundingClientRect();
     const kickerBounds = kicker?.getBoundingClientRect();
     const chapterBounds = activeChapter.getBoundingClientRect();
+    const openingBounds = chapters[0].getBoundingClientRect();
     renderer?.draw(
       progress,
       kickerBounds
@@ -505,11 +525,12 @@ function setupStory(signal: AbortSignal) {
             opacity: opacity[activeIndex],
           }
         : undefined,
+      openingBounds.bottom - canvasBounds.top,
     );
-    if (currentNumber)
-      currentNumber.textContent = String(activeIndex + 1).padStart(2, "0");
-    if (previous) previous.disabled = activeIndex === 0;
-    if (next) next.disabled = activeIndex === chapters.length - 1;
+    dots.forEach((dot, index) => {
+      if (index === activeIndex) dot.setAttribute("aria-current", "step");
+      else dot.removeAttribute("aria-current");
+    });
     if (
       navigationChapter !== null &&
       Math.abs(progress - navigationChapter) < 0.01
@@ -543,8 +564,15 @@ function setupStory(signal: AbortSignal) {
         preference.matches ||
         constrained ||
         shortViewport.matches;
-      toggle.textContent = animated ? t("Motion on") : t("Motion off");
-      toggle.setAttribute("aria-pressed", String(animated));
+      if (toggle.id === "motion-toggle")
+        toggle.setAttribute(
+          "aria-label",
+          animated ? t("Pause motion") : t("Play motion"),
+        );
+      else {
+        toggle.textContent = animated ? t("Motion on") : t("Motion off");
+        toggle.setAttribute("aria-pressed", String(animated));
+      }
     });
     cachedProgress = -1;
     displayedScroll = null;
@@ -552,14 +580,9 @@ function setupStory(signal: AbortSignal) {
     renderer?.resize();
     schedule();
   }
-  function navigateChapter(direction: number) {
+  function navigateToChapter(index: number) {
     if (!animated) return;
-    const current =
-      navigationChapter ?? Math.round(Math.max(0, cachedProgress));
-    navigationChapter = Math.max(
-      0,
-      Math.min(chapters.length - 1, current + direction),
-    );
+    navigationChapter = Math.max(0, Math.min(chapters.length - 1, index));
     const stage = story!.querySelector<HTMLElement>(".story-stage")!;
     const distance = story!.offsetHeight - stage.offsetHeight;
     const top = window.scrollY + story!.getBoundingClientRect().top;
@@ -571,8 +594,9 @@ function setupStory(signal: AbortSignal) {
       behavior: "smooth",
     });
   }
-  previous?.addEventListener("click", () => navigateChapter(-1), { signal });
-  next?.addEventListener("click", () => navigateChapter(1), { signal });
+  dots.forEach((dot, index) =>
+    dot.addEventListener("click", () => navigateToChapter(index), { signal }),
+  );
   const cancelNavigation = () => {
     navigationChapter = null;
   };
@@ -655,3 +679,5 @@ window.addEventListener("pagehide", () => cleanup());
 window.addEventListener("pageshow", (event) => {
   if (event.persisted) initialize();
 });
+
+void setupHeroShader();

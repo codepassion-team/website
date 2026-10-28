@@ -86,5 +86,6 @@ export function followScroll(
 /** The opening settles into the center before the first layer's copy appears. */
 export function desktopStoryAlignment(position: number) {
   const centered = ease(position / 0.58);
-  return { x: 0.65 - 0.15 * centered, y: 0.66 - 0.09 * centered, centered };
+  // The opening keeps the stack centered under the headline.
+  return { x: 0.5, y: 0.7 - 0.13 * centered, centered };
 }

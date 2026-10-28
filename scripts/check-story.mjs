@@ -128,7 +128,7 @@ console.log(
   "PASS: chapter navigation targets, expansion bounds, surrounding space and unchanged layer order.",
 );
 
-assert.equal(desktopStoryAlignment(0).x, 0.65);
+assert.equal(desktopStoryAlignment(0).x, 0.5);
 for (let position = 0.58; position <= 5; position += 0.01) {
   assert.equal(
     desktopStoryAlignment(position).x,
@@ -136,9 +136,7 @@ for (let position = 0.58; position <= 5; position += 0.01) {
     "The stack must remain centered across every layer chapter",
   );
 }
-console.log(
-  "PASS: opening right alignment and fixed center before layer copy appears.",
-);
+console.log("PASS: opening and layer chapters keep the stack centered.");
 
 const { connectorRoute } = await import("../src/scripts/story-connector.ts");
 for (const direction of [-1, 1]) {

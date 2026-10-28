@@ -46,9 +46,7 @@ const external = (href: string) =>
       aria-current={locale === "en" ? "page" : undefined}>EN</a
     >
   </nav>
-  <a href="#contact" class="header-cta"
-    >{t("Let’s talk")}<span aria-hidden="true">↗</span></a
-  >
+  <a href="#contact" class="header-cta">{t("Let’s talk")}</a>
   <button
     class="menu-toggle"
     aria-expanded="false"
@@ -77,7 +75,7 @@ const external = (href: string) =>
           </a>
         ))
       }
-      <a href="#contact">{t("Let’s talk ↗")}</a>
+      <a href="#contact">{t("Let’s talk")}</a>
     </nav>
     <div class="mobile-menu-options">
       <nav class="language-switch" aria-label={t("Language")}>

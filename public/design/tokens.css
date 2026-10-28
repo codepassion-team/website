@@ -17,6 +17,16 @@
     U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
+  font-family: "Inter";
+  src: url("./assets/inter-latin.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
   font-family: "JetBrains Mono";
   src: url("./assets/jetbrains-mono-latin.woff2") format("woff2");
   font-weight: 400;
@@ -24,15 +34,16 @@
   font-display: swap;
 }
 :root {
-  --ink: #090a0c;
-  --surface: #121316;
-  --paper: #f3f0ea;
-  --muted: #a6a6ad;
-  --line: #303137;
+  --ink: #08090a;
+  --surface: #0f1011;
+  --paper: #f7f8f8;
+  --muted: #8a8f98;
+  --faint: #62666d;
+  --line: #222326;
   --signal: #f04d2d;
   --rose: #ed1b5d;
   --brand-gradient: linear-gradient(115deg, var(--signal), var(--rose));
-  --font-body: "Noto Sans Thai", Arial, sans-serif;
+  --font-body: "Inter", "Noto Sans Thai", Arial, sans-serif;
   --font-detail: "JetBrains Mono", "Noto Sans Thai", monospace;
   --page-gutter: clamp(24px, 5vw, 88px);
   --content-width: 1440px;

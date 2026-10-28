@@ -62,9 +62,22 @@ for (const [locale, path] of [
     assert(ids.includes(product.id));
     assert.equal(
       [...html.matchAll(new RegExp(`href="#${product.id}"`, "g"))].length,
-      3,
-      "Product should be in desktop/mobile menus and footer",
+      1,
+      "Product should be linked from the footer",
     );
+  }
+  for (const nav of [
+    html.match(/<nav class="desktop-nav"[\s\S]*?<\/nav>/)?.[0],
+    html.match(/<nav class="mobile-nav"[\s\S]*?<\/nav>/)?.[0],
+  ]) {
+    assert(nav, `${locale}: desktop and mobile navigation`);
+    for (const href of [
+      "#expertise",
+      "https://connex.codepassion.co",
+      "/line-oa/",
+      "https://academy.codepassion.co/",
+    ])
+      assert(nav.includes(`href="${href}"`), `${locale}: nav links ${href}`);
   }
   const portalCard = html.match(
     /<article\b[^>]*id="line-oa-customer-portal"[\s\S]*?<\/article>/,
@@ -88,8 +101,11 @@ for (const [locale, path] of [
   for (const technology of technologyLayers.flatMap((layer) => layer.items))
     assert(html.includes(technology));
   assert(html.includes('id="motion-toggle"'));
-  assert(html.includes('id="story-next"'));
-  assert(html.includes('id="story-previous"'));
+  assert.equal(
+    [...html.matchAll(/data-chapter-target="[0-5]"/g)].length,
+    6,
+    `${locale}: one story dot per chapter`,
+  );
   assert.equal([...html.matchAll(/data-copy-side="right"/g)].length, 2);
   assert.equal([...html.matchAll(/class="technology-icon"/g)].length, 16);
   assert.equal([...html.matchAll(/data-icon="fa-brands:line"/g)].length, 1);
