@@ -19,8 +19,6 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
   const ctx = context;
   let width = 0;
   let height = 0;
-  const mirror = document.createElement("canvas");
-  const mirrorCtx = mirror.getContext("2d");
 
   function resize() {
     const bounds = canvas.getBoundingClientRect();
@@ -115,12 +113,17 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
-    // A tight contact shadow where the stack meets the mirrored floor.
+    // Contact shadow and floor light ground the stack instead of floating it.
     const floor = geometry[STORY_LAYER_COUNT - 1];
     surfaceScale = floor.scale;
     ctx.save();
-    ctx.filter = `blur(${Math.round(8 * scale)}px)`;
-    polygon(square(158, floor.height - 24), "#00000080");
+    ctx.filter = `blur(${Math.round(34 * scale)}px)`;
+    polygon(square(185, floor.height - 70), "#000000c0");
+    ctx.filter = `blur(${Math.round(10 * scale)}px)`;
+    polygon(square(160, floor.height - 30), "#000000d0");
+    ctx.filter = `blur(${Math.round(18 * scale)}px)`;
+    ctx.globalCompositeOperation = "lighter";
+    polygon(square(200, floor.height - 60), undefined, "#c2413a55", 3 * scale);
     ctx.restore();
     surfaceScale = 1;
     for (let layer = STORY_LAYER_COUNT - 1; layer >= 0; layer--) {
@@ -473,40 +476,6 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
       centerY = (frameTop + frameBottom) / 2 - ((top + bottom) * size) / 2;
     }
     structure(centerX, centerY, size, progress, 0.64, callout);
-    const floor = layerGeometry(progress)[STORY_LAYER_COUNT - 1];
-    reflect(centerY - (floor.height - 18) * size, size);
-  }
-
-  // Mirror the finished frame below the bottom layer, fading into the floor.
-  function reflect(floorY: number, size: number) {
-    if (!mirrorCtx) return;
-    const density = canvas.width / width;
-    const pivot = floorY * density;
-    mirror.width = canvas.width;
-    mirror.height = canvas.height;
-    mirrorCtx.drawImage(canvas, 0, 0);
-    ctx.save();
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.translate(0, 2 * pivot);
-    ctx.scale(1, -1);
-    ctx.drawImage(mirror, 0, 0);
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.globalCompositeOperation = "destination-in";
-    const fade = ctx.createLinearGradient(
-      0,
-      pivot,
-      0,
-      pivot + 230 * size * density,
-    );
-    fade.addColorStop(0, "rgba(0, 0, 0, 0.3)");
-    fade.addColorStop(1, "rgba(0, 0, 0, 0)");
-    ctx.fillStyle = fade;
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.clearRect(0, 0, canvas.width, pivot);
-    ctx.globalCompositeOperation = "source-over";
-    ctx.drawImage(mirror, 0, 0);
-    ctx.restore();
   }
   resize();
   return {
