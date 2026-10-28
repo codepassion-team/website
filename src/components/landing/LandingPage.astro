@@ -268,7 +268,12 @@ const canonical = `https://codepassion.co/${locale === "en" ? "en/" : ""}`;
                 <div class="product-info">
                   <>
                     <p class="eyebrow">{product.category}</p>
-                    <h3>{product.name}</h3>
+                    <h3>
+                      {product.name}
+                      {product.badge && (
+                        <span class="product-badge">{product.badge}</span>
+                      )}
+                    </h3>
                     <p>{product.description}</p>
                     <a
                       href={product.href}
