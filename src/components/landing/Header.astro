@@ -1,12 +1,21 @@
 ---
-import { getLandingContent } from "~/data/landing-locales";
+import { company } from "~/data/landing";
 import { translate, type Locale } from "~/data/landing-ui";
 interface Props {
   locale: Locale;
 }
 const { locale } = Astro.props;
 const t = (text: string) => translate(locale, text);
-const { products } = getLandingContent(locale);
+const navLinks = [
+  { label: "Software Solutions", href: "#expertise" },
+  { label: "MemberConnex", href: "https://connex.codepassion.co" },
+  { label: "LINE OA", href: "/line-oa/" },
+  { label: "Academy", href: company.academyUrl },
+];
+const external = (href: string) =>
+  href.startsWith("https")
+    ? { target: "_blank", rel: "noopener noreferrer" }
+    : {};
 ---
 
 <header class="site-header" id="site-header">
@@ -16,24 +25,13 @@ const { products } = getLandingContent(locale);
     ></a
   >
   <nav class="desktop-nav" aria-label={t("Main navigation")}>
-    <a href="#expertise">{t("Expertise")}</a><a href="#work">{t("Our work")}</a>
-    <details class="product-menu">
-      <summary>{t("Products")}<span aria-hidden="true">⌄</span></summary><div
-        class="product-dropdown"
-      >
-        {
-          products.map((product) => (
-            <a href={`#${product.id}`}>
-              <>
-                <span>{product.name}</span>
-                <span aria-hidden="true">↗</span>
-              </>
-            </a>
-          ))
-        }
-      </div>
-    </details>
-    <a href="#academy">{t("Academy")}</a>
+    {
+      navLinks.map(({ label, href }) => (
+        <a href={href} {...external(href)}>
+          {label}
+        </a>
+      ))
+    }
   </nav>
   <nav class="language-switch" aria-label={t("Language")}>
     <a
@@ -72,14 +70,14 @@ const { products } = getLandingContent(locale);
       >
     </div>
     <nav class="mobile-nav" id="mobile-nav" aria-label={t("Mobile navigation")}>
-      <a href="#expertise">{t("Expertise")}</a><a href="#work"
-        >{t("Our work")}</a
-      >
-      {products.map((product) => <a href={`#${product.id}`}>{product.name}</a>)}
-      <a href="#technologies">{t("Core technologies")}</a>
-      <a href="#academy">{t("Academy & courses")}</a><a href="#trust"
-        >{t("Customers & partners")}</a
-      ><a href="#contact">{t("Let’s talk ↗")}</a>
+      {
+        navLinks.map(({ label, href }) => (
+          <a href={href} {...external(href)}>
+            {label}
+          </a>
+        ))
+      }
+      <a href="#contact">{t("Let’s talk ↗")}</a>
     </nav>
     <div class="mobile-menu-options">
       <nav class="language-switch" aria-label={t("Language")}>
