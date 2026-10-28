@@ -3569,7 +3569,7 @@ html.menu-open,
   );
 }
 #hero-shader.is-ready {
-  opacity: 0.7;
+  opacity: 0.9;
 }
 /* Keep the hero clean: no decorative rings or floor grid */
 .stage-grid,

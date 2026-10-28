@@ -6,18 +6,18 @@ type Layer = {
   children?: Layer[];
 };
 
-const grain: Layer = { type: "FilmGrain", props: { strength: 0.06 } };
+const grain: Layer = { type: "FilmGrain", props: { strength: 0.03 } };
 
-// Near-black base with a faint crimson glow.
+// Near-black base with crimson and deep-navy light that visibly drifts.
 const base: Layer = {
   type: "FlowingGradient",
   props: {
-    colorA: "#050506",
-    colorB: "#08080b",
-    colorC: "#2a0c10",
-    colorD: "#0b0d14",
-    speed: 0.15,
-    distortion: 0.25,
+    colorA: "#040405",
+    colorB: "#0a0a0e",
+    colorC: "#9a2a2e",
+    colorD: "#1a2747",
+    speed: 0.7,
+    distortion: 0.75,
   },
 };
 
