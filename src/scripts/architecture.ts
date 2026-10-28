@@ -100,7 +100,7 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     reflection.addColorStop(1, "#00000000");
     ctx.fillStyle = reflection;
     ctx.fillRect(cx - 340 * scale, cy - 220 * scale, 680 * scale, 640 * scale);
-    // A centered orbital ring frames the stack without competing with its layers.
+    // A soft centered glow frames the stack without competing with its layers.
     ctx.save();
     const halo = ctx.createRadialGradient(cx, cy, 0, cx, cy, 360 * scale);
     halo.addColorStop(0, "#ff8d6a08");
@@ -110,15 +110,6 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
     ctx.beginPath();
     ctx.arc(cx, cy, 360 * scale, 0, Math.PI * 2);
     ctx.fill();
-    ctx.strokeStyle = "#ffac8d1c";
-    ctx.lineWidth = 1;
-    ctx.beginPath();
-    ctx.arc(cx, cy, 332 * scale, 0, Math.PI * 2);
-    ctx.stroke();
-    ctx.strokeStyle = "#ffac8d2c";
-    ctx.beginPath();
-    ctx.arc(cx, cy, 356 * scale, -Math.PI * 0.73, -Math.PI * 0.28);
-    ctx.stroke();
     ctx.restore();
     const geometry = layerGeometry(position);
     const strongest = Math.max(...geometry.map((layer) => layer.focus));
