@@ -108,7 +108,7 @@ const thai = {
       {
         category: "จัดการสมาชิก",
         description: "แพลตฟอร์มจัดการสมาชิกผ่าน LINE OA",
-        action: "สอบถามเกี่ยวกับ MemberConnex",
+        action: "รู้จัก MemberConnex",
       },
       {
         category: "ผลิตภัณฑ์จาก CodePassion",

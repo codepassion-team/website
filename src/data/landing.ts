@@ -148,9 +148,10 @@ export const products = [
     name: "MemberConnex",
     category: "Membership management",
     description: "Manage your membership program through LINE OA.",
-    href: "#contact",
-    action: "Ask about MemberConnex",
+    href: "https://connex.codepassion.co",
+    action: "Explore MemberConnex",
     glyph: "M",
+    badge: "Beta",
   },
   {
     id: "workery",
