@@ -167,6 +167,20 @@ h2 > span {
 .story-chapter h2 {
   text-wrap: balance;
 }
+/* A soft scrim keeps the hero copy readable over the moving shader. */
+.story-chapter--stack::before {
+  content: "";
+  position: absolute;
+  inset: -48px -12%;
+  z-index: -1;
+  background: radial-gradient(closest-side, #07060ab8, #07060a00);
+  pointer-events: none;
+}
+.static-story .story-chapter--stack {
+  position: relative;
+  top: auto;
+  left: auto;
+}
 .story-chapter--stack > .eyebrow {
   width: fit-content;
   margin-inline: auto;

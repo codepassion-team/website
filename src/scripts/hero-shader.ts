@@ -8,16 +8,17 @@ type Layer = {
 
 const grain: Layer = { type: "FilmGrain", props: { strength: 0.03 } };
 
-// Near-black base drifting through the stack's plum metal and ember glow.
+// Near-black base with the stack's plum metal and the logo's rose and
+// ember (#ed1b5d, #f04d2d), deepened so the hero copy stays readable.
 const base: Layer = {
   type: "FlowingGradient",
   props: {
-    colorA: "#08080a",
-    colorB: "#121016",
-    colorC: "#4a1c21",
-    colorD: "#231c2b",
-    speed: 0.4,
-    distortion: 0.55,
+    colorA: "#07060a",
+    colorB: "#231629",
+    colorC: "#a6133f",
+    colorD: "#b53a22",
+    speed: 1.2,
+    distortion: 0.85,
   },
 };
 
