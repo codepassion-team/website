@@ -53,6 +53,9 @@ dependencies:
   react-dom:
     specifier: ^18.3.1
     version: 18.3.1(react@18.3.1)
+  shaders:
+    specifier: ^4.0.5
+    version: 4.0.5(react-dom@18.3.1)(react@18.3.1)
   sharp:
     specifier: ^0.33.3
     version: 0.33.5
@@ -4564,6 +4567,32 @@ packages:
     engines: {node: '>=10'}
     hasBin: true
 
+  /shaders@4.0.5(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-1muVyMI5NGkv/+/QpHD9wY2HfmxeWq3MBDT3ERFBTStCSzikSBravuTaGv3B1nz0rXccvv3C0xp3lmvfptu3Zg==}
+    hasBin: true
+    peerDependencies:
+      react: ^18.0.0 || ^19.0.0
+      react-dom: ^18.0.0 || ^19.0.0
+      solid-js: ^1.8.0
+      svelte: ^5
+      vue: ^3.5.0
+    peerDependenciesMeta:
+      react:
+        optional: true
+      react-dom:
+        optional: true
+      solid-js:
+        optional: true
+      svelte:
+        optional: true
+      vue:
+        optional: true
+    dependencies:
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
+      typegpu: 0.12.3
+    dev: false
+
   /sharp@0.29.3:
     resolution: {integrity: sha512-fKWUuOw77E4nhpyzCCJR1ayrttHoFHBT2U/kR/qEMRhvPEcluG4BKj324+SCO1e84+knXHwhJ1HHJGnUt4ElGA==}
     engines: {node: '>=12.13.0'}
@@ -4882,6 +4911,11 @@ packages:
     resolution: {integrity: sha512-XPaBkWQJdsf3pLKJV9p4qN/S+fm2Oj8AIPo1BTUhg5oxkvm9+SVEGFdhyOz7tTdUTfvxMiAs4sp6/eZO2Ew+pw==}
     dev: false
 
+  /tinyest@0.3.4:
+    resolution: {integrity: sha512-81EcMHTCQ2IPweOGk9SpMgjbenR9ZJRsAE84btEv0DhvVKwhe7qBy28hWgatoXa9ppWzmtpHiJ+e86SiaAtY6w==}
+    engines: {node: '>=12.20.0'}
+    dev: false
+
   /tinyexec@0.3.2:
     resolution: {integrity: sha512-KQQR9yN7R5+OSwaK0XQoj22pwHoTlgYqmUscPYoknOoWCWfj/5/ABTMRi69FrKU5ffPVh5QcFikpWJI/P1ocHA==}
 
@@ -4942,6 +4976,10 @@ packages:
     requiresBuild: true
     optional: true
 
+  /tsover-runtime@0.0.7:
+    resolution: {integrity: sha512-FHHwMJzZbnP23+fU1PxXljy7j0RRRosL2r1/CRUNTqfW+l7m35JsUkM615x/cAzw4GqRdXPIl3axKMj9qzpZtQ==}
+    dev: false
+
   /tunnel-agent@0.6.0:
     resolution: {integrity: sha512-McnNiV1l8RYeY8tBgEpuodCC1mLUdbSN+CYBL7kJsJNInOP8UjDDEwdk6Mw60vdLLrr5NHKZhMAOSrR2NZuQ+w==}
     requiresBuild: true
@@ -4953,6 +4991,20 @@ packages:
   /type-fest@4.41.0:
     resolution: {integrity: sha512-TeTSQ6H5YHvpqVwBRcnLDCBnDOHWYu7IvGbHT6N8AOymcr9PJGjc1GTtiWZTYg0NCgYwvnYWEkVChQAr9bjfwA==}
     engines: {node: '>=16'}
+
+  /typed-binary@4.3.5:
+    resolution: {integrity: sha512-irziT9zxcyZs8TawuZBab1kQTACM3Q6wGWDh/a5IB2iWbueu+jbkN5ofoSvp28Em1w4ZEa7y44Jx7pHmgBGZdw==}
+    dev: false
+
+  /typegpu@0.12.3:
+    resolution: {integrity: sha512-zYwQEhnPPwhq5vQKmollXRK1LCVjStOnL+2B0PiebqvAzYPr25rPNR4r3olLoow5sKKjyj3kzHKEcpD5SyDzGQ==}
+    engines: {node: '>=12.20.0'}
+    hasBin: true
+    dependencies:
+      tinyest: 0.3.4
+      tsover-runtime: 0.0.7
+      typed-binary: 4.3.5
+    dev: false
 
   /typescript@5.9.3:
     resolution: {integrity: sha512-jl1vZzPDinLr9eUt3J/t7V6FgNEw9QjvBPdysz9KfQDD41fQrC2Y4vKQdiaUpFT4bXlb1RHhLpp8wtm6M5TgSw==}
