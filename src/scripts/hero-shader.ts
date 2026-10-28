@@ -26,8 +26,12 @@ function planetGeometry(width: number, height: number) {
   return { center: { x: 0.5, y: RIM_TOP + radius }, radius };
 }
 
+// The body's edge fades over BODY_FADE (in Circle units) and ends at the rim,
+// so ambient light seeps in under the rim like an atmosphere.
+const BODY_FADE = 0.2;
+
 function bodyProps({ center, radius }: ReturnType<typeof planetGeometry>) {
-  return { center, radius: radius * 2 };
+  return { center, radius: radius * 2 - BODY_FADE / 2 };
 }
 
 function rimProps({ center, radius }: ReturnType<typeof planetGeometry>) {
@@ -51,39 +55,47 @@ function layers(width: number, height: number): Layer[] {
     {
       type: "Circle",
       id: "body",
-      props: { ...bodyProps(planet), color: "#040216", softness: 0.08 },
+      props: { ...bodyProps(planet), color: "#040216", softness: BODY_FADE },
     },
     // Indigo light pooling low inside the planet.
     {
       type: "Circle",
       props: {
-        center: { x: 0.42, y: 1.3 },
-        radius: 1.8,
-        color: "#25128099",
-        softness: 1.4,
+        center: { x: 0.42, y: 1.22 },
+        radius: 1.7,
+        color: "#251280cc",
+        softness: 1.2,
       },
     },
+    // The rim, bloomed so it melts into the ambient light.
     {
-      type: "LightEdge",
-      id: "rim",
-      props: {
-        ...rimProps(planet),
-        stops: [
-          { color: "#9a367d", position: 0 },
-          { color: "#ae6075", position: 0.3 },
-          { color: "#ca8765", position: 0.5 },
-          { color: "#c9986e", position: 0.65 },
-          { color: "#943581", position: 1 },
-        ],
-        thickness: 0.012,
-        softness: 0.6,
-        intensity: 0.45,
-        bloom: 0.1,
-        spots: 2,
-        spotSize: 0.8,
-        smoke: 0.05,
-        speed: 0.35,
-      },
+      type: "Glow",
+      props: { intensity: 1, threshold: 0.1, size: 64 },
+      children: [
+        {
+          type: "LightEdge",
+          id: "rim",
+          props: {
+            ...rimProps(planet),
+            stops: [
+              { color: "#9a367d", position: 0 },
+              { color: "#ae6075", position: 0.3 },
+              { color: "#ca8765", position: 0.5 },
+              { color: "#c9986e", position: 0.65 },
+              { color: "#943581", position: 1 },
+            ],
+            thickness: 0.008,
+            softness: 1,
+            intensity: 0.35,
+            bloom: 0.1,
+            spots: 2,
+            spotSize: 0.9,
+            smoke: 0.35,
+            smokeSize: 0.6,
+            speed: 0.35,
+          },
+        },
+      ],
     },
     { type: "FilmGrain", props: { strength: 0.03 } },
   ];
