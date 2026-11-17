@@ -1,0 +1,46 @@
+---
+// Built to dist/404.html. Without it the host serves index.html with a 200
+// for any unknown URL, which Google reports as a soft 404.
+---
+
+<!doctype html>
+<html lang="th" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex" />
+    <title>ไม่พบหน้านี้ | CodePassion</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/design/tokens.css" />
+    <style>
+      body {
+        margin: 0;
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 16px;
+        background: var(--ink, #090a0c);
+        color: var(--paper, #f5f5f5);
+        font-family: "Noto Sans Thai", system-ui, sans-serif;
+        text-align: center;
+      }
+      h1 {
+        font-size: 4rem;
+        margin: 0;
+      }
+      p {
+        color: var(--muted, #9a9a9a);
+      }
+      a {
+        color: inherit;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>404</h1>
+      <p>ไม่พบหน้านี้ · Page not found</p>
+      <p><a href="/">กลับหน้าแรก</a> · <a href="/en/">Back to home</a></p>
+    </main>
+  </body>
+</html>
