@@ -169,6 +169,9 @@ const thai: Record<string, string> = {
   "Let’s build something meaningful together.":
     "มาสร้างสิ่งที่มีความหมายไปด้วยกัน",
   "Contact Us": "ติดต่อเรา",
+  "Choose an image": "เลือกรูป",
+  Image: "รูปที่",
+  of: "จาก",
 };
 export const translate = (locale: Locale, text: string) =>
   locale === "th" ? (thai[text] ?? text) : text;
