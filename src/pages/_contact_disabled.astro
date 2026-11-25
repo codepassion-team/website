@@ -35,7 +35,7 @@ const description = `Code Passion co., ltd. "Tech makes it real", our mission is
         document.documentElement.dataset.theme = themeSaved;
       } else {
         const prefersDark = window.matchMedia(
-          "(prefers-color-scheme: dark)"
+          "(prefers-color-scheme: dark)",
         ).matches;
         document.documentElement.dataset.theme = prefersDark ? "dark" : "light";
       }

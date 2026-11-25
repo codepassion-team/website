@@ -61,9 +61,7 @@ const executives: Array<TeamMember & { photo: any }> = [
               </div>
 
               {/* Name & title */}
-              <h3 class="font-semibold text-default text-xl">
-                {name}
-              </h3>
+              <h3 class="font-semibold text-default text-xl">{name}</h3>
               <span class="gradient-text font-bold text-sm">({nickname})</span>
               <p class="mt-2 font-medium text-offset text-sm">{title}</p>
 
@@ -101,11 +99,15 @@ const executives: Array<TeamMember & { photo: any }> = [
 
 <style is:global>
   .team-photo-ring {
-    box-shadow: 0 0 0 3px rgba(240, 77, 45, 0.15), 0 8px 30px rgba(0, 0, 0, 0.1);
+    box-shadow:
+      0 0 0 3px rgba(240, 77, 45, 0.15),
+      0 8px 30px rgba(0, 0, 0, 0.1);
   }
 
   .team-card:hover .team-photo-ring {
-    box-shadow: 0 0 0 3px rgba(240, 77, 45, 0.3), 0 8px 40px rgba(0, 0, 0, 0.15);
+    box-shadow:
+      0 0 0 3px rgba(240, 77, 45, 0.3),
+      0 8px 40px rgba(0, 0, 0, 0.15);
   }
 
   [data-theme="dark"] .team-card {
@@ -118,8 +120,8 @@ const executives: Array<TeamMember & { photo: any }> = [
   }
 
   [data-theme="light"] .team-card {
-    background: #FFFFFF;
-    border: 1px solid #E5E5E5;
+    background: #ffffff;
+    border: 1px solid #e5e5e5;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
   }
 

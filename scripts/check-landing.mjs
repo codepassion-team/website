@@ -22,6 +22,20 @@ for (const [locale, path] of [
     `${locale}: DOM ids must be unique`,
   );
   assert(html.includes(`lang="${locale}"`));
+  assert.equal(
+    [
+      ...html.matchAll(
+        /class="project-button[^"]*"[^>]*aria-pressed="(true|false)"/g,
+      ),
+    ].length,
+    6,
+    `${locale}: every project toggle exposes aria-pressed`,
+  );
+  const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0];
+  assert(
+    footer?.includes(`href="${locale === "en" ? "/en/" : "/"}work/"`),
+    `${locale}: footer links to the work page`,
+  );
   assert(html.includes(`hreflang="${locale}"`));
   assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
   assert.equal([...html.matchAll(/data-chapter="[0-5]"/g)].length, 6);

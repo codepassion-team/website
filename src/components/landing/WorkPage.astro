@@ -1,0 +1,290 @@
+---
+import "~/styles/landing.css";
+import "~/styles/landing-theme.css";
+import "~/styles/work.css";
+import { Image } from "astro:assets";
+import Header from "~/components/landing/Header.astro";
+import SiteFooter from "~/components/landing/SiteFooter.astro";
+import ProjectPreview from "~/components/landing/ProjectPreview.astro";
+import Analytics from "~/components/landing/Analytics.astro";
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+import { unavailablePreviews } from "~/data/landing";
+interface Props {
+  locale: Locale;
+}
+const { locale } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const { company, projects, projectGroups } = getLandingContent(locale);
+const work = projects.filter((project) => !project.hideOnWorkPage);
+const live = work.filter((project) => project.kind !== "internal");
+const root = locale === "en" ? "/en/" : "/";
+const canonical = `https://codepassion.co${root}work/`;
+const title = t("Our Work — CodePassion");
+const description = t(
+  "Websites, platforms and systems that CodePassion has built for businesses.",
+);
+const shots = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/work/*.webp",
+  { eager: true },
+);
+const shot = (slug: string) => shots[`/src/assets/work/${slug}.webp`].default;
+const sizes = {
+  lg: "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw",
+  md: "(max-width: 640px) 100vw, 50vw",
+  sm: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
+};
+const kindLabel = {
+  client: "",
+  product: t("A CodePassion product"),
+  internal: t("Internal system · login required"),
+};
+---
+
+<!doctype html>
+<html lang={locale} data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="theme-color" content="#090a0c" />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="stylesheet" href="/design/tokens.css" />
+    <link rel="alternate" hreflang="th" href="https://codepassion.co/work/" />
+    <link
+      rel="alternate"
+      hreflang="en"
+      href="https://codepassion.co/en/work/"
+    />
+    <link
+      rel="alternate"
+      hreflang="x-default"
+      href="https://codepassion.co/work/"
+    />
+    <link
+      rel="preload"
+      href={`/design/assets/noto-sans-thai-${locale === "th" ? "thai" : "latin"}.woff2`}
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <meta property="og:locale" content={locale === "th" ? "th_TH" : "en_US"} />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content="https://codepassion.co/cover.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "ItemList",
+        name: title,
+        itemListElement: live.map((project, index) => ({
+          "@type": "ListItem",
+          position: index + 1,
+          item: {
+            "@type": "CreativeWork",
+            name: project.name,
+            url: `https://${project.domain}/`,
+            creator: { "@id": "https://codepassion.co/#organization" },
+          },
+        })),
+      })}
+    />
+  </head>
+  <body>
+    <a class="skip-link" href="#projects">{t("Skip to main content")}</a>
+    <Header
+      locale={locale}
+      home={root}
+      alternates={{ th: "/work/", en: "/en/work/" }}
+      showMotionToggle={false}
+    />
+    <main>
+      <section class="section work-hero" id="home" aria-labelledby="work-title">
+        <div class="section-top">
+          <p class="eyebrow">
+            <span class="signal-dot"></span>{t("OUR WORK")}
+          </p>
+          <span class="micro">{work.length} {t("PROJECTS")}</span>
+        </div>
+        <div class="section-heading">
+          <h1 id="work-title">
+            {t("Our Work")}<br /><span
+              >{t("Digital experiences built with purpose.")}</span
+            >
+          </h1>
+          <p>
+            {
+              t(
+                "We build websites, platforms and digital tools around what each business needs. Open any project to see the live site.",
+              )
+            }
+          </p>
+        </div>
+      </section>
+
+      <section
+        class="section work-section"
+        id="projects"
+        aria-labelledby="work-title"
+      >
+        <div class="work-filter" role="group" aria-label={t("Filter projects")}>
+          <button type="button" data-group="all" aria-pressed="true"
+            >{t("All")}</button
+          >{
+            projectGroups.map((group) => (
+              <button type="button" data-group={group.id} aria-pressed="false">
+                {group.label}
+              </button>
+            ))
+          }
+        </div>
+        <p class="work-count micro" id="work-count" aria-live="polite"></p>
+
+        <div class="work-grid">
+          {
+            work.map((project, index) => (
+              <button
+                class={`work-card work-card--${project.size}`}
+                type="button"
+                aria-haspopup="dialog"
+                data-slug={project.slug}
+                data-group={project.group}
+                data-kind={project.kind}
+                data-project-name={project.name}
+                {...(project.kind !== "internal" && {
+                  "data-project-url": `https://${project.domain}`,
+                  "data-project-domain": project.domain,
+                  "data-preview-unavailable": String(
+                    unavailablePreviews.includes(project.domain),
+                  ),
+                })}
+              >
+                <span class="work-shot">
+                  <Image
+                    src={shot(project.slug)}
+                    alt=""
+                    widths={[480, 960, 1440]}
+                    sizes={sizes[project.size]}
+                    loading={index < 2 ? "eager" : "lazy"}
+                  />
+                </span>
+                <span class="work-meta micro">
+                  <span data-card="label">
+                    {project.number} / {project.category}
+                  </span>
+                  {kindLabel[project.kind] && (
+                    <span class="work-kind">{kindLabel[project.kind]}</span>
+                  )}
+                </span>
+                <strong class="work-name">{project.name}</strong>
+                <span class="work-desc">{project.description}</span>
+                <span class="work-tags">
+                  {project.tags.map((tag) => (
+                    <span>{tag}</span>
+                  ))}
+                </span>
+                <span class="work-view">
+                  {t("View project")} <span aria-hidden="true">→</span>
+                </span>
+              </button>
+            ))
+          }
+        </div>
+        <noscript
+          ><style>
+            .work-filter {
+              display: none !important;
+            }
+          </style><p class="micro">{t("Open the websites directly")}</p><ul
+            class="project-direct-links"
+          >
+            {
+              live.map((project) => (
+                <li>
+                  <a
+                    href={`https://${project.domain}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.name}
+                  </a>
+                </li>
+              ))
+            }
+          </ul></noscript
+        >
+      </section>
+
+      <section class="section work-cta" aria-labelledby="work-cta-heading">
+        <h2 id="work-cta-heading">
+          {t("Have a project in mind?")}<br /><span
+            >{t("Let’s build something meaningful together.")}</span
+          >
+        </h2>
+        <div class="work-cta-actions">
+          <a
+            href={company.contactUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="button button-light"
+            >{t("Contact Us")}<span aria-hidden="true">→</span></a
+          ><a href={company.phoneUrl} class="phone-link">{company.phone}</a>
+        </div>
+      </section>
+    </main>
+
+    <dialog
+      class="work-detail"
+      id="work-detail"
+      aria-labelledby="work-detail-name"
+    >
+      <div class="work-detail-head">
+        <p class="micro" data-detail="label"></p>
+        <button
+          class="work-detail-close"
+          type="button"
+          aria-label={t("Close project details")}>×</button
+        >
+      </div>
+      <h2 id="work-detail-name" data-detail="name"></h2>
+      <p class="work-detail-desc" data-detail="description"></p>
+      <p class="work-tags" data-detail="tags"></p>
+      <ProjectPreview locale={locale} project={live[0]}>
+        <Image
+          slot="cover"
+          class="work-cover-shot"
+          src={shot(live[0].slug)}
+          alt=""
+          widths={[960, 1440]}
+          sizes="(max-width: 800px) 100vw, 900px"
+          loading="lazy"
+        />
+      </ProjectPreview>
+      <figure class="work-detail-shot" hidden>
+        <Image
+          id="work-detail-image"
+          src={shot(work.find((project) => project.kind === "internal")!.slug)}
+          alt={t("Website preview")}
+          widths={[960, 1440]}
+          sizes="(max-width: 800px) 100vw, 900px"
+          loading="lazy"
+        />
+      </figure>
+    </dialog>
+
+    <SiteFooter locale={locale} home={root} />
+    <Analytics />
+    <script>
+      import "~/scripts/work";
+    </script>
+  </body>
+</html>

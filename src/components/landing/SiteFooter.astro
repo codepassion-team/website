@@ -26,7 +26,7 @@ const { company, products, channels } = getLandingContent(locale);
       <h2>{t("Explore")}</h2><a href={`${home}#technologies`}
         >{t("Core technologies")}</a
       ><a href={`${home}#expertise`}>{t("Expertise")}</a><a
-        href={`${home}#work`}>{t("Our work")}</a
+        href={`${locale === "en" ? "/en/" : "/"}work/`}>{t("Our work")}</a
       ><a href={`${home}#trust`}>{t("Customers & partners")}</a><a
         href={`${home}#certifications`}>{t("Certificates & standards")}</a
       ><a href="/line-oa/">{t("LINE OA Customer Portal")}</a>

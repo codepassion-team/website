@@ -49,7 +49,7 @@ const featured = getLandingContent(locale).projects.filter(
             data-preview-unavailable={String(
               unavailablePreviews.includes(project.domain),
             )}
-            aria-pressed={i === 0}
+            aria-pressed={String(i === 0)}
             aria-controls="portfolio-frame"
           >
             <>
@@ -66,6 +66,10 @@ const featured = getLandingContent(locale).projects.filter(
       }
     </div>
     <ProjectPreview locale={locale} project={featured[0]} />
+    <a
+      class="button button-quiet portfolio-all"
+      href={locale === "en" ? "/en/work/" : "/work/"}>{t("View all work →")}</a
+    >
   </div>
   <noscript
     ><style>
