@@ -31,7 +31,7 @@ for (const p of projects) {
   assert(p.description && p.tags.length >= 1, `${p.slug} copy`);
 }
 
-import { access } from "node:fs/promises";
+import { access, readdir } from "node:fs/promises";
 const workProjects = projects.filter((p) => !p.hideOnWorkPage);
 assert.deepEqual(
   projects.filter((p) => p.hideOnWorkPage).map((p) => p.slug),
@@ -42,6 +42,17 @@ assert(
   projects.every((p) => !("size" in p)),
   "no per-card sizes",
 );
+// Image-only projects carry a gallery of 6–7 images, picked in the dialog.
+const gallery = {};
+for (const slug of imageOnly) {
+  gallery[slug] = (await readdir(`src/assets/work/gallery/${slug}`)).filter(
+    (f) => f.endsWith(".webp"),
+  ).length;
+  assert(
+    gallery[slug] >= 6 && gallery[slug] <= 7,
+    `${slug} gallery has ${gallery[slug]} images`,
+  );
+}
 for (const p of workProjects) await access(`src/assets/work/${p.slug}.webp`);
 
 import { readFile } from "node:fs/promises";
@@ -109,6 +120,20 @@ for (const [locale, path, root] of [
     "lang switch",
   );
   assert(html.includes('"@type":"ItemList"'));
+  assert(html.includes('class="work-gallery-thumbs"'), "dialog has thumbnails");
+  for (const slug of imageOnly) {
+    const tpl = html.match(
+      new RegExp(
+        `<template data-gallery-for="${slug}"[^>]*>([\\s\\S]*?)</template>`,
+      ),
+    )?.[1];
+    assert(tpl, `${locale}: ${slug} gallery template`);
+    assert.equal(
+      [...tpl.matchAll(/<img /g)].length,
+      gallery[slug],
+      `${slug} gallery images`,
+    );
+  }
   assert(!html.includes("menu-motion-toggle"));
   assert(html.includes("<noscript"));
 }
