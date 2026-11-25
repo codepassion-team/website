@@ -19,7 +19,7 @@ const { company, projects, projectGroups } = getLandingContent(locale);
 const work = projects.filter((project) => !project.hideOnWorkPage);
 const live = work.filter((project) => !project.imageOnly);
 const root = locale === "en" ? "/en/" : "/";
-const canonical = `https://codepassion.co${root}portfolio/`;
+const canonical = `https://codepassion.co${root}portfolios/`;
 const title = t("Our Work — CodePassion");
 const description = t(
   "Websites, platforms and systems that CodePassion has built for businesses.",
@@ -29,6 +29,20 @@ const shots = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const shot = (slug: string) => shots[`/src/assets/work/${slug}.webp`].default;
+// Image-only projects show a gallery: src/assets/work/gallery/<slug>/NN.webp.
+const galleryFiles = import.meta.glob<{ default: ImageMetadata }>(
+  "/src/assets/work/gallery/*/*.webp",
+  { eager: true },
+);
+const gallery = (slug: string) =>
+  Object.keys(galleryFiles)
+    .filter((path) => path.startsWith(`/src/assets/work/gallery/${slug}/`))
+    .sort()
+    .map((path) => galleryFiles[path].default);
+const galleryWidths = (image: ImageMetadata) =>
+  [480, 960, 1440]
+    .filter((w) => w < image.width)
+    .concat(Math.min(image.width, 1440));
 const kindLabel = {
   client: "",
   product: t("A CodePassion product"),
@@ -50,16 +64,20 @@ const kindLabel = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/design/tokens.css" />
-    <link rel="alternate" hreflang="th" href="https://codepassion.co/portfolio/" />
+    <link
+      rel="alternate"
+      hreflang="th"
+      href="https://codepassion.co/portfolios/"
+    />
     <link
       rel="alternate"
       hreflang="en"
-      href="https://codepassion.co/en/portfolio/"
+      href="https://codepassion.co/en/portfolios/"
     />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://codepassion.co/portfolio/"
+      href="https://codepassion.co/portfolios/"
     />
     <link
       rel="preload"
@@ -99,7 +117,7 @@ const kindLabel = {
     <Header
       locale={locale}
       home={root}
-      alternates={{ th: "/portfolio/", en: "/en/portfolio/" }}
+      alternates={{ th: "/portfolios/", en: "/en/portfolios/" }}
       showMotionToggle={false}
     />
     <main>
@@ -265,17 +283,36 @@ const kindLabel = {
           loading="lazy"
         />
       </ProjectPreview>
-      <figure class="work-detail-shot" hidden>
-        <Image
-          id="work-detail-image"
-          src={shot(work.find((project) => project.imageOnly)!.slug)}
-          alt={t("Website preview")}
-          widths={[960, 1440]}
-          sizes="(max-width: 800px) 100vw, 900px"
-          loading="lazy"
-        />
+      <figure class="work-gallery" hidden>
+        <div class="work-gallery-stage" id="work-gallery-stage"></div>
+        <figcaption class="micro" id="work-gallery-count" aria-live="polite">
+        </figcaption>
+        <div
+          class="work-gallery-thumbs"
+          role="group"
+          aria-label={t("Choose an image")}
+        >
+        </div>
       </figure>
     </dialog>
+    {
+      work
+        .filter((project) => project.imageOnly)
+        .map((project) => (
+          <template data-gallery-for={project.slug}>
+            {gallery(project.slug).map((image, index) => (
+              <Image
+                src={image}
+                alt={`${project.name} — ${t("Image")} ${index + 1}`}
+                widths={galleryWidths(image)}
+                sizes="(max-width: 800px) 100vw, 900px"
+                loading="lazy"
+                data-portrait={image.height > image.width ? "" : undefined}
+              />
+            ))}
+          </template>
+        ))
+    }
 
     <SiteFooter locale={locale} home={root} />
     <Analytics />

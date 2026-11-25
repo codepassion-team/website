@@ -31,7 +31,7 @@ for (const p of projects) {
   assert(p.description && p.tags.length >= 1, `${p.slug} copy`);
 }
 
-import { access } from "node:fs/promises";
+import { access, readdir } from "node:fs/promises";
 const workProjects = projects.filter((p) => !p.hideOnWorkPage);
 assert.deepEqual(
   projects.filter((p) => p.hideOnWorkPage).map((p) => p.slug),
@@ -42,6 +42,17 @@ assert(
   projects.every((p) => !("size" in p)),
   "no per-card sizes",
 );
+// Image-only projects carry a gallery of 6–7 images, picked in the dialog.
+const gallery = {};
+for (const slug of imageOnly) {
+  gallery[slug] = (await readdir(`src/assets/work/gallery/${slug}`)).filter(
+    (f) => f.endsWith(".webp"),
+  ).length;
+  assert(
+    gallery[slug] >= 6 && gallery[slug] <= 7,
+    `${slug} gallery has ${gallery[slug]} images`,
+  );
+}
 for (const p of workProjects) await access(`src/assets/work/${p.slug}.webp`);
 
 import { readFile } from "node:fs/promises";
@@ -50,8 +61,8 @@ const thai = {
   nnm: "ระบบจัดการตลาดหนองเหนียว",
 };
 for (const [locale, path, root] of [
-  ["th", "dist/portfolio/index.html", "/"],
-  ["en", "dist/en/portfolio/index.html", "/en/"],
+  ["th", "dist/portfolios/index.html", "/"],
+  ["en", "dist/en/portfolios/index.html", "/en/"],
 ]) {
   const html = await readFile(path, "utf8");
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
@@ -64,14 +75,14 @@ for (const [locale, path, root] of [
   assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
   assert(
     html.includes(
-      `rel="canonical" href="https://codepassion.co${root}portfolio/"`,
+      `rel="canonical" href="https://codepassion.co${root}portfolios/"`,
     ),
   );
   assert(
-    html.includes('hreflang="th" href="https://codepassion.co/portfolio/"'),
+    html.includes('hreflang="th" href="https://codepassion.co/portfolios/"'),
   );
   assert(
-    html.includes('hreflang="en" href="https://codepassion.co/en/portfolio/"'),
+    html.includes('hreflang="en" href="https://codepassion.co/en/portfolios/"'),
   );
   const cards = [...html.matchAll(/<button[^>]*class="work-card[ "][^>]*>/g)];
   assert.equal(cards.length, workProjects.length, `${locale}: card count`);
@@ -105,22 +116,37 @@ for (const [locale, path, root] of [
       );
   assert(html.includes(`href="${root}#contact"`), "header CTA goes home");
   assert(
-    html.includes(`href="${root === "/" ? "/en/" : "/"}portfolio/"`),
+    html.includes(`href="${root === "/" ? "/en/" : "/"}portfolios/"`),
     "lang switch",
   );
   assert(html.includes('"@type":"ItemList"'));
+  assert(html.includes('class="work-gallery-thumbs"'), "dialog has thumbnails");
+  for (const slug of imageOnly) {
+    const tpl = html.match(
+      new RegExp(
+        `<template data-gallery-for="${slug}"[^>]*>([\\s\\S]*?)</template>`,
+      ),
+    )?.[1];
+    assert(tpl, `${locale}: ${slug} gallery template`);
+    assert.equal(
+      [...tpl.matchAll(/<img /g)].length,
+      gallery[slug],
+      `${slug} gallery images`,
+    );
+  }
   assert(!html.includes("menu-motion-toggle"));
   assert(html.includes("<noscript"));
 }
-await assert.rejects(access("dist/work/index.html"), "no /work/ page");
+for (const old of ["dist/work/index.html", "dist/portfolio/index.html"])
+  await assert.rejects(access(old), `no ${old}`);
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
 assert(
-  sitemap.includes("/portfolio/</loc>") &&
-    sitemap.includes("/en/portfolio/</loc>"),
+  sitemap.includes("/portfolios/</loc>") &&
+    sitemap.includes("/en/portfolios/</loc>"),
 );
 for (const [path, href] of [
-  ["dist/index.html", "/portfolio/"],
-  ["dist/en/index.html", "/en/portfolio/"],
+  ["dist/index.html", "/portfolios/"],
+  ["dist/en/index.html", "/en/portfolios/"],
 ]) {
   const portfolio = (await readFile(path, "utf8")).match(
     /id="work"[\s\S]*?<\/section>/,
