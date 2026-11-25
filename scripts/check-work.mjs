@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { projects, projectGroups } from "../src/data/landing.ts";
 
-assert.equal(projects.length, 18);
-assert.equal(new Set(projects.map((p) => p.slug)).size, 18);
+assert.equal(projects.length, 19);
+assert.equal(new Set(projects.map((p) => p.slug)).size, 19);
 assert.deepEqual(
   projects.filter((p) => p.featured).map((p) => p.domain),
   [
