@@ -195,6 +195,8 @@ export type Project = {
   kind: "client" | "product" | "internal";
   size: "lg" | "md" | "sm";
   featured: boolean;
+  /** Left off /work/ (shown on the home list only). */
+  hideOnWorkPage?: boolean;
   description: string;
   tags: string[];
 };
@@ -264,6 +266,8 @@ export const projects: Project[] = [
   },
   {
     slug: "smartsme",
+    // Site returned Cloudflare 522 on 2026-11-25; no screenshot to show.
+    hideOnWorkPage: true,
     name: "Smart SME Expo",
     domain: "smartsmeexpo.com",
     category: "Exhibition",

@@ -25,3 +25,11 @@ for (const p of projects) {
   assert(groups.has(p.group), `${p.slug} group`);
   assert(p.description && p.tags.length >= 1, `${p.slug} copy`);
 }
+
+import { access } from "node:fs/promises";
+const workProjects = projects.filter((p) => !p.hideOnWorkPage);
+assert.deepEqual(
+  projects.filter((p) => p.hideOnWorkPage).map((p) => p.slug),
+  ["smartsme"],
+);
+for (const p of workProjects) await access(`src/assets/work/${p.slug}.webp`);
