@@ -36,30 +36,32 @@ const { projects } = getLandingContent(locale);
       aria-label={t("Choose a portfolio website")}
     >
       {
-        projects.map((project, i) => (
-          <button
-            class:list={["project-button", { "is-selected": i === 0 }]}
-            type="button"
-            data-project-url={`https://${project.domain}`}
-            data-project-name={project.name}
-            data-project-domain={project.domain}
-            data-preview-unavailable={String(
-              unavailablePreviews.includes(project.domain),
-            )}
-            aria-pressed={i === 0}
-            aria-controls="portfolio-frame"
-          >
-            <>
-              <span class="project-number">{project.number}</span>
-              <span>
-                <>
-                  <strong>{project.name}</strong>
-                  <small>{project.category}</small>
-                </>
-              </span>
-            </>
-          </button>
-        ))
+        projects
+          .filter((project) => project.featured)
+          .map((project, i) => (
+            <button
+              class:list={["project-button", { "is-selected": i === 0 }]}
+              type="button"
+              data-project-url={`https://${project.domain}`}
+              data-project-name={project.name}
+              data-project-domain={project.domain}
+              data-preview-unavailable={String(
+                unavailablePreviews.includes(project.domain),
+              )}
+              aria-pressed={i === 0}
+              aria-controls="portfolio-frame"
+            >
+              <>
+                <span class="project-number">{project.number}</span>
+                <span>
+                  <>
+                    <strong>{project.name}</strong>
+                    <small>{project.category}</small>
+                  </>
+                </span>
+              </>
+            </button>
+          ))
       }
     </div>
     <div class="project-preview">

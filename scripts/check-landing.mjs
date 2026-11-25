@@ -56,7 +56,7 @@ for (const [locale, path] of [
     ),
   );
   assert(iframe.includes("Kantana Holdings"));
-  for (const project of projects)
+  for (const project of projects.filter((p) => p.featured))
     assert(html.includes(`data-project-url="https://${project.domain}"`));
   for (const product of products) {
     assert(ids.includes(product.id));
@@ -154,7 +154,7 @@ assert(robots.includes("Sitemap: https://codepassion.co/sitemap.xml"));
 console.log(
   "PASS: LINE OA has a canonical URL, homepage links, and sitemap discovery.",
 );
-assert.equal(projects.length, 6);
+assert.equal(projects.filter((p) => p.featured).length, 6);
 assert.equal(projects[2].domain, "trphospital.com");
 assert.equal(projects[2].category, "Hospital");
 assert.equal(projects[5].domain, "www.franchiseexpothailand.com");

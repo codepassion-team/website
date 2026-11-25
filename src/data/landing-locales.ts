@@ -3,6 +3,79 @@ import type { Locale } from "./landing-ui";
 
 const thaiDescription =
   "เราออกแบบและพัฒนาซอฟต์แวร์สำหรับธุรกิจ ตั้งแต่วางสถาปัตยกรรมจนถึงเชื่อมต่อกับระบบที่คุณใช้อยู่";
+const thaiProjects: Record<
+  string,
+  { category: string; description: string; tag: string; name?: string }
+> = {
+  kantana: {
+    category: "องค์กร",
+    description: "เว็บไซต์องค์กรของกลุ่มกันตนา",
+    tag: "เว็บไซต์องค์กร",
+  },
+  ddg: {
+    category: "เครื่องประดับ",
+    description: "เว็บไซต์ผู้ผลิตและจำหน่ายเพชรและตัวเรือน 18K ราคาส่ง",
+    tag: "ร้านค้าออนไลน์",
+  },
+  trp: {
+    category: "โรงพยาบาล",
+    description: "เว็บไซต์โรงพยาบาล",
+    tag: "เว็บไซต์สุขภาพ",
+  },
+  naturalhome: {
+    category: "อสังหาริมทรัพย์",
+    description: "เว็บไซต์บริษัทรับสร้างบ้าน",
+    tag: "เว็บไซต์องค์กร",
+  },
+  smartsme: {
+    category: "งานแสดงสินค้า",
+    description: "เว็บไซต์งานแสดงสินค้า",
+    tag: "เว็บไซต์งานอีเวนต์",
+  },
+  "franchise-expo": {
+    category: "งานแสดงสินค้า",
+    description: "เว็บไซต์งานแสดงสินค้าแฟรนไชส์",
+    tag: "เว็บไซต์งานอีเวนต์",
+  },
+  "movie-school": {
+    name: "คาบนี้ที่โรงหนัง",
+    category: "งานอีเวนต์",
+    description: "เว็บไซต์งานพร้อมระบบจองที่นั่งฟรี งานวันที่ 26 พ.ย. 2569",
+    tag: "ระบบจองที่นั่ง",
+  },
+  mindscix: {
+    category: "งานอีเวนต์",
+    description:
+      "เว็บลงทะเบียนงาน MindSciX 2026 Thailand Research & Innovation Forum",
+    tag: "ระบบลงทะเบียน",
+  },
+  kcp: {
+    category: "องค์กร",
+    description: "เว็บไซต์องค์กรของ KCP",
+    tag: "เว็บไซต์องค์กร",
+  },
+  lawnextstep: {
+    category: "ระบบยื่นเอกสารออนไลน์",
+    description: "เว็บแอปสำหรับยื่นเอกสารทางกฎหมายออนไลน์",
+    tag: "เว็บแอปพลิเคชัน",
+  },
+  nnm: {
+    category: "ระบบจัดการตลาด",
+    description: "ระบบจัดการตลาดหนองเหนียว",
+    tag: "แดชบอร์ด",
+  },
+  memberconnex: {
+    category: "ระบบสมาชิกผ่าน LINE OA",
+    description: "ระบบจัดการสมาชิกผ่าน LINE OA",
+    tag: "LINE OA",
+  },
+  academy: {
+    category: "แพลตฟอร์มคอร์สเรียน",
+    description: "หลักสูตร AI สำหรับเจ้าของธุรกิจ ผู้บริหาร และนักพัฒนา",
+    tag: "เว็บไซต์คอร์สเรียน",
+  },
+};
+
 const thai = {
   company: { ...base.company, description: thaiDescription },
   chapters: base.chapters.map((chapter, index) => ({
@@ -132,17 +205,21 @@ const thai = {
       },
     ][index],
   })),
+  projectGroups: base.projectGroups.map((group) => ({
+    ...group,
+    label: {
+      corporate: "องค์กร",
+      ecommerce: "อีคอมเมิร์ซ",
+      healthcare: "สุขภาพ",
+      events: "งานอีเวนต์",
+      platforms: "แพลตฟอร์มและระบบ",
+    }[group.id],
+  })),
   projects: base.projects.map((project) => ({
     ...project,
-    category: (
-      {
-        Corporate: "องค์กร",
-        Jewelry: "เครื่องประดับ",
-        Property: "อสังหาริมทรัพย์",
-        Exhibition: "งานแสดงสินค้า",
-        Hospital: "โรงพยาบาล",
-      } as Record<string, string>
-    )[project.category],
+    ...thaiProjects[project.slug],
+    // Tech names stay in English; only the first, descriptive tag is translated.
+    tags: [thaiProjects[project.slug].tag, ...project.tags.slice(1)],
   })),
   courses: base.courses.map((course, index) => ({
     ...course,
