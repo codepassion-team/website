@@ -196,7 +196,7 @@ export type Project = {
   featured: boolean;
   /** Shown as a screenshot only: no live preview and no link. */
   imageOnly?: boolean;
-  /** Left off /work/ (shown on the home list only). */
+  /** Left off /portfolio/ (shown on the home list only). */
   hideOnWorkPage?: boolean;
   description: string;
   tags: string[];

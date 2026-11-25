@@ -33,7 +33,7 @@ for (const [locale, path] of [
   );
   const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0];
   assert(
-    footer?.includes(`href="${locale === "en" ? "/en/" : "/"}work/"`),
+    footer?.includes(`href="${locale === "en" ? "/en/" : "/"}portfolio/"`),
     `${locale}: footer links to the work page`,
   );
   assert(html.includes(`hreflang="${locale}"`));

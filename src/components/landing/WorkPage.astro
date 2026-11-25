@@ -19,7 +19,7 @@ const { company, projects, projectGroups } = getLandingContent(locale);
 const work = projects.filter((project) => !project.hideOnWorkPage);
 const live = work.filter((project) => !project.imageOnly);
 const root = locale === "en" ? "/en/" : "/";
-const canonical = `https://codepassion.co${root}work/`;
+const canonical = `https://codepassion.co${root}portfolio/`;
 const title = t("Our Work — CodePassion");
 const description = t(
   "Websites, platforms and systems that CodePassion has built for businesses.",
@@ -50,16 +50,16 @@ const kindLabel = {
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="stylesheet" href="/design/tokens.css" />
-    <link rel="alternate" hreflang="th" href="https://codepassion.co/work/" />
+    <link rel="alternate" hreflang="th" href="https://codepassion.co/portfolio/" />
     <link
       rel="alternate"
       hreflang="en"
-      href="https://codepassion.co/en/work/"
+      href="https://codepassion.co/en/portfolio/"
     />
     <link
       rel="alternate"
       hreflang="x-default"
-      href="https://codepassion.co/work/"
+      href="https://codepassion.co/portfolio/"
     />
     <link
       rel="preload"
@@ -99,7 +99,7 @@ const kindLabel = {
     <Header
       locale={locale}
       home={root}
-      alternates={{ th: "/work/", en: "/en/work/" }}
+      alternates={{ th: "/portfolio/", en: "/en/portfolio/" }}
       showMotionToggle={false}
     />
     <main>

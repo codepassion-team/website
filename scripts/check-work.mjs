@@ -50,8 +50,8 @@ const thai = {
   nnm: "ระบบจัดการตลาดหนองเหนียว",
 };
 for (const [locale, path, root] of [
-  ["th", "dist/work/index.html", "/"],
-  ["en", "dist/en/work/index.html", "/en/"],
+  ["th", "dist/portfolio/index.html", "/"],
+  ["en", "dist/en/portfolio/index.html", "/en/"],
 ]) {
   const html = await readFile(path, "utf8");
   const ids = [...html.matchAll(/\bid="([^"]+)"/g)].map((m) => m[1]);
@@ -63,10 +63,16 @@ for (const [locale, path, root] of [
   assert(html.includes(`lang="${locale}"`));
   assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
   assert(
-    html.includes(`rel="canonical" href="https://codepassion.co${root}work/"`),
+    html.includes(
+      `rel="canonical" href="https://codepassion.co${root}portfolio/"`,
+    ),
   );
-  assert(html.includes('hreflang="th" href="https://codepassion.co/work/"'));
-  assert(html.includes('hreflang="en" href="https://codepassion.co/en/work/"'));
+  assert(
+    html.includes('hreflang="th" href="https://codepassion.co/portfolio/"'),
+  );
+  assert(
+    html.includes('hreflang="en" href="https://codepassion.co/en/portfolio/"'),
+  );
   const cards = [...html.matchAll(/<button[^>]*class="work-card[ "][^>]*>/g)];
   assert.equal(cards.length, workProjects.length, `${locale}: card count`);
   assert(!html.includes('data-slug="smartsme"'));
@@ -99,18 +105,22 @@ for (const [locale, path, root] of [
       );
   assert(html.includes(`href="${root}#contact"`), "header CTA goes home");
   assert(
-    html.includes(`href="${root === "/" ? "/en/" : "/"}work/"`),
+    html.includes(`href="${root === "/" ? "/en/" : "/"}portfolio/"`),
     "lang switch",
   );
   assert(html.includes('"@type":"ItemList"'));
   assert(!html.includes("menu-motion-toggle"));
   assert(html.includes("<noscript"));
 }
+await assert.rejects(access("dist/work/index.html"), "no /work/ page");
 const sitemap = await readFile("dist/sitemap.xml", "utf8");
-assert(sitemap.includes("/work/</loc>") && sitemap.includes("/en/work/</loc>"));
+assert(
+  sitemap.includes("/portfolio/</loc>") &&
+    sitemap.includes("/en/portfolio/</loc>"),
+);
 for (const [path, href] of [
-  ["dist/index.html", "/work/"],
-  ["dist/en/index.html", "/en/work/"],
+  ["dist/index.html", "/portfolio/"],
+  ["dist/en/index.html", "/en/portfolio/"],
 ]) {
   const portfolio = (await readFile(path, "utf8")).match(
     /id="work"[\s\S]*?<\/section>/,
