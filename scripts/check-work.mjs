@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { projects, projectGroups } from "../src/data/landing.ts";
 
-assert.equal(projects.length, 17);
-assert.equal(new Set(projects.map((p) => p.slug)).size, 17);
+assert.equal(projects.length, 18);
+assert.equal(new Set(projects.map((p) => p.slug)).size, 18);
 assert.deepEqual(
   projects.filter((p) => p.featured).map((p) => p.domain),
   [
@@ -15,7 +15,7 @@ assert.deepEqual(
   ],
 );
 // Image-only projects: shown as a screenshot, never linked or embedded.
-const imageOnly = ["nnm", "apo-crm", "smiley", "twhe", "aestec"];
+const imageOnly = ["nnm", "apo-crm", "smiley", "twhe", "aestec", "muztea"];
 assert.deepEqual(
   projects.filter((p) => p.imageOnly).map((p) => p.slug),
   imageOnly,

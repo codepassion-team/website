@@ -428,6 +428,20 @@ export const projects: Project[] = [
     description: "Clinic finder with a map for Aestec partner clinics.",
     tags: ["Clinic finder", "Next.js"],
   },
+  {
+    slug: "muztea",
+    name: "MUZ Tea",
+    domain: "preview.muzbrand.com",
+    category: "Brand website",
+    number: "18",
+    group: "corporate",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    // The live muzbrand.com is no longer our build; screenshot from a local run.
+    description: "Brand website for MUZ instant milk tea and coffee.",
+    tags: ["Brand website", "Next.js", "Firebase"],
+  },
 ];
 
 // Embedded pages unavailable in browser validation; keep a direct-first option.
