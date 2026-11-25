@@ -1,39 +1,39 @@
 [data-theme="light"] {
-  --color-brand-red: #f04d2d;
-  --color-brand-orange-red: #ef3643;
-  --color-brand-pink-red: #ed1b5d;
+  --color-brand-red: #F04D2D;
+  --color-brand-orange-red: #EF3643;
+  --color-brand-pink-red: #ED1B5D;
   --color-brand-black: #252525;
 
-  --color-background: #fafafa;
-  --color-background-card: #ffffff;
-  --color-background-offset: #f0f0f0;
+  --color-background: #FAFAFA;
+  --color-background-card: #FFFFFF;
+  --color-background-offset: #F0F0F0;
 
   --color-text: #252525;
   --color-text-muted: #666666;
 
-  --color-border: #e5e5e5;
+  --color-border: #E5E5E5;
 
   --color-primary: #252525;
-  --color-secondary: #ffffff;
+  --color-secondary: #FFFFFF;
   --color-text-offset: #666666;
 }
 
 [data-theme="dark"] {
-  --color-brand-red: #f04d2d;
-  --color-brand-orange-red: #ef3643;
-  --color-brand-pink-red: #ed1b5d;
+  --color-brand-red: #F04D2D;
+  --color-brand-orange-red: #EF3643;
+  --color-brand-pink-red: #ED1B5D;
   --color-brand-black: #252525;
 
-  --color-background: #0a0a0a;
+  --color-background: #0A0A0A;
   --color-background-card: #141414;
-  --color-background-offset: #1a1a1a;
+  --color-background-offset: #1A1A1A;
 
-  --color-text: #ffffff;
+  --color-text: #FFFFFF;
   --color-text-muted: #888888;
 
   --color-border: #222222;
 
-  --color-primary: #ffffff;
+  --color-primary: #FFFFFF;
   --color-secondary: #000000;
-  --color-text-offset: #aaaaaa;
+  --color-text-offset: #AAAAAA;
 }

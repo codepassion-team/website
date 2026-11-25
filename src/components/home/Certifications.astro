@@ -19,41 +19,28 @@ const certifications = [
 ];
 ---
 
-<section
-  id="certifications"
-  class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32"
->
+<section id="certifications" class="animate-on-scroll px-6 py-24 md:px-12 lg:py-32">
   <div class="mx-auto max-w-7xl">
-    <p class="font-light uppercase tracking-widest text-offset text-sm">
-      Certifications
-    </p>
-    <h2 class="gradient-text mt-2 font-bold text-3xl md:text-4xl lg:text-5xl">
-      Recognized. Certified. Trusted.
-    </h2>
-    <p class="mt-4 max-w-2xl font-light text-offset text-lg">
-      Industry partnerships and international certifications that validate our
-      standards.
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Certifications</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">Recognized. Certified. Trusted.</h2>
+    <p class="mt-4 max-w-2xl text-lg font-light text-offset">
+      Industry partnerships and international certifications that validate our standards.
     </p>
 
     <div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-      {
-        certifications.map(({ title, image }) => (
-          <div class="cert-card group flex flex-col items-center justify-center p-8 text-center transition-all duration-300 hover:-translate-y-1">
-            <img
-              src={image}
-              alt={`${title} certification badge`}
-              class="mb-4 h-20 w-auto"
-              loading="lazy"
-            />
-            <h3
-              class="font-semibold text-default"
-              style="font-family: 'Mitr', sans-serif; font-size: 1rem;"
-            >
-              {title}
-            </h3>
-          </div>
-        ))
-      }
+      {certifications.map(({ title, image }) => (
+        <div class="cert-card group flex flex-col items-center justify-center p-8 text-center transition-all duration-300 hover:-translate-y-1">
+          <img
+            src={image}
+            alt={`${title} certification badge`}
+            class="mb-4 h-20 w-auto"
+            loading="lazy"
+          />
+          <h3 class="font-semibold text-default" style="font-family: 'Mitr', sans-serif; font-size: 1rem;">
+            {title}
+          </h3>
+        </div>
+      ))}
     </div>
   </div>
 </section>
@@ -64,7 +51,7 @@ const certifications = [
   }
 
   [data-theme="dark"] .cert-card {
-    background: #0f1623;
+    background: #0F1623;
     border: 1px solid rgba(30, 100, 200, 0.2);
     box-shadow: 0 0 20px rgba(30, 100, 200, 0.15);
   }
@@ -75,7 +62,7 @@ const certifications = [
   }
 
   [data-theme="light"] .cert-card {
-    background: #ffffff;
+    background: #FFFFFF;
     border: 1px solid rgba(30, 100, 200, 0.15);
     box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
   }

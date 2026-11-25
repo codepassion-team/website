@@ -460,15 +460,16 @@ export function createArchitectureRenderer(canvas: HTMLCanvasElement) {
         ...geometry.map((layer) => -layer.height + 105 * layer.scale + 18),
       );
       const headerHeight =
-        document.getElementById("site-header")?.getBoundingClientRect()
-          .height ?? 68;
+        document.getElementById("site-header")?.getBoundingClientRect().height ??
+        68;
       const transition = Math.max(0, Math.min(1, progress / 0.12));
       const storyComposition = transition * transition * (3 - 2 * transition);
       const openingTop = height * 0.42;
       const storyTop = Math.max(headerHeight + 18, height * 0.18);
       const openingBottom = height - (height < 650 ? 112 : 96);
       const storyBottom = height * 0.56;
-      const frameTop = openingTop + (storyTop - openingTop) * storyComposition;
+      const frameTop =
+        openingTop + (storyTop - openingTop) * storyComposition;
       const frameBottom =
         openingBottom + (storyBottom - openingBottom) * storyComposition;
       size = Math.min(size, (frameBottom - frameTop) / (bottom - top));

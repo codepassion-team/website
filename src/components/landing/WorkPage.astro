@@ -179,7 +179,7 @@ const kindLabel = {
                 </span>
                 <span class="work-meta micro">
                   <span data-card="label">
-                    {project.number} / {project.category}
+                    {String(index + 1).padStart(2, "0")} / {project.category}
                   </span>
                   {kindLabel[project.kind] && (
                     <span class="work-kind">{kindLabel[project.kind]}</span>

@@ -41,40 +41,29 @@ const clients: Array<ClientLogo> = [
 ];
 ---
 
-<section
-  id="clients"
-  class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32"
->
+<section id="clients" class="animate-on-scroll bg-offset px-6 py-24 md:px-12 lg:py-32">
   <div class="mx-auto max-w-7xl">
-    <p class="font-light uppercase tracking-widest text-offset text-sm">
-      Our Clients
-    </p>
-    <h2 class="gradient-text mt-2 font-bold text-3xl md:text-4xl lg:text-5xl">
-      Trusted by 30+ Businesses
-    </h2>
+    <p class="text-sm font-light uppercase tracking-widest text-offset">Our Clients</p>
+    <h2 class="gradient-text mt-2 text-3xl font-bold md:text-4xl lg:text-5xl">Trusted by 30+ Businesses</h2>
 
     <!-- Stats row -->
     <div class="mt-8 flex flex-wrap justify-center gap-8 md:gap-16">
       <div class="text-center">
-        <p class="gradient-text font-bold text-3xl">30+</p>
-        <p class="font-light text-offset text-xs">Projects Delivered</p>
+        <p class="text-3xl font-bold gradient-text">30+</p>
+        <p class="text-xs font-light text-offset">Projects Delivered</p>
       </div>
       <div class="text-center">
-        <p class="gradient-text font-bold text-3xl">5+</p>
-        <p class="font-light text-offset text-xs">Years in Business</p>
+        <p class="text-3xl font-bold gradient-text">5+</p>
+        <p class="text-xs font-light text-offset">Years in Business</p>
       </div>
       <div class="text-center">
-        <p class="gradient-text font-bold text-3xl">100%</p>
-        <p class="font-light text-offset text-xs">Enterprise-Grade Quality</p>
+        <p class="text-3xl font-bold gradient-text">100%</p>
+        <p class="text-xs font-light text-offset">Enterprise-Grade Quality</p>
       </div>
     </div>
 
     <!-- Logo grid -->
-    <div
-      class="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5"
-      role="list"
-      aria-label="Our clients"
-    >
+    <div class="mt-12 grid grid-cols-2 gap-5 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5" role="list" aria-label="Our clients">
       {
         clients.map(({ title, logo }) => (
           <div
@@ -99,13 +88,13 @@ const clients: Array<ClientLogo> = [
 <style>
   .client-logo-card {
     border-radius: 0.75rem;
-    background: #ffffff;
-    border: 1px solid #e5e5e5;
+    background: #FFFFFF;
+    border: 1px solid #E5E5E5;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
   }
 
   .client-logo-card:hover {
-    background: #ffffff;
-    border-color: #d0d0d0;
+    background: #FFFFFF;
+    border-color: #D0D0D0;
   }
 </style>

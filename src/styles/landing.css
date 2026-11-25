@@ -316,8 +316,7 @@ ul {
 .stage-grid {
   position: absolute;
   inset: 0;
-  background-image:
-    linear-gradient(#ffffff04 1px, transparent 1px),
+  background-image: linear-gradient(#ffffff04 1px, transparent 1px),
     linear-gradient(90deg, #ffffff04 1px, transparent 1px);
   background-size: 88px 88px;
   mask-image: linear-gradient(90deg, transparent 35%, #000 100%);
@@ -355,9 +354,7 @@ ul {
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition:
-    opacity 180ms ease,
-    visibility 180ms ease;
+  transition: opacity 180ms ease, visibility 180ms ease;
 }
 .story-brand.is-visible {
   opacity: 1;
@@ -822,8 +819,7 @@ ul {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  background:
-    radial-gradient(ellipse at 70% 35%, #72534044, transparent 60%),
+  background: radial-gradient(ellipse at 70% 35%, #72534044, transparent 60%),
     linear-gradient(130deg, #221e21, #0e0f12);
 }
 .preview-mark {
@@ -953,8 +949,8 @@ ul {
   justify-content: center;
   position: relative;
   overflow: hidden;
-  background:
-    radial-gradient(ellipse at 70% 90%, #8c272b4f, transparent 65%), #161315;
+  background: radial-gradient(ellipse at 70% 90%, #8c272b4f, transparent 65%),
+    #161315;
 }
 .product-art > .micro {
   position: absolute;
@@ -997,8 +993,8 @@ ul {
   border-radius: 50%;
 }
 .product-1 .product-art {
-  background:
-    radial-gradient(ellipse at 70% 90%, #154d6050, transparent 65%), #10171b;
+  background: radial-gradient(ellipse at 70% 90%, #154d6050, transparent 65%),
+    #10171b;
 }
 .product-1 .product-monogram {
   color: #a5d0d4;
@@ -1013,8 +1009,8 @@ ul {
   border-color: #639b9c33;
 }
 .product-2 .product-art {
-  background:
-    radial-gradient(ellipse at 70% 90%, #755e2850, transparent 65%), #191713;
+  background: radial-gradient(ellipse at 70% 90%, #755e2850, transparent 65%),
+    #191713;
 }
 .product-2 .product-monogram {
   color: #ddcba2;
@@ -2238,8 +2234,8 @@ body {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .product-3 .product-art {
-  background:
-    radial-gradient(ellipse at 50% 100%, #f04d2d24, transparent 70%), #121519;
+  background: radial-gradient(ellipse at 50% 100%, #f04d2d24, transparent 70%),
+    #121519;
 }
 .product-3 .product-monogram {
   font-size: 76px;
@@ -3200,8 +3196,7 @@ html.menu-open,
 
 /* A full-viewport architectural light field, with room for the live stack. */
 .story-stage {
-  background:
-    radial-gradient(
+  background: radial-gradient(
       ellipse at 76% 42%,
       #432322 0%,
       #21171c 24%,
@@ -3236,8 +3231,7 @@ html.menu-open,
 .stage-grid {
   inset: 48% -30% -65%;
   background-size: 90px 90px;
-  background-image:
-    linear-gradient(#ecaa7a14 1px, transparent 1px),
+  background-image: linear-gradient(#ecaa7a14 1px, transparent 1px),
     linear-gradient(90deg, #ecaa7a14 1px, transparent 1px);
   transform: perspective(600px) rotateX(58deg);
   mask-image: radial-gradient(ellipse at 55% 0%, #000, transparent 68%);
@@ -3474,8 +3468,7 @@ html.menu-open,
   }
 }
 .product-4 .product-art {
-  background:
-    radial-gradient(ellipse at 30% 100%, #06c75530, transparent 65%),
+  background: radial-gradient(ellipse at 30% 100%, #06c75530, transparent 65%),
     radial-gradient(ellipse at 85% 10%, #f04d2d22, transparent 60%), #0f1712;
 }
 .product-4 .product-monogram {

@@ -32,6 +32,15 @@ assert.deepEqual(
   projects.filter((p) => p.hideOnWorkPage).map((p) => p.slug),
   ["smartsme"],
 );
+// The grid is not "dense": in DOM order, card sizes must fill 12-column rows.
+const span = { lg: 8, md: 6, sm: 4 };
+let row = 0;
+for (const p of workProjects) {
+  row += span[p.size];
+  assert(row <= 12, `${p.slug} overflows its row`);
+  if (row === 12) row = 0;
+}
+assert.equal(row, 0, "last row is full");
 for (const p of workProjects) await access(`src/assets/work/${p.slug}.webp`);
 
 import { readFile } from "node:fs/promises";
@@ -60,6 +69,11 @@ for (const [locale, path, root] of [
   const cards = [...html.matchAll(/<button[^>]*class="work-card[ "][^>]*>/g)];
   assert.equal(cards.length, workProjects.length, `${locale}: card count`);
   assert(!html.includes('data-slug="smartsme"'));
+  assert.deepEqual(
+    [...html.matchAll(/data-card="label">\s*(\d\d) \//g)].map((m) => m[1]),
+    workProjects.map((_, i) => String(i + 1).padStart(2, "0")),
+    `${locale}: cards numbered in order`,
+  );
   assert.equal(
     [...html.matchAll(/data-group="/g)].length,
     workProjects.length + 1 + projectGroups.length,

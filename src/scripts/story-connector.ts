@@ -7,7 +7,10 @@ export function connectorRoute(start: Point, end: Point, clearanceX: number) {
   const requested = (clearanceX - start.x) * direction;
   // Keep the elbows away from either endpoint so the route remains legible
   // when copy switches sides or its width changes between story chapters.
-  const bendDistance = Math.max(gap * 0.22, Math.min(gap * 0.78, requested));
+  const bendDistance = Math.max(
+    gap * 0.22,
+    Math.min(gap * 0.78, requested),
+  );
   return {
     direction,
     verticalDirection: end.y >= start.y ? 1 : -1,
