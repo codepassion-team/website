@@ -182,42 +182,265 @@ export const products = [
   },
 ];
 
-export const projects = [
+export type ProjectGroup =
+  "corporate" | "ecommerce" | "healthcare" | "events" | "platforms";
+
+export type Project = {
+  slug: string;
+  name: string;
+  domain: string;
+  number: string;
+  category: string;
+  group: ProjectGroup;
+  kind: "client" | "product" | "internal";
+  featured: boolean;
+  /** Shown as a screenshot only: no live preview and no link. */
+  imageOnly?: boolean;
+  /** Left off /portfolio/ (shown on the home list only). */
+  hideOnWorkPage?: boolean;
+  description: string;
+  tags: string[];
+};
+
+export const projectGroups: { id: ProjectGroup; label: string }[] = [
+  { id: "corporate", label: "Corporate" },
+  { id: "ecommerce", label: "E-commerce" },
+  { id: "healthcare", label: "Healthcare" },
+  { id: "events", label: "Events" },
+  { id: "platforms", label: "Platforms & systems" },
+];
+
+// Descriptions state only what each site visibly is; tech tags come from the
+// project's own repo in codepassion-team.
+export const projects: Project[] = [
   {
+    slug: "kantana",
     name: "Kantana Holdings",
     domain: "kantanaholdings.com",
     category: "Corporate",
     number: "01",
+    group: "corporate",
+    kind: "client",
+    featured: true,
+    description: "Corporate website for the Kantana group.",
+    tags: ["Corporate website", "Astro"],
   },
   {
+    slug: "ddg",
     name: "DDG Jewelry",
     domain: "ddgjewelry.com",
     category: "Jewelry",
     number: "02",
+    group: "ecommerce",
+    kind: "client",
+    featured: true,
+    description: "Website for a diamond and 18K jewelry maker and wholesaler.",
+    tags: ["Online store", "Astro", "LINE LIFF"],
   },
   {
+    slug: "trp",
     name: "Teeraporn Hospital",
     domain: "trphospital.com",
     category: "Hospital",
     number: "03",
+    group: "healthcare",
+    kind: "client",
+    featured: true,
+    description: "Hospital website.",
+    tags: ["Healthcare website"],
   },
   {
+    slug: "naturalhome",
     name: "Natural Home",
     domain: "naturalhome.co.th",
     category: "Property",
     number: "04",
+    group: "corporate",
+    kind: "client",
+    featured: true,
+    description: "Website for a home builder.",
+    tags: ["Corporate website", "Next.js"],
   },
   {
+    slug: "smartsme",
+    // Site returned Cloudflare 522 on 2026-11-25; no screenshot to show.
+    hideOnWorkPage: true,
     name: "Smart SME Expo",
     domain: "smartsmeexpo.com",
     category: "Exhibition",
     number: "05",
+    group: "events",
+    kind: "client",
+    featured: true,
+    description: "Website for a trade exhibition.",
+    tags: ["Event website"],
   },
   {
+    slug: "franchise-expo",
     name: "Franchise Expo Thailand",
     domain: "www.franchiseexpothailand.com",
     category: "Exhibition",
     number: "06",
+    group: "events",
+    kind: "client",
+    featured: true,
+    description: "Website for a franchise exhibition.",
+    tags: ["Event website"],
+  },
+  {
+    slug: "movie-school",
+    name: "Movie School",
+    domain: "movie-school.c9n.co",
+    category: "Event",
+    number: "07",
+    group: "events",
+    kind: "client",
+    featured: false,
+    description:
+      "Event website with free seat booking, for a cinema event on 26 Nov 2026.",
+    tags: ["Seat booking", "Astro", "Cloudflare Workers", "Google Apps Script"],
+  },
+  {
+    slug: "mindscix",
+    name: "MindSciX 2026",
+    domain: "mindsciencex2026.c9n.co",
+    category: "Event",
+    number: "08",
+    group: "events",
+    kind: "client",
+    featured: false,
+    description:
+      "Registration website for the MindSciX 2026 Thailand Research & Innovation Forum.",
+    tags: ["Event registration", "Astro"],
+  },
+  {
+    slug: "kcp",
+    name: "KCP",
+    domain: "www.kcpmaster.com",
+    category: "Corporate",
+    number: "09",
+    group: "corporate",
+    kind: "client",
+    featured: false,
+    description: "Corporate website for KCP.",
+    tags: ["Corporate website", "Astro"],
+  },
+  {
+    slug: "lawnextstep",
+    name: "LawNextStep E-Filing",
+    domain: "efiling.lawnextstep.com",
+    category: "E-filing system",
+    number: "10",
+    group: "platforms",
+    kind: "client",
+    featured: false,
+    description: "Web application for filing legal documents online.",
+    tags: ["Web application", "Next.js"],
+  },
+  {
+    slug: "nnm",
+    name: "Nong Niaw Market Dashboard",
+    domain: "nnm.codepassion.co",
+    category: "Market management",
+    number: "11",
+    group: "platforms",
+    kind: "internal",
+    imageOnly: true,
+    featured: false,
+    description: "Management system for Nong Niaw Market.",
+    tags: ["Dashboard", "Next.js"],
+  },
+  {
+    slug: "memberconnex",
+    name: "MemberConnex",
+    domain: "connex.codepassion.co",
+    category: "Membership platform",
+    number: "12",
+    group: "platforms",
+    kind: "product",
+    featured: false,
+    description: "Membership management through LINE OA.",
+    tags: ["LINE OA", "Next.js", "Elysia"],
+  },
+  {
+    slug: "academy",
+    name: "CodePassion Academy",
+    domain: "academy.codepassion.co",
+    category: "Learning platform",
+    number: "13",
+    group: "platforms",
+    kind: "product",
+    featured: false,
+    description: "AI courses for business owners, executives and developers.",
+    tags: ["Course website", "Astro"],
+  },
+  {
+    slug: "apo-crm",
+    name: "APO CRM",
+    domain: "",
+    category: "Partner CRM",
+    number: "14",
+    group: "platforms",
+    kind: "internal",
+    imageOnly: true,
+    featured: false,
+    // Screenshot taken from a local run with fictional mock data.
+    description:
+      "Partner management system for Asian Palm Oil: partners, seedling requests and rewards.",
+    tags: ["CRM", "Next.js", "Elysia", "Supabase"],
+  },
+  {
+    slug: "smiley",
+    name: "Smiley Assistance",
+    domain: "smiley.c9n.co",
+    category: "Membership app",
+    number: "15",
+    group: "platforms",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "24-hour roadside assistance membership app on LINE.",
+    tags: ["LINE app", "Next.js", "Elysia", "Supabase"],
+  },
+  {
+    slug: "twhe",
+    name: "Thailand Wellness & Healthcare Expo 2025",
+    domain: "thailandwellnessexpo.com",
+    category: "Exhibition",
+    number: "16",
+    group: "events",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "Website for the Thailand Wellness & Healthcare Expo 2025.",
+    tags: ["Event website", "Astro"],
+  },
+  {
+    slug: "aestec",
+    name: "Aestec Clinic Discovery",
+    domain: "aestec-clinic-discovery.vercel.app",
+    category: "Clinic finder",
+    number: "17",
+    group: "healthcare",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "Clinic finder with a map for Aestec partner clinics.",
+    tags: ["Clinic finder", "Next.js"],
+  },
+  {
+    slug: "muztea",
+    name: "MUZ Tea",
+    domain: "preview.muzbrand.com",
+    category: "Brand website",
+    number: "18",
+    group: "corporate",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    // The live muzbrand.com is no longer our build; screenshot from a local run.
+    description: "Brand website for MUZ instant milk tea and coffee.",
+    tags: ["Brand website", "Next.js", "Firebase"],
   },
 ];
 

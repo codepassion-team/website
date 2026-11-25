@@ -717,6 +717,10 @@ ul {
   grid-template-columns: 310px minmax(0, 1fr);
   gap: 40px;
 }
+.portfolio-all {
+  align-self: start;
+  font-size: 15px;
+}
 .project-list {
   display: flex;
   flex-direction: column;

@@ -143,6 +143,32 @@ const thai: Record<string, string> = {
   "We choose the tools for each project, from cloud hosting and application frameworks to data storage.":
     "เราเลือกเครื่องมือให้เหมาะกับแต่ละโปรเจกต์ ตั้งแต่คลาวด์และเฟรมเวิร์ก ไปจนถึงการจัดเก็บข้อมูล",
   Language: "เลือกภาษา",
+
+  // Work page
+  "View all work": "ดูผลงานทั้งหมด",
+  "Our Work — CodePassion": "ผลงานของเรา — CodePassion",
+  "Websites, platforms and systems that CodePassion has built for businesses.":
+    "รวมเว็บไซต์ แพลตฟอร์ม และระบบที่ CodePassion พัฒนาให้ธุรกิจ",
+  "OUR WORK": "ผลงาน",
+  PROJECTS: "ผลงาน",
+  "Our Work": "ผลงานของเรา",
+  "Digital experiences built with purpose.": "ทุกงานเริ่มจากโจทย์ของธุรกิจ",
+  "We build websites, platforms and digital tools around what each business needs. Open any project to see the live site.":
+    "เราสร้างเว็บไซต์ แพลตฟอร์ม และเครื่องมือดิจิทัลตามโจทย์ของแต่ละธุรกิจ เปิดผลงานไหนก็ได้เพื่อดูเว็บไซต์จริง",
+  "Filter projects": "กรองผลงาน",
+  All: "ทั้งหมด",
+  Showing: "แสดง",
+  projects: "ผลงาน",
+  "View project": "ดูผลงาน",
+  "A CodePassion product": "ผลิตภัณฑ์ของ CodePassion",
+  "Internal system · login required": "ระบบภายใน · ต้องล็อกอิน",
+  "Website preview": "ภาพตัวอย่างเว็บไซต์",
+  "Close project details": "ปิดรายละเอียดผลงาน",
+  "Open the websites directly": "เปิดเว็บไซต์โดยตรง",
+  "Have a project in mind?": "มีโปรเจกต์ในใจไหม?",
+  "Let’s build something meaningful together.":
+    "มาสร้างสิ่งที่มีความหมายไปด้วยกัน",
+  "Contact Us": "ติดต่อเรา",
 };
 export const translate = (locale: Locale, text: string) =>
-  locale === "th" ? thai[text] ?? text : text;
+  locale === "th" ? (thai[text] ?? text) : text;

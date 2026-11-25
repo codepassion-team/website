@@ -1,0 +1,60 @@
+---
+import { getLandingContent } from "~/data/landing-locales";
+import { translate, type Locale } from "~/data/landing-ui";
+interface Props {
+  locale: Locale;
+  /** Prefix for in-page links when rendered off the home page, e.g. "/en/". */
+  home?: string;
+}
+const { locale, home = "" } = Astro.props;
+const t = (text: string) => translate(locale, text);
+const { company, products, channels } = getLandingContent(locale);
+---
+
+<footer class="site-footer section">
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a class="brand" href={home || "#home"}
+        ><img
+          src="/brand/codepassion_logo_vertical_whitefont.png"
+          alt=""
+          width="150"
+          height="138"
+        /></a
+      ><p>{t("Software development & system architecture.")}</p>
+    </div><div>
+      <h2>{t("Explore")}</h2><a href={`${home}#technologies`}
+        >{t("Core technologies")}</a
+      ><a href={`${home}#expertise`}>{t("Expertise")}</a><a
+        href={`${locale === "en" ? "/en/" : "/"}portfolio/`}>{t("Our work")}</a
+      ><a href={`${home}#trust`}>{t("Customers & partners")}</a><a
+        href={`${home}#certifications`}>{t("Certificates & standards")}</a
+      ><a href="/line-oa/">{t("LINE OA Customer Portal")}</a>
+    </div><div>
+      <h2>{t("Our products")}</h2>{
+        products.map((product) => (
+          <a href={`${home}#${product.id}`}>{product.name}</a>
+        ))
+      }<a href={company.academyUrl} target="_blank" rel="noopener noreferrer"
+        >CodePassion Academy</a
+      >
+    </div><div>
+      <h2>{t("Stay connected")}</h2>{
+        channels.map((channel) => (
+          <a
+            href={channel.href}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`${channel.name}: ${channel.label}`}
+          >
+            {channel.name}
+          </a>
+        ))
+      }
+    </div>
+  </div><div class="footer-bottom">
+    <span>© {new Date().getFullYear()} {company.legalName}</span><span
+      >{t("Software development & systems integration.")}</span
+    ><a href="#home">{t("Back to top ↑")}</a>
+  </div>
+</footer>

@@ -3,11 +3,20 @@ import { company } from "~/data/landing";
 import { translate, type Locale } from "~/data/landing-ui";
 interface Props {
   locale: Locale;
+  /** Prefix for in-page links when rendered off the home page, e.g. "/en/". */
+  home?: string;
+  alternates?: { th: string; en: string };
+  showMotionToggle?: boolean;
 }
-const { locale } = Astro.props;
+const {
+  locale,
+  home = "",
+  alternates = { th: "/", en: "/en/" },
+  showMotionToggle = true,
+} = Astro.props;
 const t = (text: string) => translate(locale, text);
 const navLinks = [
-  { label: "Software Solutions", href: "#expertise" },
+  { label: "Software Solutions", href: `${home}#expertise` },
   { label: "MemberConnex", href: "https://connex.codepassion.co" },
   { label: "LINE OA", href: "/line-oa/" },
   { label: "Academy", href: company.academyUrl },
@@ -19,7 +28,7 @@ const external = (href: string) =>
 ---
 
 <header class="site-header" id="site-header">
-  <a href="#home" class="brand" aria-label={t("CodePassion home")}
+  <a href={home || "#home"} class="brand" aria-label={t("CodePassion home")}
     ><img src="/brand/codepassion.svg" alt="" width="42" height="42" /><span
       >CodePassion</span
     ></a
@@ -35,18 +44,18 @@ const external = (href: string) =>
   </nav>
   <nav class="language-switch" aria-label={t("Language")}>
     <a
-      href="/"
+      href={alternates.th}
       lang="th"
       hreflang="th"
       aria-current={locale === "th" ? "page" : undefined}>TH</a
     ><span aria-hidden="true">/</span><a
-      href="/en/"
+      href={alternates.en}
       lang="en"
       hreflang="en"
       aria-current={locale === "en" ? "page" : undefined}>EN</a
     >
   </nav>
-  <a href="#contact" class="header-cta">{t("Let’s talk")}</a>
+  <a href={`${home}#contact`} class="header-cta">{t("Let’s talk")}</a>
   <button
     class="menu-toggle"
     aria-expanded="false"
@@ -75,24 +84,28 @@ const external = (href: string) =>
           </a>
         ))
       }
-      <a href="#contact">{t("Let’s talk")}</a>
+      <a href={`${home}#contact`}>{t("Let’s talk")}</a>
     </nav>
     <div class="mobile-menu-options">
       <nav class="language-switch" aria-label={t("Language")}>
         <a
-          href="/"
+          href={alternates.th}
           lang="th"
           hreflang="th"
           aria-current={locale === "th" ? "page" : undefined}>TH</a
         ><span aria-hidden="true">/</span><a
-          href="/en/"
+          href={alternates.en}
           lang="en"
           hreflang="en"
           aria-current={locale === "en" ? "page" : undefined}>EN</a
         >
-      </nav><button class="menu-motion-toggle" type="button" aria-pressed="true"
-        >{t("Motion on")}</button
-      >
+      </nav>{
+        showMotionToggle && (
+          <button class="menu-motion-toggle" type="button" aria-pressed="true">
+            {t("Motion on")}
+          </button>
+        )
+      }
     </div>
   </dialog>
 </header>

@@ -22,6 +22,20 @@ for (const [locale, path] of [
     `${locale}: DOM ids must be unique`,
   );
   assert(html.includes(`lang="${locale}"`));
+  assert.equal(
+    [
+      ...html.matchAll(
+        /class="project-button[^"]*"[^>]*aria-pressed="(true|false)"/g,
+      ),
+    ].length,
+    6,
+    `${locale}: every project toggle exposes aria-pressed`,
+  );
+  const footer = html.match(/<footer[\s\S]*?<\/footer>/)?.[0];
+  assert(
+    footer?.includes(`href="${locale === "en" ? "/en/" : "/"}portfolio/"`),
+    `${locale}: footer links to the work page`,
+  );
   assert(html.includes(`hreflang="${locale}"`));
   assert.equal([...html.matchAll(/<h1[ >]/g)].length, 1);
   assert.equal([...html.matchAll(/data-chapter="[0-5]"/g)].length, 6);
@@ -56,7 +70,7 @@ for (const [locale, path] of [
     ),
   );
   assert(iframe.includes("Kantana Holdings"));
-  for (const project of projects)
+  for (const project of projects.filter((p) => p.featured))
     assert(html.includes(`data-project-url="https://${project.domain}"`));
   for (const product of products) {
     assert(ids.includes(product.id));
@@ -154,7 +168,7 @@ assert(robots.includes("Sitemap: https://codepassion.co/sitemap.xml"));
 console.log(
   "PASS: LINE OA has a canonical URL, homepage links, and sitemap discovery.",
 );
-assert.equal(projects.length, 6);
+assert.equal(projects.filter((p) => p.featured).length, 6);
 assert.equal(projects[2].domain, "trphospital.com");
 assert.equal(projects[2].category, "Hospital");
 assert.equal(projects[5].domain, "www.franchiseexpothailand.com");
