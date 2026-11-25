@@ -328,7 +328,7 @@ export const projects: Project[] = [
     number: "09",
     group: "corporate",
     kind: "client",
-    size: "sm",
+    size: "md",
     featured: false,
     description: "Corporate website for KCP.",
     tags: ["Corporate website", "Astro"],

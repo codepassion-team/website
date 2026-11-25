@@ -145,7 +145,7 @@ const thai: Record<string, string> = {
   Language: "เลือกภาษา",
 
   // Work page
-  "View all work →": "ดูผลงานทั้งหมด →",
+  "View all work": "ดูผลงานทั้งหมด",
   "Our Work — CodePassion": "ผลงานของเรา — CodePassion",
   "Websites, platforms and systems that CodePassion has built for businesses.":
     "รวมเว็บไซต์ แพลตฟอร์ม และระบบที่ CodePassion พัฒนาให้ธุรกิจ",

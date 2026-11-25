@@ -67,8 +67,9 @@ const featured = getLandingContent(locale).projects.filter(
     </div>
     <ProjectPreview locale={locale} project={featured[0]} />
     <a
-      class="button button-quiet portfolio-all"
-      href={locale === "en" ? "/en/work/" : "/work/"}>{t("View all work →")}</a
+      class="text-link portfolio-all"
+      href={locale === "en" ? "/en/work/" : "/work/"}
+      >{t("View all work")}<span aria-hidden="true">→</span></a
     >
   </div>
   <noscript

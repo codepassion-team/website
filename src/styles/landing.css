@@ -721,8 +721,8 @@ ul {
   gap: 40px;
 }
 .portfolio-all {
-  justify-self: start;
   align-self: start;
+  font-size: 15px;
 }
 .project-list {
   display: flex;
