@@ -193,7 +193,6 @@ export type Project = {
   category: string;
   group: ProjectGroup;
   kind: "client" | "product" | "internal";
-  size: "lg" | "md" | "sm";
   featured: boolean;
   /** Left off /work/ (shown on the home list only). */
   hideOnWorkPage?: boolean;
@@ -220,7 +219,6 @@ export const projects: Project[] = [
     number: "01",
     group: "corporate",
     kind: "client",
-    size: "lg",
     featured: true,
     description: "Corporate website for the Kantana group.",
     tags: ["Corporate website", "Astro"],
@@ -233,7 +231,6 @@ export const projects: Project[] = [
     number: "02",
     group: "ecommerce",
     kind: "client",
-    size: "sm",
     featured: true,
     description: "Website for a diamond and 18K jewelry maker and wholesaler.",
     tags: ["Online store", "Astro", "LINE LIFF"],
@@ -246,7 +243,6 @@ export const projects: Project[] = [
     number: "03",
     group: "healthcare",
     kind: "client",
-    size: "md",
     featured: true,
     description: "Hospital website.",
     tags: ["Healthcare website"],
@@ -259,7 +255,6 @@ export const projects: Project[] = [
     number: "04",
     group: "corporate",
     kind: "client",
-    size: "md",
     featured: true,
     description: "Website for a home builder.",
     tags: ["Corporate website", "Next.js"],
@@ -274,7 +269,6 @@ export const projects: Project[] = [
     number: "05",
     group: "events",
     kind: "client",
-    size: "sm",
     featured: true,
     description: "Website for a trade exhibition.",
     tags: ["Event website"],
@@ -287,7 +281,6 @@ export const projects: Project[] = [
     number: "06",
     group: "events",
     kind: "client",
-    size: "sm",
     featured: true,
     description: "Website for a franchise exhibition.",
     tags: ["Event website"],
@@ -300,7 +293,6 @@ export const projects: Project[] = [
     number: "07",
     group: "events",
     kind: "client",
-    size: "lg",
     featured: false,
     description:
       "Event website with free seat booking, for a cinema event on 26 Nov 2026.",
@@ -314,7 +306,6 @@ export const projects: Project[] = [
     number: "08",
     group: "events",
     kind: "client",
-    size: "md",
     featured: false,
     description:
       "Registration website for the MindSciX 2026 Thailand Research & Innovation Forum.",
@@ -328,7 +319,6 @@ export const projects: Project[] = [
     number: "09",
     group: "corporate",
     kind: "client",
-    size: "md",
     featured: false,
     description: "Corporate website for KCP.",
     tags: ["Corporate website", "Astro"],
@@ -341,7 +331,6 @@ export const projects: Project[] = [
     number: "10",
     group: "platforms",
     kind: "client",
-    size: "md",
     featured: false,
     description: "Web application for filing legal documents online.",
     tags: ["Web application", "Next.js"],
@@ -354,7 +343,6 @@ export const projects: Project[] = [
     number: "11",
     group: "platforms",
     kind: "internal",
-    size: "md",
     featured: false,
     description: "Management system for Nong Niaw Market.",
     tags: ["Dashboard", "Next.js"],
@@ -367,7 +355,6 @@ export const projects: Project[] = [
     number: "12",
     group: "platforms",
     kind: "product",
-    size: "lg",
     featured: false,
     description: "Membership management through LINE OA.",
     tags: ["LINE OA", "Next.js", "Elysia"],
@@ -380,7 +367,6 @@ export const projects: Project[] = [
     number: "13",
     group: "platforms",
     kind: "product",
-    size: "sm",
     featured: false,
     description: "AI courses for business owners, executives and developers.",
     tags: ["Course website", "Astro"],

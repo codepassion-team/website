@@ -29,11 +29,6 @@ const shots = import.meta.glob<{ default: ImageMetadata }>(
   { eager: true },
 );
 const shot = (slug: string) => shots[`/src/assets/work/${slug}.webp`].default;
-const sizes = {
-  lg: "(max-width: 640px) 100vw, (max-width: 1024px) 100vw, 66vw",
-  md: "(max-width: 640px) 100vw, 50vw",
-  sm: "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw",
-};
 const kindLabel = {
   client: "",
   product: t("A CodePassion product"),
@@ -153,7 +148,7 @@ const kindLabel = {
           {
             work.map((project, index) => (
               <button
-                class={`work-card work-card--${project.size}`}
+                class="work-card"
                 type="button"
                 aria-haspopup="dialog"
                 data-slug={project.slug}
@@ -173,7 +168,7 @@ const kindLabel = {
                     src={shot(project.slug)}
                     alt=""
                     widths={[480, 960, 1440]}
-                    sizes={sizes[project.size]}
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                     loading={index < 2 ? "eager" : "lazy"}
                   />
                 </span>
