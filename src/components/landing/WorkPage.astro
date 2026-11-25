@@ -17,7 +17,7 @@ const { locale } = Astro.props;
 const t = (text: string) => translate(locale, text);
 const { company, projects, projectGroups } = getLandingContent(locale);
 const work = projects.filter((project) => !project.hideOnWorkPage);
-const live = work.filter((project) => project.kind !== "internal");
+const live = work.filter((project) => !project.imageOnly);
 const root = locale === "en" ? "/en/" : "/";
 const canonical = `https://codepassion.co${root}work/`;
 const title = t("Our Work — CodePassion");
@@ -154,8 +154,9 @@ const kindLabel = {
                 data-slug={project.slug}
                 data-group={project.group}
                 data-kind={project.kind}
+                data-image-only={project.imageOnly ? "true" : undefined}
                 data-project-name={project.name}
-                {...(project.kind !== "internal" && {
+                {...(!project.imageOnly && {
                   "data-project-url": `https://${project.domain}`,
                   "data-project-domain": project.domain,
                   "data-preview-unavailable": String(
@@ -267,7 +268,7 @@ const kindLabel = {
       <figure class="work-detail-shot" hidden>
         <Image
           id="work-detail-image"
-          src={shot(work.find((project) => project.kind === "internal")!.slug)}
+          src={shot(work.find((project) => project.imageOnly)!.slug)}
           alt={t("Website preview")}
           widths={[960, 1440]}
           sizes="(max-width: 800px) 100vw, 900px"

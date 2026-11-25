@@ -61,7 +61,7 @@ function setupDetail(signal: AbortSignal) {
   };
 
   function open(card: HTMLElement) {
-    const internal = card.dataset.kind === "internal";
+    const imageOnly = card.dataset.imageOnly === "true";
     const cardImage = card.querySelector<HTMLImageElement>(".work-shot img")!;
     const kind = card.querySelector(".work-kind")?.textContent?.trim();
     const label = card
@@ -76,9 +76,9 @@ function setupDetail(signal: AbortSignal) {
         tag.cloneNode(true),
       ),
     );
-    preview!.hidden = internal;
-    shot!.hidden = !internal;
-    if (internal) {
+    preview!.hidden = imageOnly;
+    shot!.hidden = !imageOnly;
+    if (imageOnly) {
       copyImage(image!, cardImage);
       image!.alt = `${card.dataset.projectName} — ${t("Website preview")}`;
     } else if (cover) copyImage(cover, cardImage);
@@ -87,7 +87,7 @@ function setupDetail(signal: AbortSignal) {
     dialog!.showModal();
     // Select once the preview is on screen: a quick close-and-reopen gives the
     // visibility observer no change to report, so select() starts the load.
-    if (!internal) portfolio.select(card);
+    if (!imageOnly) portfolio.select(card);
   }
 
   cards.forEach((card) =>

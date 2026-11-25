@@ -69,6 +69,27 @@ const thaiProjects: Record<
     description: "ระบบจัดการสมาชิกผ่าน LINE OA",
     tag: "LINE OA",
   },
+  "apo-crm": {
+    category: "ระบบ CRM คู่ค้า",
+    description:
+      "ระบบจัดการคู่ค้าเกษตรกรปาล์มของ Asian Palm Oil ทั้งคู่ค้า คำขอต้นกล้า และการแลกรางวัล",
+    tag: "ระบบ CRM",
+  },
+  smiley: {
+    category: "แอปสมาชิก",
+    description: "แอปสมาชิกบริการช่วยเหลือฉุกเฉิน 24 ชั่วโมงบน LINE",
+    tag: "แอปบน LINE",
+  },
+  twhe: {
+    category: "งานแสดงสินค้า",
+    description: "เว็บไซต์งาน Thailand Wellness & Healthcare Expo 2025",
+    tag: "เว็บไซต์งานอีเวนต์",
+  },
+  aestec: {
+    category: "ค้นหาคลินิก",
+    description: "ระบบค้นหาคลินิกพร้อมแผนที่ ของคลินิกคู่ค้า Aestec",
+    tag: "ค้นหาคลินิก",
+  },
   academy: {
     category: "แพลตฟอร์มคอร์สเรียน",
     description: "หลักสูตร AI สำหรับเจ้าของธุรกิจ ผู้บริหาร และนักพัฒนา",

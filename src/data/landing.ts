@@ -194,6 +194,8 @@ export type Project = {
   group: ProjectGroup;
   kind: "client" | "product" | "internal";
   featured: boolean;
+  /** Shown as a screenshot only: no live preview and no link. */
+  imageOnly?: boolean;
   /** Left off /work/ (shown on the home list only). */
   hideOnWorkPage?: boolean;
   description: string;
@@ -343,6 +345,7 @@ export const projects: Project[] = [
     number: "11",
     group: "platforms",
     kind: "internal",
+    imageOnly: true,
     featured: false,
     description: "Management system for Nong Niaw Market.",
     tags: ["Dashboard", "Next.js"],
@@ -370,6 +373,60 @@ export const projects: Project[] = [
     featured: false,
     description: "AI courses for business owners, executives and developers.",
     tags: ["Course website", "Astro"],
+  },
+  {
+    slug: "apo-crm",
+    name: "APO CRM",
+    domain: "",
+    category: "Partner CRM",
+    number: "14",
+    group: "platforms",
+    kind: "internal",
+    imageOnly: true,
+    featured: false,
+    // Screenshot taken from a local run with fictional mock data.
+    description:
+      "Partner management system for Asian Palm Oil: partners, seedling requests and rewards.",
+    tags: ["CRM", "Next.js", "Elysia", "Supabase"],
+  },
+  {
+    slug: "smiley",
+    name: "Smiley Assistance",
+    domain: "smiley.c9n.co",
+    category: "Membership app",
+    number: "15",
+    group: "platforms",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "24-hour roadside assistance membership app on LINE.",
+    tags: ["LINE app", "Next.js", "Elysia", "Supabase"],
+  },
+  {
+    slug: "twhe",
+    name: "Thailand Wellness & Healthcare Expo 2025",
+    domain: "thailandwellnessexpo.com",
+    category: "Exhibition",
+    number: "16",
+    group: "events",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "Website for the Thailand Wellness & Healthcare Expo 2025.",
+    tags: ["Event website", "Astro"],
+  },
+  {
+    slug: "aestec",
+    name: "Aestec Clinic Discovery",
+    domain: "aestec-clinic-discovery.vercel.app",
+    category: "Clinic finder",
+    number: "17",
+    group: "healthcare",
+    kind: "client",
+    imageOnly: true,
+    featured: false,
+    description: "Clinic finder with a map for Aestec partner clinics.",
+    tags: ["Clinic finder", "Next.js"],
   },
 ];
 

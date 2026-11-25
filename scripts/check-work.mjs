@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
 import { projects, projectGroups } from "../src/data/landing.ts";
 
-assert.equal(projects.length, 13);
-assert.equal(new Set(projects.map((p) => p.slug)).size, 13);
+assert.equal(projects.length, 17);
+assert.equal(new Set(projects.map((p) => p.slug)).size, 17);
 assert.deepEqual(
   projects.filter((p) => p.featured).map((p) => p.domain),
   [
@@ -14,7 +14,12 @@ assert.deepEqual(
     "www.franchiseexpothailand.com",
   ],
 );
-assert(!projects.some((p) => p.domain.includes("aestec")));
+// Image-only projects: shown as a screenshot, never linked or embedded.
+const imageOnly = ["nnm", "apo-crm", "smiley", "twhe", "aestec"];
+assert.deepEqual(
+  projects.filter((p) => p.imageOnly).map((p) => p.slug),
+  imageOnly,
+);
 assert.equal(projects.find((p) => p.slug === "nnm").kind, "internal");
 assert.deepEqual(
   projects.filter((p) => p.kind === "product").map((p) => p.slug),
@@ -77,9 +82,13 @@ for (const [locale, path, root] of [
   );
   assert.equal([...html.matchAll(/<iframe/g)].length, 1, "dialog iframe only");
   assert(!/<iframe[^>]*\ssrc=/.test(html), "iframe loads lazily");
-  const nnm = cards.find((m) => m[0].includes('data-slug="nnm"'))[0];
-  assert(!nnm.includes("data-project-url"), "internal has no live link");
-  assert(!html.includes("https://nnm.codepassion.co"), "no NNM link anywhere");
+  for (const slug of imageOnly) {
+    const card = cards.find((m) => m[0].includes(`data-slug="${slug}"`))[0];
+    assert(!card.includes("data-project-url"), `${slug} has no live link`);
+    const { domain } = projects.find((p) => p.slug === slug);
+    if (domain)
+      assert(!html.includes(`https://${domain}`), `${slug} not linked`);
+  }
   if (locale === "th")
     for (const text of Object.values(thai)) assert(html.includes(text));
   else
