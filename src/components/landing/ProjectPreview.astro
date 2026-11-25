@@ -1,0 +1,88 @@
+---
+import type { Project } from "~/data/landing";
+import { translate, type Locale } from "~/data/landing-ui";
+interface Props {
+  locale: Locale;
+  project: Project;
+}
+const { locale, project } = Astro.props;
+const t = (text: string) => translate(locale, text);
+---
+
+<div class="project-preview">
+  <div class="browser-chrome">
+    <span class="browser-dots" aria-hidden="true"><i></i><i></i><i></i></span
+    ><div class="browser-address">
+      <svg
+        width="12"
+        height="12"
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        aria-hidden="true"
+        ><rect x="4" y="7" width="8" height="7" rx="2"></rect><path
+          d="M5.5 7V4a2.5 2.5 0 0 1 5 0v3"></path></svg
+      ><span id="preview-domain">{project.domain}</span>
+    </div><button
+      type="button"
+      id="close-preview"
+      aria-label={t("Close live preview")}
+      hidden>×</button
+    >
+  </div>
+  <div class="iframe-stage" id="iframe-stage">
+    <div class="preview-cover" id="preview-cover">
+      <slot name="cover" />
+      <img
+        id="preview-brand"
+        src="/media/logos/ktn.webp"
+        alt=""
+        width="120"
+        height="70"
+      /><p class="eyebrow">
+        {t("VIEW THE WEBSITE")}
+      </p><h3 id="preview-name">{project.name}</h3><a
+        id="preview-open"
+        href={`https://${project.domain}`}
+        class="button button-light"
+        target="_blank"
+        rel="noopener noreferrer"
+        hidden>{t("Open website")}</a
+      ><span
+        class="preview-spinner"
+        id="preview-spinner"
+        aria-hidden="true"
+        hidden></span><button
+        class="button button-quiet"
+        type="button"
+        id="show-preview"
+        hidden>{t("Show preview")}</button
+      ><button class="button button-light" type="button" id="load-preview"
+        >{t("Load live preview")}</button
+      ><p class="preview-privacy" id="preview-note">
+        {t("Loads the selected website here.")}
+      </p>
+    </div>
+    <iframe
+      id="portfolio-frame"
+      title={`${project.name} — ${t("Our work")}`}
+      loading="lazy"
+      referrerpolicy="no-referrer"
+      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+      hidden></iframe>
+  </div>
+  <div class="preview-bottom">
+    <p id="preview-status" role="status">
+      {
+        t(
+          "The preview opens as you scroll here. Some sites may restrict embedding.",
+        )
+      }
+    </p><a
+      id="preview-external"
+      href={`https://${project.domain}`}
+      target="_blank"
+      rel="noopener noreferrer">{t("Visit website")}</a
+    >
+  </div>
+</div>
