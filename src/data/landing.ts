@@ -442,6 +442,18 @@ export const projects: Project[] = [
     description: "Brand website for MUZ instant milk tea and coffee.",
     tags: ["Brand website", "Next.js", "Firebase"],
   },
+  {
+    slug: "dentalland",
+    name: "Dental Land Chiang Rai",
+    domain: "dentalland-chiangrai.com",
+    category: "Dental clinic",
+    number: "19",
+    group: "healthcare",
+    kind: "client",
+    featured: false,
+    description: "Website for Dental Land, a dental clinic in Chiang Rai.",
+    tags: ["Healthcare website"],
+  },
 ];
 
 // Embedded pages unavailable in browser validation; keep a direct-first option.
